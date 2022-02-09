@@ -10,3 +10,18 @@ This is the last of the Milestone Projects that make up the Full Stack Web Devel
 This e-commerce platform allows a small to medium size fitness business to transition from in person to online sales of products and class admittence, and will drive a growth in sales with the oppertunity to support fully online operation. Working fully online can be an avenue for business development however the need for this functionality/ability was emphasized most recently by the COVID pandemic where many in person businesses were forced to move online.
 
 ---
+
+# User Stories
+
+My user stories are broken up into categories indicated by their ID number. A **Guest** is a Non-Account Holder and a **Customer** is an Account Holder
+
+| ID | Category Name |
+| --- | --- |
+| 01 | Merchandise |
+| 02 | Class Booking |
+| 03 | Shopping Bag and Checkout |
+| 04 | User Account |
+| 05 | Miscellaneous |
+| 06 | Admin |
+
+![Spreadsheet of User Stories](readme-assets/ms4-user-stories.png)
