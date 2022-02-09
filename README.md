@@ -11,6 +11,8 @@ This e-commerce platform allows a small to medium size fitness business to trans
 
 ---
 
+# **Strategy**
+
 # User Stories
 
 My user stories are broken up into categories indicated by their ID number. A **Guest** is a Non-Account Holder and a **Customer** is an Account Holder
@@ -25,3 +27,37 @@ My user stories are broken up into categories indicated by their ID number. A **
 | 06 | Admin |
 
 ![Spreadsheet of User Stories](readme-assets/ms4-user-stories.png)
+
+# **Structure**
+
+The website functionality that is set out in the user stories can be broken down into 3 general categories using what features users are allowed to access at different permisson levels.
+
+### 1. Permission Level 1 - Guest User/Not logged in
+At this level, Users can;
+- View all basic information about the business,
+- View all products and classes avaliable for purchase,
+- Add any classes or products to their bag,
+- Purchase the contents of the bag, by entering their information, and recieve confirmation of the transaction on completion,
+- Create an account, either seperatly or as part of the check out procedure,
+
+### 2. Permission Level 2 - User Logged In/Customer
+At this level, Users can;
+- Do everything from Permission Level 1,
+- View all data stored in relation to their account, including basic details, shipping address and order/class order history,
+- Update their account information, via their account Profile page
+- Add products/classes to their wish/favourite lists
+- Buy class tokens or a subscription
+- Leave rating on products or classes
+
+### 3. Permission Level 3 - Admin
+At this level, Users can;
+- Do everything from Permission Level 1 and 2 apart from edit users account information,
+- Create, View, Edit or Delete products, product categories, classes and class categories,
+- View details about the classes and attendees,
+- Manage stock,
+- Recieve user communications,
+
+
+
+
+
