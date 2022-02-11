@@ -59,5 +59,15 @@ At this level, Users can;
 
 
 
+# Database Schema
+
+To deliver the required functionality, I have used a relational database to store and access any associated data. 
+
+SQLlite was used in the development phase and Postgres, as provided by Heroku, was used in live production.
+
+This diagram shows the database models and the relationship between them.
+
+![Database Structure and Schema Diagram](readme-assets/gym-fit-db-diagram.png)
+
 
 
