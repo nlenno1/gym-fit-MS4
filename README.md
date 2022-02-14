@@ -26,7 +26,7 @@ My user stories are broken up into categories indicated by their ID number. A **
 | 05 | Miscellaneous |
 | 06 | Admin |
 
-![Spreadsheet of User Stories](readme-assets/ms4-user-stories.png)
+![Spreadsheet of User Stories](readme/assets/ms4-user-stories.png)
 
 # **Structure**
 
@@ -67,7 +67,7 @@ SQLlite was used in the development phase and Postgres, as provided by Heroku, w
 
 This diagram shows the database models and the relationship between them.
 
-![Database Structure and Schema Diagram](readme-assets/gym-fit-db-diagram.png)
+![Database Structure and Schema Diagram](readme/assets/gym-fit-db-diagram.png)
 
 
 # Skeleton
