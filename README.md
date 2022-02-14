@@ -1,5 +1,5 @@
-# Studio - Online Fitness Platform
-This project is designed to fufill the needs of a gym or fitness center and to help them grow their online sales.
+# Gym Fit - Group Fitness E-Commerce Platform
+This project is designed to fufill the needs of a gym or fitness center looking to move thier booking system online and to help them grow their online sales.
 
 ![Live Project Representation Image](#)
 
@@ -70,4 +70,15 @@ This diagram shows the database models and the relationship between them.
 ![Database Structure and Schema Diagram](readme-assets/gym-fit-db-diagram.png)
 
 
+# Skeleton
 
+## Wireframes
+
+[Link to all the Wireframe designs for this project](readme/assets/wireframes.md)
+
+
+# Technology Used
+
+### Documentation
+[TinyPNG](https://tinypng.com/) - Image Compression
+[CompressPNG](https://compresspng.com/) - Image Compression
