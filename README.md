@@ -10,11 +10,7 @@ This is the last of the Milestone Projects that make up the Full Stack Web Devel
 
 This e-commerce platform allows a small to medium size fitness business to transition from in person to online sales of products and class admittance, and will drive a growth in sales with the opportunity to support fully online operation. Working fully online can be an avenue for business development however the need for this functionality/ability was emphasized most recently by the COVID pandemic where many in person businesses were forced to move online.
 
----
-
-## **Strategy**
-
----
+## **STRATEGY**
 
 ### **Project Goals**
 
@@ -53,11 +49,7 @@ This e-commerce platform allows a small to medium size fitness business to trans
 - Read other customer reviews of class and ability to share their personal views with others in their own review
 - Opportunity to purchase subscriptions or class access token packages which were unavailable before
 
----
-
 ## **User Stories**
-
----
 
 My user stories are broken up into categories indicated by their ID number. A **Guest** is a Non-Account Holder and a **Customer** is an Account Holder
 
@@ -71,7 +63,7 @@ My user stories are broken up into categories indicated by their ID number. A **
 
 ![Spreadsheet of User Stories](readme/assets/gym-fit-user-stories.png)
 
-## **Scope**
+## **SCOPE**
 
 ### **Production Feature Planning Table**
 
@@ -110,6 +102,8 @@ After the initial planning session, an importance viability assessment was perfo
 
 The graph shows an axis of up to 6 however data scores range from 1 to 5 making a 5,5 the highest possible.
 
+Not all users will be able to access all features.
+
 #### **I-V Analysis Conclusion**
 
 After the analysis of the features suggested, all features will be implemented **apart** from feature **3, 11, 15, 16, 18, 20**. These have been removed due to complexity and time restraints mainly but have been added to the list of features for future releases.
@@ -122,9 +116,7 @@ After the analysis of the features suggested, all features will be implemented *
 
 Removed functionality can be included in a later release.
 
-## **Structure**
-
-The website functionality that is set out in the user stories can be broken down into 3 general categories using what features users are allowed to access at different permisson levels.
+The selected website functionality can be broken down into 3 general permission levels using what features users are allowed to access.
 
 ### 1. Permission Level 1 - Guest User/Not logged in
 
@@ -134,7 +126,7 @@ At this level, Users can;
 - View all individual classes available for purchase,
 - Add any individual class to their bag,
 - Purchase the contents of the bag, by entering their information, and receive confirmation of the transaction on completion,
-- Create an account, either separatly or as part of the checkout procedure,
+- Create an account, either separately or as part of the checkout procedure,
 
 ### 2. Permission Level 2 - User Logged In/Customer
 
@@ -157,9 +149,9 @@ At this level, Users can;
 - Manage instructor profiles
 - Receive customer communications
 
-## Database Schema
+## **STRUCTURE**
 
----
+## Database Schema
 
 To deliver the required functionality, I have used a relational database to store and access any associated data.
 
@@ -169,24 +161,103 @@ This diagram shows the database models and the relationship between them.
 
 ![Database Structure and Schema Diagram](readme/assets/gym-fit-db-schema.png)
 
----
-
-## **Skeleton**
-
----
+## **SKELETON**
 
 ### **Wireframes**
 
 [Link to all the Wireframe designs for this project](readme/assets/wireframes.md)
 
----
+### **Design Alterations**
 
-## **Technology Used**
+### **Design Decisions**
 
----
+## **FEATURES**
+
+This is a full, page by page, breakdown of all the features & elements that have been implemented for the first production release of the Gym Fit E-Commerce platform.
+
+### **CRUD Table**
+
+### **Defensive Programming**
+
+### **Error Handling**
+
+### **Features for Future Releases**
+
+- Sign In and Out with other social media accounts
+- Schedule weekly classes until a set date or for a certain number of weeks
+- Add customers to waiting lists if a class is full, with email notification on space opening up
+- Purchase multiple classes with a weekly interval with a specified number of weeks
+- Create, View, Edit and Delete Class Access Packages for specific class categories
+- Allow Instructors to Update their publicly visible profiles and manage their classes
+
+## **TESTING**
+
+View the [Testing Document](readme/assets/testing.md)
+
+## **BUGS AND ISSUES**
+
+## **DEPLOYMENT**
+
+## **TECHNOLOGY USED**
+
+### Languages and Libraries
+
+- [HTML5](https://developer.mozilla.org/en-US/docs/Glossary/HTML5) - Programming Language
+- [CSS 3](https://developer.mozilla.org/en-US/docs/Web/CSS) - Programming Language
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - Programming Language
+- [Python](https://www.python.org/) - Programming Language
+- [Werkzeug ](https://www.python.org/) - Python library to manage user management integrity
+- [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) - Templating Language
+- [jQuery](https://jquery.com/) - JavaScript Library
+- [Bootstrap v5](https://getbootstrap.com/) - Library Import
+- [Google Fonts](https://fonts.google.com/) - Typography Import
+- [Font Awesome](https://fontawesome.com/) - Icon provider
+
+### IDE and Version Control
+
+- [Git Pod](https://gitpod.io/) - IDE (Integrated Development Environment)
+- [Git](https://git-scm.com/) - Version Control Tool
+- [Github](https://github.com/) - Cloud based hosting service to manager my Git Repositories
+- [Code Institute GitPod Template](https://github.com/Code-Institute-Org/gitpod-full-template) - Provides GitPod extensions to help with code production
+
+### Design and Development
+
+- [Google Chrome Development Tools](https://developer.chrome.com/docs/devtools/) - Design/Development Tools
+- [Figma](https://www.figma.com/) - Wireframe designer software
+- [Coolors](https://coolors.co/) - Colour scheme generator
+- [Lucid App](https://lucid.app/) - Diagram creator
+- [Draw.io](https://app.diagrams.net/) - Flow chart creator
+- [Animista](https://animista.net/) - CSS animation designer
+
+### Validation and Testing
+
+- [CSS Beautifier](https://www.freeformatter.com/css-beautifier.html) - Beautifying CSS Code
+- [JavaScript Validator](https://beautifytools.com/javascript-validator.php) - Validating JS code
+- [Lambda Test](https://www.lambdatest.com/) - Browser Testing Cloud Service
+- [Am I Responsive?](http://ami.responsivedesign.is/) - Webpage Breakpoint visualizer and image generator
 
 ### Documentation
 
 - [TinyPNG](https://tinypng.com/) - Image Compression
 - [CompressPNG](https://compresspng.com/) - Image Compression
 - [Markdown Table Generator](https://www.tablesgenerator.com/markdown_tables) - Markdown Table Production
+
+## **CREDITS**
+
+### **Code snippets**
+
+### **Resources**
+
+### **Content**
+
+### **Media**
+
+Gym Fit logo designed by [Hollie Coote](https://www.linkedin.com/in/hollie-coote-38306a146/?originalSubdomain=uk)
+
+Images sourced from:
+
+- [Pexels](https://www.pexels.com)
+- [Pixabay](https://www.pixabay.com)
+- [Unslapsh](https://www.unsplash.com)
+
+### **Acknowledgements**
