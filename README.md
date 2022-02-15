@@ -19,14 +19,13 @@ My user stories are broken up into categories indicated by their ID number. A **
 
 | ID | Category Name |
 | --- | --- |
-| 01 | Merchandise |
-| 02 | Class Booking |
-| 03 | Shopping Bag and Checkout |
-| 04 | User Account |
-| 05 | Miscellaneous |
-| 06 | Admin |
+| 01 | Class Booking |
+| 02 | Shopping Bag and Checkout |
+| 03 | User Account |
+| 04 | Miscellaneous |
+| 05 | Admin |
 
-![Spreadsheet of User Stories](readme/assets/ms4-user-stories.png)
+![Spreadsheet of User Stories](readme/assets/gym-fit-user-stories.png)
 
 # **Structure**
 
@@ -35,28 +34,27 @@ The website functionality that is set out in the user stories can be broken down
 ### 1. Permission Level 1 - Guest User/Not logged in
 At this level, Users can;
 - View all basic information about the business,
-- View all products and classes avaliable for purchase,
-- Add any classes or products to their bag,
+- View all individual classes avaliable for purchase,
+- Add any individual class to their bag,
 - Purchase the contents of the bag, by entering their information, and recieve confirmation of the transaction on completion,
 - Create an account, either seperatly or as part of the check out procedure,
 
 ### 2. Permission Level 2 - User Logged In/Customer
 At this level, Users can;
 - Do everything from Permission Level 1,
-- View all data stored in relation to their account, including basic details, shipping address and order/class order history,
+- View all data stored in relation to their account, including basic details, address and order/class order history
 - Update their account information, via their account Profile page
-- Add products/classes to their wish/favourite lists
+- Add classes to their favourite lists
 - Buy class tokens or a subscription
-- Leave rating on products or classes
+- Leave rating on classes attended
 
 ### 3. Permission Level 3 - Admin
 At this level, Users can;
-- Do everything from Permission Level 1 and 2 apart from edit users account information,
-- Create, View, Edit or Delete products, product categories, classes and class categories,
-- View details about the classes and attendees,
-- Manage stock,
-- Recieve user communications,
-
+- Do everything from Permission Level 1 and 2
+- Create, View, Edit or Delete classes and class categories
+- View details about the classes and attendees
+- Manage instructor profiles
+- Recieve customer communications
 
 
 # Database Schema
@@ -67,7 +65,7 @@ SQLlite was used in the development phase and Postgres, as provided by Heroku, w
 
 This diagram shows the database models and the relationship between them.
 
-![Database Structure and Schema Diagram](readme/assets/gym-fit-db-diagram.png)
+![Database Structure and Schema Diagram](readme/assets/gym-fit-db-schema.png)
 
 
 # Skeleton
@@ -80,5 +78,5 @@ This diagram shows the database models and the relationship between them.
 # Technology Used
 
 ### Documentation
-[TinyPNG](https://tinypng.com/) - Image Compression
-[CompressPNG](https://compresspng.com/) - Image Compression
+- [TinyPNG](https://tinypng.com/) - Image Compression
+- [CompressPNG](https://compresspng.com/) - Image Compression
