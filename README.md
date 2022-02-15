@@ -71,6 +71,57 @@ My user stories are broken up into categories indicated by their ID number. A **
 
 ![Spreadsheet of User Stories](readme/assets/gym-fit-user-stories.png)
 
+## **Scope**
+
+### **Production Feature Planning Table**
+
+After the initial planning session, an importance viability assessment was performed on all the features suggested and below are the results of this. I-V marks range from 1 to 5
+
+| ID | Feature                                                                                          | Importance | Viability |
+|----|--------------------------------------------------------------------------------------------------|------------|-----------|
+| 01 | Register, Confirm, Update information in and Delete a User Account with confirmation emails      | 5          | 5         |
+| 02 | Sign In and Out                                                                                  | 5          | 5         |
+| 03 | Sign In and Out with other social media accounts                                                 | 3          | 4         |
+| 04 | Recover account if login information is lost                                                     | 5          | 5         |
+| 05 | View User's personal information, upcoming and previous classes and order history                | 5          | 5         |
+| 06 | Update User's Personal Information                                                               | 5          | 5         |
+| 07 | Create, View, Edit and Delete Class Categories                                                   | 5          | 5         |
+| 08 | Schedule, View, Edit and Delete Classes                                                          | 5          | 5         |
+| 09 | Filter classes by category, date, trainer, time, ability level and favourite class category list | 5          | 3         |
+| 10 | Manage User's personal favourite class category list                                             | 4          | 5         |
+| 11 | Schedule weekly classes until a set date or for a certain number of weeks                        | 3          | 3         |
+| 12 | Book onto or add a class to the shopping bag                                                     | 5          | 5         |
+| 13 | Delete a class booking with refund if required                                                   | 5          | 4         |
+| 14 | View fully booked or almost full classes                                                         | 5          | 5         |
+| 15 | Add customers to waiting lists if a class is full, with email notification on space opening up    | 3          | 5         |
+| 16 | Purchase multiple classes with a weekly interval with a specified number of weeks                | 2          | 3         |
+| 17 | Create, View, Edit and Delete Class Access Packages (Tokens or Unlimited)                        | 5          | 5         |
+| 18 | Create, View, Edit and Delete Class Access Packages for specific class categories                | 3          | 5         |
+| 19 | Create, View, Edit and Delete Instructor Profiles                                                | 4          | 5         |
+| 20 | Allow Instructors to Update their publicly visible profiles and manage their classes             | 2          | 2         |
+| 21 | Add purchasable items to the shopping bag                                                        | 5          | 5         |
+| 22 | Securely process a purchase for items in the shopping bag                                        | 5          | 5         |
+| 23 | View order confirmation on purchase completion with a confirmation email                         | 5          | 5         |
+| 24 | Validate all User input                                                                          | 5          | 5         |
+| 25 | Contact system with FAQs                                                                         | 5          | 5         |
+| 26 | Links to business social media accounts                                                          | 5          | 5         |
+
+![Importance Viability Graph](readme/assets/gym-fit-importance-viability-graph.png)
+
+The graph shows an axis of up to 6 however data scores range from 1 to 5 making a 5,5 the highest possible.
+
+#### **I-V Analysis Conclusion**
+
+After the analysis of the features suggested, all features will be implemented **apart** from feature **3, 11, 15, 16, 18, 20**. These have been removed due to complexity and time restraints mainly but have been added to the list of features for future releases.
+
+**Feature 15 and 18** have been removed because time restraints have limited the amount of features that can be added. These features are possible however the importance category carries more weight in this instance.
+
+**Feature 9** has been **included** in this release however it has been **amended**. The feature will now:
+
+    "Filter classes by class category, date and favourite class category list only while sorting classes chronologically"
+
+Removed functionality can be included in a later release.
+
 ## **Structure**
 
 The website functionality that is set out in the user stories can be broken down into 3 general categories using what features users are allowed to access at different permisson levels.
@@ -138,3 +189,4 @@ This diagram shows the database models and the relationship between them.
 
 - [TinyPNG](https://tinypng.com/) - Image Compression
 - [CompressPNG](https://compresspng.com/) - Image Compression
+- [Markdown Table Generator](https://www.tablesgenerator.com/markdown_tables) - Markdown Table Production
