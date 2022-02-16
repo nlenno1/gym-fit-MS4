@@ -1,5 +1,7 @@
 # Wireframes
 
+To to use the development time most efficiently, the Home page was designed using the [Figma](https://www.figma.com) software to be able to show design elements like the color scheme, fonts ets and then traditional wireframes, produced using the [Balsamiq](https://www.balsamiq.com), were used to design the other pages.
+
 Home
 ![Page Wireframe](wireframes/home-wireframe.png)
 
@@ -15,6 +17,9 @@ My Account
 Our Classes
 ![Page Wireframe](wireframes/our-classes.png)
 
+Add A Review
+![Page Wireframe](wireframes/add-a-review.png)
+
 Class Booking
 ![Page Wireframe](wireframes/class-booking.png)
 
@@ -26,6 +31,9 @@ Cancel Class Booking
 
 Join Now
 ![Page Wireframe](wireframes/join-now.png)
+
+Contact
+![Page Wireframe](wireframes/contact.png)
 
 Shopping Bag
 ![Page Wireframe](wireframes/Shopping-Bag.png)
