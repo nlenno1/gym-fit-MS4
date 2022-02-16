@@ -1,6 +1,35 @@
 {% extends "base.html" %}
+
 {% load static %}
 
+{% block page_header %}
+    <div class="container container-header">
+        <div class="row">
+            <div class="col-12"></div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block content %}
-    <h1 class="display-1 text-danger">Everything is working</h1>
+    <div class="container-fluid">
+        <div class="row" id="hero-image">
+            <div class="col-12 col-sm-6 offset-sm-1">
+                <h1 class="display-5 text-center text-sm-start ms-sm-5 mt-3">Welcome to Community Fitness</h1>
+            </div>
+            <div class="col-12 col-sm-5 text-center text-sm-start">
+                <img class="hero-logo" src="media/gym-fit-logo.png" alt="Gym Fit Logo">
+            </div>
+        </div>
+        <div class="row">
+            <div class="d-none d-sm-block col-sm-6">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <div class="col-12 col-sm-6">
+                <p class="text-center mt-5 mt-sm-3">
+                    Gym Fit is a community based fitness centre designed to bring people together to enjoy the experience of 
+                    group fitness, reap the benefits of having a healthier lifestyle and meet like minded people along the way
+                </p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
