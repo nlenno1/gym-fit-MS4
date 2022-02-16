@@ -151,6 +151,12 @@ At this level, Users can;
 
 ## **STRUCTURE**
 
+## Topology
+
+This diagram explains how the pages will be linked or accessed from each other. The red lines are Admin only access pathways. All the blue elements are accessible at all times from the navbar element.
+
+![Topology Diagram](readme/assets/gym-fit-topology-diagram.png)
+
 ## Database Schema
 
 To deliver the required functionality, I have used a relational database to store and access any associated data.
