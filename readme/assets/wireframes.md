@@ -17,6 +17,9 @@ My Account
 Our Classes
 ![Page Wireframe](wireframes/our-classes.png)
 
+Class Details
+![Page Wireframe](wireframes/class-details.png)
+
 Add A Review
 ![Page Wireframe](wireframes/add-a-review.png)
 
