@@ -167,6 +167,16 @@ This diagram shows the database models and the relationship between them.
 
 ![Database Structure and Schema Diagram](readme/assets/gym-fit-db-schema.png)
 
+Color Key:
+
+- Yellow - Orders
+- Green - Products/Purchasable items
+- Blue - User/Acounts
+- Red - Categories/Auto Fill Options
+- Orange - Reviews
+
+In the database, the LineItem model is no necessary however it has been included for code reusability and to speed up future develpment.
+
 ## **SKELETON**
 
 ### **Wireframes**
