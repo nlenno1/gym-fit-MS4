@@ -39,7 +39,7 @@ Contact
 ![Page Wireframe](wireframes/contact.png)
 
 Shopping Bag
-![Page Wireframe](wireframes/Shopping-Bag.png)
+![Page Wireframe](wireframes/shopping-bag.png)
 
 Checkout
 ![Page Wireframe](wireframes/checkout.png)
