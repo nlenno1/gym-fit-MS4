@@ -175,7 +175,7 @@ Color Key:
 - Red - Categories/Auto Fill Options
 - Orange - Reviews
 
-In the database, the LineItem model is no necessary however it has been included for code reusability and to speed up future develpment.
+In the database, the OrderLineItem model is not necessary however, it has been included for code reusability and to speed up future develpment.
 
 ## **SKELETON**
 
@@ -205,6 +205,7 @@ This is a full, page by page, breakdown of all the features & elements that have
 - Purchase multiple classes with a weekly interval with a specified number of weeks
 - Create, View, Edit and Delete Class Access Packages for specific class categories
 - Allow Instructors to Update their publicly visible profiles and manage their classes
+- Automated subscription payment service
 
 ## **TESTING**
 
