@@ -36,17 +36,20 @@
   <body>
 
     <header class="fixed-top">
-      <nav class="navbar navbar-expand navbar-dark bg-dark pb-0 px-4">
-        <div class="container-fluid justify-content-around justify-content-sm-end">
+      <nav id="top-nav" class="navbar navbar-expand py-0 px-2 px-lg-5">
+        <div class="container-fluid px-0 justify-content-end">
           <ul class="navbar-nav mx-0">
-            <li class="nav-item">
-              <a class="nav-link py-0" href="#">Sign In</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link px-4 dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                My Account
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li><a class="dropdown-item" href="#">Register</a></li>
+                <li><a class="dropdown-item" href="#">Log In</a></li>
+              </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link py-0" href="#">Register</a>
-            </li>
-            <li class="nav-item">
-              <a href="" class="nav-link py-0">
+              <a href="" class="nav-link px-4">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <p class="mb-0">3</p>
               </a>
@@ -54,24 +57,28 @@
           </ul>
         </div>
       </nav>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+      <nav id="main-nav" class="navbar navbar-light navbar-expand-lg">
         <div class="container-fluid px-4">
-          <a class="navbar-brand" href="{% url 'home' %}">Logo 
-            <i class="fa-solid fa-cart-shopping"></i>
+          <a class="" href="{% url 'home' %}">
+            <img src="media/gym-fit-logo-black-text-clear.png" alt="Gym Fit Logo">
           </a>
-          <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+          <button id="menu-toggle-button" class="navbar-toggler" type="button" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse ms-0" id="navbarTogglerDemo01">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+          <div class="d-none d-lg-block ms-0">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link" href="#">Our Classes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="#">Class Bookings</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <a class="nav-link" href="#">Join Now</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
               </li>
             </ul>
           </div>
