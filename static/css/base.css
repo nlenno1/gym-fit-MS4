@@ -8,6 +8,14 @@
     min-height: calc(100vh - 340px)
 }
 
+.vetical-center {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+}
+
 /* Navbar */
 
 #top-nav, footer {
@@ -62,6 +70,13 @@
     height: 180px;
     width: 180px;
     margin: 0 auto;
+}
+
+#teamwork-image {
+    width: 75%;
+    max-width: 500px;
+    position: relative;
+    margin: -65px 0 15px;
 }
 
 @media(min-width:575px) {
