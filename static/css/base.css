@@ -16,25 +16,25 @@ h1, h2, h3 ,h4, h5 {
     min-height: calc(100vh - 340px)
 }
 
-.vetical-center {
+.vertical-center {
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    align-content: center;
+    justify-content: space-evenly;
 }
 
 .mt-big {
-    margin-top: 15vh;
+    margin-top: 14vh;
 }
 
 .pt-big {
-    padding-top: 15vh;
+    padding-top: 14vh;
 }
 
 .py-big {
-    padding-top: 15vh;
-    padding-bottom: 15vh;
+    padding-top: 14vh;
+    padding-bottom: 14vh;
 }
 
 /* Navbar */
@@ -144,7 +144,6 @@ h1, h2, h3 ,h4, h5 {
 .our-team-container {
     height: 100%;
     min-height: 345px;
-    padding: 0 30px;
 }
 
 .team-cards-container, .our-team-container {
@@ -176,6 +175,32 @@ h1, h2, h3 ,h4, h5 {
     margin-top: -55px;
     padding-right: 52px;
     margin-bottom: 0;
+}
+
+/* Bar and Shop */
+
+#shop-and-bar p {
+    font-size: 1.4rem;
+}
+
+#smoothie-1 {
+    width: 20vw;
+    min-width: 210px;
+    margin-left: 30px;
+    float: left;
+}
+
+#smoothie-2 {
+    width: 35vw;
+    min-width: 360px;
+    margin-top: -88px;
+    margin-right: 25px;
+    float: right;
+}
+
+#shop-image {
+    width: 35vw;
+    min-width: 340px;
 }
 
 /* Footer */
