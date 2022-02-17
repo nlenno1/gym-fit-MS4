@@ -1,6 +1,6 @@
 /* Navbar */
 
-#top-nav {
+#top-nav, footer {
     background-color: #353535;
 }
 
@@ -28,7 +28,13 @@
     }
 }
 
-/* Hero Image  */
+/* Container Header */
+
+.container-header {
+    padding-top: 140px;
+}
+
+/* Hero Image */
 
 #hero-image {
     height: 300px;
@@ -47,14 +53,43 @@
     margin: 0 auto;
 }
 
-.container-header {
-    padding-top: 88px;
-}
-
 @media(min-width:575px) {
     .hero-logo {
         height: 200px;
         width: 200px;
         margin: 50px 0 0 -20px;
     }
+    #hero-image {
+        height: 60vh;
+    }
+}
+
+/* Footer */
+
+footer {
+    color: #fafafa;
+}
+
+footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+footer img {
+    width: 100%;
+    max-width: 200px;
+}
+
+.footer-link-container, .footer-service-description {
+    height: 100%;
+    max-height: 245px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.footer-service-description{
+    max-width: 250px;
+    margin: 0 auto;
 }
