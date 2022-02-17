@@ -4,6 +4,10 @@
     transition: 0.1s ease-in-out;
 }
 
+#content {
+    min-height: calc(100vh - 340px)
+}
+
 /* Navbar */
 
 #top-nav, footer {
@@ -46,6 +50,7 @@
     height: 300px;
     background: url('/media/homepage-hero-image.jpg') no-repeat center center;
     background-size: cover;
+    position: relative;
 }
 
 #hero-image h1 {
@@ -63,10 +68,38 @@
     .hero-logo {
         height: 200px;
         width: 200px;
-        margin: 50px 0 0 -20px;
+        position: absolute;
+        top: 112px;
+        right: calc(30% - 100px);
     }
     #hero-image {
-        height: 60vh;
+        height: 400px;
+    }
+    #hero-image h1 {
+        margin-left: 12vw !important;
+    }
+}
+
+@media(min-width:768px) {
+    #hero-image h1 {
+        width: 530px;
+    }
+}
+
+@media(min-width:997px) {
+    #hero-image {
+        height: 650px;
+    }
+    #hero-image h1 {
+        margin-top: 8vh !important;
+        margin-left: 15vw !important;
+    }
+    .hero-logo {
+        height: 340px;
+        width: 340px;
+        position: absolute;
+        top: 180px;
+        right: calc(28% - 100px);
     }
 }
 
