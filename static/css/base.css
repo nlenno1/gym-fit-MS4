@@ -2,6 +2,10 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+body p {
+    font-size: 1.6rem;
+}
+
 h1, h2, h3 ,h4, h5 {
     font-family: 'Overlock', cursive;
 }
@@ -17,6 +21,14 @@ h1, h2, h3 ,h4, h5 {
 }
 
 .vertical-center {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.vertical-spread {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -37,15 +49,18 @@ h1, h2, h3 ,h4, h5 {
     padding-bottom: 14vh;
 }
 
-/* Navbar */
+/* Colours */
 
-#top-nav, footer, #our-team {
+#top-nav, footer, #our-team, #home-find-us {
     background-color: #353535;
 }
 
-#top-nav a, .text-blue {
+#top-nav a, .text-blue, #home-find-us {
     color: #2AAFD3;
 }
+
+/* Navbar */
+
 
 #main-nav {
     padding: 0;
@@ -179,10 +194,6 @@ h1, h2, h3 ,h4, h5 {
 
 /* Bar and Shop */
 
-#shop-and-bar p {
-    font-size: 1.4rem;
-}
-
 #smoothie-1 {
     width: 20vw;
     min-width: 210px;
@@ -202,6 +213,9 @@ h1, h2, h3 ,h4, h5 {
     width: 35vw;
     min-width: 340px;
 }
+
+/* Our Team */
+
 
 /* Footer */
 
@@ -244,6 +258,10 @@ footer img {
     text-align: center;
     font-size: 1.8rem;
     padding: 15px 5vw;
+}
+
+footer p {
+    font-size: 1rem;
 }
 
 @media(min-width:768px) {
