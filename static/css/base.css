@@ -16,13 +16,26 @@
     align-content: center;
 }
 
+.mt-big {
+    margin-top: 15vh;
+}
+
+.pt-big {
+    padding-top: 15vh;
+}
+
+.py-big {
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+}
+
 /* Navbar */
 
-#top-nav, footer {
+#top-nav, footer, #our-team {
     background-color: #353535;
 }
 
-#top-nav a {
+#top-nav a, .text-blue {
     color: #2AAFD3;
 }
 
@@ -116,6 +129,44 @@
         top: 180px;
         right: calc(28% - 100px);
     }
+}
+
+/* Our Team */
+
+.our-team-container {
+    height: 100%;
+    min-height: 345px;
+    padding: 0 30px;
+}
+
+.team-cards-container, .our-team-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.team-cards-container {
+    max-width: 1200px;
+}
+
+.trainer-card {
+    display: relative;
+    width: 280px;
+}
+
+.trainer-card img {
+    width: 230px;
+}
+
+.trainer-card p {
+    transform: rotate(90deg);
+    transform-origin: right top;
+    position: absolute;
+    color: #fafafa;
+    font-size: 2em;
+    margin-top: -45px;
+    padding-right: 60px;
 }
 
 /* Footer */
