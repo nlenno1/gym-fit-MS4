@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extracss %}
+  <link rel="stylesheet" href="{% static 'css/classes.css' %}">
+{% endblock %}
+
+{% block page_header %}
+    <div class="container container-header">
+        <div class="row">
+            <div class="col-12"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <section id="content" class="container">
+        <h1 class="display-3 ps-5 mt-5 mb-3">Class Booking</h1>
+        <div class="row">
+            <div class="col-12 text-center">
+                <form action="POST" method="">
+                    <div class="my-3 mx-auto">
+                        <input type="date" placeholder="Select a Date" class="form-control" aria-label="Select the date you want to see classes for">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="results-container">
+            <div class="row mt-3">
+                <div class="col-12 col-md-6 text-center text-md-start">
+                    <h3 class="mb-0">Classes on {{selected_date}}</h3>
+                </div>
+                <div class="col-12 col-md-6 text-center text-md-end">
+                    <!-- Select Element from Bootstrap Documentation -->
+                    <select class="form-select ms-auto" aria-label="Select a Class Category to filter the results by">
+                        <option selected disabled hidden>Filter by...</option>
+                        {% for category in class_categories %}
+                            <option value="{{category.id}}">{{category.friendly_name}}</option>
+                        {% endfor %}
+                      </select>
+                </div>
+            </div>
+            <!-- Table Element from Bootstrap Documentation -->
+            <table id="single-class-table" class="table mt-5">
+                <thead>
+                  <tr>
+                    <th scope="col">Class Type</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col d-none d-lg-table-header">Duration</th>
+                    <th scope="col d-none d-lg-table-header">Instructor</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Price</th>
+                    <th scope="col"></th>
+                    <th scope="col">Admin</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for class in classes %}
+                        <tr>
+                            <th scope="row">{{ class.category|title }}</th>
+                            <td>{{ class.start_time|title }}</td>
+                            <td class="d-none d-lg-table-cell">{{ class.duration }} mins</td>
+                            <td class="d-none d-lg-table-cell">{{ class.instructor|title }}</td>
+                            <td>{{ class.location }}</td>
+                            <td>£{{ class.price }}</td>
+                            <td><a class="btn btn-dark bag-button" href="">Add to Bag</a></td>
+                            <td><a href="#">Edit Class</a></td>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+{% endblock %}
+
+<!-- {% block postloadjs %}
+<script>
+    $(document).ready( function() {
+        $('#datePicker').val(new Date().toDateInputValue());
+    });​
+</script>
+{% endblock %} -->
