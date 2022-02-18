@@ -24,7 +24,7 @@
     <nav id="main-nav" class="navbar navbar-light navbar-expand-md">
       <div class="container-fluid px-4">
         <a class="" href="{% url 'home' %}">
-          <img src="media/gym-fit-logo-black-text-clear.png" alt="Gym Fit Logo">
+          <img src="{{ MEDIA_URL }}gym-fit-logo-black-text-clear.png" alt="Gym Fit Logo">
         </a>
         <button onclick="openNav()" id="menu-toggle-button" class="navbar-toggler me-2" type="button" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -32,7 +32,7 @@
         <div class="d-none d-md-block ms-0">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#">Our Classes</a>
+              <a class="nav-link" href="{% url 'view_class_categories' %}">Our Classes</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Class Bookings</a>
