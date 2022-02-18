@@ -225,7 +225,17 @@ h1, h2, h3 ,h4, h5 {
     }
 }
 
-/* Our Team */
+/* Map */
+
+#map {
+    padding: 4rem 1rem;
+}
+
+#map img {
+    width: 100%;
+}
+
+
 
 
 /* Footer */
