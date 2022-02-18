@@ -1,0 +1,50 @@
+<header class="fixed-top">
+    <nav id="top-nav" class="navbar navbar-expand py-0 px-2 px-lg-5">
+      <div class="container-fluid px-0 justify-content-end">
+        <ul class="navbar-nav mx-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link px-4 dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              My Account
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" href="#">Register</a></li>
+              <li><a class="dropdown-item" href="#">Log In</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="" class="nav-link px-4  d-flex align-items-center">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <p class="mb-0 ps-2">3</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <nav id="main-nav" class="navbar navbar-light navbar-expand-md">
+      <div class="container-fluid px-4">
+        <a class="" href="{% url 'home' %}">
+          <img src="media/gym-fit-logo-black-text-clear.png" alt="Gym Fit Logo">
+        </a>
+        <button onclick="openNav()" id="menu-toggle-button" class="navbar-toggler me-2" type="button" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="d-none d-md-block ms-0">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Our Classes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Class Bookings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Join Now</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
