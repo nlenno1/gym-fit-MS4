@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block extracss %}
+  <link rel="stylesheet" href="{% static 'css/classes.css' %}">
+{% endblock %}
+
 {% block page_header %}
     <div class="container container-header">
         <div class="row">
@@ -11,7 +15,25 @@
 {% endblock %}
 
 {% block content %}
-    <div id="content" class="container-fluid g-0">
-        {{ class_categories }}
+    <section id="content" class="container g-0">
+        <h1 class="display-3 ps-5 mt-5 mb-3">Our Classes</h1>
+        <div class="class_category_container">
+            {% for category in class_categories %}
+            <div class="class_catergory_card">
+                <div class="row g-0 text-center">
+                    <div class="col-12"><h4 class="pt-2">{{ category.friendly_name }}</h4></div>
+                    <div class="col-12">
+                        <div class="image-container d-flex justify-content-center">
+                            <img src="{{ category.image_url }}" alt="Image of {{ category.friendly_name }}"></div>
+                        </div>
+                    <div class="col-6">Av. Rating: </div>
+                    <div class="col-6"><i class="fa-regular fa-heart"></i></div>
+                    <div class="col-12">
+                        <a class="btn btn-dark mt-2" href="">View Class Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </section>
 {% endblock %}
