@@ -6,6 +6,10 @@ body p {
     font-size: 1.6rem;
 }
 
+footer p, nav p {
+    font-size: 1rem;
+}
+
 h1, h2, h3 ,h4, h5 {
     font-family: 'Overlock', cursive;
 }
@@ -201,17 +205,24 @@ h1, h2, h3 ,h4, h5 {
     float: left;
 }
 
-#smoothie-2 {
+.smoothie-2 {
     width: 35vw;
     min-width: 360px;
-    margin-top: -88px;
-    margin-right: 25px;
-    float: right;
 }
 
 #shop-image {
     width: 35vw;
     min-width: 340px;
+}
+
+@media(min-width:768px) {
+    .smoothie-2 {
+        width: 35vw;
+        min-width: 360px;
+        margin-top: -120px;
+        margin-right: 25px;
+        float: right;
+    }
 }
 
 /* Our Team */
@@ -258,10 +269,6 @@ footer img {
     text-align: center;
     font-size: 1.8rem;
     padding: 15px 5vw;
-}
-
-footer p {
-    font-size: 1rem;
 }
 
 @media(min-width:768px) {
