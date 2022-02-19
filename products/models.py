@@ -19,7 +19,7 @@ class ClassAccessPackage(models.Model):
     description = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     duration = models.PositiveSmallIntegerField(validators=[
-                                                MaxValueValidator(50)])
+                                                MaxValueValidator(365)])
     unlimited_tokens = models.BooleanField()
     amount_of_tokens = models.PositiveSmallIntegerField(
                        validators=[MaxValueValidator(50)],
