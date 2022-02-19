@@ -1,5 +1,8 @@
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
+
 from .models import ClassCategory, SingleExerciseClass
+
 
 def view_class_categories(request):
     """ A view to return all the categories"""
@@ -11,6 +14,18 @@ def view_class_categories(request):
     }
 
     return render(request, 'classes/our_classes.html', context)
+
+
+def view_single_class_category(request, category_id):
+    """ A view to return details about an individual class category"""
+
+    category = get_object_or_404(ClassCategory, pk=category_id)
+
+    context = {
+        'category': category
+    }
+
+    return render(request, 'classes/class_category_details.html', context)
 
 
 def view_all_single_classes(request):
