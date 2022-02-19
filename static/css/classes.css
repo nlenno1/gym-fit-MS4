@@ -65,10 +65,17 @@ input[type="date"] {
     padding: 0 5px;
 }
 
+.schedule-display-buttons a {
+    color: #000;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.bag-button {
+    background-color: #2AAFD3;
+}
+
 @media(min-width: 768px) {
-    .schedule-display-buttons{
-        flex-direction: row;
-    }
     input[type="date"], select{
         max-width: 300px;
     }

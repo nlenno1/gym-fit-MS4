@@ -3,22 +3,107 @@
 {% load static %}
 
 {% block extracss %}
-  <link rel="stylesheet" href="{% static 'css/classes.css' %}">
+<link rel="stylesheet" href="{% static 'css/classes.css' %}">
+<link rel="stylesheet" href="{% static 'css/join_us.css' %}">
+
 {% endblock %}
 
 {% block page_header %}
-    <div class="container container-header">
-        <div class="row">
-            <div class="col-12"></div>
-        </div>
+<div class="container container-header">
+    <div class="row">
+        <div class="col-12"></div>
     </div>
+</div>
 {% endblock %}
 
 {% block content %}
-    <section id="content" class="container g-0">
-        <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Join Us</h1>
-        <h2 class="text-center text-md-start ps-md-5 mt-5 mb-3">Here you can find our selection of Class Access Packages</h2>
+<section id="content" class="container">
+    <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Join Us</h1>
+    <h2 class="text-center text-md-start ps-md-5 mt-5 mb-3">Here you can find our selection of Class Access Packages
+    </h2>
 
-        {{ packages }}
-    </section>
+    <h4 class="mt-5 mb-3 ps-3">Class Tokens</h4>
+    {% for package in token_packages %}
+    <div class="single-class-schedule-display text-center">
+        <div class="row g-0 align-items-md-center">
+            <div class="col-12 col-sm-4 col-md-2">
+                <img src="" alt="">
+            </div>
+            <div class="col-12 col-sm-4 col-md-6">
+                <div class="row g-0 align-items-md-center">
+                    <div class="col-12 col-lg-4">
+                        <!-- Information/Description Popover -->
+                        <p>
+                            <strong>{{ package.friendly_name|title }}
+                                <button type="button" class="no-button" data-container="body"
+                                    data-toggle="popover" data-placement="bottom" data-content="{{ package.description }}"><i class="fas fa-info-circle"></i>
+                                </button>
+                            </strong>
+                        </p>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <p>{{ package.amount_of_tokens }} Tokens Included</p>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <p>£{{ package.price }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-4 schedule-display-buttons mt-3 mt-sm-0 flex-lg-row">
+                <a class="btn btn-dark text-light bag-button" href="#">Add to Bag</a>
+                <a class="" href="#">Edit Package</a>
+                <a class="" href="#">
+                    <i class="fa-solid fa-trash-can"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <hr class="package-type-divider">
+
+    <h4 class="mt-5 mb-3 ps-3">Unlimited Use</h4>
+    {% for package in unlimited_packages %}
+    <div class="single-class-schedule-display text-center">
+        <div class="row g-0 align-items-md-center">
+            <div class="col-12 col-sm-4 col-md-2">
+                <img src="" alt="">
+            </div>
+            <div class="col-12 col-sm-4 col-md-6">
+                <div class="row g-0 align-items-md-center">
+                    <div class="col-12 col-lg-4">
+                        <!-- Information/Description Popover -->
+                        <p>
+                            <strong>{{ package.friendly_name|title }}
+                                <button type="button" class="no-button" data-container="body"
+                                    data-toggle="popover" data-placement="bottom" data-content="{{ package.description }}"><i class="fas fa-info-circle"></i>
+                                </button>
+                            </strong>
+                        </p>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <p>{{ package.duration }} Days Class Access</p>
+                        <p><strong>
+                            Expires: {{ package.today_expires }}
+                        </strong> </p>
+                        <p>(if purchased today)</p>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <p>£{{ package.price }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-4 schedule-display-buttons mt-3 mt-sm-0 flex-lg-row">
+                <a class="btn btn-dark text-light bag-button" href="#">Add to Bag</a>
+                <a class="" href="#">Edit Package</a>
+                <a class="" href="#">
+                    <i class="fa-solid fa-trash-can"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</section>
 {% endblock %}
+
