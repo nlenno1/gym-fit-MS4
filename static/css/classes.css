@@ -37,36 +37,40 @@
 
 /* Class Bookings */
 
-input[type="date"], select{
-    max-width: 300px;
-}
-
 input[type="date"] {
     margin: 0 auto;
 }
 
-.single-class-table td, .single-class-table th {
-    line-height: 50px;
-    padding: 0 0.5em;
+.bag-button {
+    margin: 0 5px;
 }
 
-.single-class-table td a {
-    margin-top: -4px
-}
-
-.single_class_card, .class_list_header {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    align-items: center;
-    padding: 5px;
+.single-class-schedule-display {
+    padding: 15px 5px;
+    margin: 1vh 0;
     border: 2px solid #353535;
 }
 
-.single_class_card p, .class_list_header p {
+.single-class-schedule-display p {
+    font-size: 1rem;
     margin-bottom: 0;
-    line-height: 50px;
+}
+
+.schedule-display-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 0 5px;
+}
+
+@media(min-width: 768px) {
+    .schedule-display-buttons{
+        flex-direction: row;
+    }
+    input[type="date"], select{
+        max-width: 300px;
+    }
+    
 }
