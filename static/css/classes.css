@@ -45,12 +45,12 @@ input[type="date"] {
     margin: 0 auto;
 }
 
-#single-class-table td, #single-class-table th {
+.single-class-table td, .single-class-table th {
     line-height: 50px;
     padding: 0 0.5em;
 }
 
-#single-class-table td a {
+.single-class-table td a {
     margin-top: -4px
 }
 
@@ -69,10 +69,4 @@ input[type="date"] {
 .single_class_card p, .class_list_header p {
     margin-bottom: 0;
     line-height: 50px;
-}
-
-@media(min-width:768px) {
-    .conditional-table-cell {
-        display: table-cell;
-    }
 }
