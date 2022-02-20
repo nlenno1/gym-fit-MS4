@@ -47,17 +47,15 @@ def filter_single_classes(request, category_id):
 
     classes = SingleExerciseClass.objects.all()
     categories = ClassCategory.objects.all()
-    filtered_classes = []
 
-    print("Category Selected : " + category_id)
-    for item in classes:
-        print(item.category.id)
-        if str(item.category.id) == str(category_id):
-            filtered_classes.append(item)
+    selected_filter_name = [item.friendly_name for item in categories if str(item.id) == str(category_id)]
+
+    filtered_classes = [item for item in classes if str(item.category.id) == str(category_id)]
 
     context = {
         'classes': filtered_classes,
         'class_categories': categories,
+        'selected_filter': selected_filter_name[0],
     }
 
     return render(request, 'classes/class_booking.html', context)
