@@ -46,6 +46,7 @@
                             <option value="{{ category.id }}">{{ category.friendly_name|title }}</option>
                             {% endfor %}
                         </select>
+                        <input value="{{ current_category_filter }}" name="current_category_filter" type="text" hidden readonly>
                     </div>
                 </div>
             </form>

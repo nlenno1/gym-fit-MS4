@@ -49,24 +49,29 @@ def filter_single_classes(request):
     categories = ClassCategory.objects.all()
 
     if request.GET:
-        print(request.GET)
 
         filtered_classes = []
         selected_filter_name_list = []
 
+        if request.GET['category_filter'] == 'None':
+            category_filter = request.GET['current_category_filter']
+        else:
+            category_filter = request.GET['category_filter']
+
         # Check for all category option selected
-        if request.GET['category_filter'] == 'all':
+        if category_filter == 'all':
             selected_filter_name = 'all'
             filtered_classes = classes
         else:  # Filter the classes by category
-            filtered_classes = [item for item in classes if str(item.category.id) == str(request.GET['category_filter'])]
-            selected_filter_name_list = [item.friendly_name for item in categories if str(item.id) == str(request.GET['category_filter'])]
+            filtered_classes = [item for item in classes if str(item.category.id) == str(category_filter)]
+            selected_filter_name_list = [item.friendly_name for item in categories if str(item.id) == str(category_filter)]
             selected_filter_name = selected_filter_name_list[0]
 
     context = {
         'classes': filtered_classes,
         'class_categories': categories,
         'selected_filter': selected_filter_name,
+        'current_category_filter': category_filter,
     }
 
     return render(request, 'classes/class_booking.html', context)
