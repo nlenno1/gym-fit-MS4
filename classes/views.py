@@ -42,20 +42,31 @@ def view_all_single_classes(request):
     return render(request, 'classes/class_booking.html', context)
 
 
-def filter_single_classes(request, category_id):
+def filter_single_classes(request):
     """ A view to return all the single exercise classes"""
 
     classes = SingleExerciseClass.objects.all()
     categories = ClassCategory.objects.all()
 
-    selected_filter_name = [item.friendly_name for item in categories if str(item.id) == str(category_id)]
+    if request.GET:
+        print(request.GET)
 
-    filtered_classes = [item for item in classes if str(item.category.id) == str(category_id)]
+        filtered_classes = []
+        selected_filter_name_list = []
+
+        # Check for all category option selected
+        if request.GET['category_filter'] == 'all':
+            selected_filter_name = 'all'
+            filtered_classes = classes
+        else:  # Filter the classes by category
+            filtered_classes = [item for item in classes if str(item.category.id) == str(request.GET['category_filter'])]
+            selected_filter_name_list = [item.friendly_name for item in categories if str(item.id) == str(request.GET['category_filter'])]
+            selected_filter_name = selected_filter_name_list[0]
 
     context = {
         'classes': filtered_classes,
         'class_categories': categories,
-        'selected_filter': selected_filter_name[0],
+        'selected_filter': selected_filter_name,
     }
 
     return render(request, 'classes/class_booking.html', context)

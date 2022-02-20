@@ -65,7 +65,16 @@
       function closeNav() {
         document.getElementById("mobileNav").style.height = "0%";
       }
-      $('[data-toggle="popover"]').popover({ trigger: "hover" })
+      
+      // $('[data-toggle="popover"]').popover({ trigger: "hover" })
+
+      $('#date-picker').change(function(){
+        $('#date-form').submit();
+      });
+
+      $('#category-filter-select').change(function(){
+        $('#date-form').submit();
+      });
     </script>
   {% endblock %}
 
