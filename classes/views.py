@@ -1,6 +1,7 @@
+from datetime import date, datetime, timedelta
+
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
-from datetime import date, datetime
 
 from .models import ClassCategory, SingleExerciseClass
 
@@ -41,6 +42,48 @@ def view_all_single_classes(request):
     }
 
     return render(request, 'classes/class_booking.html', context)
+
+
+
+def classes_this_week(request):
+    """ A view to return all the single exercise classes"""
+
+    classes = SingleExerciseClass.objects.all()
+    categories = ClassCategory.objects.all()
+
+    for item in classes:
+        item.friendly_date = item.date.strftime("%d/%m/%Y")
+
+    today = datetime.now()
+    current_date = today.strftime("%Y,%m,%d")
+    current_date_temp = datetime.strptime(current_date, "%Y,%m,%d")
+    this_week = []
+    for x in range(6):
+        newdate = current_date_temp + timedelta(days=x)
+        this_week.append(newdate)
+
+    selected_classes = [item for item in classes if str(item.date) > str(this_week[0]) and str(item.date) < str(this_week[-1])]
+
+    week_dates = [date.strftime("%d/%m/%Y") for date in this_week]
+
+    days_with_classes = []
+    for item in selected_classes:
+        if item.friendly_date not in days_with_classes:
+            days_with_classes.append({
+                'friendly_date': item.friendly_date,
+                'text_date': item.date.strftime("%A %d %b"),
+            })
+
+    print(week_dates)
+    print(days_with_classes)
+
+    context = {
+        'classes': selected_classes,
+        'class_categories': categories,
+        'days_with_classes': days_with_classes,
+    }
+
+    return render(request, 'classes/classes_this_week.html', context)
 
 
 def filter_single_classes(request):
