@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from datetime import datetime
 
 from .models import ClassCategory, SingleExerciseClass
 
@@ -49,17 +50,18 @@ def filter_single_classes(request):
     categories = ClassCategory.objects.all()
 
     if request.GET:
-
         filtered_classes = []
         selected_filter_name_list = []
 
+        # Check if category or date filters are None and assign previous values if true
         if request.GET['category_filter'] == 'None':
             category_filter = request.GET['current_category_filter']
         else:
             category_filter = request.GET['category_filter']
 
+        date_filter = request.GET['date_filter']
         # Check for all category option selected
-        if category_filter == 'all':
+        if category_filter == 'all' or category_filter == '':
             selected_filter_name = 'all'
             filtered_classes = classes
         else:  # Filter the classes by category
@@ -67,11 +69,16 @@ def filter_single_classes(request):
             selected_filter_name_list = [item.friendly_name for item in categories if str(item.id) == str(category_filter)]
             selected_filter_name = selected_filter_name_list[0]
 
+        # Filter the Classes by day if a date is selected
+        if date_filter != '':
+            filtered_classes = [item for item in filtered_classes if str(item.date) == str(date_filter)]
+
     context = {
         'classes': filtered_classes,
         'class_categories': categories,
-        'selected_filter': selected_filter_name,
+        'selected_category_filter': selected_filter_name,
         'current_category_filter': category_filter,
+        'date_filter': date_filter,
     }
 
     return render(request, 'classes/class_booking.html', context)

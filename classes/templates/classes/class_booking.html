@@ -28,22 +28,21 @@
                     <div class="col-12 col-md-3">
                         <!-- date input - js change event hander calls function -->
                         <div class="my-3">
-                            <input id="date-picker" name="date_filter" type="date" class="form-control" aria-label="Select the date you want to see classes for">
-                            <input value="" name="current_date_filter" type="date" hidden readonly>
+                            <input value="{{ date_filter }}" id="date-picker" name="date_filter" type="date" class="form-control" aria-label="Select the date you want to see classes for">
                         </div>
                     </div>
                     <div class="col-12 col-md-6 text-center text-md-end">
                         <select class="form-select mx-auto mx-md-0 ms-md-auto" name="category_filter" id="category-filter-select" aria-label="Select what Category to filter the classes by">
                             <option selected hidden value="None">
-                                {% if selected_filter %}
-                                    Showing {{ selected_filter|title }} Classes
+                                {% if selected_category_filter %}
+                                    Showing {{ selected_category_filter|title }} Classes
                                 {% else %}
                                     Filter by...
                                 {% endif %}
                             </option>
                             <option value="all">Show All</option>
                             {% for category in class_categories %}
-                            <option value="{{ category.id }}">{{ category.friendly_name|title }}</option>
+                                <option value="{{ category.id }}">{{ category.friendly_name|title }}</option>
                             {% endfor %}
                         </select>
                         <input value="{{ current_category_filter }}" name="current_category_filter" type="text" hidden readonly>
