@@ -1,4 +1,4 @@
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
@@ -28,21 +28,6 @@ def view_single_class_category(request, category_id):
     }
 
     return render(request, 'classes/class_category_details.html', context)
-
-
-def view_all_single_classes(request):
-    """ A view to return all the single exercise classes"""
-
-    classes = SingleExerciseClass.objects.all()
-    categories = ClassCategory.objects.all()
-
-    context = {
-        'classes': classes,
-        'class_categories': categories,
-    }
-
-    return render(request, 'classes/class_booking.html', context)
-
 
 
 def classes_this_week(request):
@@ -148,4 +133,4 @@ def filter_single_classes(request):
         'date_filter': date_filter,
     }
 
-    return render(request, 'classes/class_booking.html', context)
+    return render(request, 'classes/classes_by_day.html', context)
