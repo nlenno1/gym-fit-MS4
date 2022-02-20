@@ -73,9 +73,6 @@ def classes_this_week(request):
             })
 
     if request.GET:
-        print(request.GET)
-        selected_filter_name_list = []
-
         # Check if category or date filters are None and assign previous values if true
         if request.GET['category_filter'] == 'None':
             category_filter = request.GET['current_category_filter']
