@@ -64,8 +64,6 @@ def classes_this_week(request):
 
     selected_classes = [item for item in classes if str(item.date) > str(this_week[0]) and str(item.date) < str(this_week[-1])]
 
-    week_dates = [date.strftime("%d/%m/%Y") for date in this_week]
-
     days_with_classes = []
     for item in selected_classes:
         if item.friendly_date not in days_with_classes:
@@ -74,13 +72,36 @@ def classes_this_week(request):
                 'text_date': item.date.strftime("%A %d %b"),
             })
 
-    print(week_dates)
-    print(days_with_classes)
+    if request.GET:
+        print(request.GET)
+        selected_filter_name_list = []
+
+        # Check if category or date filters are None and assign previous values if true
+        if request.GET['category_filter'] == 'None':
+            category_filter = request.GET['current_category_filter']
+        else:
+            category_filter = request.GET['category_filter']
+
+        # Check for all category option selected
+        if category_filter == 'all' or category_filter == '':
+            selected_filter_name = 'all'
+        else:  # Filter the classes by category
+            selected_classes = [item for item in selected_classes if str(item.category.id) == str(category_filter)]
+            selected_filter_name_list = [item.friendly_name for item in categories if str(item.id) == str(category_filter)]
+            selected_filter_name = selected_filter_name_list[0]
+
+    else:  # Set defaults and todays date to filter classes
+        category_filter = ''
+        selected_filter_name = ''
 
     context = {
         'classes': selected_classes,
         'class_categories': categories,
+
         'days_with_classes': days_with_classes,
+
+        'selected_category_filter': selected_filter_name,
+        'current_category_filter': category_filter,
     }
 
     return render(request, 'classes/classes_this_week.html', context)
