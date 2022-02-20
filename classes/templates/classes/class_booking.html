@@ -31,15 +31,16 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 text-center text-md-end">
-                    <!-- Select Element from Bootstrap Documentation -->
-                    <!-- Filter by category dropdown menu -->
-                    <select class="form-select ms-auto" aria-label="Select a Class Category to filter the results by">
-                        <option selected disabled hidden>Filter by...</option>
-                        <option value="use_favourites">Favourite Classes</option>
-                        {% for category in class_categories %}
-                            <option value="{{category.id}}">{{category.friendly_name}}</option>
-                        {% endfor %}
-                      </select>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="category-filter-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Filter by...
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="category-filter-dropdown">
+                            {% for category in class_categories %}
+                                <li><a class="dropdown-item" href="{% url 'filter_single_classes' category.id %}">{{ category.friendly_name|title }} - {{ category.id }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
             <!-- Individual Class Display -->
@@ -64,7 +65,7 @@
                                     </div>
                                 {% else %}
                                     <div class="row g-0 align-items-center">
-                                        <div class="col-12 col-md-4"><p><strong>{{ class.category|title}}</strong></p></div>
+                                        <div class="col-12 col-md-4"><p><strong>{{ class.category|title}} - {{ class.category.id }}</strong></p></div>
                                         <div class="col-12 col-md-4"><p>{{ class.instructor|title }}</p></div>
                                         <div class="col-12 col-md-4"><p>{{ class.location|title }}</p></div>
                                     </div>

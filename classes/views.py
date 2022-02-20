@@ -36,7 +36,28 @@ def view_all_single_classes(request):
 
     context = {
         'classes': classes,
-        'class_categories': categories
+        'class_categories': categories,
+    }
+
+    return render(request, 'classes/class_booking.html', context)
+
+
+def filter_single_classes(request, category_id):
+    """ A view to return all the single exercise classes"""
+
+    classes = SingleExerciseClass.objects.all()
+    categories = ClassCategory.objects.all()
+    filtered_classes = []
+
+    print("Category Selected : " + category_id)
+    for item in classes:
+        print(item.category.id)
+        if str(item.category.id) == str(category_id):
+            filtered_classes.append(item)
+
+    context = {
+        'classes': filtered_classes,
+        'class_categories': categories,
     }
 
     return render(request, 'classes/class_booking.html', context)
