@@ -80,6 +80,12 @@ h1, h2, h3 ,h4, h5 {
     height: 100px;
 }
 
+#class-mobile-nav-collapse {
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.8em;
+}
+
 @media(min-width:997px) {
     #main-nav img {
         padding: 0 0 0 5vw;

@@ -23,9 +23,7 @@
                 <div class="row align-items-center g-0 mt-3">
                     <div class="col-12 col-md-6 text-center text-md-start">
                         <!-- Label for Date input -->
-                        <a href="{% url 'filter_single_classes' %}">
-                            <h3 class="text-center mb-0">Classes Shown By Day</h3>
-                        </a>
+                        <h3 class="text-center text-md-start ps-md-5 my-3"><a href="{% url 'filter_single_classes' %}">Classes By Day</a></h3>
                     </div>
                     <div class="col-12 col-md-6 text-center text-md-end">
                         <select class="form-select mx-auto mx-md-0 ms-md-auto" name="category_filter" id="category-filter-select" aria-label="Select what Category to filter the classes by">
@@ -71,7 +69,7 @@
                                                 </div>
                                             {% else %}
                                                 <div class="row g-0 align-items-center">
-                                                    <div class="col-12 col-md-4"><p><strong>{{ class.category|title}} - {{ class.category.id }}</strong></p></div>
+                                                    <div class="col-12 col-md-4"><p><strong>{{ class.category|title}}</strong></p></div>
                                                     <div class="col-12 col-md-4"><p>{{ class.instructor|title }}</p></div>
                                                     <div class="col-12 col-md-4"><p>{{ class.location|title }}</p></div>
                                                 </div>
@@ -83,7 +81,7 @@
                                             {% else %}
                                                 <a class="btn btn-dark bag-button" href="#">Add to Bag</a>
                                             {% endif %}
-                                            <a class="" href="#">{{class.date}}</a>
+                                            <a class="" href="#">Edit Class</a>
                                             <a class="" href="#">
                                                 <i class="fa-solid fa-trash-can"></i>
                                             </a>

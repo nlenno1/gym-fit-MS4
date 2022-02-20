@@ -11,9 +11,19 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'view_class_categories' %}">Our Classes</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'classes_this_week' %}">Class Bookings</a>
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#" type="button" data-bs-toggle="collapse" data-bs-target="#class-mobile-nav-collapse" aria-expanded="false" aria-controls="class-mobile-nav-collapse">
+            Book Classes
+          </a>
+          <ul class="collapse" id="class-mobile-nav-collapse">
+            <li><a class="dropdown-item" href="{% url 'classes_this_week' %}">This Week</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_single_classes' %}">Classes By Day</a></li>
+          </ul>
         </li>
+
+
         <li class="nav-item">
           <a class="nav-link" href="{% url 'view_class_access_packages' %}">Join Now</a>
         </li>
