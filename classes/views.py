@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
-from datetime import datetime
+from datetime import date, datetime
 
 from .models import ClassCategory, SingleExerciseClass
 
@@ -46,11 +46,11 @@ def view_all_single_classes(request):
 def filter_single_classes(request):
     """ A view to return all the single exercise classes"""
 
-    classes = SingleExerciseClass.objects.all()
+    filtered_classes = SingleExerciseClass.objects.all()
     categories = ClassCategory.objects.all()
 
     if request.GET:
-        filtered_classes = []
+        print(request.GET)
         selected_filter_name_list = []
 
         # Check if category or date filters are None and assign previous values if true
@@ -63,21 +63,27 @@ def filter_single_classes(request):
         # Check for all category option selected
         if category_filter == 'all' or category_filter == '':
             selected_filter_name = 'all'
-            filtered_classes = classes
         else:  # Filter the classes by category
-            filtered_classes = [item for item in classes if str(item.category.id) == str(category_filter)]
+            filtered_classes = [item for item in filtered_classes if str(item.category.id) == str(category_filter)]
             selected_filter_name_list = [item.friendly_name for item in categories if str(item.id) == str(category_filter)]
             selected_filter_name = selected_filter_name_list[0]
 
-        # Filter the Classes by day if a date is selected
-        if date_filter != '':
-            filtered_classes = [item for item in filtered_classes if str(item.date) == str(date_filter)]
+    else:  # Set defaults and todays date to filter classes
+        category_filter = ''
+        selected_filter_name = ''
+        date_filter = datetime.today().strftime('%Y-%m-%d')
+
+    # Filter the Classes by day if a date is selected
+    if date_filter != '':
+        filtered_classes = [item for item in filtered_classes if str(item.date) == str(date_filter)]
 
     context = {
         'classes': filtered_classes,
         'class_categories': categories,
+
         'selected_category_filter': selected_filter_name,
         'current_category_filter': category_filter,
+
         'date_filter': date_filter,
     }
 
