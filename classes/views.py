@@ -43,26 +43,14 @@ def classes_this_week(request):
     current_date = today.strftime("%Y,%m,%d")
     current_date_temp = datetime.strptime(current_date, "%Y,%m,%d")
     this_week = []
-    for x in range(6):
+    for x in range(7):
         newdate = current_date_temp + timedelta(days=x)
         this_week.append(newdate)
 
-    selected_classes = [item for item in classes if str(item.date) > str(this_week[0]) and str(item.date) < str(this_week[-1])]
 
-    days_with_classes = []
-    for item in selected_classes:
-        if item.friendly_date not in days_with_classes:
-            days_with_classes.append({
-                'friendly_date': item.friendly_date,
-                'text_date': item.date.strftime("%A %d %b"),
-            })
-
+    selected_classes = [item for item in classes if str(item.date) >= str(this_week[0] - timedelta(days=1)) and str(item.date) <= str(this_week[-1])]
     if request.GET:
-        # Check if category or date filters are None and assign previous values if true
-        if request.GET['category_filter'] == 'None':
-            category_filter = request.GET['current_category_filter']
-        else:
-            category_filter = request.GET['category_filter']
+        category_filter = request.GET['category_filter']
 
         # Check for all category option selected
         if category_filter == 'all' or category_filter == '':
@@ -76,14 +64,23 @@ def classes_this_week(request):
         category_filter = ''
         selected_filter_name = ''
 
+    days_with_classes = []
+    search_storage = []
+    for item in selected_classes:
+        if item.date not in search_storage:
+            search_storage.append(item.date)
+            days_with_classes.append({
+                'date': item.date,
+                'friendly_date': item.friendly_date,
+                'text_date': item.date.strftime("%A %d %b"),
+            })
+    days_with_classes_sorted = sorted(days_with_classes, key=lambda d: d['date'])
+
     context = {
         'classes': selected_classes,
         'class_categories': categories,
-
-        'days_with_classes': days_with_classes,
-
+        'days_with_classes': days_with_classes_sorted,
         'selected_category_filter': selected_filter_name,
-        'current_category_filter': category_filter,
     }
 
     return render(request, 'classes/classes_this_week.html', context)
@@ -96,7 +93,6 @@ def filter_single_classes(request):
     categories = ClassCategory.objects.all()
 
     if request.GET:
-        print(request.GET)
         selected_filter_name_list = []
 
         # Check if category or date filters are None and assign previous values if true
