@@ -75,6 +75,10 @@
       $('#category-filter-select').change(function(){
         $('#date-form').submit();
       });
+      // Date formatting taken from Stack Overflow (https://stackoverflow.com/questions/32378590/set-date-input-fields-max-date-to-today)
+      var datePickerMinValue = new Date().toISOString().split("T")[0];
+      $('#date-picker').attr('min', datePickerMinValue)
+      
     </script>
   {% endblock %}
 
