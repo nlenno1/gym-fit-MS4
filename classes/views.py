@@ -80,7 +80,7 @@ def classes_this_week(request):
         'classes': selected_classes,
         'class_categories': categories,
         'days_with_classes': days_with_classes_sorted,
-        'selected_category_filter': selected_filter_name,
+        'category_filter': selected_filter_name,
     }
 
     return render(request, 'classes/classes_this_week.html', context)
@@ -92,19 +92,28 @@ def filter_single_classes(request):
     filtered_classes = SingleExerciseClass.objects.all()
     categories = ClassCategory.objects.all()
 
-    category_filter = ''
+    category_filter = 'None'
+    category_filter_name = ''
+    previous_category_filter = 'None'
     date_filter = datetime.today().strftime('%Y-%m-%d')
 
     if request.GET:
         # Check if category or date filters are None and assign previous values if true
-        category_filter = request.GET['category_filter']
+        if request.GET['category_filter'] != 'None':
+            category_filter = request.GET['category_filter']
+            previous_category_filter = request.GET['category_filter']
+        else:
+            category_filter = request.GET['previous_category_filter']
+            previous_category_filter = request.GET['previous_category_filter']
+
         date_filter = request.GET['date_filter']
 
         # Check for all category option selected
-        if category_filter == 'all' or category_filter == 'None':
+        if category_filter == 'all' or category_filter == '':
             category_filter = 'all'
         else:  # Filter the classes by category
             category_filter = ClassCategory.objects.get(pk=category_filter)
+            category_filter_name = category_filter.friendly_name
             filtered_classes = filtered_classes.filter(category=category_filter)
 
     # Filter the Classes by date and order by start time
@@ -116,14 +125,13 @@ def filter_single_classes(request):
         if item.date.strftime("%d:%m:%Y - ") + item.start_time.strftime("%H:%M") <= now.strftime("%d:%m:%Y - %H:%M:%S"):
             item.closed = True
 
-    print(category_filter)
-
     context = {
         'classes': filtered_classes,
         'class_categories': categories,
 
-        'selected_category_filter': category_filter,
-        'current_category_filter': category_filter,
+        'category_filter': category_filter,
+        'previous_category_filter': previous_category_filter,
+        'category_filter_name': category_filter_name,
 
         'date_filter': date_filter,
     }

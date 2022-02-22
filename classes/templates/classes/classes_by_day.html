@@ -35,8 +35,8 @@
                     <div class="col-12 col-md-6 text-center text-md-end">
                         <select class="form-select mx-auto mx-md-0 ms-md-auto" name="category_filter" id="category-filter-select" aria-label="Select what Category to filter the classes by">
                             <option hidden value="None">
-                                {% if selected_category_filter %}
-                                    Showing {{ category_filter|title }} Classes
+                                {% if category_filter_name != '' %}
+                                    Showing {{ category_filter_name|title }} Classes
                                 {% else %}
                                     Filter by...
                                 {% endif %}
@@ -44,13 +44,14 @@
                             <option value="all">Show All</option>
                             {% for category in class_categories %}
                                 <option value="{{ category.id }}"
-                                {% if category == selected_category_filter.id %}
+                                {% if category == category_filter.id %}
                                 selected
                                 {% endif %}
                                 >{{ category.friendly_name|title }}</option>
                             {% endfor %}
                         </select>
                     </div>
+                <input type="text" name="previous_category_filter"  value="{{ previous_category_filter }}" hidden readonly>
                 </div>
             </form>
             <!-- Individual Class Display -->
