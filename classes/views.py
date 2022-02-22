@@ -91,20 +91,16 @@ def filter_single_classes(request):
 
     filtered_classes = SingleExerciseClass.objects.all()
     categories = ClassCategory.objects.all()
-
     category_filter = 'None'
     category_filter_name = ''
-    previous_category_filter = 'None'
     date_filter = datetime.today().strftime('%Y-%m-%d')
 
     if request.GET:
         # Check if category or date filters are None and assign previous values if true
         if request.GET['category_filter'] != 'None':
             category_filter = request.GET['category_filter']
-            previous_category_filter = request.GET['category_filter']
         else:
             category_filter = request.GET['previous_category_filter']
-            previous_category_filter = request.GET['previous_category_filter']
 
         date_filter = request.GET['date_filter']
 
@@ -128,11 +124,8 @@ def filter_single_classes(request):
     context = {
         'classes': filtered_classes,
         'class_categories': categories,
-
         'category_filter': category_filter,
-        'previous_category_filter': previous_category_filter,
         'category_filter_name': category_filter_name,
-
         'date_filter': date_filter,
     }
 
