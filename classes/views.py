@@ -47,7 +47,6 @@ def classes_this_week(request):
         newdate = current_date_temp + timedelta(days=x)
         this_week.append(newdate)
 
-
     selected_classes = [item for item in classes if str(item.date) >= str(this_week[0] - timedelta(days=1)) and str(item.date) <= str(this_week[-1])]
     if request.GET:
         category_filter = request.GET['category_filter']
@@ -118,6 +117,12 @@ def filter_single_classes(request):
     # Filter the Classes by day if a date is selected
     if date_filter != '':
         filtered_classes = [item for item in filtered_classes if str(item.date) == str(date_filter)]
+
+    # Check if classes displayed have happened yet
+    now = datetime.now()
+    for item in filtered_classes:
+        if item.date.strftime("%d:%m:%Y - ") + item.start_time.strftime("%H:%M") <= now.strftime("%d:%m:%Y - %H:%M:%S"):
+            item.closed = True
 
     context = {
         'classes': filtered_classes,

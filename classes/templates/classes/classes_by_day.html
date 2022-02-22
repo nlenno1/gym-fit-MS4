@@ -82,6 +82,8 @@
                                 <div class="col-12 col-sm-4 schedule-display-buttons mt-3 mt-sm-0 flex-lg-row">
                                     {% if class.remaining_spaces is 0 %}
                                         <p class="text-danger fw-bold">Fully Booked</p>
+                                    {% elif class.closed %}
+                                        <a class="btn btn-dark text-white" disabled href="#">Class Closed</a>
                                     {% else %}
                                         <a class="btn btn-dark bag-button" href="#">Add to Bag</a>
                                     {% endif %}
