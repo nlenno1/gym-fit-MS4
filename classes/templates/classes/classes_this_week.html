@@ -28,8 +28,8 @@
                     <div class="col-12 col-md-6 text-center text-md-end">
                         <select class="form-select mx-auto mx-md-0 ms-md-auto" name="category_filter" id="category-filter-select" aria-label="Select what Category to filter the classes by">
                             <option selected hidden value="None">
-                                {% if selected_category_filter %}
-                                    Showing {{ selected_category_filter|title }} Classes
+                                {% if category_filter %}
+                                    Showing {{ category_filter|title }} Classes
                                 {% else %}
                                     Filter by...
                                 {% endif %}
@@ -39,7 +39,6 @@
                                 <option value="{{ category.id }}">{{ category.friendly_name|title }}</option>
                             {% endfor %}
                         </select>
-                        <input value="{{ current_category_filter }}" name="current_category_filter" type="text" hidden readonly>
                     </div>
                 </div>
             </form>
@@ -49,7 +48,7 @@
                     {% for date in days_with_classes %}
                         <h3>{{ date.text_date }}</h3>
                         {% for class in classes %}
-                            {% if class.friendly_date == date.friendly_date %}
+                            {% if class.date == date.date %}
                                 <div class="single-class-schedule-display text-center">
                                     <div class="row g-0 align-items-center">
                                         <div class="col-6 col-sm-4 col-md-2">
