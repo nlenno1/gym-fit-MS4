@@ -14,6 +14,10 @@ h1, h2, h3 ,h4, h5 {
     font-family: 'Overlock', cursive;
 }
 
+.blue-button {
+    background-color: #2AAFD3;
+}
+
 .hover-blue:hover, footer a:hover, hr {
     color:#2AAFD3;
     font-weight: 500;
