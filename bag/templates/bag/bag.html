@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extracss %}
+  <link rel="stylesheet" href="{% static 'css/classes.css' %}">
+{% endblock %}
+
+{% block page_header %}
+    <div class="container container-header">
+        <div class="row">
+            <div class="col-12"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <section id="content" class="container g-0">
+        <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Shopping Bag</h1>
+    </section>
+{% endblock %}
