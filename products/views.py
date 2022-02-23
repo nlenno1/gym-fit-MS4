@@ -1,7 +1,8 @@
+from datetime import date, timedelta
 from django.shortcuts import render
+
 from .models import ClassAccessPackage
 
-from datetime import date, timedelta
 
 def view_class_access_packages(request):
     """ A view to return the class access packages available"""

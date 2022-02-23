@@ -4,14 +4,14 @@ from django.shortcuts import render, redirect
 def view_bag(request):
     """ View to render the shopping bag """
 
-    return render(request, 'bag/bag.html')
+    return render(request, 'bag/bag.html', )
 
 
 def add_package_to_bag(request, item_id):
     """ View to add a package to the shopping bag """
 
     redirect_url = request.POST.get('redirect_url')
-    bag = request.session.get('bag', {'class_access_package': {"item_id": None},
+    bag = request.session.get('bag', {'class_access_package': {"item_id": None, "package_object": None},
                                       'single_classes': []})
 
     bag['class_access_package']['item_id'] = item_id
