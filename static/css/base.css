@@ -73,6 +73,7 @@ h1, h2, h3 ,h4, h5 {
 #main-nav {
     padding: 0;
     background-color: #fafafa;
+    border-bottom: 5px ridge #2AAFD3;
 }
 
 #main-nav ul a {
