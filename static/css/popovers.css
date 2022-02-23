@@ -1,10 +1,10 @@
-[data-toggle="popover"] {
+[data-bs-toggle="popover"] {
     padding: 0;
     border: none;
     background-color: rgba(0, 0, 0, 0);
 }
 
-[data-toggle="popover"] a{
+[data-bs-toggle="popover"] a{
     color: #000;
 }
 
