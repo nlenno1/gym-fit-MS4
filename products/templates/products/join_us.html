@@ -17,6 +17,11 @@
 {% endblock %}
 
 {% block content %}
+{% if bag_items.class_access_package %}
+<div class="alter alert-warning text-center py-3 px-3 fw-bold">
+    You have the Class Access Package {{ bag_items.class_access_package.friendly_name|title }} in your bag already. A new package will replace this one.
+</div>
+{% endif %}
 <section id="content" class="container">
     <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Join Us</h1>
     <h2 class="text-center text-md-start ps-md-5 mt-5 mb-3">Here you can find our selection of Class Access Packages
@@ -50,7 +55,11 @@
                 </div>
             </div>
             <div class="col-12 col-sm-4 schedule-display-buttons mt-3 mt-sm-0 flex-lg-row">
-                <a class="btn btn-dark text-light bag-button" href="#">Add to Bag</a>
+                <form action="{% url 'add_package_to_bag' package.id %}" method="POST" class="form">
+                    {% csrf_token %}
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    <button type="submit" class="btn btn-dark text-light bag-button">Add to Bag</button>
+                </form>
                 <a class="" href="#">Edit Package</a>
                 <a class="" href="#">
                     <i class="fa-solid fa-trash-can"></i>
@@ -94,7 +103,11 @@
                 </div>
             </div>
             <div class="col-12 col-sm-4 schedule-display-buttons mt-3 mt-sm-0 flex-lg-row">
-                <a class="btn btn-dark text-light bag-button" href="#">Add to Bag</a>
+                <form action="{% url 'add_package_to_bag' package.id %}" method="POST" class="form">
+                    {% csrf_token %}
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    <button type="submit" class="btn btn-dark text-light bag-button">Add to Bag</button>
+                </form>
                 <a class="" href="#">Edit Package</a>
                 <a class="" href="#">
                     <i class="fa-solid fa-trash-can"></i>
