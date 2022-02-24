@@ -29,7 +29,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 CSRF_TRUSTED_ORIGINS = ['https://8000-nlenno1-gymfitms4-pycva174525.ws-eu32.gitpod.io',
-                        'https://8000-nlenno1-gymfitms4-pycva174525.ws-eu33.gitpod.io']
+                        'https://8000-nlenno1-gymfitms4-pycva174525.ws-eu33.gitpod.io',
+                        'https://8000-nlenno1-gymfitms4-pycva174525.ws-eu34.gitpod.io']
 
 # Application definition
 

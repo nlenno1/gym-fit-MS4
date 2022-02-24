@@ -51,6 +51,11 @@ input[type="date"] {
     border: 2px solid #353535;
 }
 
+.single-class-schedule-display img {
+    height: 120px;
+    margin-top: -6px;
+}
+
 .single-class-schedule-display p {
     font-size: 1rem;
     margin-bottom: 0;
