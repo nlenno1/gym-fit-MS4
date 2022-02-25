@@ -67,3 +67,9 @@ class SingleExerciseClass(models.Model):
     remaining_spaces = models.PositiveSmallIntegerField(
                        validators=[MaxValueValidator(150)],
                        null=True, blank=True)
+
+    def _generate_class_id_number(self):
+            """
+            Generate a random, unique order number using UUID
+            """
+            return uuid.uuid4().hex.upper()
