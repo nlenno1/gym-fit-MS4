@@ -11,10 +11,10 @@ def add_package_to_bag(request, item_id):
     """ View to add a package to the shopping bag """
 
     redirect_url = request.POST.get('redirect_url')
-    bag = request.session.get('bag', {'class_access_package': {"item_id": None, "package_object": None},
-                                      'single_classes': []})
+    bag = request.session.get('bag', {'class_access_package': None,
+                                    'single_classes': []})
 
-    bag['class_access_package']['item_id'] = item_id
+    bag['class_access_package'] = item_id
 
     request.session['bag'] = bag
 
@@ -25,18 +25,12 @@ def add_single_class_to_bag(request, item_id):
     """ View to add a single class to the shopping bag """
 
     redirect_url = request.POST.get('redirect_url')
-    bag = request.session.get('bag', {'class_access_package': {"item_id": None},
-                                      'single_classes': []})
+    bag = request.session.get('bag', {'class_access_package': None,
+                                     'single_classes': []})
 
-    if len(bag['single_classes']) > 0:
-        if not any(item['item_id'] == item_id for item in bag['single_classes']):
-            bag['single_classes'].append({
-                'item_id': item_id
-            })
-    else:
-        bag['single_classes'].append({
-            'item_id': item_id
-        })
+    if item_id not in bag['single_classes']:
+        bag['single_classes'].append(item_id)
+        print("item added to bag")
 
     request.session['bag'] = bag
 

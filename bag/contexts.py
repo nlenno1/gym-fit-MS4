@@ -6,28 +6,32 @@ from classes.models import SingleExerciseClass
 def bag_contents(request):
     """ Context processor for bag contents"""
 
-    bag = request.session.get('bag', {'class_access_package': {"item_id": None, "package_object": None},
+    bag = request.session.get('bag', {'class_access_package': None,
                                       'single_classes': []})
     total = 0
     product_count = 0
 
-    if bag['class_access_package']['item_id']:
-        package = get_object_or_404(ClassAccessPackage, pk=bag['class_access_package']['item_id'])
+    bag_items = {'class_access_package': None,
+                 'single_classes': []}
+
+    if bag['class_access_package']:
+        package = get_object_or_404(ClassAccessPackage, pk=bag['class_access_package'])
         total += package.price
         product_count += 1
         package.today_expires = date.today() + timedelta(days=package.duration)
-        bag['class_access_package']['package_object'] = package
+        bag_items["class_access_package"] = package
 
-    for item in bag['single_classes']:
-        exercise_class_object = get_object_or_404(SingleExerciseClass, pk=item['item_id'])
+    for item_id in bag['single_classes']:
+        exercise_class_object = get_object_or_404(SingleExerciseClass, pk=item_id)
         total += exercise_class_object.price
         product_count += 1
         exercise_class_object.start_time = exercise_class_object.start_time.strftime('%H:%M')
         exercise_class_object.end_time = exercise_class_object.end_time.strftime('%H:%M')
-        item['exercise_class_object'] = exercise_class_object
+        bag_items["single_classes"].append(exercise_class_object)
 
     context = {
         'bag': bag,
+        'bag_items': bag_items,
         'total': total,
         'product_count': product_count,
     }
