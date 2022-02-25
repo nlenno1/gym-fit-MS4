@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 
 
 def view_bag(request):
@@ -35,3 +35,17 @@ def add_single_class_to_bag(request, item_id):
     request.session['bag'] = bag
 
     return redirect(redirect_url)
+
+
+def remove_from_bag(request, product_type, item_id):
+    """ View to remove items from the bag """
+
+    bag = request.session.get('bag', {'class_access_package': None,
+                                      'single_classes': []})
+
+    if product_type == 'package':
+        bag['class_access_package'] = None
+    elif product_type == 'single_class':
+        bag['single_classes'].remove(item_id)
+
+    return redirect(reverse('view_bag'))

@@ -33,7 +33,7 @@
                                             <p>
                                                 <strong>{{ bag_items.class_access_package.friendly_name }}
                                                     <button type="button" data-bs-container="body" data-bs-trigger="hover focus"
-                                                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{ package.description }}"><i class="fas fa-info-circle"></i>
+                                                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{ bag_items.class_access_package.description }}"><i class="fas fa-info-circle"></i>
                                                     </button>
                                                 </strong>
                                             </p>
@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-2 schedule-display-buttons mt-3 mt-sm-0 flex-lg-row">
-                                    <a class="" href="#">
+                                    <a class="" href="{% url 'remove_from_bag' 'package' bag_items.class_access_package.id %}">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </div>
@@ -87,7 +87,7 @@
                                     {% endif %}
                                 </div>
                                 <div class="col-12 col-sm-1 schedule-display-buttons mt-3 mt-sm-0 flex-lg-row">
-                                    <a class="" href="#">
+                                    <a class="" href="{% url 'remove_from_bag' 'single_class' item.id %}">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </div>
