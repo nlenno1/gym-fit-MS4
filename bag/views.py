@@ -19,8 +19,9 @@ def add_package_to_bag(request, item_id):
     bag = request.session.get('bag', {'class_access_package': None,
                                     'single_classes': []})
 
+    if bag['class_access_package'] is not None:
+        messages.warning(request, f"The previously selected Class Access Package has been removed")
     bag['class_access_package'] = item_id
-
     messages.success(request, f'Added {package.friendly_name} to your shopping bag')
 
     request.session['bag'] = bag
@@ -52,10 +53,15 @@ def remove_from_bag(request, product_type, item_id):
 
     bag = request.session.get('bag', {'class_access_package': None,
                                       'single_classes': []})
-
     if product_type == 'package':
+        package = get_object_or_404(ClassAccessPackage, pk=item_id)
         bag['class_access_package'] = None
+        messages.success(request, f'Removed {package.friendly_name} from your bag')
     elif product_type == 'single_class':
+        exercise_class = get_object_or_404(SingleExerciseClass, pk=item_id)
         bag['single_classes'].remove(item_id)
+        messages.success(request, f'Removed {exercise_class.category} at {exercise_class.start_time} on {exercise_class.date} from your bag')
 
+    request.session['bag'] = bag
+    
     return redirect(reverse('view_bag'))
