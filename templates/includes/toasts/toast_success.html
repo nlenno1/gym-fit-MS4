@@ -5,6 +5,51 @@
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body">
-        {{ message }}
+        <div class="row">
+            <div class="col-12">
+                {{ message }}
+            </div>
+        </div>
+        {% if total %}
+            <hr class="mt-1 mb-3">
+            <p>Your Bag Item Count: {{product_count}}</p>
+            <div class="bag-items-notification">
+                <div class="row g-0">
+                    {% if bag_items.class_access_package %}
+                    <div class="col-8">
+                        <p class="fw-bold">{{ bag_items.class_access_package.friendly_name }}</p>
+                    </div>
+                    <div class="col-4">
+                        <p>£{{ bag_items.class_access_package.price }}</p>
+                    </div>
+                    {% endif %}
+                    {% for item in bag_items.single_classes %}
+                        <div class="col-4">
+                            {{ item.date }} : {{ item.start_time }}
+                        </div>
+                        <div class="col-4">
+                            <p class="mb-0 fw-bold">{{ item.category }}</p>
+                            <p>{{ item.instructor }}</p>
+                        </div>
+                        <div class="col-4">
+                            <p>£{{ item.price }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row fw-bold">
+                <div class="col-8 text-end">
+                    <p>Total:</p>
+                </div>
+                <div class="col-4">
+                    <p>£{{ total }}</p>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-12 text-center">
+                    <a href="{% url 'view_bag' %}">Go To Bag</a>
+                </div>
+            </div>
+        {% endif %}
     </div>
 </div>

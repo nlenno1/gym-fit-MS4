@@ -2,10 +2,6 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
-body p {
-    font-size: 1.2rem;
-}
-
 footer p, nav p {
     font-size: 1rem;
 }
@@ -383,4 +379,13 @@ footer img {
 
 .toast-container i {
     margin-right: 10px;
+}
+
+.bag-items-notification {
+    max-height: 200px;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border: 3px solid #c4c4c4;
+    padding: 10px 5px 0;
 }
