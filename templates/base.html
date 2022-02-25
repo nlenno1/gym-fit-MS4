@@ -40,7 +40,21 @@
   {% include 'includes/mobile-nav.html' %}
 
   {% if messages %}
-    <div class="message-container"></div>
+    <div class="toast-container">
+      {% for message in messages %}
+        {% with message.level as level %}
+          {% if level == 40 %}
+            {% include 'includes/toasts/toast_error.html' %}
+          {% elif level == 30 %}
+            {% include 'includes/toasts/toast_warning.html' %}
+          {% elif level == 25 %}
+            {% include 'includes/toasts/toast_success.html' %}
+          {% else %}
+            {% include 'includes/toasts/toast_info.html' %}
+          {% endif %}
+        {% endwith %}
+      {% endfor %}
+    </div>
   {% endif %}
 
   {% block page_header %}
@@ -72,6 +86,21 @@
         return new bootstrap.Popover(popoverTriggerEl)
       })
 
+      
+      var option = {
+        autohide: true,
+        delay: 5000,
+      }
+
+      window.onload = (event) => {
+        // Initialize toasts 
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function (toastEl) {
+          return new bootstrap.Toast(toastEl, option).show()
+        })
+      }
+      
+      // Move to page that needs it 
       $('#date-picker').change(function(){
         $('#date-form').submit();
       });
@@ -82,7 +111,6 @@
       // Date formatting taken from Stack Overflow (https://stackoverflow.com/questions/32378590/set-date-input-fields-max-date-to-today)
       var datePickerMinValue = new Date().toISOString().split("T")[0];
       $('#date-picker').attr('min', datePickerMinValue)
-      
     </script>
   {% endblock %}
 
