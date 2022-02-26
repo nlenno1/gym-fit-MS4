@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extracss %}
+  <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block page_header %}
+    <div class="container container-header">
+        <div class="row">
+            <div class="col-12"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <section id="content" class="container">
+        <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Checkout</h1>
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-last">
+                <h5 class="mb-5 fw-bold">Fill out this form to complete your order</h5>
+                <form id="payment-form" action="{% url 'checkout' %}" method="POST">
+                    {% csrf_token %}
+                    <fieldset class="px-3 mb-4">
+                        <legend class="fieldset-label small">Contact Information</legend>
+                        {{ order_form.full_name | as_crispy_field }}
+                        {{ order_form.email | as_crispy_field }}
+                        {{ order_form.phone_number | as_crispy_field }}
+                    </fieldset>
+                    <fieldset class="px-3 mb-4">
+                        <legend class="fieldset-label small">Address</legend>
+                        {{ order_form.street_address1 | as_crispy_field }}
+                        {{ order_form.street_address2 | as_crispy_field }}
+                        {{ order_form.town_or_city | as_crispy_field }}
+                        {{ order_form.county | as_crispy_field }}
+                        {{ order_form.country | as_crispy_field }}
+                        {{ order_form.postcode | as_crispy_field }}
+                        <div class="float-right">
+                            <div class="row g-0">
+                                {% if user.is_authenticated %}
+                                <div class="col-10">
+                                    <label class="form-check-label" for="id-save-info">Save this information to my profile</label>
+                                </div>
+                                <div class="col-2 text-end">
+                                    <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                                </div>
+                                {% else %}
+                                <div class="col-12">
+                                    <label class="form-check-label" for="id-save-info">
+                                        <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
+                                        <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
+                                    </label>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="px-3 mb-4">
+                        <!-- Stripe Payment Element -->
+                        <legend class="fieldset-label small">Payment</legend>
+                        <div id="card-element" class="mb-3"></div>
+                        <div id="card-errors" class="mb-3 text-danger"></div>
+                    </fieldset>
+                    <div class="mt-2 mb-5">                    
+						<a href="{% url 'view_bag' %}" class="btn btn-dark ms-3">
+                            Back to Bag
+						</a>
+						<button id="submit-button" class="btn btn-dark blue-button float-end me-3">
+							<span>Complete Order</span>
+							<span>
+								<i class="fas fa-lock"></i>
+							</span>
+						</button>
+						<p class="small text-danger my-0 text-end me-3">
+							<span>
+								<i class="fas fa-exclamation-circle"></i>
+							</span>
+							<span>You will be charged <strong>£{{ total|floatformat:2 }}</strong></span>
+						</p>
+					</div>
+                </form>
+            </div>
+            <div class="col-12 col-md-6">
+                <h5 class="fw-bold">Order Summary</h5>
+                <div class="mx-3">
+                    <hr>
+                    {% if bag_items.class_access_package != None %}
+                        <div class="row g-0 mx-3">
+                            <div class="col-9">
+                                <p class="mb-0">{{ bag_items.class_access_package.friendly_name }}</p>
+                            </div>
+                            <div class="col-3 text-center">
+                                <p class="mb-0">£{{ bag_items.class_access_package.price }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                    {% endif %}
+                    {% if bag_items.single_classes|length > 0 %}
+                        {% for item in bag_items.single_classes %}
+                        <div class="row g-0">
+                            <div class="col-9">
+                                <p class="mb-0">{{ item.category }} - {{ item.date }} - {{ item.start_time }}</p>
+                            </div>
+                            <div class="col-3 text-center">
+                                <p class="mb-0">£{{ item.price }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <hr>
+                    {% endif %}
+                    <p class="text-end fw-bold">
+                        Total £{{ total }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
