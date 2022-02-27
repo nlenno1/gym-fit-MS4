@@ -21,7 +21,7 @@ def add_package_to_bag(request, item_id):
                                     'single_classes': []})
 
     if bag['class_access_package'] is not None:
-        messages.warning(request, f"The previously selected Class Access Package has been removed")
+        messages.warning(request, "The previously selected Class Access Package has been removed")
     bag['class_access_package'] = item_id
     messages.success(request, f'Added {package.friendly_name} to your shopping bag')
 

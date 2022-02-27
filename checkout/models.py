@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -54,9 +56,8 @@ class Order(models.Model):
 class OrderLineItem(models.Model):
     """ Model for individual items in an order """
     order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
-    content_type = models.ForeignKey(ContentType,  on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    product = GenericForeignKey('content_type', 'object_id')
+    exercise_class = models.ForeignKey(SingleExerciseClass,  on_delete=models.CASCADE, null=True, blank=True)
+    access_package = models.ForeignKey(ClassAccessPackage,  on_delete=models.CASCADE, null=True, blank=True)
     lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
 
     def save(self, *args, **kwargs):
@@ -64,7 +65,10 @@ class OrderLineItem(models.Model):
         Override the original save method to set the lineitem total
         and update the order total.
         """
-        self.lineitem_total = self.product.price
+        if self.exercise_class:
+            self.lineitem_total = self.exercise_class.price
+        elif self.access_package:
+            self.lineitem_total = self.access_package.price
         super().save(*args, **kwargs)
 
     def __str__(self):
