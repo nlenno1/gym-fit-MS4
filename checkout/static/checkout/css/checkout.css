@@ -32,3 +32,8 @@
     right: .5rem;
 }
 
+/* Checkout Success */
+
+.no-p-margin p {
+  margin-bottom: 0;
+}
