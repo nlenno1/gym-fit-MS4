@@ -11,6 +11,7 @@ class ClassCategoryAdmin(admin.ModelAdmin):
 
 class SingleExerciseClassAdmin(admin.ModelAdmin):
     """ Edit Class for Admin pages """
+
     list_display = (
             'date',
             'start_time',
