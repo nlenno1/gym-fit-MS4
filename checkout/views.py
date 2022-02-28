@@ -1,4 +1,6 @@
 import json
+from datetime import date, timedelta
+
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
@@ -17,12 +19,22 @@ from .models import OrderLineItem, Order
 def cache_checkout_data(request):
     """ View to temp save checkout data """
     try:
+        #  check if the order includes a class access package
+        package_data = {}
+        current_bag = bag_contents(request)
+        package = current_bag['bag_items']['class_access_package']
+        if package:  # add required data to dict
+            package_data['type'] = package.type
+            package_data['unlimited_tokens'] = package.unlimited_tokens
+            package_data['amount_of_tokens'] = package.amount_of_tokens
+            package_data['expiry_date'] = (date.today() + timedelta(days=package.duration)).strftime("%d/%m/%Y")
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'bag': json.dumps(request.session.get('bag', {})),
             'save_info': request.POST.get('save_info'),
             'username': request.user,
+            'package_data': json.dumps(package_data),
         })
         return HttpResponse(status=200)
     except Exception as err:
