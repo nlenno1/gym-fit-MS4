@@ -34,8 +34,8 @@
                         {{ order_form.street_address2 | as_crispy_field }}
                         {{ order_form.town_or_city | as_crispy_field }}
                         {{ order_form.county | as_crispy_field }}
-                        {{ order_form.country | as_crispy_field }}
                         {{ order_form.postcode | as_crispy_field }}
+                        {{ order_form.country | as_crispy_field }}
                         <div class="float-right">
                             <div class="row g-0">
                                 {% if user.is_authenticated %}
