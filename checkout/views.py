@@ -63,7 +63,7 @@ def checkout(request):
         }
         order_form = OrderForm(form_data)
         if order_form.is_valid():  # save order_form if valid
-            order = order_form.save()
+            order = order_form.save(commit=False)
 
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
@@ -86,7 +86,6 @@ def checkout(request):
                     order.delete()
                     return redirect(reverse('view_bag'))
 
-            print(bag['single_classes'])
             for item_id in bag['single_classes']:
                 try:
                     exercise_class = SingleExerciseClass.objects.get(id=item_id)
@@ -144,6 +143,7 @@ def checkout_success(request, order_number):
     """ Handle sucessful checkouts"""
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
+
     messages.success(request, f"Order sucessfully processed! {chr(10)}\
         Your order number is {order_number}.{chr(10)}A confirmation email will be sent \
             to {order.email}.")
