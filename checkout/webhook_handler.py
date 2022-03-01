@@ -26,7 +26,6 @@ class StripeWebhookHandler:
         # retrieve and store data from the Stripe returned intent object
 
         intent = event.data.object
-        print(intent)
 
         pid = intent.id
         original_bag = intent.metadata.bag
@@ -60,10 +59,8 @@ class StripeWebhookHandler:
                     stripe_pid=pid,
                 )
                 order_exists = True
-                print("ORDER EXISTS IN DATABASE")
                 break
             except Order.DoesNotExist:
-                print("ORDER NOT FOUND ATTEMPT " + str(attempt))
                 attempt += 1
                 time.sleep(2)
         if order_exists:
