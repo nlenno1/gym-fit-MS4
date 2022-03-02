@@ -1,7 +1,15 @@
+import datetime
+from dateutil.relativedelta import relativedelta
+
 from django import forms
 from django.contrib.auth.models import User
 
 from .models import UserProfile
+
+
+class DateInput(forms.DateInput):
+    """Add date picker widget to date field """
+    input_type = 'date'
 
 
 class UserForm(forms.ModelForm):
@@ -40,6 +48,8 @@ class UserProfileForm(forms.ModelForm):
     """ Class for all User Profiles """
     class Meta:
         """ Update Class Meta Data """
+        widgets = {'dob': DateInput(
+                    )}
         model = UserProfile
         fields = ('default_phone_number',
                   'default_street_address1', 'default_street_address2',
