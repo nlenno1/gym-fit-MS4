@@ -389,3 +389,22 @@ footer img {
     border: 3px solid #c4c4c4;
     padding: 10px 5px 0;
 }
+
+/* Allauth form formatting */
+
+#allauth-content {
+    min-height: calc(100vh - 200px)
+}
+
+.allauth-form-inner-content .text-center {
+    margin-top: 2rem;
+    margin-bottom: 3rem
+}
+
+.allauth-form-inner-content label:not([for='id_remember']){
+    display: none;
+}
+
+.allauth-form-inner-content input::placeholder {
+    color: #aab7c4;
+}

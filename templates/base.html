@@ -112,6 +112,17 @@
       // Date formatting taken from Stack Overflow (https://stackoverflow.com/questions/32378590/set-date-input-fields-max-date-to-today)
       var datePickerMinValue = new Date().toISOString().split("T")[0];
       $('#date-picker').attr('min', datePickerMinValue)
+
+      // Adding css to allauth templates through JS 
+      $(".allauth-form-inner-content .text-center a").each(function() {
+        $(this).addClass("btn btn-dark");
+      });
+      $(".allauth-form-inner-content .text-center input:submit").each(function() {
+        $(this).addClass("btn btn-dark blue-button");
+      });
+      $(".allauth-form-inner-content .text-center button:submit").each(function() {
+        $(this).addClass("btn btn-dark blue-button");
+      });
     </script>
   {% endblock %}
 
