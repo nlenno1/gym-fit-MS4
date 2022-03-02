@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpR
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
+from django.contrib.auth.models import User
 
 import stripe
 
@@ -12,7 +13,7 @@ from bag.contexts import bag_contents
 from products.models import ClassAccessPackage
 from classes.models import SingleExerciseClass
 from profiles.models import UserProfile
-from profiles.forms import UserProfileForm
+from profiles.forms import UserProfileForm, UserForm
 from .forms import OrderForm
 from .models import OrderLineItem, Order
 
@@ -164,6 +165,8 @@ def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 
     profile = UserProfile.objects.get(user=request.user)
+    user_profile_object = User.objects.get(id=request.user.id)
+
     # attached user profile to the order
     order.user_profile = profile
     order.save()
@@ -178,9 +181,30 @@ def checkout_success(request, order_number):
             'default_postcode': order.postcode,
             'default_country': order.country,
         }
+        # split full name into first and last
+        list_name = order.full_name.split()
+        user_data = {
+            'first_name': list_name[0],
+            'last_name': list_name[-1],
+            'email': order.email,
+            'username': user_profile_object.username,
+        }
+        print(user_data)
+        print(user_profile_object)
+
         user_profile_form = UserProfileForm(profile_data, instance=profile)
-        if user_profile_form.is_valid():
-            user_profile_form.save()
+        user_form = UserForm(user_data, instance=user_profile_object)
+        print(user_form)
+
+        if user_profile_form.is_valid() and user_form.is_valid():
+            try:
+                user_profile_form.save()
+                user_form.save()
+                messages.success(request, "Submitted Information Saved to Profile")
+            except Exception as err:
+                messages.error(request, f"User Not Saved. Error message: {err}")
+        else:
+            messages.error(request, "User Not Saved")
 
     messages.success(request, f"Order sucessfully processed! {chr(10)}\
         Your order number is {order_number}.{chr(10)}A confirmation email will be sent \
