@@ -34,14 +34,13 @@
                     <li class="nav-item">
                         <button class="nav-link">Favourite Class List</button>
                     </li>
+                    {% if request.user.is_superuser %}
+                        <li class="nav-item">
+                            <button class="nav-link">Admin</button>
+                        </li>
+                    {% endif %}
                     <li class="nav-item">
-                        <button class="nav-link">Admin</button>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Sign Out</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Delete Account</a>
+                        <a href="{% url 'account_logout' %}" class="nav-link">Log Out</a>
                     </li>
                 </ul>
                 <!-- Class Access Package/Tokens View -->
