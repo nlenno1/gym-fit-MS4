@@ -79,7 +79,6 @@
                 </section>
                 <section id="previous-puchases" class="mx-5 mb-5">
                     {% if orders|length > 0 %}
-                    {% else %}
                     <div class="table-responsive">
                         <table class="table table-sm table-borderless">
                             <thead>
@@ -99,7 +98,7 @@
                                                 {{ order.order_number|truncatechars:6 }}
                                             </a>
                                         </td>
-                                        <td>{{ order.date }}</td>
+                                        <td>{{ order.order_date }}</td>
                                         <td>
                                             <ul class="list-unstyled">
                                                 {% for item in order.lineitems.all %}
@@ -116,15 +115,15 @@
                                                 {% endfor %}
                                             </ul>
                                         </td>
-                                        <td>${{ order.grand_total }}</td>
+                                        <td>£{{ order.grand_total }}</td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
                     </div>
+                    {% else %}
                         <h5 class="display-3">You have no Previous Orders</h5>
                     {% endif %}
-                    {{ orders }}
                 </section>
             </div>
         </div>
