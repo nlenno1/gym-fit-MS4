@@ -18,8 +18,59 @@
     <section id="content" class="container">
         <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Profile</h1>
         <div class="row">
-            <div class="col-12">
-                {{ profile }}
+            <!-- My Profile Menu Pills -->
+            <div class="col-12 col-md-3">
+                <!-- Nav Pills Taken from Bootstrap 5 Documentation -->
+                <ul class="nav nav-pills nav-justified">
+                    <li class="nav-item">
+                      <button class="nav-link active" aria-current="page" href="#">Personal Details</button>
+                    </li>
+                    <li class="nav-item">
+                      <button class="nav-link">My Bookings</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link">Previous Purchases</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link">Favourite Class List</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link">Admin</button>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Sign Out</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Delete Account</a>
+                    </li>
+                </ul>
+
+                <div class="active_class_package_display py-5">
+                    <hr>
+                    <h5>Class Access Package</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-12 col-sm-9 col-md-12">
+                            <p class="mb-0">Usage Allowance: </p>
+                        </div>
+                        <div class="col-12 col-sm-3 col-md-12 text-end">
+                            <p class="mb-0">Unlimited</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-9 col-md-12">
+                            <p class="mb-0">Package/Token Expiry Date: </p>
+                        </div>
+                        <div class="col-12 col-sm-3 col-md-12 text-end">
+                            <p class="mb-0">Never</p>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            <div class="col-12 col-md-9">
+
             </div>
         </div>
     </section>
