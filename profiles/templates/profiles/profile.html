@@ -16,7 +16,7 @@
 
 {% block content %}
     <section id="content" class="container">
-        <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Profile</h1>
+        <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Profile - <span id="visible-section-name">Personal Details</span></h1>
         <div class="row">
             <!-- My Profile Menu Pills -->
             <div class="col-12 col-md-3">
@@ -44,7 +44,7 @@
                         <a href="#" class="nav-link">Delete Account</a>
                     </li>
                 </ul>
-
+                <!-- Class Access Package/Tokens View -->
                 <div class="active_class_package_display py-5">
                     <hr>
                     <h5>Class Access Package</h5>
@@ -65,13 +65,29 @@
                             <p class="mb-0">Never</p>
                         </div>
                     </div>
-
-                    
                 </div>
             </div>
             <div class="col-12 col-md-9">
-
+                <section id="personal-details">
+                    <form class="mx-5 mb-5" action="{% url 'profile' %}" method="POST" id="profile-update-form">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-dark blue-button">Update Information</button>
+                        </div>
+                    </form>
+                </section>
+                <section id="previous-puchases">
+                    {{ orders }}
+                    {{ profile_data.default_street_address2 }}
+                </section>
             </div>
         </div>
     </section>
+{% endblock %}
+
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'profiles/js/countryfield.js' %}"></script>
 {% endblock %}
