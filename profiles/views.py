@@ -32,6 +32,7 @@ def profile(request):
         'user_form': user_form,
         'orders': orders,
         'on_profile_page': True,
+        'profile': profile_object
     }
 
     return render(request, template, context)

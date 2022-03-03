@@ -44,27 +44,39 @@
                     </li>
                 </ul>
                 <!-- Class Access Package/Tokens View -->
-                <div class="active_class_package_display py-5">
-                    <hr>
-                    <h5>Class Access Package</h5>
-                    <hr>
-                    <div class="row">
-                        <div class="col-12 col-sm-9 col-md-12">
-                            <p class="mb-0">Usage Allowance: </p>
+                {% if profile.active_class_package  %}
+                    <div class="active_class_package_display py-5">
+                        <hr>
+                        <h5>Class Access Package</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-12 col-sm-9 col-md-12">
+                                <p class="mb-0">Package Name: </p>
+                            </div>
+                            <div class="col-12 col-sm-3 col-md-12 text-end">
+                                <p class="mb-0">{{ profile.package_name }}</p>
+                            </div>
                         </div>
-                        <div class="col-12 col-sm-3 col-md-12 text-end">
-                            <p class="mb-0">Unlimited</p>
+                        {% if profile.class_package_type == "TK" %}
+                            <div class="row">
+                                <div class="col-12 col-sm-9 col-md-12">
+                                    <p class="mb-0">Remaining Tokens: </p>
+                                </div>
+                                <div class="col-12 col-sm-3 col-md-12 text-end">
+                                    <p class="mb-0">{{ profile.class_tokens }}</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-12 col-sm-9 col-md-12">
+                                <p class="mb-0">Expiry Date: </p>
+                            </div>
+                            <div class="col-12 col-sm-3 col-md-12 text-end">
+                                <p class="mb-0">{{ profile.package_expiry }}</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-9 col-md-12">
-                            <p class="mb-0">Package/Token Expiry Date: </p>
-                        </div>
-                        <div class="col-12 col-sm-3 col-md-12 text-end">
-                            <p class="mb-0">Never</p>
-                        </div>
-                    </div>
-                </div>
+                {% endif %}
             </div>
             <div class="col-12 col-md-9">
                 <section id="personal-details">

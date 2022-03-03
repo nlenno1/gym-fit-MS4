@@ -32,6 +32,7 @@ class UserProfile(models.Model):
     classes_attended = models.ManyToManyField(SingleExerciseClass, blank=True)
 
     active_class_package = models.BooleanField(default=False)
+    package_name = models.CharField(max_length=30, null=True, blank=True)
     class_package_type = models.CharField(max_length=30, null=True, blank=True)
     class_tokens = models.IntegerField(null=True, blank=True)
     package_expiry = models.DateField(null=True, blank=True)
