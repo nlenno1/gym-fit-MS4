@@ -24,7 +24,7 @@ def profile(request):
 
     form = UserProfileForm(instance=profile_object)
     user_form = UserForm(instance=user_object)
-    orders = profile_object.orders.all()
+    orders = profile_object.orders.all().order_by('-order_date')
 
     template = "profiles/profile.html"
     context = {
