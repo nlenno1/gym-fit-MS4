@@ -78,54 +78,136 @@
                         </div>
                     </form>
                 </section>
-                <section id="previous-puchases" class="mx-5 mb-5">
-                    {% if orders|length > 0 %}
+                <section id="my-bookings" class="mx-md-5 mb-5">
+                    {% if my_bookings|length > 0 %}
                     <div class="table-responsive">
                         <table class="table table-sm table-borderless">
                             <thead>
                                 <tr>
-                                    <th>Order Number</th>
                                     <th>Date</th>
-                                    <th>Items</th>
-                                    <th>Order Total</th>
+                                    <th>Start Time</th>
+                                    <th>Class Category</th>
+                                    <th>Duration</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for order in orders %}
+                                {% for booking in my_booking %}
                                     <tr>
-                                        <td>
-                                            <a href="{% url 'order_history' order.order_number %}"
-                                            title="{{ order.order_number }}">
-                                                {{ order.order_number|truncatechars:6 }}
+                                        <td>booking.date</td>
+                                        <td>booking.start_time</td>
+                                        <td>booking.category</td>
+                                        <td>booking.duration</td>
+                                        <td>  <!-- Cancel Booking Button -->
+                                            <a href="#" type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                            data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Cancel this class booking">
+                                                <i class="fa-solid fa-calendar-xmark"></i>
                                             </a>
                                         </td>
-                                        <td>{{ order.order_date }}</td>
-                                        <td>
-                                            <ul class="list-unstyled">
-                                                {% for item in order.lineitems.all %}
-                                                    <li class="small">
-                                                        {% if item.access_package %}
-                                                            <p class="mb-0">
-                                                                {{ item.access_package.friendly_name }}
-                                                            </p>
-                                                        {% else %}
-                                                            <p class="mb-0">{{ item.exercise_class.category }}:</p>
-                                                            <p class="mb-0">{{ item.exercise_class.date }} - {{ item.exercise_class.start_time }}</p>
-                                                        {% endif %}
-                                                    </li>
-                                                {% endfor %}
-                                            </ul>
-                                        </td>
-                                        <td>£{{ order.grand_total }}</td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
                     </div>
                     {% else %}
+                    <div class="text-center text-md-start">
+                        <h2 class="display-3">You have no Bookings</h2>
+                        <h3>Why not book onto one of our classes</h3>
+                        <a href="" class="btn btn-dark blue-button">Our Classes</a>
+                    </div>
+                    {% endif %}
+                </section>
+                <section id="previous-puchases" class="mx-md-5 mb-5 mb-5">
+                    {% if orders|length > 0 %}
+                        <h5 class="text-center text-md-start">Click onto the order number to view more details</h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>Order Number</th>
+                                        <th>Date</th>
+                                        <th>Items</th>
+                                        <th>Order Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in orders %}
+                                        <tr>
+                                            <td>
+                                                <a href="{% url 'order_history' order.order_number %}"
+                                                title="{{ order.order_number }}">
+                                                    {{ order.order_number|truncatechars:6 }}
+                                                </a>
+                                            </td>
+                                            <td>{{ order.order_date }}</td>
+                                            <td>
+                                                <ul class="list-unstyled">
+                                                    {% for item in order.lineitems.all %}
+                                                        <li class="small">
+                                                            {% if item.access_package %}
+                                                                <p class="mb-0">
+                                                                    {{ item.access_package.friendly_name }}
+                                                                </p>
+                                                            {% else %}
+                                                                <p class="mb-0">{{ item.exercise_class.category }}:</p>
+                                                                <p class="mb-0">{{ item.exercise_class.date }} - {{ item.exercise_class.start_time }}</p>
+                                                            {% endif %}
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </td>
+                                            <td>£{{ order.grand_total }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
                         <h5 class="display-3">You have no Previous Orders</h5>
                     {% endif %}
                 </section>
+                <section id="fav-class-list" class="mx-md-5 mb-5 mb-5">
+                    {% if fav_class_list|length > 0 %}
+                        <h5 class="text-center text-md-start">This is a list of your favourite classes</h5>
+                        <p>To add a class to this list go to Our Classes and click the heart icon</p>
+                        {% for category in fav_class_list %}
+                            <div class="row">
+                                <div class="col-12 col-md-9">
+                                    {{ category.category_name }}
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <a href="#" type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Remove this Category from the list">
+                                        <i class="fa-solid fa-eraser"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                    <div class="text-center text-md-start">
+                        <h5 class="display-3">You have no Categories in Your Favourites List</h5>
+                        <p>To add a class to this list go to Our Classes and click the heart icon</p>
+                    </div>
+                    {% endif %}
+                </section>
+                {% if user.is_superuser %}
+                    <section id="admin-functions" class="mx-md-5 mb-5 mb-5">
+                        <ul class="nav nav-pills nav-justified">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Add A Class Catergory</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Schedule A Class</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Create a Class Access Package</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Instructor Management</a>
+                            </li>
+                        </ul>
+                    </section>
+                {% endif %}
             </div>
         </div>
     </section>
