@@ -23,7 +23,9 @@ def cache_checkout_data(request):
     """ View to temp save checkout data """
     try:
         #  check if the order includes a class access package
+        user_data = {}
         package_data = {}
+        classes_data = {}
         current_bag = bag_contents(request)
         package = current_bag['bag_items']['class_access_package']
         if package:  # add required data to dict
@@ -189,12 +191,9 @@ def checkout_success(request, order_number):
             'email': order.email,
             'username': user_profile_object.username,
         }
-        print(user_data)
-        print(user_profile_object)
 
         user_profile_form = UserProfileForm(profile_data, instance=profile)
         user_form = UserForm(user_data, instance=user_profile_object)
-        print(user_form)
 
         if user_profile_form.is_valid() and user_form.is_valid():
             try:

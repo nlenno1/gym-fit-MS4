@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from products.models import ClassAccessPackage
 from classes.models import SingleExerciseClass
 from .models import Order, OrderLineItem
+from profiles.models import User, UserProfile
 
 
 class StripeWebhookHandler:
@@ -40,6 +41,30 @@ class StripeWebhookHandler:
             if value == "":
                 shipping_details.address[field] = None
 
+        # update profile information if save_info
+        profile = None
+        username = intent.metadata.username
+        if username != 'AnonymousUser':  # user has been authenticated
+            profile = UserProfile.objects.get(user__username=username)
+            user_profile = User.objects.get(username=username)
+            if save_info:
+                profile.default_phone_number=shipping_details.phone
+                profile.default_country=shipping_details.address.country
+                profile.default_postcode=shipping_details.address.postal_code
+                profile.default_town_or_city=shipping_details.address.city
+                profile.default_street_address1=shipping_details.address.line1
+                profile.default_street_address2=shipping_details.address.line2
+                profile.default_county=shipping_details.address.state
+                # split full name into first and last
+                list_name = billing_details.name.split()
+                # store values in variable
+                user_profile.first_name=str(list_name[0])
+                user_profile.last_name=str(list_name[-1])
+                user_profile.email=billing_details.email
+                # save profiles
+                profile.save()
+                user_profile.save()
+
         order_exists = False  # assuming the order doesn't exist
         attempt = 1
         while attempt <= 5:
@@ -73,6 +98,7 @@ class StripeWebhookHandler:
             try:  # generate new order from information in Stripe webhook
                 order = Order.objects.create(
                     full_name=shipping_details.name,
+                    user_profile=profile,
                     email=billing_details.email,
                     phone_number=shipping_details.phone,
                     country=shipping_details.address.country,
