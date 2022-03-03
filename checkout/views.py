@@ -215,6 +215,28 @@ def checkout_success(request, order_number):
         Your order number is {order_number}.{chr(10)}A confirmation email will be sent \
             to {order.email}.")
 
+    current_bag = bag_contents(request)
+    # Save Class Access Package to Profile
+    if current_bag['bag_items']['class_access_package']:
+        package = current_bag['bag_items']['class_access_package']
+        if request.user.is_authenticated:
+            profile = UserProfile.objects.get(user=request.user)
+            profile.active_class_package = True
+            profile.package_name = package.friendly_name
+            profile.class_package_type = package.type
+            if not profile.class_tokens:  # if no tokens in account
+                profile.class_tokens = package.amount_of_tokens
+            else:  # add tokens to current total
+                profile.class_tokens += package.amount_of_tokens
+            profile.package_expiry = (date.today() + timedelta(
+                                      package.duration))
+            profile.save()
+    # Save Classes to Profile
+    if len(current_bag['bag_items']['single_classes']) > 0:
+        for item in current_bag['bag_items']['single_classes']:
+            profile.classes.add(item)
+            profile.save()
+
     if 'bag' in request.session:
         del request.session['bag']
 

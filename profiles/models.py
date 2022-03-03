@@ -29,7 +29,7 @@ class UserProfile(models.Model):
     health_conditions = models.TextField(null=True, blank=True)
 
     fav_class_categories = models.ManyToManyField(ClassCategory, blank=True)
-    classes_attended = models.ManyToManyField(SingleExerciseClass, blank=True)
+    classes = models.ManyToManyField(SingleExerciseClass, blank=True)
 
     active_class_package = models.BooleanField(default=False)
     package_name = models.CharField(max_length=30, null=True, blank=True)

@@ -10,7 +10,7 @@ class UserProfileAdmin(admin.ModelAdmin):
               'default_town_or_city', 'default_county', 'default_postcode',
               'default_country', 'dob', 'health_conditions',
               'active_class_package', 'class_package_type', 'class_tokens',
-              'package_expiry',)
+              'package_expiry','classes', 'fav_class_categories')
 
     list_display = ('user', 'dob', 'active_class_package',
                     'default_phone_number',)

@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -26,13 +28,23 @@ def profile(request):
     user_form = UserForm(instance=user_object)
     orders = profile_object.orders.all().order_by('-order_date')
 
+    upcoming_classes = []
+    previous_classes = []
+    for item in profile_object.classes.order_by("-date"):
+        if item.date < date.today():
+            previous_classes.append(item)
+        else:
+            upcoming_classes.append(item)
+
     template = "profiles/profile.html"
     context = {
         'form': form,
         'user_form': user_form,
         'orders': orders,
         'on_profile_page': True,
-        'profile': profile_object
+        'profile': profile_object,
+        'upcoming_classes': upcoming_classes,
+        'previous_classes': previous_classes,
     }
 
     return render(request, template, context)

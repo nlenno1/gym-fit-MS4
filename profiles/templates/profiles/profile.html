@@ -91,36 +91,73 @@
                     </form>
                 </section>
                 <section id="my-bookings" class="mx-md-5 mb-5">
-                    {% if my_bookings|length > 0 %}
-                    <div class="table-responsive">
-                        <table class="table table-sm table-borderless">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Start Time</th>
-                                    <th>Class Category</th>
-                                    <th>Duration</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for booking in my_booking %}
-                                    <tr>
-                                        <td>booking.date</td>
-                                        <td>booking.start_time</td>
-                                        <td>booking.category</td>
-                                        <td>booking.duration</td>
-                                        <td>  <!-- Cancel Booking Button -->
-                                            <a href="#" type="button" data-bs-container="body" data-bs-trigger="hover focus"
-                                            data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Cancel this class booking">
-                                                <i class="fa-solid fa-calendar-xmark"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                    {% if upcoming_classes|length > 0 or previous_classes|length > 0 %}
+                        {% if upcoming_classes|length > 0 %}
+                            <h5 class="display-4">Upcoming Classes</h5>
+                            <hr>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>Class Category</th>
+                                            <th>Duration</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for booking in upcoming_classes %}
+                                            <tr>
+                                                <td>{{ booking.date }}</td>
+                                                <td>{{ booking.start_time }}</td>
+                                                <td>{{ booking.category }}</td>
+                                                <td>{{ booking.duration }}</td>
+                                                <td>  <!-- Cancel Booking Button -->
+                                                    <a href="#" type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                                    data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Cancel this class booking">
+                                                        <i class="fa-solid fa-calendar-xmark"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% endif %}
+                        {% if previous_classes|length > 0 %}
+                            <h5 class="display-4">Previous Classes</h5>
+                            <hr>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>Class Category</th>
+                                            <th>Duration</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for booking in previous_classes %}
+                                            <tr>
+                                                <td>{{ booking.date }}</td>
+                                                <td>{{ booking.start_time }}</td>
+                                                <td>{{ booking.category }}</td>
+                                                <td>{{ booking.duration }}</td>
+                                                <td>  <!-- Cancel Booking Button -->
+                                                    <a href="#" type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                                    data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Cancel this class booking">
+                                                        <i class="fa-solid fa-calendar-xmark"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% endif %}
                     {% else %}
                     <div class="text-center text-md-start">
                         <h2 class="display-3">You have no Bookings</h2>
