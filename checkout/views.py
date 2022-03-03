@@ -119,6 +119,12 @@ def checkout(request):
             messages.error(request, "You can't checkout as there is nothing in your shopping bag")
             return redirect(reverse('view_bag'))
 
+        if not request.user.is_authenticated and bag["class_access_package"]:
+            messages.error(request, "You can't purchase a Class Access Package\
+                 or Class Tokens without being signed in. Please sign in or\
+                 create and account.")
+            return redirect(reverse('account_login'))
+
         current_bag = bag_contents(request)
         grand_total = current_bag['total']
         stripe_total = round(grand_total * 100)
