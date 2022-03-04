@@ -24,7 +24,7 @@
 
 /* Profile Forms */
 
-.stripe-style-input {
+.stripe-style-input, .input-group {
     box-sizing: border-box;
     border: 1px solid #2AAFD3;
     border-radius: 0.25rem;

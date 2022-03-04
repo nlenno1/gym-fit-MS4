@@ -68,7 +68,7 @@
                         <button type="submit" class="btn btn-dark text-light bag-button">Add to Bag</button>
                     {% endif %}
                 </form>
-                <a class="" href="#">Edit Package</a>
+                <a class="" href="{% url 'edit_class_access_package' package.id %}">Edit Package</a>
                 <a class="" href="#">
                     <i class="fa-solid fa-trash-can"></i>
                 </a>
@@ -126,7 +126,7 @@
                         <button type="submit" class="btn btn-dark text-light bag-button">Add to Bag</button>
                     {% endif %}
                 </form>
-                <a class="" href="#">Edit Package</a>
+                <a class="" href="{% url 'edit_class_access_package' package.id %}">Edit Package</a>
                 <a class="" href="#">
                     <i class="fa-solid fa-trash-can"></i>
                 </a>

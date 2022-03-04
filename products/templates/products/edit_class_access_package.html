@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/join_us.css' %}">
+<link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+{% endblock %}
+
+{% block page_header %}
+<div class="container container-header">
+    <div class="row">
+        <div class="col-12"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<section id="content" class="container">
+    <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Edit Class Access Package</h1>
+    <h2 class="text-center text-md-start ps-md-5 mb-5">Fill out the form below to update the Class Access Package called <strong>"{{ package.friendly_name }}"</strong> </h2>
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <form action="{% url 'edit_class_access_package' package.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <div class="text-center mt-5">
+                    <a href="{% url 'view_class_access_packages' %}" class="btn btn-dark">Cancel</a>
+                    <button type="submit" class="btn btn-dark blue-button">Update Access Package</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

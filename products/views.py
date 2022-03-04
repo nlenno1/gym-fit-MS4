@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from datetime import date, timedelta
 
@@ -40,7 +40,6 @@ def add_class_access_package(request):
 
     if request.method == "POST":
         form = ClassAccessPackageForm(request.POST, request.FILES)
-        print(form)
         if form.is_valid():
             if form['type'] == "TK":
                 form.duration = 86
@@ -61,3 +60,31 @@ def add_class_access_package(request):
     }
 
     return render(request, 'products/add_class_access_package.html', context)
+
+
+def edit_class_access_package(request, package_id):
+    """ A view to allow Admin to edit new packages"""
+
+    package = get_object_or_404(ClassAccessPackage, id=package_id)
+
+    if request.method == "POST":
+        form = ClassAccessPackageForm(request.POST, request.FILES,
+                                      instance=package)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully Updated Class Access \
+                             Package")
+            return redirect(reverse('view_class_access_packages'))
+        else:
+            messages.error(request, "Failed to update Class Access \
+                           Package. Please ensure the form is valid")
+    else:
+        form = ClassAccessPackageForm(instance=package)
+        messages.info(request, f'You are now editing the Class Access Package called "{package.friendly_name}"')
+
+    context = {
+        'form': form,
+        'package': package,
+    }
+
+    return render(request, 'products/edit_class_access_package.html', context)
