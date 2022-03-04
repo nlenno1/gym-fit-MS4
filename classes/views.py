@@ -2,9 +2,33 @@ from datetime import datetime, timedelta
 
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.conf import settings
+from django.contrib.auth.models import User
 
-from .models import ClassCategory, SingleExerciseClass
 from profiles.models import UserProfile
+from .models import ClassCategory, SingleExerciseClass
+
+
+def send_class_cancellation_email(class_id):
+        """Send the user a class cancellation email"""
+        exercise_class = SingleExerciseClass.objects.get(id=class_id)
+        for person in exercise_class.attendees:
+            user = User.objects.get(id=person.id)
+            subject = render_to_string(
+                'classes/cancellation_emails/confirmation_email_subject.txt',
+                {'class': exercise_class})
+            body = render_to_string(
+                'classes/cancellation_emails/confirmation_email_body.txt',
+                {'user': user, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+
+            send_mail(
+                subject,
+                body,
+                settings.DEFAULT_FROM_EMAIL,
+                [user.email]
+            )     
 
 
 def view_class_categories(request):

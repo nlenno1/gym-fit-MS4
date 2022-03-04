@@ -1,0 +1,1 @@
+Gym Fit Exercise Class Cancellation for {{ class.category }} on {{ class.date }}
