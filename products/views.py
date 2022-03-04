@@ -10,6 +10,7 @@ def view_class_access_packages(request):
 
     packages = ClassAccessPackage.objects.all()
     profile = UserProfile.objects.get(user=request.user)
+    profile_object.check_package_expired()
 
     tokens = []
     unlimited = []

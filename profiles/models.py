@@ -1,4 +1,7 @@
+from datetime import date
+from django.contrib import messages
 from django.db import models
+
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -39,6 +42,16 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def check_package_expired(self):
+        """ Check if package assigned to profile has expired """
+        if self.active_class_package:
+            if date.today() > self.package_expiry:
+                self.active_class_package = False
+                self.package_name = None
+                self.class_package_type = None
+                self.class_tokens = None
+                self.save()
 
 
 @receiver(post_save, sender=User)

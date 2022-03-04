@@ -14,6 +14,7 @@ def profile(request):
     """ Display User Profile """
 
     profile_object = get_object_or_404(UserProfile, user=request.user)
+    profile_object.check_package_expired()
     user_object = get_object_or_404(User, id=request.user.id)
 
     if request.method == 'POST':
