@@ -112,7 +112,7 @@
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     {% if profile.class_package_type == "UU" %}
                         <button type="submit" class="btn btn-dark" disabled>Active Package</button>
-                    {% elif profile.class_package_type == "TK" %}
+                    {% if profile.class_package_type == "TK" %}
                         <button type="submit" class="btn btn-dark" disabled>Active Tokens</button>
                     {% else %}
                         <button type="submit" class="btn btn-dark text-light bag-button">Add to Bag</button>
