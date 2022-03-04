@@ -1,6 +1,7 @@
+from datetime import date, timedelta
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
-from datetime import date, timedelta
+from django.contrib.auth.decorators import login_required
 
 from profiles.models import UserProfile
 from .models import ClassAccessPackage
@@ -35,8 +36,13 @@ def view_class_access_packages(request):
     return render(request, 'products/join_us.html', context)
 
 
+@login_required
 def add_class_access_package(request):
     """ A view to allow Admin to add new package """
+
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, only Admin allowed")
+        return redirect(reverse('home'))
 
     if request.method == "POST":
         form = ClassAccessPackageForm(request.POST, request.FILES)
@@ -62,8 +68,13 @@ def add_class_access_package(request):
     return render(request, 'products/add_class_access_package.html', context)
 
 
+@login_required
 def edit_class_access_package(request, package_id):
     """ A view to allow Admin to edit a package """
+
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, only Admin allowed")
+        return redirect(reverse('home'))
 
     package = get_object_or_404(ClassAccessPackage, id=package_id)
 
@@ -91,8 +102,13 @@ def edit_class_access_package(request, package_id):
     return render(request, 'products/edit_class_access_package.html', context)
 
 
+@login_required
 def delete_class_access_package(request, package_id):
     """ A view to allow Admin to delete a package """
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, only Admin allowed")
+        return redirect(reverse('home'))
+
     package = get_object_or_404(ClassAccessPackage, id=package_id)
     package.delete()
     messages.success(request, "Package deleted")
