@@ -68,8 +68,8 @@
                         <button type="submit" class="btn btn-dark text-light bag-button">Add to Bag</button>
                     {% endif %}
                 </form>
-                <a class="" href="{% url 'edit_class_access_package' package.id %}">Edit Package</a>
-                <a class="" href="#">
+                <a class="btn btn-dark text-light" href="{% url 'edit_class_access_package' package.id %}">Edit Package</a>
+                <a class="confirm-delete" href="{% url 'delete_class_access_package' package.id %}">
                     <i class="fa-solid fa-trash-can"></i>
                 </a>
             </div>
@@ -126,8 +126,8 @@
                         <button type="submit" class="btn btn-dark text-light bag-button">Add to Bag</button>
                     {% endif %}
                 </form>
-                <a class="" href="{% url 'edit_class_access_package' package.id %}">Edit Package</a>
-                <a class="" href="#">
+                <a class="btn btn-dark  text-light" href="{% url 'edit_class_access_package' package.id %}">Edit Package</a>
+                <a class="confirm-delete" href="{% url 'delete_class_access_package' package.id %}">
                     <i class="fa-solid fa-trash-can"></i>
                 </a>
             </div>

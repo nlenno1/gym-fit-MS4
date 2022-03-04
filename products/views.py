@@ -36,7 +36,7 @@ def view_class_access_packages(request):
 
 
 def add_class_access_package(request):
-    """ A view to allow Admin to add new packages"""
+    """ A view to allow Admin to add new package """
 
     if request.method == "POST":
         form = ClassAccessPackageForm(request.POST, request.FILES)
@@ -48,7 +48,7 @@ def add_class_access_package(request):
             form.save()
             messages.success(request, "Successfully Created A \
                              Class Access Package")
-            return redirect(reverse('add_class_access_package'))
+            return redirect(reverse('view_class_access_package'))
         else:
             messages.error(request, "Failed to create the Class Access Package\
                            . Please ensure the form is valid")
@@ -63,7 +63,7 @@ def add_class_access_package(request):
 
 
 def edit_class_access_package(request, package_id):
-    """ A view to allow Admin to edit new packages"""
+    """ A view to allow Admin to edit a package """
 
     package = get_object_or_404(ClassAccessPackage, id=package_id)
 
@@ -80,7 +80,8 @@ def edit_class_access_package(request, package_id):
                            Package. Please ensure the form is valid")
     else:
         form = ClassAccessPackageForm(instance=package)
-        messages.info(request, f'You are now editing the Class Access Package called "{package.friendly_name}"')
+        messages.info(request, f'You are now editing the Class Access Package \
+                      called "{package.friendly_name}"')
 
     context = {
         'form': form,
@@ -88,3 +89,11 @@ def edit_class_access_package(request, package_id):
     }
 
     return render(request, 'products/edit_class_access_package.html', context)
+
+
+def delete_class_access_package(request, package_id):
+    """ A view to allow Admin to delete a package """
+    package = get_object_or_404(ClassAccessPackage, id=package_id)
+    package.delete()
+    messages.success(request, "Package deleted")
+    return redirect(reverse('view_class_access_packages'))
