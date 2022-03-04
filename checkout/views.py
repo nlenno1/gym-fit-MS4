@@ -23,16 +23,21 @@ def cache_checkout_data(request):
     """ View to temp save checkout data """
     try:
         #  check if the order includes a class access package
-        user_data = {}
         package_data = {}
-        classes_data = {}
+        classes_data = []
         current_bag = bag_contents(request)
         package = current_bag['bag_items']['class_access_package']
+        # store exercise class id numbers in meta data
+        if len(current_bag['bag_items']['single_classes']) > 0:
+            for item in current_bag['bag_items']['single_classes']:
+                classes_data.append(item.id)
+                print(item.id)
+        # store package data in meta data
         if package:  # add required data to dict
+            package_data['name'] = package.friendly_name
             package_data['type'] = package.type
-            package_data['unlimited_tokens'] = package.unlimited_tokens
             package_data['amount_of_tokens'] = package.amount_of_tokens
-            package_data['expiry_date'] = (date.today() + timedelta(days=package.duration)).strftime("%d/%m/%Y")
+            package_data['expiry_date'] = (date.today() + timedelta(days=package.duration)).strftime("%d,%m,%Y")
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
@@ -40,11 +45,12 @@ def cache_checkout_data(request):
             'save_info': request.POST.get('save_info'),
             'username': request.user,
             'package_data': json.dumps(package_data),
+            'classes_data': json.dumps(classes_data),
         })
         return HttpResponse(status=200)
     except Exception as err:
-        messages.error(request, "Sorry, your payment can't be processed \
-            right now. Please try again later.")
+        messages.error(request, f"Sorry, your payment can't be processed \
+            right now. Please try again later. {err}")
         return HttpResponse(content=err, status=400)
 
 def checkout(request):
@@ -224,12 +230,13 @@ def checkout_success(request, order_number):
             profile.active_class_package = True
             profile.package_name = package.friendly_name
             profile.class_package_type = package.type
-            if not profile.class_tokens:  # if no tokens in account
-                profile.class_tokens = package.amount_of_tokens
-            else:  # add tokens to current total
-                profile.class_tokens += package.amount_of_tokens
-            profile.package_expiry = (date.today() + timedelta(
-                                      package.duration))
+            if package.type == "TK":
+                if not profile.class_tokens:  # if no tokens in account
+                    profile.class_tokens = package.amount_of_tokens
+                else:  # add tokens to current total
+                    profile.class_tokens += package.amount_of_tokens
+            profile.package_expiry = date.today() + timedelta(
+                                      package.duration)
             profile.save()
     # Save Classes to Profile
     if len(current_bag['bag_items']['single_classes']) > 0:

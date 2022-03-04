@@ -1,7 +1,8 @@
 import json
-import time
+from datetime import time, datetime
 
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 
 from products.models import ClassAccessPackage
 from classes.models import SingleExerciseClass
@@ -31,7 +32,8 @@ class StripeWebhookHandler:
         pid = intent.id
         original_bag = intent.metadata.bag
         save_info = intent.metadata.save_info
-        package_data = intent.metadata.package_data
+        package_data = json.loads(intent.metadata.package_data)
+        classes_data = json.loads(intent.metadata.classes_data)
         billing_details = intent.charges.data[0].billing_details
         shipping_details = intent.shipping
         grand_total = round(intent.charges.data[0].amount / 100, 2)
@@ -64,6 +66,29 @@ class StripeWebhookHandler:
                 # save profiles
                 profile.save()
                 user_profile.save()
+
+            if user_profile.is_authenticated:
+                # Save Class Access Package to Profile
+                if package_data:
+                    profile.active_class_package = True
+                    profile.package_name = package_data['name']
+                    profile.class_package_type = package_data['type']
+                    if package_data['type'] == "TK":
+                        if not profile.class_tokens:  # if no tokens in account
+                            profile.class_tokens = package_data['amount_of_tokens']
+                        else:  # add tokens to current total
+                            profile.class_tokens += package_data['amount_of_tokens']
+                    profile.package_expiry = datetime.strptime(
+                                              package_data['expiry_date'], "%d,%m,%Y")
+                    profile.save()
+
+                # Save Classes to Profile
+                if len(classes_data) > 0:
+                    for item in classes_data:
+                        exercise_class = get_object_or_404(SingleExerciseClass
+                                                           , id=item)
+                        profile.classes.add(exercise_class)
+                        profile.save()
 
         order_exists = False  # assuming the order doesn't exist
         attempt = 1
