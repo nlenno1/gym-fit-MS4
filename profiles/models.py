@@ -15,7 +15,7 @@ class UserProfile(models.Model):
     class Meta:
         """ Define Class Spefic Data """
         verbose_name_plural = 'User Profiles'
-    
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     default_phone_number = models.CharField(max_length=20, null=True, blank=True)
     default_street_address1 = models.CharField(max_length=80, null=True, blank=True)

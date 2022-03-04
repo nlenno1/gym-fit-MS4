@@ -1,5 +1,6 @@
 # from datetime import datetime
 from django.db import models
+from django.contrib.auth.models import User
 
 from django.core.validators import MaxValueValidator
 
@@ -46,8 +47,8 @@ class SingleExerciseClass(models.Model):
     duration = models.PositiveSmallIntegerField(
                validators=[MaxValueValidator(120)], null=True, blank=True)  # Calculated in function below
     location = models.CharField(max_length=100)
-    instructor = models.CharField(max_length=100)  # Will become manytomany
-    # models.ForeignKey(Instructor, on_delete=models.CASCADE)
+    instructor = models.CharField(max_length=100)  # Will become ForeignKey
+    # instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     token_cost = models.PositiveSmallIntegerField(
                 validators=[MaxValueValidator(30)])
@@ -62,14 +63,15 @@ class SingleExerciseClass(models.Model):
     additional_notes = models.TextField(null=True, blank=True)
 
     # To be filled
-    participants = models.CharField(max_length=100, null=True, blank=True)  # Will become manytomany
-    # models.ManyToManyField(User, through='somewhere', blank=True)
+    participants = models.ManyToManyField(User, blank=True)
     remaining_spaces = models.PositiveSmallIntegerField(
                        validators=[MaxValueValidator(150)],
                        null=True, blank=True)
 
+    # def __init__(self):
+    #     models.Model.__init__(self)
+    #     self.remaining_spaces = self.max_capacity
+
     def _generate_class_id_number(self):
-            """
-            Generate a random, unique order number using UUID
-            """
-            return uuid.uuid4().hex.upper()
+        """ Generate a random, unique order number using UUID """
+        return uuid.uuid4().hex.upper()

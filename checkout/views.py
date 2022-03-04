@@ -241,6 +241,11 @@ def checkout_success(request, order_number):
     # Save Classes to Profile
     if len(current_bag['bag_items']['single_classes']) > 0:
         for item in current_bag['bag_items']['single_classes']:
+            # add user to class participants
+            item.participants.add(user_profile_object)
+            item.remaining_spaces -= 1
+            item.save()
+            # add class to profile
             profile.classes.add(item)
             profile.save()
 

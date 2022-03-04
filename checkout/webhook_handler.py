@@ -87,6 +87,11 @@ class StripeWebhookHandler:
                     for item in classes_data:
                         exercise_class = get_object_or_404(SingleExerciseClass
                                                            , id=item)
+                        # add user to class participants
+                        exercise_class.participants.add(user_profile)
+                        exercise_class.remaining_spaces -= 1
+                        exercise_class.save()
+                        # add class to profile
                         profile.classes.add(exercise_class)
                         profile.save()
 
