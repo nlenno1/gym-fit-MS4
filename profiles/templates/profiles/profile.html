@@ -183,7 +183,8 @@
                                     {% for order in orders %}
                                         <tr>
                                             <td>
-                                                <a href="{% url 'order_history' order.order_number %}"
+                                                <a href="{% url 'order_history' order.order_number %}" type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                                data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click to view more about this purchase"
                                                 title="{{ order.order_number }}">
                                                     {{ order.order_number|truncatechars:6 }}
                                                 </a>

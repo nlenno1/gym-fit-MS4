@@ -59,6 +59,10 @@ h1, h2, h3 ,h4, h5 {
     background-color: #353535;
 }
 
+#content i {
+    color: #000;
+}
+
 #top-nav a, .text-blue, #home-find-us {
     color: #2AAFD3;
 }
