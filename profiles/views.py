@@ -24,8 +24,12 @@ def profile(request):
             form.save()
             user_form.save()
             messages.success(request, "Profile updated successfully")
-
-    form = UserProfileForm(instance=profile_object)
+        else:
+            messages.error(request, "Update failed. Please ensure the form is \
+                           valid")
+    else:
+        form = UserProfileForm(instance=profile_object)
+    
     user_form = UserForm(instance=user_object)
     orders = profile_object.orders.all().order_by('-order_date')
 

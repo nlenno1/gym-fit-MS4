@@ -20,7 +20,6 @@ class ClassAccessPackage(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     duration = models.PositiveSmallIntegerField(validators=[
                                                 MaxValueValidator(365)])
-    unlimited_tokens = models.BooleanField()
     amount_of_tokens = models.PositiveSmallIntegerField(
                        validators=[MaxValueValidator(50)],
                        null=True, blank=True)

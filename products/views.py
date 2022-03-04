@@ -1,5 +1,6 @@
+from django.shortcuts import render, redirect, reverse
+from django.contrib import messages
 from datetime import date, timedelta
-from django.shortcuts import render
 
 from profiles.models import UserProfile
 from .models import ClassAccessPackage
@@ -37,7 +38,23 @@ def view_class_access_packages(request):
 def add_class_access_package(request):
     """ A view to allow Admin to add new packages"""
 
-    form = ClassAccessPackageForm()
+    if request.method == "POST":
+        form = ClassAccessPackageForm(request.POST, request.FILES)
+        print(form)
+        if form.is_valid():
+            if form['type'] == "TK":
+                form.duration = 86
+            elif form['type'] == "UU":
+                form.amount_of_tokens = None
+            form.save()
+            messages.success(request, "Successfully Created A \
+                             Class Access Package")
+            return redirect(reverse('add_class_access_package'))
+        else:
+            messages.error(request, "Failed to create the Class Access Package\
+                           . Please ensure the form is valid")
+    else:
+        form = ClassAccessPackageForm()
 
     context = {
         'form': form,

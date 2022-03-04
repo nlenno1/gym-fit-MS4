@@ -40,10 +40,16 @@
 
 .stripe-style-input:focus,
 .stripe-style-input:active {
-  border: 2px solid #2AAFD3;
-  padding: 9px 11px;
   box-shadow: 0 1px 3px 0 #cfd7df;
+  border: 1px solid #2AAFD3;
 }
+
+.stripe-style-input:focus:not([type="file"]),
+.stripe-style-input:active:not([type="file"]) {
+    border: 2px solid #2AAFD3;
+    padding: 9px 11px;
+}
+
 
 .stripe-style-input::placeholder {
     color: #aab7c4;

@@ -17,12 +17,12 @@
 {% endblock %}
 
 {% block content %}
+{% if bag_items.class_access_package %}
+<div class="alter alert-warning text-center py-3 px-3">
+    You have the Class Access Package <strong>{{ bag_items.class_access_package.friendly_name|title }}</strong> in your bag already. Adding a new package will replace this one.
+</div>
+{% endif %}
 <section id="content" class="container">
-    {% if bag_items.class_access_package %}
-    <div class="alter alert-warning text-center py-3 px-3">
-        You have the Class Access Package <strong>{{ bag_items.class_access_package.friendly_name|title }}</strong> in your bag already. Adding a new package will replace this one.
-    </div>
-    {% endif %}
     <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Join Us</h1>
     <h2 class="text-center text-md-start ps-md-5 mt-5 mb-3">Here you can find our selection of Class Access Packages
     </h2>
@@ -32,7 +32,11 @@
     <div class="single-class-schedule-display text-center">
         <div class="row g-0 align-items-md-center">
             <div class="col-12 col-sm-4 col-md-2">
-                <img src="{{ MEDIA_URL }}{{ package.image }}" alt="Token image for {{ package.friendly_name }}">
+                {% if package.image %}
+                    <img src="{{ MEDIA_URL }}{{ package.image }}" alt="Token image for {{ package.friendly_name }}">
+                {% else %}
+                    <img src="{{ MEDIA_URL }}/no-image.jpg" alt="Token image for {{ package.friendly_name }}">
+                {% endif %}
             </div>
             <div class="col-12 col-sm-4 col-md-6">
                 <div class="row g-0 align-items-md-center">
@@ -80,7 +84,11 @@
     <div class="single-class-schedule-display text-center">
         <div class="row g-0 align-items-md-center">
             <div class="col-12 col-sm-4 col-md-2">
-                <img src="{{ MEDIA_URL }}{{ package.image }}" alt="Token image for {{ package.friendly_name }}">
+                {% if package.image %}
+                    <img src="{{ MEDIA_URL }}{{ package.image }}" alt="Token image for {{ package.friendly_name }}">
+                {% else %}
+                    <img src="{{ MEDIA_URL }}/no-image.jpg" alt="Token image for {{ package.friendly_name }}">
+                {% endif %}
             </div>
             <div class="col-12 col-sm-4 col-md-6">
                 <div class="row g-0 align-items-md-center">
@@ -112,7 +120,7 @@
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     {% if profile.class_package_type == "UU" %}
                         <button type="submit" class="btn btn-dark" disabled>Active Package</button>
-                    {% if profile.class_package_type == "TK" %}
+                    {% elif profile.class_package_type == "TK" %}
                         <button type="submit" class="btn btn-dark" disabled>Active Tokens</button>
                     {% else %}
                         <button type="submit" class="btn btn-dark text-light bag-button">Add to Bag</button>
