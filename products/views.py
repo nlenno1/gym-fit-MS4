@@ -2,12 +2,14 @@ from datetime import date, timedelta
 from django.shortcuts import render
 
 from .models import ClassAccessPackage
+from profiles.models import UserProfile
 
 
 def view_class_access_packages(request):
     """ A view to return the class access packages available"""
 
     packages = ClassAccessPackage.objects.all()
+    profile = UserProfile.objects.get(user=request.user)
 
     tokens = []
     unlimited = []
@@ -24,6 +26,7 @@ def view_class_access_packages(request):
     context = {
         'token_packages': tokens,
         'unlimited_packages': unlimited,
+        'profile': profile,
     }
 
     return render(request, 'products/join_us.html', context)

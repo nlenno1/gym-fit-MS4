@@ -20,6 +20,17 @@ def add_package_to_bag(request, item_id):
     redirect_url = request.POST.get('redirect_url')
     bag = request.session.get('bag', {'class_access_package': None,
                                     'single_classes': []})
+    profile = UserProfile.objects.get(user=request.user)
+
+    if profile.active_class_package and profile.class_package_type == "UU":
+        messages.error(request, f"You can not add {package.friendly_name} to your bag \
+                       as you currently have an active Unlimited Use Package")
+        return redirect(redirect_url)
+
+    if profile.active_class_package and profile.class_package_type == "TK":
+        messages.info(request, "Purchasing a new Token Package with tokens on \
+                      your account will add the new tokens to your amount and \
+                      update their expiry date")
 
     if bag['class_access_package'] is not None:
         messages.warning(request, "The previously selected Class Access Package has been removed")
