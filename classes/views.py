@@ -69,7 +69,7 @@ def classes_this_week(request):
 
     # check if class id is in profile classes
     for item in selected_classes:
-        if profile.classes.filter(id=item.id):
+        if profile.classes.filter(id=item.id).exists():
             item.unavailable = True
 
     # Create a list of dates that contain classes with a friendly date
@@ -134,7 +134,7 @@ def filter_single_classes(request):
 
     # check if class id is in profile classes
     for item in filtered_classes:
-        if profile.classes.filter(id=item.id):
+        if profile.classes.filter(id=item.id).exists():
             item.unavailable = True
 
     context = {

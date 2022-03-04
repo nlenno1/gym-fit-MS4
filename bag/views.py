@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 
 from products.models import ClassAccessPackage
 from classes.models import SingleExerciseClass
+from profiles.models import UserProfile
 
 
 def view_bag(request):
@@ -37,6 +38,16 @@ def add_single_class_to_bag(request, item_id):
     redirect_url = request.POST.get('redirect_url')
     bag = request.session.get('bag', {'class_access_package': None,
                                      'single_classes': []})
+    profile = UserProfile.objects.get(user=request.user)
+
+    if profile:
+        if profile.classes.filter(id=exercise_class.id):
+            messages.error(request, f"You have already booked onto \
+                            {exercise_class.category} on \
+                            {exercise_class.date} at \
+                            {exercise_class.start_time} \
+                            so you can not add it to your bag")
+            return redirect(redirect_url)
 
     if item_id not in bag['single_classes']:
         bag['single_classes'].append(item_id)
