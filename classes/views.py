@@ -48,7 +48,7 @@ def classes_this_week(request):
 
     category_filter = ''
     filter_name = ''
-    # generate the current date, list of dates for this week and a list of 
+    # generate the current date, list of dates for this week and a list of
     # classes that happen in the week that are properly formatted
     current_date = datetime.strptime(
                     datetime.now().strftime("%Y,%m,%d"), "%Y,%m,%d")
@@ -63,6 +63,13 @@ def classes_this_week(request):
             filter_name = 'all'
         else:  # Filter the classes by category
             filter_name, selected_classes = filter_classes_by_category(category_filter, selected_classes)
+
+    # Check if classes displayed have happened yet
+    now = datetime.now()
+    for item in selected_classes:
+        if item.date.strftime("%d:%m:%Y - ") + item.start_time.strftime("%H:%M") <= now.strftime("%d:%m:%Y - %H:%M:%S"):
+            item.closed = True
+
     # remove the seconds number from the time values
     for item in selected_classes:
         item.start_time = item.start_time.strftime('%H:%M')
