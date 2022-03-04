@@ -1,0 +1,16 @@
+Hello {{ order.full_name }}!
+
+This is a confirmation email for your order at Gym Fit. Your order information is below:
+
+Order Number: {{ order.order_number }}
+Order Date: {{ order.order_date }}
+
+Grand Total: £{{ order.grand_total }}
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Thank you for your order!
+
+Kind Regards
+
+Gym Fit
