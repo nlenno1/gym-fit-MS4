@@ -37,7 +37,7 @@
 
 /* Class Bookings */
 
-input[type="date"] {
+#date-picker {
     margin: 0 auto;
 }
 
@@ -81,7 +81,7 @@ input[type="date"] {
 }
 
 @media(min-width: 768px) {
-    input[type="date"], select{
+    #date-picker, #category-filter-select{
         max-width: 300px;
     }
     

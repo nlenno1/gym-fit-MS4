@@ -44,7 +44,7 @@ def classes_this_week(request):
     classes = SingleExerciseClass.objects.all()
     categories = ClassCategory.objects.all()
     profile = UserProfile.objects.get(user=request.user)
-    profile_object.check_package_expired()
+    profile.check_package_expired()
 
     category_filter = ''
     filter_name = ''
@@ -105,7 +105,7 @@ def filter_single_classes(request):
     category_filter_name = ''
     date_filter = datetime.today().strftime('%Y-%m-%d')
     profile = UserProfile.objects.get(user=request.user)
-    profile_object.check_package_expired()
+    profile.check_package_expired()
 
     if request.GET:
         # Check if category or date filters are None and assign previous values if true

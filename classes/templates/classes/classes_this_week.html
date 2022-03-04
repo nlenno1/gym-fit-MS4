@@ -68,9 +68,10 @@
                                                 </div>
                                             {% else %}
                                                 <div class="row g-0 align-items-center">
-                                                    <div class="col-12 col-md-4"><p><strong>{{ class.category|title}}</strong></p></div>
-                                                    <div class="col-12 col-md-4"><p>{{ class.instructor|title }}</p></div>
-                                                    <div class="col-12 col-md-4"><p>{{ class.location|title }}</p></div>
+                                                    <div class="col-12 col-md-3"><p><strong>{{ class.category|title}}</strong></p></div>
+                                                    <div class="col-12 col-md-3 d-none d-md-block"><p>{{ class.instructor|title }}</p></div>
+                                                    <div class="col-12 col-md-3 d-none d-md-block"><p>{{ class.location|title }}</p></div>
+                                                    <div class="col-12 col-md-3"><p>£{{ class.price }}</p></div>
                                                 </div>
                                             {% endif %}
                                         </div>
@@ -88,10 +89,12 @@
                                                     <button type="submit" class="btn btn-dark text-light bag-button">Add to Bag</button>
                                                 </form>
                                             {% endif %}
-                                            <a class="" href="#">Edit Class</a>
-                                            <a class="" href="#">
-                                                <i class="fa-solid fa-trash-can"></i>
-                                            </a>
+                                            {% if user.is_superuser %}
+                                                <a class="" href="#">Edit Class</a>
+                                                <a class="" href="#">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

@@ -4,6 +4,7 @@
 
 {% block extracss %}
     <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/classes.css' %}">
 {% endblock %}
 
 {% block page_header %}
@@ -95,68 +96,73 @@
                         {% if upcoming_classes|length > 0 %}
                             <h5 class="display-4">Upcoming Classes</h5>
                             <hr>
-                            <div class="table-responsive">
-                                <table class="table table-sm table-borderless">
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Start Time</th>
-                                            <th>Class Category</th>
-                                            <th>Duration</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for booking in upcoming_classes %}
-                                            <tr>
-                                                <td>{{ booking.date }}</td>
-                                                <td>{{ booking.start_time }}</td>
-                                                <td>{{ booking.category }}</td>
-                                                <td>{{ booking.duration }}</td>
-                                                <td>  <!-- Cancel Booking Button -->
-                                                    <a href="#" type="button" data-bs-container="body" data-bs-trigger="hover focus"
-                                                    data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Cancel this class booking">
-                                                        <i class="fa-solid fa-calendar-xmark"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
+                            {% for class in upcoming_classes %}
+                                <div class="single-class-schedule-display text-center">
+                                    <div class="row g-0 align-items-center">
+                                        <div class="col-6 col-sm-5">
+                                            <div class="row g-0 align-items-center">
+                                                <div class="col-12 col-lg-6">
+                                                    <p class="fw-bold">{{ class.date }}</p>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <p class="fw-bold">{{ class.start_time }}</p>
+                                                    <p>{{ class.duration|title }} mins</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-sm-5">
+                                            <div class="row g-0 align-items-center">
+                                                <div class="col-12 col-lg-4 fw-bold"><p>{{ class.category|title}}</p></div>
+                                                <div class="col-12 col-lg-4 d-none d-lg-block"><p>{{ class.instructor|title }}</p></div>
+                                                <div class="col-12 col-lg-4"><p>{{ class.location|title }}</p></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-2">
+                                            <a href="#" type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                                data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Cancel this class booking">
+                                                    <i class="fa-solid fa-calendar-xmark"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
                         {% endif %}
                         {% if previous_classes|length > 0 %}
                             <h5 class="display-4">Previous Classes</h5>
                             <hr>
-                            <div class="table-responsive">
-                                <table class="table table-sm table-borderless">
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Start Time</th>
-                                            <th>Class Category</th>
-                                            <th>Duration</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for booking in previous_classes %}
-                                            <tr>
-                                                <td>{{ booking.date }}</td>
-                                                <td>{{ booking.start_time }}</td>
-                                                <td>{{ booking.category }}</td>
-                                                <td>{{ booking.duration }}</td>
-                                                <td>  <!-- Cancel Booking Button -->
-                                                    <a href="#" type="button" data-bs-container="body" data-bs-trigger="hover focus"
-                                                    data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Cancel this class booking">
-                                                        <i class="fa-solid fa-calendar-xmark"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
+                            {% for class in previous_classes %}
+                                <div class="single-class-schedule-display text-center">
+                                    <div class="row g-0 align-items-center">
+                                        <div class="col-6 col-sm-4">
+                                            <div class="row g-0">
+                                                <div class="col-12 col-lg-6">
+                                                    <p class="fw-bold">{{ class.date }}</p>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <p>{{ class.start_time }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-sm-4">
+                                            <div class="row g-0 align-items-center">
+                                                <div class="col-12">
+                                                    <p class="fw-bold">{{ class.category|title}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-4">
+                                            <div class="row g-0">
+                                                <div class="col-12 col-lg-6">
+                                                    <p>{{ class.instructor|title }}</p>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <p>{{ class.location|title }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
                         {% endif %}
                     {% else %}
                     <div class="text-center text-md-start">

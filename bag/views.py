@@ -21,6 +21,7 @@ def add_package_to_bag(request, item_id):
     bag = request.session.get('bag', {'class_access_package': None,
                                     'single_classes': []})
     profile = UserProfile.objects.get(user=request.user)
+    profile.check_package_expired()
 
     if profile.active_class_package and profile.class_package_type == "UU":
         messages.error(request, f"You can not add {package.friendly_name} to your bag \
@@ -50,6 +51,7 @@ def add_single_class_to_bag(request, item_id):
     bag = request.session.get('bag', {'class_access_package': None,
                                      'single_classes': []})
     profile = UserProfile.objects.get(user=request.user)
+    profile.check_package_expired()
 
     if profile:
         if profile.classes.filter(id=exercise_class.id):
