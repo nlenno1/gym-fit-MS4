@@ -70,11 +70,6 @@ def classes_this_week(request):
         if item.date.strftime("%d:%m:%Y - ") + item.start_time.strftime("%H:%M") <= now.strftime("%d:%m:%Y - %H:%M:%S"):
             item.closed = True
 
-    # remove the seconds number from the time values
-    for item in selected_classes:
-        item.start_time = item.start_time.strftime('%H:%M')
-        item.end_time = item.end_time.strftime('%H:%M')
-
     # check if class id is in profile classes
     for item in selected_classes:
         if profile.classes.filter(id=item.id).exists():
@@ -136,10 +131,6 @@ def filter_single_classes(request):
     for item in filtered_classes:
         if item.date.strftime("%d:%m:%Y - ") + item.start_time.strftime("%H:%M") <= now.strftime("%d:%m:%Y - %H:%M:%S"):
             item.closed = True
-    # remove the seconds number from the time values
-    for item in filtered_classes:
-        item.start_time = item.start_time.strftime('%H:%M')
-        item.end_time = item.end_time.strftime('%H:%M')
 
     # check if class id is in profile classes
     for item in filtered_classes:

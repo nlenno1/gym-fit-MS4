@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 
 from django.core.validators import MaxValueValidator
 
-# from profiles.models import User
 # from instructors.models import Instructor
 
 
