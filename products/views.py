@@ -1,8 +1,9 @@
 from datetime import date, timedelta
 from django.shortcuts import render
 
-from .models import ClassAccessPackage
 from profiles.models import UserProfile
+from .models import ClassAccessPackage
+from .forms import ClassAccessPackageForm
 
 
 def view_class_access_packages(request):
@@ -31,3 +32,15 @@ def view_class_access_packages(request):
     }
 
     return render(request, 'products/join_us.html', context)
+
+
+def add_class_access_package(request):
+    """ A view to allow Admin to add new packages"""
+
+    form = ClassAccessPackageForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'products/add_class_access_package.html', context)

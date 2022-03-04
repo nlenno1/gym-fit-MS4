@@ -17,12 +17,12 @@
 {% endblock %}
 
 {% block content %}
-{% if bag_items.class_access_package %}
-<div class="alter alert-warning text-center py-3 px-3">
-    You have the Class Access Package <strong>{{ bag_items.class_access_package.friendly_name|title }}</strong> in your bag already. Adding a new package will replace this one.
-</div>
-{% endif %}
 <section id="content" class="container">
+    {% if bag_items.class_access_package %}
+    <div class="alter alert-warning text-center py-3 px-3">
+        You have the Class Access Package <strong>{{ bag_items.class_access_package.friendly_name|title }}</strong> in your bag already. Adding a new package will replace this one.
+    </div>
+    {% endif %}
     <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Join Us</h1>
     <h2 class="text-center text-md-start ps-md-5 mt-5 mb-3">Here you can find our selection of Class Access Packages
     </h2>
