@@ -75,10 +75,12 @@
                                             {% endif %}
                                         </div>
                                         <div class="col-12 col-sm-4 schedule-display-buttons mt-3 mt-sm-0 flex-lg-row">
-                                            {% if class.remaining_spaces is 0 %}
-                                                <p class="text-danger fw-bold">Fully Booked</p>
-                                            {% elif class.closed %}
-                                                <button class="btn btn-dark text-white" disabled>Class Closed</button>
+                                            {% if class.closed %}
+                                                <button class="btn btn-dark" disabled>Class Closed</button>
+                                            {% elif class.unavailable %}
+                                                <button class="btn btn-dark" disabled>Already Booked</button>
+                                            {% elif class.remaining_spaces is 0 %}
+                                                <button class="btn btn-danger" disabled>Fully Booked</button>
                                             {% else %}
                                                 <form action="{% url 'add_single_class_to_bag' class.id %}" method="POST" class="form">
                                                     {% csrf_token %}

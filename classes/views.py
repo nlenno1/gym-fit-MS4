@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 
 from .models import ClassCategory, SingleExerciseClass
+from profiles.models import UserProfile
 
 
 def view_class_categories(request):
@@ -42,6 +43,7 @@ def classes_this_week(request):
 
     classes = SingleExerciseClass.objects.all()
     categories = ClassCategory.objects.all()
+    profile = UserProfile.objects.get(user=request.user)
 
     category_filter = ''
     filter_name = ''
@@ -64,6 +66,12 @@ def classes_this_week(request):
     for item in selected_classes:
         item.start_time = item.start_time.strftime('%H:%M')
         item.end_time = item.end_time.strftime('%H:%M')
+
+    # check if class id is in profile classes
+    for item in selected_classes:
+        if profile.classes.filter(id=item.id):
+            item.unavailable = True
+
     # Create a list of dates that contain classes with a friendly date
     # formatted to display
     days_with_classes = []
@@ -95,6 +103,7 @@ def filter_single_classes(request):
     category_filter = 'None'
     category_filter_name = ''
     date_filter = datetime.today().strftime('%Y-%m-%d')
+    profile = UserProfile.objects.get(user=request.user)
 
     if request.GET:
         # Check if category or date filters are None and assign previous values if true
@@ -122,6 +131,11 @@ def filter_single_classes(request):
     for item in filtered_classes:
         item.start_time = item.start_time.strftime('%H:%M')
         item.end_time = item.end_time.strftime('%H:%M')
+
+    # check if class id is in profile classes
+    for item in filtered_classes:
+        if profile.classes.filter(id=item.id):
+            item.unavailable = True
 
     context = {
         'classes': filtered_classes,
