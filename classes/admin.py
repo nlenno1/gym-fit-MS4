@@ -13,7 +13,7 @@ class SingleExerciseClassAdmin(admin.ModelAdmin):
     """ Edit Class for Admin pages """
 
     list_display = (
-            'date',
+            'class_date',
             'start_time',
             'duration',
             'category',
@@ -23,7 +23,7 @@ class SingleExerciseClassAdmin(admin.ModelAdmin):
             'ability_level',
         )
 
-    ordering = ('-date', '-start_time')
+    ordering = ('-class_date', '-start_time')
 
 
 admin.site.register(ClassCategory, ClassCategoryAdmin)
