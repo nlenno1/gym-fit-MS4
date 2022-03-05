@@ -34,6 +34,7 @@ class ClassCategory(models.Model):
 class SingleExerciseClass(models.Model):
     """ Class for the Categories of Exercise Classes Available """
 
+
     class Meta:
         """ Update Meta data for model """
         verbose_name_plural = "Single Exercise Classes"

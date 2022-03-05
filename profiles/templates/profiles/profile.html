@@ -43,7 +43,7 @@
                     <li class="nav-item">
                         <a href="{% url 'account_logout' %}" class="nav-link">Sign Out</a>
                     </li>
-                </ul>
+                </ul> 
                 <!-- Class Access Package/Tokens View -->
                 {% if profile.active_class_package  %}
                     <div class="active_class_package_display py-5">
@@ -253,7 +253,7 @@
                                 <a href="#" class="nav-link">Add A Class Catergory</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Schedule A Class</a>
+                                <a href="{% url 'add_single_exercise_class' %}" class="nav-link">Schedule A Class</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{% url 'add_class_access_package' %}" class="nav-link">Create a Class Access Package</a>

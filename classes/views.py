@@ -5,10 +5,13 @@ from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from profiles.models import UserProfile
 from .models import ClassCategory, SingleExerciseClass
+from .forms import ClassCategoryForm, SingleExerciseClassForm
 
 
 def send_class_cancellation_email(class_id):
@@ -170,3 +173,66 @@ def filter_single_classes(request):
     }
 
     return render(request, 'classes/classes_by_day.html', context)
+
+# Single Exercise Class CRUD Operations
+
+
+@login_required
+def add_single_exercise_class(request):
+    """ A view to allow Admin to add new single exercise class """
+
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, only Admin allowed")
+        return redirect(reverse('home'))
+
+    # if request.method == "POST":
+    #     form = ClassAccessPackageForm(request.POST, request.FILES)
+    #     if form.is_valid():
+    #         # Set any new values
+    #         form.save()
+    #         messages.success(request, "Successfully Created A \
+    #                          Class Access Package")
+    #         return redirect(reverse('view_class_access_packages'))
+    #     else:
+    #         messages.error(request, "Failed to create the Class Access Package\
+    #                        . Please ensure the form is valid")
+    # else:
+    form = SingleExerciseClassForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'classes/add_single_exercise_class.html', context)
+
+
+# Class Category CRUD Operations
+
+
+@login_required
+def add_class_category(request):
+    """ A view to allow Admin to add new class category """
+
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, only Admin allowed")
+        return redirect(reverse('home'))
+
+    # if request.method == "POST":
+    #     form = ClassAccessPackageForm(request.POST, request.FILES)
+    #     if form.is_valid():
+    #         # Set any new values
+    #         form.save()
+    #         messages.success(request, "Successfully Created A \
+    #                          Class Access Package")
+    #         return redirect(reverse('view_class_access_packages'))
+    #     else:
+    #         messages.error(request, "Failed to create the Class Access Package\
+    #                        . Please ensure the form is valid")
+    # else:
+    form = ClassCategoryForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'classes/add_class_category.html', context)

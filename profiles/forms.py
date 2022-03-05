@@ -48,8 +48,7 @@ class UserProfileForm(forms.ModelForm):
     """ Class for all User Profiles """
     class Meta:
         """ Update Class Meta Data """
-        widgets = {'dob': DateInput(
-                    )}
+        widgets = {'dob': DateInput()}
         model = UserProfile
         fields = ('default_phone_number',
                   'default_street_address1', 'default_street_address2',
@@ -61,7 +60,7 @@ class UserProfileForm(forms.ModelForm):
         """
         Add placeholders and classes, remove auto-generated
         labels and set autofocus on first field
-        """ 
+        """
         super().__init__(*args, **kwargs)
         placeholders = {
             'default_phone_number': 'Phone Number',
