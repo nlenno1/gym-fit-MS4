@@ -81,7 +81,7 @@ def classes_this_week(request):
                     datetime.now().strftime("%Y,%m,%d"), "%Y,%m,%d")
     this_week = [(current_date + timedelta(days=x)).strftime(
                 "%Y-%m-%d") for x in range(7)]
-    selected_classes = classes.filter(date__gte=this_week[0], date__lt=this_week[-1])
+    selected_classes = classes.filter(class_date__gte=this_week[0], class_date__lt=this_week[-1])
 
     if request.GET:
         category_filter = request.GET['category_filter']
@@ -94,7 +94,7 @@ def classes_this_week(request):
     # Check if classes displayed have happened yet
     now = datetime.now()
     for item in selected_classes:
-        if item.date.strftime("%d:%m:%Y - ") + item.start_time.strftime("%H:%M") <= now.strftime("%d:%m:%Y - %H:%M:%S"):
+        if item.class_date.strftime("%d:%m:%Y - ") + item.start_time.strftime("%H:%M") <= now.strftime("%d:%m:%Y - %H:%M:%S"):
             item.closed = True
 
     # check if class id is in profile classes
@@ -107,11 +107,11 @@ def classes_this_week(request):
     days_with_classes = []
     search_storage = []
     for item in selected_classes:
-        if item.date not in search_storage:
-            search_storage.append(item.date)
+        if item.class_date not in search_storage:
+            search_storage.append(item.class_date)
             days_with_classes.append({
-                'date': item.date,
-                'text_date': item.date.strftime("%A %d %b"),
+                'date': item.class_date,
+                'text_date': item.class_date.strftime("%A %d %b"),
             })
     days_with_classes_sorted = sorted(days_with_classes, key=lambda d: d['date'])
 
@@ -205,6 +205,19 @@ def add_single_exercise_class(request):
     return render(request, 'classes/add_single_exercise_class.html', context)
 
 
+@login_required
+def delete_single_exercise_class(request, class_id):
+    """ A view to allow Admin to delete a single exercise class """
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, only Admin allowed")
+        return redirect(reverse('home'))
+
+    exercise_class = get_object_or_404(SingleExerciseClass, id=class_id)
+    exercise_class.delete()
+    messages.success(request, "Exercise Class Deleted")
+    return redirect(reverse('classes_this_week'))
+
+
 # Class Category CRUD Operations
 
 
@@ -271,7 +284,7 @@ def edit_class_category(request, category_id):
 
 @login_required
 def delete_class_category(request, category_id):
-    """ A view to allow Admin to delete a package """
+    """ A view to allow Admin to delete a class category """
     if not request.user.is_superuser:
         messages.error(request, "Sorry, only Admin allowed")
         return redirect(reverse('home'))
