@@ -234,3 +234,36 @@ def add_class_category(request):
     }
 
     return render(request, 'classes/add_class_category.html', context)
+
+
+@login_required
+def edit_class_category(request, category_id):
+    """ A view to allow Admin to edit a class category """
+
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, only Admin allowed")
+        return redirect(reverse('home'))
+
+    category = get_object_or_404(ClassCategory, id=category_id)
+
+    if request.method == "POST":
+        form = ClassCategoryForm(request.POST, request.FILES,
+                                      instance=category)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully Updated Class Category")
+            return redirect(reverse('view_single_class_category', args=[category.id]))
+        else:
+            messages.error(request, "Failed to update Class Category. \
+                           Please ensure the form is valid")
+    else:
+        form = ClassCategoryForm(instance=category)
+        messages.info(request, f'You are now editing the Class Access Package \
+                      called "{category.friendly_name}"')
+
+    context = {
+        'form': form,
+        'category': category,
+    }
+
+    return render(request, 'classes/edit_class_category.html', context)
