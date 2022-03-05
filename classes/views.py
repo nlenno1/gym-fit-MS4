@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
@@ -152,11 +152,11 @@ def filter_single_classes(request):
             category_filter_name, filtered_classes = filter_classes_by_category(category_filter, filtered_classes)
 
     # Filter the Classes by date and order by start time
-    filtered_classes = filtered_classes.filter(date=date_filter).order_by('start_time')
+    filtered_classes = filtered_classes.filter(class_date=date_filter).order_by('start_time')
     # Check if classes displayed have happened yet
     now = datetime.now()
     for item in filtered_classes:
-        if item.date.strftime("%d:%m:%Y - ") + item.start_time.strftime("%H:%M") <= now.strftime("%d:%m:%Y - %H:%M:%S"):
+        if item.class_date.strftime("%d:%m:%Y - ") + item.start_time.strftime("%H:%M") <= now.strftime("%d:%m:%Y - %H:%M:%S"):
             item.closed = True
 
     # check if class id is in profile classes
@@ -185,19 +185,18 @@ def add_single_exercise_class(request):
         messages.error(request, "Sorry, only Admin allowed")
         return redirect(reverse('home'))
 
-    # if request.method == "POST":
-    #     form = ClassAccessPackageForm(request.POST, request.FILES)
-    #     if form.is_valid():
-    #         # Set any new values
-    #         form.save()
-    #         messages.success(request, "Successfully Created A \
-    #                          Class Access Package")
-    #         return redirect(reverse('view_class_access_packages'))
-    #     else:
-    #         messages.error(request, "Failed to create the Class Access Package\
-    #                        . Please ensure the form is valid")
-    # else:
-    form = SingleExerciseClassForm()
+    if request.method == "POST":
+        form = SingleExerciseClassForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully Created An \
+                             Exercise Class")
+            return redirect(reverse('filter_single_classes'))
+        else:
+            messages.error(request, "Failed to create the Exercise Class\
+                           . Please ensure the form is valid")
+    else:
+        form = SingleExerciseClassForm()
 
     context = {
         'form': form,
@@ -217,19 +216,18 @@ def add_class_category(request):
         messages.error(request, "Sorry, only Admin allowed")
         return redirect(reverse('home'))
 
-    # if request.method == "POST":
-    #     form = ClassAccessPackageForm(request.POST, request.FILES)
-    #     if form.is_valid():
-    #         # Set any new values
-    #         form.save()
-    #         messages.success(request, "Successfully Created A \
-    #                          Class Access Package")
-    #         return redirect(reverse('view_class_access_packages'))
-    #     else:
-    #         messages.error(request, "Failed to create the Class Access Package\
-    #                        . Please ensure the form is valid")
-    # else:
-    form = ClassCategoryForm()
+    if request.method == "POST":
+        form = ClassCategoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully Created A \
+                             Class Category")
+            return redirect(reverse('view_class_categories'))
+        else:
+            messages.error(request, "Failed to create the Class Category\
+                           . Please ensure the form is valid")
+    else:
+        form = ClassCategoryForm()
 
     context = {
         'form': form,

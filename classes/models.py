@@ -39,7 +39,6 @@ class SingleExerciseClass(models.Model):
         """ Update Meta data for model """
         verbose_name_plural = "Single Exercise Classes"
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     category = models.ForeignKey(ClassCategory, null=True, blank=True,
                                  on_delete=models.CASCADE)
     class_date = models.DateField(auto_now=False, auto_now_add=False)

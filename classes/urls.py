@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
      path('our_classes/', views.view_class_categories,
           name='view_class_categories'),
-     path('class_category/int<category_id>',
+     path('class_category/int:<category_id>',
           views.view_single_class_category, name='view_single_class_category'),
      path('class_category/add',
           views.add_class_category, name='add_class_category'),
