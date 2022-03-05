@@ -87,34 +87,6 @@ class StripeWebhookHandler:
                 profile.save()
                 user_profile.save()
 
-            if user_profile.is_authenticated:
-                # Save Class Access Package to Profile
-                if package_data:
-                    profile.active_class_package = True
-                    profile.package_name = package_data['name']
-                    profile.class_package_type = package_data['type']
-                    if package_data['type'] == "TK":
-                        if not profile.class_tokens:  # if no tokens in account
-                            profile.class_tokens = package_data['amount_of_tokens']
-                        else:  # add tokens to current total
-                            profile.class_tokens += package_data['amount_of_tokens']
-                    profile.package_expiry = datetime.strptime(
-                                              package_data['expiry_date'], "%d,%m,%Y")
-                    profile.save()
-
-                # Save Classes to Profile
-                if len(classes_data) > 0:
-                    for item in classes_data:
-                        exercise_class = get_object_or_404(SingleExerciseClass
-                                                           , id=item)
-                        # add user to class participants
-                        exercise_class.participants.add(user_profile)
-                        exercise_class.remaining_spaces -= 1
-                        exercise_class.save()
-                        # add class to profile
-                        profile.classes.add(exercise_class)
-                        profile.save()
-
         order_exists = False  # assuming the order doesn't exist
         attempt = 1
         while attempt <= 5:
@@ -199,6 +171,34 @@ class StripeWebhookHandler:
                 return HttpResponse(
                     content=f'Webhook received: {event["type"]} | ERROR: {err}',
                     status=500)
+
+        if user_profile.is_authenticated:
+            # Save Class Access Package to Profile
+            if package_data:
+                profile.active_class_package = True
+                profile.package_name = package_data['name']
+                profile.class_package_type = package_data['type']
+                if package_data['type'] == "TK":
+                    if not profile.class_tokens:  # if no tokens in account
+                        profile.class_tokens = package_data['amount_of_tokens']
+                    else:  # add tokens to current total
+                        profile.class_tokens += package_data['amount_of_tokens']
+                profile.package_expiry = datetime.strptime(
+                                            package_data['expiry_date'], "%d,%m,%Y")
+                profile.save()
+
+            # Save Classes to Profile
+            if len(classes_data) > 0:
+                for item in classes_data:
+                    exercise_class = get_object_or_404(SingleExerciseClass
+                                                        , id=item)
+                    # add user to class participants
+                    exercise_class.participants.add(user_profile)
+                    exercise_class.remaining_spaces -= 1
+                    exercise_class.save()
+                    # add class to profile
+                    profile.classes.add(exercise_class)
+                    profile.save()
         self._send_confirmation_email(order)
         return HttpResponse(
             content=f"Webhook recieved: {event['type']} | Success: Created order in webhook",

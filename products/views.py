@@ -54,7 +54,7 @@ def add_class_access_package(request):
             form.save()
             messages.success(request, "Successfully Created A \
                              Class Access Package")
-            return redirect(reverse('view_class_access_package'))
+            return redirect(reverse('view_class_access_packages'))
         else:
             messages.error(request, "Failed to create the Class Access Package\
                            . Please ensure the form is valid")
