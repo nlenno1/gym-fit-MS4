@@ -1,4 +1,6 @@
-# from datetime import datetime
+import uuid
+from datetime import date, datetime, timedelta
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -45,7 +47,7 @@ class SingleExerciseClass(models.Model):
     start_time = models.TimeField(auto_now=False, auto_now_add=False)
     end_time = models.TimeField(auto_now=False, auto_now_add=False)
     duration = models.PositiveSmallIntegerField(
-               validators=[MaxValueValidator(120)], null=True, blank=True)  # Calculated in function below
+               validators=[MaxValueValidator(120)], null=True, blank=True)
     location = models.CharField(max_length=100)
     instructor = models.CharField(max_length=100)  # Will become ForeignKey
     # instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
@@ -68,9 +70,12 @@ class SingleExerciseClass(models.Model):
                        validators=[MaxValueValidator(150)],
                        null=True, blank=True)
 
-    # def __init__(self):
-    #     models.Model.__init__(self)
-    #     self.remaining_spaces = self.max_capacity
+    def __init__(self, *args, **kwargs):
+        """ Set remaining spaces variable """
+        super().__init__(*args, **kwargs)
+        self.remaining_spaces = self.max_capacity
+    #     if self.duration:
+    #         self.duration = datetime.combine(date.today(), self.end_time) - datetime.combine(date.today(),self.start_time)
 
     def _generate_class_id_number(self):
         """ Generate a random, unique order number using UUID """

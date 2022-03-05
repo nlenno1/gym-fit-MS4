@@ -12,6 +12,12 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 
+class TimePickerInput(forms.TimeInput):
+    """Add time picker widget to time field """
+    input_type = 'time'
+
+
+
 class UserForm(forms.ModelForm):
     """ Class for all User Profiles """
     class Meta:
