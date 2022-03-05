@@ -15,7 +15,6 @@ class ClassCategory(models.Model):
         """ Update Meta data for model """
         verbose_name_plural = "Class Categories"
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
@@ -70,19 +69,9 @@ class SingleExerciseClass(models.Model):
                        validators=[MaxValueValidator(150)],
                        null=True, blank=True)
 
-<<<<<<< HEAD
     def __init__(self, *args, **kwargs):
         """ Set remaining spaces variable """
         super().__init__(*args, **kwargs)
         self.remaining_spaces = self.max_capacity
     #     if self.duration:
     #         self.duration = datetime.combine(date.today(), self.end_time) - datetime.combine(date.today(),self.start_time)
-=======
-    # def __init__(self):
-    #     models.Model.__init__(self)
-    #     self.remaining_spaces = self.max_capacity
-
-    def _generate_class_id_number(self):
-        """ Generate a random, unique order number using UUID """
-        return uuid.uuid4().hex.upper()
->>>>>>> parent of 1438294 (feat: add POST to add_class_category and add_single_class, styled our_classes display and added image handler into our_classes template)

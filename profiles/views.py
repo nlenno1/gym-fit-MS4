@@ -12,7 +12,6 @@ from .forms import UserProfileForm, UserForm
 
 def profile(request):
     """ Display User Profile """
-
     profile_object = get_object_or_404(UserProfile, user=request.user)
     profile_object.check_package_expired()
     user_object = get_object_or_404(User, id=request.user.id)
@@ -29,14 +28,14 @@ def profile(request):
                            valid")
     else:
         form = UserProfileForm(instance=profile_object)
-    
+
     user_form = UserForm(instance=user_object)
     orders = profile_object.orders.all().order_by('-order_date')
 
     upcoming_classes = []
     previous_classes = []
-    for item in profile_object.classes.order_by("-date"):
-        if item.date < date.today():
+    for item in profile_object.classes.order_by("-class_date"):
+        if item.class_date < date.today():
             previous_classes.append(item)
         else:
             upcoming_classes.append(item)
@@ -57,7 +56,8 @@ def profile(request):
 
 def order_history(request, order_number):
     """ Display Previous Orders """
-    order = get_object_or_404(Order, order_number=order_number)  # Find the order
+    # Find the order
+    order = get_object_or_404(Order, order_number=order_number)
     # Message to tell user that this is a previous order
     messages.info(request, (
         f'This is a past confirmation for order number {order_number}. '

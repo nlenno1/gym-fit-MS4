@@ -102,7 +102,7 @@
                                         <div class="col-6 col-sm-5">
                                             <div class="row g-0 align-items-center">
                                                 <div class="col-12 col-lg-6">
-                                                    <p class="fw-bold">{{ class.date }}</p>
+                                                    <p class="fw-bold">{{ class.class_date }}</p>
                                                 </div>
                                                 <div class="col-12 col-lg-6">
                                                     <p class="fw-bold">{{ class.start_time }}</p>
@@ -136,7 +136,7 @@
                                         <div class="col-6 col-sm-4">
                                             <div class="row g-0">
                                                 <div class="col-12 col-lg-6">
-                                                    <p class="fw-bold">{{ class.date }}</p>
+                                                    <p class="fw-bold">{{ class.class_date }}</p>
                                                 </div>
                                                 <div class="col-12 col-lg-6">
                                                     <p>{{ class.start_time }}</p>
@@ -206,7 +206,7 @@
                                                                 </p>
                                                             {% else %}
                                                                 <p class="mb-0">{{ item.exercise_class.category }}:</p>
-                                                                <p class="mb-0">{{ item.exercise_class.date }} - {{ item.exercise_class.start_time }}</p>
+                                                                <p class="mb-0">{{ item.exercise_class.class_date }} - {{ item.exercise_class.start_time }}</p>
                                                             {% endif %}
                                                         </li>
                                                     {% endfor %}
