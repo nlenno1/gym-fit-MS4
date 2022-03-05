@@ -1,8 +1,8 @@
 from datetime import date
 
 from django import forms
-from profiles.forms import DateInput, TimePickerInput
 from .models import ClassCategory, SingleExerciseClass
+from profiles.forms import DateInput
 
 
 class ClassCategoryForm(forms.ModelForm):
@@ -26,14 +26,9 @@ class SingleExerciseClassForm(forms.ModelForm):
     """ Class for Form to create Class Access Packages """
     class Meta:
         """ Update Class Meta Data """
-        widgets = {'date': DateInput(),
-                   'start_time': TimePickerInput(),
-                   'end_time': TimePickerInput(), }
+        widgets = {'date': DateInput()}
         model = SingleExerciseClass
-        exclude = ['remaining_spaces', 'participants', ]
-        labels = {
-            'duration': 'Duration (mins)*',
-        }
+        exclude = ['remaining_spaces', 'participants', 'duration', ]
 
     def __init__(self, *args, **kwargs):
         """

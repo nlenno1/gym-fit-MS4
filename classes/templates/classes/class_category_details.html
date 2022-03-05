@@ -27,81 +27,60 @@
             </button>
         </h1>
         <div class="row g-0">
-            <div class="col-12 col-lg-4 text-center">
-                {% if category.image_url %}
-                    <img class="w-100 mx-auto px-md-2" src="{{ category.image_url }}" alt="Image of {{ category.friendly_name }}">
-                {% elif category.image %}
-                    <img class="w-100 mx-auto px-md-2" src="{{MEDIA_URL}}{{ category.image }}" alt="Image of {{ category.friendly_name }}">
-                {% else %}
-                    <img class="w-100 mx-auto px-md-2" src="{{MEDIA_URL}}no-image.jpg" alt="Image of {{ category.friendly_name }}">
-                {% endif %}
+            <div class="col-12 col-lg-3 text-center">
+                <img class="mx-auto px-md-2" id="single-category-image" src="{{ category.image_url }}" alt="Image of a {{ category.friendly_name }} class">
             </div>
-            <div class="col-12 col-lg-8 text-center text-md-start">
+            <div class="col-12 col-lg-9 text-center text-md-start">
                 <p>{{ category.description }}</p>
                 <p>Equipment Required: {{ category.equipment_required }}</p>
                 <p>3.56 stars average rating from 40 reviews</p>
             </div>
-            {% if user.is_superuser %}
-                <div class="row g-0 pt-4 px-md-5">
-                    <div class="col-12 col-md-6 text-center text-md-start">
-                        <a class="mb-4 btn btn-dark" href="#">Update Class Category</a>
-                    </div>
-                    <div class="col-12 col-md-6 text-center text-md-end">
-                        <a class="mb-4 btn btn-danger" href="#">Delete Class Category</a>
-                    </div>
+            <div class="row g-0 pb-4 px-md-5">
+                <div class="col-12 col-md-6 text-center text-md-start">
+                    <a href="#">Update Class Category</a>
                 </div>
-            {% endif %}
+                <div class="col-12 col-md-6 text-center text-md-end">
+                    <a href="#">Delete Class Category</a>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12 col-md-6">
                     <h4>Class Reviews</h4>
                 </div>
-                {% if reviews|length > 0 %}
                 <div class="col-t12-col-md-6">
-                    <a href="#" class="float-end btn btn-dark blue-button">Write A Review</a>
+                    <a href="#" class="float-end">Write A Review</a>
                 </div>
-                    <div class="col-12">
-                        <table class="table table-striped mt-4 mb-5">
-                            <thead>
-                            <tr class="d-none d-md-table-row">
-                                <th scope="col">Date</th>
-                                <th scope="col">Username</th>
-                                <th scope="col">Review</th>
-                                <th scope="col">Rating</th>
-                            </tr>
-                            <tr class="d-md-none">
-                                <th scope="col">Review</th>
-                                <th scope="col">Rating</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                {% for review in reviews %}   
-                                    <tr>
-                                        <td scope="row" class="d-none d-md-table-cell">03/11/2021</th>
-                                        <td class="d-none d-md-table-cell">Bob</td>
-                                        <td>What a great class</td>
-                                        <td>4/5 
-                                            {% if review.user_id == user.id %}
-                                                <button type="button" class="float-end" data-bs-container="body" data-bs-trigger="hover focus"
-                                                    data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Delete Your Review">
-                                                    <a href="#">
-                                                        <i class="fa-solid fa-trash-can"></i>
-                                                    </a>
-                                                </button>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                {% else %}
-                    <div class="col-12 mb-5 text-center text-md-start">
-                        <h5>There are no reviews to show</h5>
-                        <p>Why don't you be the first to leave a review?</p>
-                        <a href="#" class="btn btn-dark blue-button">Create a Review</a>
-                    </div>
-                {% endif %}
+                <div class="col-12">
+                    <table class="table table-striped mt-4 mb-5">
+                        <thead>
+                          <tr class="d-none d-md-table-row">
+                            <th scope="col">Date</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Review</th>
+                            <th scope="col">Rating</th>
+                          </tr>
+                          <tr class="d-md-none">
+                            <th scope="col">Review</th>
+                            <th scope="col">Rating</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td scope="row" class="d-none d-md-table-cell">03/11/2021</th>
+                            <td class="d-none d-md-table-cell">Bob</td>
+                            <td>What a great class</td>
+                            <td>4/5 
+                                <button type="button" class="float-end" data-bs-container="body" data-bs-trigger="hover focus"
+                                    data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Delete Your Review">
+                                    <a href="#">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
             </div>
         </div>
     </section>

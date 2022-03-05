@@ -25,15 +25,9 @@
                     <div class="col-12"><h4 class="pt-2">{{ category.friendly_name }}</h4></div>
                     <div class="col-12">
                         <div class="image-container d-flex justify-content-center">
-                            {% if category.image_url %}
-                                <img src="{{ category.image_url }}" alt="Image of {{ category.friendly_name }}"></div>
-                            {% elif category.image %}
-                                <img src="{{MEDIA_URL}}{{ category.image }}" alt="Image of {{ category.friendly_name }}"></div>
-                            {% else %}
-                                <img src="{{MEDIA_URL}}no-image.jpg" alt="Image of {{ category.friendly_name }}"></div>
-                            {% endif %}
+                            <img src="{{ category.image_url }}" alt="Image of {{ category.friendly_name }}"></div>
                         </div>
-                    <div class="col-6">Av. Rating: {{ category.average_rating }}</div>
+                    <div class="col-6">Av. Rating: </div>
                     <div class="col-6"><i class="fa-regular fa-heart"></i></div>
                     <div class="col-12">
                         <a class="btn btn-dark mt-2" href="{% url 'view_single_class_category' category.id %}">View Class Details</a>
