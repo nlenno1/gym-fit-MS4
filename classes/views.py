@@ -267,3 +267,16 @@ def edit_class_category(request, category_id):
     }
 
     return render(request, 'classes/edit_class_category.html', context)
+
+
+@login_required
+def delete_class_category(request, category_id):
+    """ A view to allow Admin to delete a package """
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, only Admin allowed")
+        return redirect(reverse('home'))
+
+    category = get_object_or_404(ClassCategory, id=category_id)
+    category.delete()
+    messages.success(request, "Category deleted")
+    return redirect(reverse('view_class_categories'))

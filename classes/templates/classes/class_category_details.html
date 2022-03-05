@@ -47,7 +47,7 @@
                         <a class="mb-4 btn btn-dark" href="{% url 'edit_class_category' category.id %}">Update Class Category</a>
                     </div>
                     <div class="col-12 col-md-6 text-center text-md-end">
-                        <a class="mb-4 btn btn-danger" href="#">Delete Class Category</a>
+                        <a class="mb-4 btn btn-danger" href="{% url 'delete_class_category' category.id %}">Delete Class Category</a>
                     </div>
                 </div>
             {% endif %}

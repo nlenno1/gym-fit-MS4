@@ -10,8 +10,8 @@ urlpatterns = [
           views.add_class_category, name='add_class_category'),
      path('class_category/<category_id>/edit',
           views.edit_class_category, name='edit_class_category'),
-     # path('class_category/<class_id>/delete',
-     #      views.delete_class_category, name='delete_class_category'),
+     path('class_category/<category_id>/delete',
+          views.delete_class_category, name='delete_class_category'),
 
      path('classes_this_week/', views.classes_this_week,
           name='classes_this_week'),
