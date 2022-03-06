@@ -17,26 +17,26 @@
 
 {% block content %}
     <section id="content" class="container">
-        <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Profile - <span id="visible-section-name">Personal Details</span></h1>
+        <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">PROFILE - <span id="visible-section-name">PERSONAL DETAILS</span></h1>
         <div class="row">
             <!-- My Profile Menu Pills -->
             <div class="col-12 col-md-3">
                 <!-- Nav Pills Taken from Bootstrap 5 Documentation -->
                 <ul class="nav nav-pills nav-justified">
                     <li class="nav-item">
-                      <button class="nav-link active" aria-current="page" href="#">Personal Details</button>
+                      <button class="nav-link profile-menu-button" id="personal-details-button" aria-current="page" href="#">Personal Details</button>
                     </li>
                     <li class="nav-item">
-                      <button class="nav-link">My Bookings</button>
+                      <button class="nav-link profile-menu-button" id="my-bookings-button">My Bookings</button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link">Previous Purchases</button>
+                        <button class="nav-link profile-menu-button" id="previous-puchases-button">Previous Purchases</button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link">Favourite Class List</button>
+                        <button class="nav-link profile-menu-button" id="favourite-class-list-button">Favourite Class List</button>
                     </li>
                     {% if request.user.is_superuser %}
-                        <li class="nav-item">
+                        <li class="nav-item profile-menu-button" id="admin-functions-button">
                             <button class="nav-link">Admin</button>
                         </li>
                     {% endif %}
@@ -80,7 +80,7 @@
                 {% endif %}
             </div>
             <div class="col-12 col-md-9">
-                <section id="personal-details">
+                <section id="personal-details" class="profile-section">
                     <form class="mx-5 mb-5" action="{% url 'profile' %}" method="POST" id="profile-update-form">
                         {% csrf_token %}
                         {{ user_form|crispy }}
@@ -91,7 +91,7 @@
                         </div>
                     </form>
                 </section>
-                <section id="my-bookings" class="mx-md-5 mb-5">
+                <section id="my-bookings" class="profile-section mx-md-5 mb-5">
                     {% if upcoming_classes|length > 0 or previous_classes|length > 0 %}
                         {% if upcoming_classes|length > 0 %}
                             <h5 class="display-4">Upcoming Classes</h5>
@@ -172,7 +172,7 @@
                     </div>
                     {% endif %}
                 </section>
-                <section id="previous-puchases" class="mx-md-5 mb-5 mb-5">
+                <section id="previous-puchases" class="profile-section mx-md-5 mb-5 mb-5">
                     {% if orders|length > 0 %}
                         <h5 class="text-center text-md-start">Click onto the order number to view more details</h5>
                         <div class="table-responsive">
@@ -222,23 +222,31 @@
                         <h5 class="display-3">You have no Previous Orders</h5>
                     {% endif %}
                 </section>
-                <section id="fav-class-list" class="mx-md-5 mb-5 mb-5">
+                <section id="favourite-class-list" class="profile-section mx-md-5 mb-5 mb-5">
                     {% if fav_class_list|length > 0 %}
-                        <h5 class="text-center text-md-start">This is a list of your favourite classes</h5>
-                        <p>To add a class to this list go to Our Classes and click the heart icon</p>
-                        {% for category in fav_class_list %}
-                            <div class="row">
-                                <div class="col-12 col-md-9">
-                                    {{ category.category_name }}
-                                </div>
-                                <div class="col-12 col-md-3">
-                                    <a href="#" class="confirm-cancel" type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                        <h2 class="text-center text-md-start">This is a list of your favourite classes</h2>
+                        <h3>To add a class to this list go to Our Classes and click the heart icon</h3>
+                        <table class="table text-center">
+                            <thead>
+                                <tr>
+                                <th scope="col">Category</th>
+                                <th scope="col">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for category in fav_class_list %}
+                                    <tr>
+                                    <th scope="row">{{ category.friendly_name }}</th>
+                                    <td>
+                                        <a href="#" class="confirm-cancel" type="button" data-bs-container="body" data-bs-trigger="hover focus"
                                         data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Remove this Category from the list">
-                                        <i class="fa-solid fa-eraser"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        {% endfor %}
+                                            <i class="fa-solid fa-eraser"></i>
+                                        </a>
+                                    </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     {% else %}
                     <div class="text-center text-md-start">
                         <h5 class="display-3">You have no Categories in Your Favourites List</h5>
@@ -247,7 +255,7 @@
                     {% endif %}
                 </section>
                 {% if user.is_superuser %}
-                    <section id="admin-functions" class="mx-md-5 mb-5 mb-5">
+                    <section id="admin-functions" class="profile-section mx-md-5 mb-5 mb-5">
                         <ul class="nav nav-pills nav-justified">
                             <li class="nav-item">
                                 <a href="{% url 'add_class_category' %}" class="nav-link">Add A Class Catergory</a>
@@ -274,9 +282,20 @@
     {{ block.super }}
     <script type="text/javascript" src="{% static 'profiles/js/countryfield.js' %}"></script>
     <script>
+        // Tab View Control
+        $('.profile-menu-button').click(function(){
+            section = this.id.slice(0, -7)
+            $('#' + section).show();
+            $(".profile-section").not($('#' + section)).hide();
+            $("#visible-section-name").html(section.replace(/-/g, " ").toUpperCase());
+        })
+        $(document).ready(function(){
+            $('#personal-details').show();
+            $('#personal-details-button').addClass('active');
+        })
         // Confirm Cancellation 
         $(document).on('click', '.confirm-cancel', function(){
-        return confirm('Are you sure you want to cancel this booking?');
+            return confirm('Are you sure you want to cancel this booking?');
         })
     </script>
 {% endblock %}

@@ -49,6 +49,7 @@ def profile(request):
         'profile': profile_object,
         'upcoming_classes': upcoming_classes,
         'previous_classes': previous_classes,
+        'fav_class_list': profile_object.fav_class_categories.all(),
     }
 
     return render(request, template, context)
