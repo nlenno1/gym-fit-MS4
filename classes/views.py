@@ -196,10 +196,10 @@ def filter_single_classes(request):
     if request.GET:
         # Check for category & date filters and
         # assign previous if none
-        if request.GET['category_filter'] != 'None':
-            category_filter = request.GET['category_filter']
-        else:
+        if request.GET['category_filter'] == 'None':
             category_filter = request.GET['previous_category_filter']
+        else:
+            category_filter = request.GET['category_filter']
 
         date_filter = request.GET['date_filter']
 
