@@ -42,12 +42,12 @@
                                 {% endif %}
                             </option>
                             <option value="all">Show All</option>
+                            {% if request.user.is_authenticated %}
+                                <option value="fav_categories">Favourite Class Categories</option>
+                            {% endif %}
                             {% for category in class_categories %}
-                                <option value="{{ category.id }}"
-                                {% if category == category_filter.id %}
-                                selected
-                                {% endif %}
-                                >{{ category.friendly_name|title }}</option>
+                                <option value="{{ category.id }}" {% if category == category_filter.id %}
+                                selected {% endif %}>{{ category.friendly_name|title }}</option>
                             {% endfor %}
                         </select>
                     </div>

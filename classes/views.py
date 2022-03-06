@@ -104,6 +104,17 @@ def filter_classes_by_category(category_filter, classes):
     return category_filter_name, filtered_classes
 
 
+def filter_classes_by_fav_category(request, classes):
+    """ Function to filter a selection of classes using
+    favourite class categories list"""
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        profile.check_package_expired()
+        category_ids = [item.id for item in profile.fav_class_categories.all()]
+        filtered_classes = classes.all().filter(category__id__in=category_ids)
+        filter_name = "Favourite Class Categories"
+        return filter_name, filtered_classes
+
 def classes_this_week(request):
     """ A view to return all the single exercise classes in the current week"""
 
@@ -125,6 +136,8 @@ def classes_this_week(request):
         # Check for all category option selected
         if category_filter == 'all' or category_filter == '':
             filter_name = 'all'
+        elif category_filter == "fav_categories":
+            filter_name, selected_classes = filter_classes_by_fav_category(request, selected_classes)
         else:  # Filter the classes by category
             filter_name, selected_classes = filter_classes_by_category(category_filter, selected_classes)
 
@@ -193,6 +206,8 @@ def filter_single_classes(request):
         # Check for all category option selected
         if category_filter == 'all' or category_filter == '':
             category_filter = 'all'
+        elif category_filter == "fav_categories":
+            category_filter_name, filtered_classes = filter_classes_by_fav_category(request, filtered_classes)
         else:  # Filter the classes by category
             category_filter_name, filtered_classes = filter_classes_by_category(category_filter, filtered_classes)
 
