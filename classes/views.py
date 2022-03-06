@@ -23,7 +23,7 @@ def send_class_cancellation_email(exercise_class, user_profile, refunded):
     body = render_to_string(
         'classes/cancellation_emails/cancellation_email_body.txt',
         {'user': user_profile, 'contact_email': settings.DEFAULT_FROM_EMAIL,
-        'class': exercise_class, 'refunded':refunded})
+        'class': exercise_class, 'refunded' : refunded})
 
     send_mail(
         subject,
@@ -54,26 +54,43 @@ def send_update_email(class_id, form):
             [user.email, ]
         )
 
+# Class Categories
+
 
 def view_class_categories(request):
     """ A view to return all the categories"""
 
     categories = ClassCategory.objects.all()
+    fav_categories = []
+
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        for category in profile.fav_class_categories.all():
+            fav_categories.append(category.id)
 
     context = {
-        'class_categories': categories
+        'class_categories': categories,
+        'fav_categories': fav_categories,
     }
 
     return render(request, 'classes/our_classes.html', context)
+
 
 
 def view_single_class_category(request, category_id):
     """ A view to return details about an individual class category"""
 
     category = get_object_or_404(ClassCategory, pk=category_id)
+    fav_category = False
+
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        if profile.fav_class_categories.filter(pk=category.id).exists():
+            fav_category = True
 
     context = {
-        'category': category
+        'category': category,
+        'fav_category': fav_category,
     }
 
     return render(request, 'classes/class_category_details.html', context)
@@ -467,3 +484,38 @@ def delete_class_category(request, category_id):
     category.delete()
     messages.success(request, "Category deleted")
     return redirect(reverse('view_class_categories'))
+
+
+# Favourite Class List Functions
+
+@login_required
+def add_category_to_favs(request, category_id):
+    """ A view to allow user to add a class category
+    to their favourties list """
+
+    redirect_url = request.POST.get('redirect_url')
+    profile = UserProfile.objects.get(user=request.user)
+    category = ClassCategory.objects.get(pk=category_id)
+
+    profile.fav_class_categories.add(category)
+    messages.success(request, f"You have ADDED {category.friendly_name} to \
+        your Class Category Favourites list")
+
+    return redirect(redirect_url)
+
+
+
+@login_required
+def remove_category_from_favs(request, category_id):
+    """ A view to allow user to remove a class category
+    from their favourties list """
+
+    redirect_url = request.POST.get('redirect_url')
+    profile = UserProfile.objects.get(user=request.user)
+
+    category = profile.fav_class_categories.get(id=category_id)
+    profile.fav_class_categories.remove(category)
+    messages.success(request, f"You have REMOVED {category.friendly_name} from \
+        your Class Category Favourites list")
+
+    return redirect(redirect_url)

@@ -53,6 +53,12 @@ h1, h2, h3 ,h4, h5 {
     padding-bottom: 12vh;
 }
 
+.no-button {
+    padding: 0;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
 /* Colours */
 
 #top-nav, footer, #our-team, #home-find-us {

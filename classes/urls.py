@@ -14,6 +14,11 @@ urlpatterns = [
      path('class_category/<int:category_id>/delete',
           views.delete_class_category, name='delete_class_category'),
 
+     path('class_category/favourites/add/<category_id>',
+          views.add_category_to_favs, name='add_category_to_favs'),
+     path('class_category/favourites/remove/<category_id>',
+          views.remove_category_from_favs, name='remove_category_from_favs'),
+
      path('classes_this_week/', views.classes_this_week,
           name='classes_this_week'),
 
