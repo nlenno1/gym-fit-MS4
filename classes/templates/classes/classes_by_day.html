@@ -91,12 +91,12 @@
                                         <button class="btn btn-dark" disabled>Already Booked</button>
                                     {% elif class.remaining_spaces is 0 %}
                                         <p class="text-danger fw-bold">Fully Booked</p>
-                                        {% elif profile_tokens > 0 %}
-                                        <form action="{% url 'book_with_tokens' class.id %}" method="POST" class="form">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
-                                            <button type="submit" class="btn btn-success">Book with Tokens</button>
-                                        </form>
+                                    {% elif profile_tokens > class.token_cost %}
+                                    <form action="{% url 'book_with_tokens' class.id %}" method="POST" class="form">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+                                        <button type="submit" class="btn btn-success">Book with Tokens</button>
+                                    </form>
                                     {% else %}
                                         <form action="{% url 'add_single_class_to_bag' class.id %}" method="POST" class="form">
                                             {% csrf_token %}

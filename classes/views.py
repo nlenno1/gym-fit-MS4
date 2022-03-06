@@ -217,23 +217,25 @@ def book_with_tokens(request, class_id):
         messages.error(request, f"You have already booked onto \
                             {exercise_class.info()} \
                             so you can not add it to your bag")
-    elif exercise_class.remaining_spaces > 0 and profile.class_tokens > 0:
+    elif exercise_class.remaining_spaces == 0:
+        messages.error(request, "Sorry, we can't make this booking as this \
+            class is fully booked")
+    elif profile.class_package_type == "\
+            TK" and profile.class_tokens < exercise_class.token_cost:
+        messages.error(request, "Sorry, we can't make this booking as you \
+            don't have enough Class Tokens remaining")
+    else:
         exercise_class.participants.add(profile.user)
         exercise_class.remaining_spaces -= 1
         exercise_class.save()
         profile.classes.add(exercise_class)
-        profile.class_tokens -= 1
+        if profile.class_package_type == "TK":
+            profile.class_tokens -= exercise_class.token_cost
         profile.save()
         messages.success(request, f"You have booked onto the \
             {exercise_class.info()}. You have \
             {profile.class_tokens} Class Tokens remaining")
-    elif profile.class_tokens == 0:
-        messages.error(request, "Sorry, I can't make this booking as you \
-            don't have any Class Tokens remaining")
-    else:
-        messages.error(request, "Sorry, I can't make this booking as this \
-            class is fully booked")
-    try:    
+    try:
         return redirect(redirect_url)
     except Exception as err:
         messages.error(request, f"{err}")

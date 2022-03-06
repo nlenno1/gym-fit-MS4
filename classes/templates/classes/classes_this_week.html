@@ -82,7 +82,7 @@
                                                 <button class="btn btn-dark" disabled>Already Booked</button>
                                             {% elif class.remaining_spaces is 0 %}
                                                 <button class="btn btn-danger" disabled>Fully Booked</button>
-                                            {% elif profile_tokens > 0 %}
+                                            {% elif profile_tokens > class.token_cost %}
                                                 <form action="{% url 'book_with_tokens' class.id %}" method="POST" class="form">
                                                     {% csrf_token %}
                                                     <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">

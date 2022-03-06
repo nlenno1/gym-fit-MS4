@@ -232,7 +232,7 @@
                                     {{ category.category_name }}
                                 </div>
                                 <div class="col-12 col-md-3">
-                                    <a href="#" type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                    <a href="#" class="confirm-cancel" type="button" data-bs-container="body" data-bs-trigger="hover focus"
                                         data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Remove this Category from the list">
                                         <i class="fa-solid fa-eraser"></i>
                                     </a>
@@ -273,4 +273,10 @@
 {% block postloadjs %}
     {{ block.super }}
     <script type="text/javascript" src="{% static 'profiles/js/countryfield.js' %}"></script>
+    <script>
+        // Confirm Cancellation 
+        $(document).on('click', '.confirm-cancel', function(){
+        return confirm('Are you sure you want to cancel this booking?');
+        })
+    </script>
 {% endblock %}
