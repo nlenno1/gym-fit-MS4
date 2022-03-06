@@ -71,7 +71,15 @@
                                                     <div class="col-12 col-md-3"><p><strong>{{ class.category|title}}</strong></p></div>
                                                     <div class="col-12 col-md-3 d-none d-md-block"><p>{{ class.instructor|title }}</p></div>
                                                     <div class="col-12 col-md-3 d-none d-md-block"><p>{{ class.location|title }}</p></div>
-                                                    <div class="col-12 col-md-3"><p>£{{ class.price }}</p></div>
+                                                    <div class="col-12 col-md-3">
+                                                        <p>
+                                                            {% if profile_tokens > 0 %}
+                                                                {{ class.token_cost }} Token{{ class.token_cost|pluralize  }}
+                                                            {% else %}
+                                                                £{{ class.price }}
+                                                            {% endif %}
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             {% endif %}
                                         </div>
