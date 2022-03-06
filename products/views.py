@@ -12,11 +12,13 @@ def view_class_access_packages(request):
     """ A view to return the class access packages available"""
 
     packages = ClassAccessPackage.objects.all()
-    profile = UserProfile.objects.get(user=request.user)
-    profile.check_package_expired()
-
     tokens = []
     unlimited = []
+    profile = None
+
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        profile.check_package_expired()
 
     for package in packages:
         if package.type == "UU":

@@ -56,6 +56,7 @@ def send_update_email(class_id, form):
             [user.email, ]
         )
 
+
 def view_class_categories(request):
     """ A view to return all the categories"""
 
@@ -87,14 +88,13 @@ def filter_classes_by_category(category_filter, classes):
     category_filter_name = category_filter.friendly_name
     return category_filter_name, filtered_classes
 
+
 def classes_this_week(request):
     """ A view to return all the single exercise classes in the current week"""
 
     classes = SingleExerciseClass.objects.all()
     categories = ClassCategory.objects.all()
-    profile = UserProfile.objects.get(user=request.user)
-    profile.check_package_expired()
-
+    profile_tokens = None
     category_filter = ''
     filter_name = ''
     # generate the current date, list of dates for this week and a list of
@@ -119,10 +119,16 @@ def classes_this_week(request):
         if item.class_date.strftime("%d:%m:%Y - ") + item.start_time.strftime("%H:%M") <= now.strftime("%d:%m:%Y - %H:%M:%S"):
             item.closed = True
 
-    # check if class id is in profile classes
-    for item in selected_classes:
-        if profile.classes.filter(id=item.id).exists():
-            item.unavailable = True
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        profile.check_package_expired()
+
+        # check if class id is in profile classes
+        for item in selected_classes:
+            if profile.classes.filter(id=item.id).exists():
+                item.unavailable = True
+
+        profile_tokens = profile.class_tokens
 
     # Create a list of dates that contain classes with a friendly date
     # formatted to display
@@ -142,7 +148,7 @@ def classes_this_week(request):
         'class_categories': categories,
         'days_with_classes': days_with_classes_sorted,
         'category_filter': filter_name,
-        'profile_tokens': profile.class_tokens,
+        'profile_tokens': profile_tokens,
     }
 
     return render(request, 'classes/classes_this_week.html', context)
@@ -157,8 +163,7 @@ def filter_single_classes(request):
     category_filter = 'None'
     category_filter_name = ''
     date_filter = datetime.today().strftime('%Y-%m-%d')
-    profile = UserProfile.objects.get(user=request.user)
-    profile.check_package_expired()
+    profile_tokens = None
 
     if request.GET:
         # Check for category & date filters and
@@ -186,10 +191,16 @@ def filter_single_classes(request):
                     "%H:%M") <= now.strftime("%d:%m:%Y - %H:%M:%S"):
             item.closed = True
 
-    # check if class id is in profile classes
-    for item in filtered_classes:
-        if profile.classes.filter(id=item.id).exists():
-            item.unavailable = True
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        profile.check_package_expired()
+
+        # check if class id is in profile classes
+        for item in filtered_classes:
+            if profile.classes.filter(id=item.id).exists():
+                item.unavailable = True
+        
+        profile_tokens = profile.class_tokens
 
     context = {
         'classes': filtered_classes,
@@ -197,7 +208,7 @@ def filter_single_classes(request):
         'category_filter': category_filter,
         'category_filter_name': category_filter_name,
         'date_filter': date_filter,
-        'profile_tokens': profile.class_tokens,
+        'profile_tokens': profile_tokens,
     }
 
     return render(request, 'classes/classes_by_day.html', context)
