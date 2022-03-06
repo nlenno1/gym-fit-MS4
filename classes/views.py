@@ -88,7 +88,7 @@ def filter_classes_by_category(category_filter, classes):
     return category_filter_name, filtered_classes
 
 def classes_this_week(request):
-    """ A view to return all the single exercise classes"""
+    """ A view to return all the single exercise classes in the current week"""
 
     classes = SingleExerciseClass.objects.all()
     categories = ClassCategory.objects.all()
@@ -142,13 +142,15 @@ def classes_this_week(request):
         'class_categories': categories,
         'days_with_classes': days_with_classes_sorted,
         'category_filter': filter_name,
+        'profile_tokens': profile.class_tokens,
     }
 
     return render(request, 'classes/classes_this_week.html', context)
 
 
 def filter_single_classes(request):
-    """ A view to return all the single exercise classes"""
+    """ A view to return all the single exercise classes
+    filtered by date and category"""
 
     filtered_classes = SingleExerciseClass.objects.all()
     categories = ClassCategory.objects.all()
@@ -159,7 +161,8 @@ def filter_single_classes(request):
     profile.check_package_expired()
 
     if request.GET:
-        # Check if category or date filters are None and assign previous values if true
+        # Check for category & date filters and
+        # assign previous if none
         if request.GET['category_filter'] != 'None':
             category_filter = request.GET['category_filter']
         else:
@@ -174,11 +177,13 @@ def filter_single_classes(request):
             category_filter_name, filtered_classes = filter_classes_by_category(category_filter, filtered_classes)
 
     # Filter the Classes by date and order by start time
-    filtered_classes = filtered_classes.filter(class_date=date_filter).order_by('start_time')
+    filtered_classes = filtered_classes.filter(
+                       class_date=date_filter).order_by('start_time')
     # Check if classes displayed have happened yet
     now = datetime.now()
     for item in filtered_classes:
-        if item.class_date.strftime("%d:%m:%Y - ") + item.start_time.strftime("%H:%M") <= now.strftime("%d:%m:%Y - %H:%M:%S"):
+        if item.class_date.strftime("%d:%m:%Y - ") + item.start_time.strftime(
+                    "%H:%M") <= now.strftime("%d:%m:%Y - %H:%M:%S"):
             item.closed = True
 
     # check if class id is in profile classes
@@ -192,9 +197,48 @@ def filter_single_classes(request):
         'category_filter': category_filter,
         'category_filter_name': category_filter_name,
         'date_filter': date_filter,
+        'profile_tokens': profile.class_tokens,
     }
 
     return render(request, 'classes/classes_by_day.html', context)
+
+# Token Functions
+
+
+def book_with_tokens(request, class_id):
+    """ book class using user tokens """
+
+    redirect_url = request.POST.get('redirect_url')
+    exercise_class = SingleExerciseClass.objects.get(pk=class_id)
+    profile = UserProfile.objects.get(user=request.user)
+    profile.check_package_expired()
+
+    if profile.classes.filter(id=exercise_class.id):
+        messages.error(request, f"You have already booked onto \
+                            {exercise_class.info()} \
+                            so you can not add it to your bag")
+    elif exercise_class.remaining_spaces > 0 and profile.class_tokens > 0:
+        exercise_class.participants.add(profile.user)
+        exercise_class.remaining_spaces -= 1
+        exercise_class.save()
+        profile.classes.add(exercise_class)
+        profile.class_tokens -= 1
+        profile.save()
+        messages.success(request, f"You have booked onto the \
+            {exercise_class.info()}. You have \
+            {profile.class_tokens} Class Tokens remaining")
+    elif profile.class_tokens == 0:
+        messages.error(request, "Sorry, I can't make this booking as you \
+            don't have any Class Tokens remaining")
+    else:
+        messages.error(request, "Sorry, I can't make this booking as this \
+            class is fully booked")
+    try:    
+        return redirect(redirect_url)
+    except Exception as err:
+        messages.error(request, f"{err}")
+        return redirect('classes_this_week')
+
 
 # Single Exercise Class CRUD Operations
 

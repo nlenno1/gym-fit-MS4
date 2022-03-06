@@ -72,6 +72,15 @@ class SingleExerciseClass(models.Model):
         """ Set remaining spaces variable """
         super().__init__(*args, **kwargs)
         self.remaining_spaces = self.max_capacity
+        # self.name = f"{self.category} on {self.class_date} at \
+        #     {self.start_time}"
     #     if self.duration:
     #         self.duration = datetime.combine(date.today(), self.end_time) - datetime.combine(date.today(),self.start_time)
 
+    def info(self):
+        """ return string of class info """
+        category = self.category.friendly_name
+        class_date = self.class_date.strftime("%d/%m/%Y")
+        start_time = self.start_time.strftime("%H:%M")
+        return f"{category} on {class_date} at \
+            {start_time}"
