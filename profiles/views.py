@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
@@ -37,9 +37,11 @@ def profile(request):
     for item in profile_object.classes.order_by("class_date"):
         if item.class_date < date.today():
             previous_classes.append(item)
+        elif item.class_date == date.today() and item.start_time.strftime('%H:%M:%S') < datetime.now().strftime('%H:%M:%S'):
+            previous_classes.append(item)
         else:
             upcoming_classes.append(item)
-    sorted_previous_classes = sorted(previous_classes, key=lambda x: x.class_date, reverse=True)
+    sorted_previous_classes = sorted(previous_classes, key=lambda x: (x.class_date, x.start_time), reverse=True)
 
     template = "profiles/profile.html"
     context = {
