@@ -34,11 +34,12 @@ def profile(request):
 
     upcoming_classes = []
     previous_classes = []
-    for item in profile_object.classes.order_by("-class_date"):
+    for item in profile_object.classes.order_by("class_date"):
         if item.class_date < date.today():
             previous_classes.append(item)
         else:
             upcoming_classes.append(item)
+    sorted_previous_classes = sorted(previous_classes, key=lambda x: x.class_date, reverse=True)
 
     template = "profiles/profile.html"
     context = {
@@ -48,7 +49,7 @@ def profile(request):
         'on_profile_page': True,
         'profile': profile_object,
         'upcoming_classes': upcoming_classes,
-        'previous_classes': previous_classes,
+        'previous_classes': sorted_previous_classes,
         'fav_class_list': profile_object.fav_class_categories.all(),
     }
 

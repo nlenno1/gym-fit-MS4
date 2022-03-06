@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 
 from django.shortcuts import render, redirect, reverse
 from django.shortcuts import get_object_or_404
@@ -251,6 +251,41 @@ def book_with_tokens(request, class_id):
     except Exception as err:
         messages.error(request, f"{err}")
         return redirect('classes_this_week')
+
+
+@login_required
+def cancel_class_booking(request, class_id):
+    """ Cancel class and refund tokens """
+
+    exercise_class = SingleExerciseClass.objects.get(pk=class_id)
+    profile = UserProfile.objects.get(user=request.user)
+    profile.check_package_expired()
+
+    exercise_class.participants.remove(profile.user)
+    exercise_class.remaining_spaces += 1
+    exercise_class.save()
+
+    profile.classes.remove(exercise_class)
+    profile.save()
+
+    if profile.class_package_type == "TK":
+        if date.today() > exercise_class.class_date - timedelta(days=1):
+            messages.success(request, "You have cancelled this class booking \
+                but have not been issued a refund due to notice given")
+        else:
+            profile.class_tokens += exercise_class.token_cost
+            messages.success(request, "You have cancelled this class booking")
+            if exercise_class.token_cost > 1:
+                messages.info(request, f"You have been refunded {exercise_class.token_cost} \
+                    Class Tokens")
+            else:
+                messages.info(request, "You have been refunded 1 Class Token")
+    else:
+        messages.success(request, f"You have cancelled your class booking for \
+            {exercise_class.info()}")
+
+    profile.save()
+    return redirect(reverse('profile'))
 
 
 # Single Exercise Class CRUD Operations

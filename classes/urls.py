@@ -29,4 +29,6 @@ urlpatterns = [
 
      path('single_class/<class_id>/book',
                views.book_with_tokens, name='book_with_tokens'),
+     path('single_class/<class_id>/cancel',
+               views.cancel_class_booking, name='cancel_class_booking'),
 ]

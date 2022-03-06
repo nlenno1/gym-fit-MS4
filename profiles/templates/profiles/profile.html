@@ -118,7 +118,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-2">
-                                            <a href="#" type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                            <a href="{% url 'cancel_class_booking' class.id %}" type="button" data-bs-container="body" data-bs-trigger="hover focus"
                                                 data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Cancel this class booking">
                                                     <i class="fa-solid fa-calendar-xmark"></i>
                                             </a>
@@ -291,7 +291,6 @@
         })
         $(document).ready(function(){
             $('#personal-details').show();
-            $('#personal-details-button').addClass('active');
         })
         // Confirm Cancellation 
         $(document).on('click', '.confirm-cancel', function(){
