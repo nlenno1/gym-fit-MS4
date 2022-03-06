@@ -15,23 +15,24 @@ from .forms import ClassCategoryForm, SingleExerciseClassForm
 
 
 def send_class_cancellation_email(class_id):
-        """Send the user a class cancellation email"""
-        exercise_class = SingleExerciseClass.objects.get(id=class_id)
-        for person in exercise_class.attendees:
-            user = User.objects.get(id=person.id)
-            subject = render_to_string(
-                'classes/cancellation_emails/confirmation_email_subject.txt',
-                {'class': exercise_class})
-            body = render_to_string(
-                'classes/cancellation_emails/confirmation_email_body.txt',
-                {'user': user, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+    """Send the user a class cancellation email"""
+    exercise_class = SingleExerciseClass.objects.get(id=class_id)
+    for person in exercise_class.participants.all():
+        user = User.objects.get(id=person.id)
+        subject = render_to_string(
+            'classes/cancellation_emails/confirmation_email_subject.txt',
+            {'class': exercise_class})
+        body = render_to_string(
+            'classes/cancellation_emails/confirmation_email_body.txt',
+            {'user': user, 'contact_email': settings.DEFAULT_FROM_EMAIL,
+             'class': exercise_class})
 
-            send_mail(
-                subject,
-                body,
-                settings.DEFAULT_FROM_EMAIL,
-                [user.email]
-            )     
+        send_mail(
+            subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [user.email, ]
+        )
 
 
 def view_class_categories(request):
@@ -206,6 +207,40 @@ def add_single_exercise_class(request):
 
 
 @login_required
+def edit_single_exercise_class(request, class_id):
+    """ A view to allow Admin to edit a single exercise class """
+
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, only Admin allowed")
+        return redirect(reverse('home'))
+
+    exercise_class = get_object_or_404(SingleExerciseClass, id=class_id)
+
+    if request.method == "POST":
+        form = SingleExerciseClassForm(request.POST, request.FILES,
+                                       instance=exercise_class)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully Updated Exercise Class")
+            return redirect(reverse('classes_this_week'))
+        else:
+            messages.error(request, "Failed to update Class Category. \
+                           Please ensure the form is valid")
+    else:
+        form = SingleExerciseClassForm(instance=exercise_class)
+    messages.info(request, f'You are now editing the Class \
+                    of {exercise_class.category} currently on \
+                    {exercise_class.class_date} at {exercise_class.start_time}')
+
+    context = {
+        'form': form,
+        'exercise_class': exercise_class,
+    }
+
+    return render(request, 'classes/edit_single_exercise_class.html', context)
+
+
+@login_required
 def delete_single_exercise_class(request, class_id):
     """ A view to allow Admin to delete a single exercise class """
     if not request.user.is_superuser:
@@ -213,6 +248,8 @@ def delete_single_exercise_class(request, class_id):
         return redirect(reverse('home'))
 
     exercise_class = get_object_or_404(SingleExerciseClass, id=class_id)
+    # refund customers tokens
+    send_class_cancellation_email(class_id)
     exercise_class.delete()
     messages.success(request, "Exercise Class Deleted")
     return redirect(reverse('classes_this_week'))

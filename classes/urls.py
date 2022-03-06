@@ -22,8 +22,8 @@ urlpatterns = [
 
      path('single_class/add',
           views.add_single_exercise_class, name='add_single_exercise_class'),
-     # path('single_class/<class_id>/edit',
-     #      views.edit_single_exercise_class, name='edit_single_exercise_class'),
+     path('single_class/<class_id>/edit',
+          views.edit_single_exercise_class, name='edit_single_exercise_class'),
      path('single_class/<class_id>/delete',
           views.delete_single_exercise_class, name='delete_single_exercise_class'),
 ]

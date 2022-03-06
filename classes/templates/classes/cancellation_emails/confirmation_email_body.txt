@@ -1,14 +1,14 @@
-Hello {{ user.full_name }}!
+Hello {{ user.first_name|title }}!
 
 Unfortunatly we have had to cancel one of your upcoming exercise class bookings.
 
 The details for the cancelled class are below:
 
-Class : {{ class.category }}
-Date : {{ class.date }}
+Class : {{ class.category.friendly_name }}
+Date : {{ class.class_date }}
 Time : {{ class.start_time }}
 Location : {{ class.location }}
-Instructor : {{ class.instructior }}
+Instructor : {{ class.instructor }}
 
 You have been refunded {{ class.token_cost }} class tokens for this class cancellation.
 
