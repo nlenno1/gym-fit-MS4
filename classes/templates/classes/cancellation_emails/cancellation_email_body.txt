@@ -10,9 +10,7 @@ Time : {{ class.start_time }}
 Location : {{ class.location }}
 Instructor : {{ class.instructor }}
 
-You have been refunded {{ class.token_cost }} class tokens for this class cancellation.
-
-We apologise for an inconvenience caused and look forward to seeing you at another of our classes soon!
+{% if refunded %}You have been refunded {{ class.token_cost }} class token/s for this class cancellation. {% endif %}We apologise for an inconvenience caused and look forward to seeing you at another of our classes soon!
 
 If you have any questions, feel free to contact us at {{ contact_email }}.
 

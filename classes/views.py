@@ -14,25 +14,23 @@ from .models import ClassCategory, SingleExerciseClass
 from .forms import ClassCategoryForm, SingleExerciseClassForm
 
 
-def send_class_cancellation_email(class_id):
+def send_class_cancellation_email(exercise_class, user_profile, refunded):
     """Send the user a class cancellation email"""
-    exercise_class = SingleExerciseClass.objects.get(id=class_id)
-    for person in exercise_class.participants.all():
-        user = User.objects.get(id=person.id)
-        subject = render_to_string(
-            'classes/cancellation_emails/confirmation_email_subject.txt',
-            {'class': exercise_class})
-        body = render_to_string(
-            'classes/cancellation_emails/confirmation_email_body.txt',
-            {'user': user, 'contact_email': settings.DEFAULT_FROM_EMAIL,
-             'class': exercise_class})
 
-        send_mail(
-            subject,
-            body,
-            settings.DEFAULT_FROM_EMAIL,
-            [user.email, ]
-        )
+    subject = render_to_string(
+        'classes/cancellation_emails/cancellation_email_subject.txt',
+        {'class': exercise_class})
+    body = render_to_string(
+        'classes/cancellation_emails/cancellation_email_body.txt',
+        {'user': user_profile, 'contact_email': settings.DEFAULT_FROM_EMAIL,
+        'class': exercise_class, 'refunded':refunded})
+
+    send_mail(
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        [user_profile.email, ]
+    )
 
 
 def send_update_email(class_id, form):
@@ -47,7 +45,7 @@ def send_update_email(class_id, form):
         body = render_to_string(
             'classes/update_emails/update_email_body.txt',
             {'user': user, 'contact_email': settings.DEFAULT_FROM_EMAIL,
-             'class': exercise_class, 'form': form})
+            'class': exercise_class, 'form': form})
 
         send_mail(
             subject,
@@ -199,7 +197,7 @@ def filter_single_classes(request):
         for item in filtered_classes:
             if profile.classes.filter(id=item.id).exists():
                 item.unavailable = True
-        
+
         profile_tokens = profile.class_tokens
 
     context = {
@@ -363,9 +361,34 @@ def delete_single_exercise_class(request, class_id):
 
     exercise_class = get_object_or_404(SingleExerciseClass, id=class_id)
     # refund customers tokens
-    send_class_cancellation_email(class_id)
+    refund_total = 0
+    for user_profile in exercise_class.participants.all():
+        refunded = False
+        # if user has a profile
+        if user_profile.is_authenticated:
+            profile = UserProfile.objects.get(user=user_profile)
+            # if the user currently doesn't have a package
+            if not profile.active_class_package:
+                profile.active_class_package = True
+                profile.class_package_type = "TK"
+                profile.class_tokens = exercise_class.token_cost
+                profile.package_name = "Tokens for a Refunded Class"
+                profile.package_expiry = date.today() + timedelta(days=84)
+                profile.save()
+                refund_total += exercise_class.token_cost
+                refunded = True
+            # if the user is on a token package
+            elif profile.class_package_type != "UU":
+                profile.class_tokens += exercise_class.token_cost
+                profile.save()
+                refund_total += exercise_class.token_cost
+                refunded = True
+
+        send_class_cancellation_email(exercise_class, user_profile, refunded)
+
     exercise_class.delete()
     messages.success(request, "Exercise Class Deleted")
+    messages.info(request, f"Refunded a total of {refund_total} Token/s")
     return redirect(reverse('classes_this_week'))
 
 

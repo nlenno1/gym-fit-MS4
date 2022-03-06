@@ -62,8 +62,15 @@
                                                     <div class="col-12 col-md-3"><p><strong>{{ class.category|title}}</strong></p></div>
                                                     <div class="col-12 col-md-3"><p>{{ class.instructor|title }}</p></div>
                                                     <div class="col-12 col-md-3"><p>{{ class.location|title }}</p></div>
-                                                    <div class="col-12 col-md-3 text-danger fw-bold">
-                                                            <p>{{ class.remaining_spaces }} Spaces!</p>
+                                                    <div class="col-12 col-md-3">
+                                                            <p class="text-danger fw-bold">Only {{ class.remaining_spaces }} Spaces Left!</p>
+                                                            <p>
+                                                                {% if profile_tokens > 0 %}
+                                                                    {{ class.token_cost }} Token{{ class.token_cost|pluralize  }}
+                                                                {% else %}
+                                                                    £{{ class.price }}
+                                                                {% endif %}
+                                                            </p>
                                                     </div>
                                                 </div>
                                             {% else %}
