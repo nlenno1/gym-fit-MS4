@@ -1,0 +1,1 @@
+Gym Fit Exercise Class Details Update for {{ class.category.friendly_name }} {% if form.class_date != class.class_date %}originally{% endif %} on {{ class.class_date }}

@@ -1,0 +1,21 @@
+Hello {{ user.first_name|title }}!
+
+Unfortunatly we have had to make some changes to one of your upcoming exercise class bookings.
+
+The updated details for the {{ class.category.friendly_name }} class are below:
+
+Date : {% if form.class_date.value != class.class_date|title %}{{ form.class_date.value }} (Changed){% else %}{{ class.class_date|title }}{% endif %}
+Start Time : {% if form.start_time.value != class.start_time|title %}{{ form.start_time.value }} (Changed){% else %}{{ class.start_time }}{% endif %}
+Location : {% if form.location.value|lower != class.location|lower %}{{ form.location.value|title }} (Changed){% else %}{{ class.location|title }}{% endif %}
+Instructor : {% if form.instructor.value|lower != class.instructor|lower %}{{ form.instructor.value|title }} (Changed){% else %}{{ class.instructor|title }}{% endif %}
+Duration : {% if form.duration.value != class.duration|title  %}{{ form.duration.value }} mins (Changed){% else %}{{ class.duration }} mins{% endif %}
+
+We apologise for an inconvenience caused and look forward to seeing you for your {{ class.category.friendly_name }} class!
+
+If you wish to cancel your booking, due to these changes, then please do so through your profile page on our site
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Kind Regards
+
+Gym Fit

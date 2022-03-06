@@ -74,3 +74,4 @@ class SingleExerciseClass(models.Model):
         self.remaining_spaces = self.max_capacity
     #     if self.duration:
     #         self.duration = datetime.combine(date.today(), self.end_time) - datetime.combine(date.today(),self.start_time)
+

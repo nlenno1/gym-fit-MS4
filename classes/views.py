@@ -35,6 +35,27 @@ def send_class_cancellation_email(class_id):
         )
 
 
+def send_update_email(class_id, form):
+    """Send the user a class update email"""
+    exercise_class = SingleExerciseClass.objects.get(id=class_id)
+    for person in exercise_class.participants.all():
+        user = User.objects.get(id=person.id)
+
+        subject = render_to_string(
+            'classes/update_emails/update_email_subject.txt',
+            {'class': exercise_class})
+        body = render_to_string(
+            'classes/update_emails/update_email_body.txt',
+            {'user': user, 'contact_email': settings.DEFAULT_FROM_EMAIL,
+             'class': exercise_class, 'form': form})
+
+        send_mail(
+            subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [user.email, ]
+        )
+
 def view_class_categories(request):
     """ A view to return all the categories"""
 
@@ -220,6 +241,7 @@ def edit_single_exercise_class(request, class_id):
         form = SingleExerciseClassForm(request.POST, request.FILES,
                                        instance=exercise_class)
         if form.is_valid():
+            send_update_email(class_id, form)
             form.save()
             messages.success(request, "Successfully Updated Exercise Class")
             return redirect(reverse('classes_this_week'))

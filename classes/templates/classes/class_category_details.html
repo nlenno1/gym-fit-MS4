@@ -47,7 +47,7 @@
                         <a class="mb-4 btn btn-dark" href="{% url 'edit_class_category' category.id %}">Update Class Category</a>
                     </div>
                     <div class="col-12 col-md-6 text-center text-md-end">
-                        <a class="mb-4 btn btn-danger" href="{% url 'delete_class_category' category.id %}">Delete Class Category</a>
+                        <a class="mb-4 btn btn-danger confirm-delete" href="{% url 'delete_class_category' category.id %}">Delete Class Category</a>
                     </div>
                 </div>
             {% endif %}
@@ -81,7 +81,7 @@
                                         <td>What a great class</td>
                                         <td>4/5 
                                             {% if review.user_id == user.id %}
-                                                <button type="button" class="float-end" data-bs-container="body" data-bs-trigger="hover focus"
+                                                <button type="button" class="float-end confirm-delete" data-bs-container="body" data-bs-trigger="hover focus"
                                                     data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Delete Your Review">
                                                     <a href="#">
                                                         <i class="fa-solid fa-trash-can"></i>
