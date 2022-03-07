@@ -8,6 +8,10 @@ class ContactMessageForm(forms.ModelForm):
         """ Update Class Meta Data """
         model = ContactMessage
         exclude = ['message_from',]
+        labels = {
+            'message_subject': 'Message Subject',
+            'message_text': 'Message'
+        }
 
     def __init__(self, *args, **kwargs):
         """ Add  classes and set autofocus on first field """
