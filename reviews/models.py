@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator
 
 
-class Review(models.Model):
+class ClassCategoryReview(models.Model):
     """ Class for a Review """
 
     class Meta:
@@ -17,7 +17,8 @@ class Review(models.Model):
     review_subject_id = models.CharField(max_length=254, null=False,
                                          blank=False)
     review_text = models.TextField(null=False, blank=False)
-    review_rating = models.IntegerField(choices = [(i,i) for i in range(1, 6)], validators=[MaxValueValidator(5)],
+    review_rating = models.IntegerField(choices=[(i,i) for i in range(1, 6)], 
+                                        validators=[MaxValueValidator(5)],
                                         null=False, blank=False,)
     created_on = models.DateTimeField(auto_now_add=True, null=False,
                                       blank=False, editable=False)
