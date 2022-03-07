@@ -1,14 +1,14 @@
 from datetime import date
 
 from django import forms
-from .models import ClassCategoryReview
+from .models import Review
 
 
-class ClassCategoryReviewForm(forms.ModelForm):
-    """ Class for Form to create Class Access Packages """
+class ReviewForm(forms.ModelForm):
+    """ Class for Form to create a Review """
     class Meta:
         """ Update Class Meta Data """
-        model = ClassCategoryReview
+        model = Review
         fields = ['review_text',  'review_rating', ]
         labels = {
             'review_rating': 'Review Rating (out of 5)',
