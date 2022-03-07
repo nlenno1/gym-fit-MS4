@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extracss %}
+  <link rel="stylesheet" href="{% static 'css/form-inputs.css' %}">
+{% endblock %}
+
+{% block page_header %}
+    <div class="container container-header">
+        <div class="row">
+            <div class="col-12"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <section id="content" class="container">
+        <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Instructor Management</h1>
+        <div class="text-center text-md-start ps-md-5 mb-5">
+            <a href="{% url 'add_an_instructor' %}" class="btn btn-dark blue-button">Add An Instructor </a>
+        </div>
+        <div class="row g-0">
+            <div class="col-12">
+                {% if instructors|length > 0 %}
+                    {% for instructor in instructors %}
+                        {{ instructor }}
+                    {% endfor %}
+                {% else %}
+                    <h5 class="text-center">You don't have any instructors. Why don't you add some?</h5>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
