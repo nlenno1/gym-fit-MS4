@@ -40,7 +40,7 @@
                     <hr>
                     <ul class="nav nav-pills nav-justified">
                         <li class="nav-item profile-menu-button" id="admin-messages-button">
-                            <button class="nav-link">Admin Messages</button>
+                            <button class="nav-link">Admin Messages ({{ admin_messages|length }})</button>
                         </li>
                         <li class="nav-item">
                             <a href="{% url 'add_class_category' %}" class="nav-link">Add A Class Catergory</a>
@@ -279,21 +279,23 @@
                                 <thead>
                                     <tr>
                                     <th scope="col">Sender</th>
+                                    <th scope="col">Reply Email</th>
                                     <th scope="col">Subject</th>
                                     <th scope="col">Message</th>
                                     <th scope="col">Sent</th>
-                                    <th scope="col">Delete Message</th>
+                                    <th scope="col">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% for message in admin_messages %}
                                         <tr>
                                         <th scope="row">{{ message.message_from }}</th>
+                                        <th>{{ message.message_from.email }}</th>
                                         <th>{{ message.message_subject }}</th>
                                         <th>{{ message.message_text }}</th>
                                         <th>{{ message.message_sent }}</th>
                                         <td>
-                                            <a href="#" class="confirm-delete" type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                            <a href="{% url 'delete_contact_message' message.id %}" class="confirm-delete" type="button" data-bs-container="body" data-bs-trigger="hover focus"
                                             data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Delete this message">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
