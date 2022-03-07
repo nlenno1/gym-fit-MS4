@@ -20,7 +20,7 @@
         <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">PROFILE - <span id="visible-section-name">PERSONAL DETAILS</span></h1>
         <div class="row">
             <!-- My Profile Menu Pills -->
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <!-- Nav Pills Taken from Bootstrap 5 Documentation -->
                 <ul class="nav nav-pills nav-justified">
                     <li class="nav-item">
@@ -35,11 +35,29 @@
                     <li class="nav-item">
                         <button class="nav-link profile-menu-button" id="favourite-class-list-button">Favourite Class List</button>
                     </li>
-                    {% if request.user.is_superuser %}
-                        <li class="nav-item profile-menu-button" id="admin-functions-button">
-                            <button class="nav-link">Admin</button>
+                </ul>
+                {% if request.user.is_superuser %}
+                    <hr>
+                    <ul class="nav nav-pills nav-justified">
+                        <li class="nav-item profile-menu-button" id="admin-messages-button">
+                            <button class="nav-link">Admin Messages</button>
                         </li>
-                    {% endif %}
+                        <li class="nav-item">
+                            <a href="{% url 'add_class_category' %}" class="nav-link">Add A Class Catergory</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'add_single_exercise_class' %}" class="nav-link">Schedule A Class</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'add_class_access_package' %}" class="nav-link">Create a Class Access Package</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Instructor Management</a>
+                        </li>
+                    </ul>
+                {% endif %}
+                <hr>
+                <ul class="nav nav-pills nav-justified">
                     <li class="nav-item">
                         <a href="{% url 'account_logout' %}" class="nav-link">Sign Out</a>
                     </li>
@@ -79,9 +97,9 @@
                     </div>
                 {% endif %}
             </div>
-            <div class="col-12 col-md-9">
+            <div class="col-12 col-md-6 col-lg-8 col-xl-9">
                 <section id="personal-details" class="profile-section">
-                    <form class="mx-5 mb-5" action="{% url 'profile' %}" method="POST" id="profile-update-form">
+                    <form class="mb-5" action="{% url 'profile' %}" method="POST" id="profile-update-form">
                         {% csrf_token %}
                         {{ user_form|crispy }}
                         <hr class="my-4">
@@ -255,21 +273,40 @@
                     {% endif %}
                 </section>
                 {% if user.is_superuser %}
-                    <section id="admin-functions" class="profile-section mx-md-5 mb-5 mb-5">
-                        <ul class="nav nav-pills nav-justified">
-                            <li class="nav-item">
-                                <a href="{% url 'add_class_category' %}" class="nav-link">Add A Class Catergory</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{% url 'add_single_exercise_class' %}" class="nav-link">Schedule A Class</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{% url 'add_class_access_package' %}" class="nav-link">Create a Class Access Package</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">Instructor Management</a>
-                            </li>
-                        </ul>
+                    <section id="admin-messages" class="profile-section mx-md-5 mb-5 mb-5">
+                        {% if admin_messages|length > 0 %}
+                            <table class="table table-hover text-center">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">Sender</th>
+                                    <th scope="col">Subject</th>
+                                    <th scope="col">Message</th>
+                                    <th scope="col">Sent</th>
+                                    <th scope="col">Delete Message</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for message in admin_messages %}
+                                        <tr>
+                                        <th scope="row">{{ message.message_from }}</th>
+                                        <th>{{ message.message_subject }}</th>
+                                        <th>{{ message.message_text }}</th>
+                                        <th>{{ message.message_sent }}</th>
+                                        <td>
+                                            <a href="#" class="confirm-delete" type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                            data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Delete this message">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <div class="text-center text-md-start">
+                                <h5 class="display-3">You have no Messages</h5>
+                            </div>
+                        {% endif %}
                     </section>
                 {% endif %}
             </div>

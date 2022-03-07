@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 from checkout.models import Order
 from .models import UserProfile
+from contact.models import ContactMessage
 
 from .forms import UserProfileForm, UserForm
 
@@ -43,6 +44,12 @@ def profile(request):
             upcoming_classes.append(item)
     sorted_previous_classes = sorted(previous_classes, key=lambda x: (x.class_date, x.start_time), reverse=True)
 
+    admin_messages = None
+    if request.user.is_superuser:
+        admin_messages = ContactMessage.objects.all()
+        for item in admin_messages:
+            item.message_sent = item.message_sent.strftime("%d/%m/%Y %H:%M")
+
     template = "profiles/profile.html"
     context = {
         'form': form,
@@ -53,6 +60,7 @@ def profile(request):
         'upcoming_classes': upcoming_classes,
         'previous_classes': sorted_previous_classes,
         'fav_class_list': profile_object.fav_class_categories.all(),
+        'admin_messages': admin_messages,
     }
 
     return render(request, template, context)
