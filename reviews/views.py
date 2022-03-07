@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 
 from classes.models import ClassCategory
+from reviews.models import ClassCategoryReview
 from .forms import ClassCategoryReviewForm
 
 
@@ -27,3 +28,19 @@ def create_a_category_review(request, category_id):
     }
 
     return render(request, 'reviews/write_a_category_review.html', context)
+
+
+def delete_category_review(request, review_id):
+    """ View to allow users to delete a review """
+
+    review = ClassCategoryReview.objects.get(id=review_id)
+    category = review.review_subject
+
+    if review:
+        review.delete()
+        messages.success(request, "Review deleted")
+    else:
+        messages.error(request, "Unable to find review to delete")
+
+    return redirect(reverse('view_single_class_category', kwargs={'category_id':category.id}))
+
