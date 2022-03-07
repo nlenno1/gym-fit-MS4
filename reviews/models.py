@@ -16,7 +16,8 @@ class ClassCategoryReview(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
-    review_subject = models.ForeignKey(ClassCategory, on_delete=models.CASCADE, null=False)
+    review_subject = models.ForeignKey(ClassCategory, on_delete=models.CASCADE,
+                                       null=False)
     review_text = models.TextField(null=False, blank=False)
     review_rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)],
                                         validators=[MaxValueValidator(5)],

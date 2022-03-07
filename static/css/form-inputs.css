@@ -1,6 +1,8 @@
 /* Forms */
 
-.stripe-style-input, .input-group {
+.stripe-style-input,
+.input-group,
+.form-check input {
     box-sizing: border-box;
     border: 1px solid #2AAFD3;
     border-radius: 0.25rem;
@@ -10,18 +12,20 @@
     transition: box-shadow 150ms ease;
 }
 
-.stripe-style-input:not([type="file"]) {
+.stripe-style-input:not([type="file"], [type="checkbox"]) {
     padding: 10px 12px;
 }
 
 .stripe-style-input:focus,
-.stripe-style-input:active {
+.stripe-style-input:active,
+.form-check input:focus, 
+.form-check input:active {
   box-shadow: 0 1px 3px 0 #cfd7df;
   border: 1px solid #2AAFD3;
 }
 
-.stripe-style-input:focus:not([type="file"]),
-.stripe-style-input:active:not([type="file"]) {
+.stripe-style-input:focus:not([type="file"], [type="checkbox"]),
+.stripe-style-input:active:not([type="file"], [type="checkbox"]) {
     border: 2px solid #2AAFD3;
     padding: 9px 11px;
 }
