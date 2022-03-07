@@ -87,11 +87,11 @@
                             <tbody>
                                 {% for review in reviews %}   
                                     <tr>
-                                        <td scope="row" class="d-none d-md-table-cell">03/11/2021</th>
-                                        <td class="d-none d-md-table-cell">Bob</td>
-                                        <td>What a great class</td>
-                                        <td>4/5 
-                                            {% if review.user_id == user.id %}
+                                        <td scope="row" class="d-none d-md-table-cell">{{ review.created_on }}</th>
+                                        <td class="d-none d-md-table-cell">{{ review.author }}</td>
+                                        <td>{{ review.review_text }}</td>
+                                        <td>{{ review.review_rating }}
+                                            {% if review.author.id == request.user.id %}
                                                 <button type="button" class="float-end confirm-delete" data-bs-container="body" data-bs-trigger="hover focus"
                                                     data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Delete Your Review">
                                                     <a href="#">

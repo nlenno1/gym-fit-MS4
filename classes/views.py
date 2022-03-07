@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from profiles.models import UserProfile
 from .models import ClassCategory, SingleExerciseClass
 from .forms import ClassCategoryForm, SingleExerciseClassForm
+from reviews.models import ClassCategoryReview
 
 
 def send_class_cancellation_email(exercise_class, user_profile, refunded):
@@ -81,7 +82,11 @@ def view_single_class_category(request, category_id):
     """ A view to return details about an individual class category"""
 
     category = get_object_or_404(ClassCategory, pk=category_id)
+    reviews = ClassCategoryReview.objects.filter(review_subject=category).order_by('-created_on')
     fav_category = False
+
+    for review in reviews:
+        review.created_on = review.created_on.strftime("%d %B %Y at %H:%M")
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
@@ -91,6 +96,7 @@ def view_single_class_category(request, category_id):
     context = {
         'category': category,
         'fav_category': fav_category,
+        'reviews': reviews,
     }
 
     return render(request, 'classes/class_category_details.html', context)
