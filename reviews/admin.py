@@ -7,8 +7,8 @@ class ClassCategoryReviewAdmin(admin.ModelAdmin):
 
     list_display = (
             'created_on',
-            'user_id',
-            'review_subject_id',
+            'author',
+            'review_subject',
             'review_rating',
         )
 
@@ -16,4 +16,3 @@ class ClassCategoryReviewAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ClassCategoryReview, ClassCategoryReviewAdmin)
-
