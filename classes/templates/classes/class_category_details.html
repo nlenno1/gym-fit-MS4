@@ -67,9 +67,11 @@
                     <h4>Class Reviews</h4>
                 </div>
                 {% if reviews|length > 0 %}
-                <div class="col-t12-col-md-6">
-                    <a href="{% url 'create_a_category_review' category.id %}" class="float-end btn btn-dark blue-button">Write A Review</a>
-                </div>
+                    {% if not previous_review %}
+                        <div class="col-t12-col-md-6">
+                            <a href="{% url 'create_a_category_review' category.id %}" class="float-end btn btn-dark blue-button">Write A Review</a>
+                        </div>
+                    {% endif %}
                     <div class="col-12">
                         <table class="table table-striped mt-4 mb-5">
                             <thead>
@@ -85,8 +87,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                                {% for review in reviews %}   
-                                    <tr>
+                                {% for review in reviews %}  
+                                    <tr >
                                         <td scope="row" class="d-none d-md-table-cell">{{ review.created_on }}</th>
                                         <td class="d-none d-md-table-cell">{{ review.author }}</td>
                                         <td>{{ review.review_text }}</td>
@@ -109,8 +111,10 @@
                 {% else %}
                     <div class="col-12 mb-5 text-center text-md-start">
                         <h5>There are no reviews to show</h5>
-                        <p>Why don't you be the first to leave a review?</p>
-                        <a href="{% url 'create_a_category_review' category.id %}" class="btn btn-dark blue-button">Write A Review</a>
+                        {% if not previous_review %}
+                            <p>Why don't you be the first to leave a review?</p>
+                            <a href="{% url 'create_a_category_review' category.id %}" class="btn btn-dark blue-button">Write A Review</a>
+                        {% endif %}
                     </div>
                 {% endif %}
             </div>

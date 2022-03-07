@@ -85,6 +85,10 @@ def view_single_class_category(request, category_id):
     reviews = ClassCategoryReview.objects.filter(review_subject=category).order_by('-created_on')
     fav_category = False
 
+    previous_review = None
+    previous_review = ClassCategoryReview.objects.filter(
+                      author=request.user, review_subject=category).exists()
+
     for review in reviews:
         review.created_on = review.created_on.strftime("%d %B %Y at %H:%M")
 
@@ -97,6 +101,7 @@ def view_single_class_category(request, category_id):
         'category': category,
         'fav_category': fav_category,
         'reviews': reviews,
+        'previous_review': previous_review,
     }
 
     return render(request, 'classes/class_category_details.html', context)
