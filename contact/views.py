@@ -2,25 +2,38 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .forms import ContactMessageForm
+from .forms import ContactMessageForm, GuestContactMessageForm
 from .models import ContactMessage
 
 
 def send_contact_message(request):
     """ View to allow users to send a message to admin """
 
-    form = ContactMessageForm()
+    if request.user.is_authenticated:
+        form = ContactMessageForm()
+    else:
+        form = GuestContactMessageForm()
 
     if request.method == "POST":
-        form = ContactMessageForm(request.POST)
-        if form.is_valid():
-            new_message = form.save(commit=False)
-            new_message.message_from = request.user
-            new_message.save()
-            messages.success(request, "Message sent to Admin")
+        if request.user.is_authenticated:
+            form = ContactMessageForm(request.POST)
+            if form.is_valid():
+                new_message = form.save(commit=False)
+                new_message.message_from = request.user.first_name + " " + request.user.last_name
+                new_message.reply_email = request.user.email
+                new_message.save()
+                messages.success(request, "Message sent to Admin")
+            else:
+                messages.error(request, "Unable to send message. Please check \
+                    that the form is valid")
         else:
-            messages.error(request, "Unable to send message. Please check \
-                that the form is valid")
+            form = GuestContactMessageForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Message sent to Admin")
+            else:
+                messages.error(request, "Unable to send message. Please check \
+                    that the form is valid")
 
         return redirect(reverse('send_contact_message'))
 

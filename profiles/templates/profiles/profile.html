@@ -290,7 +290,7 @@
                                     {% for message in admin_messages %}
                                         <tr>
                                         <th scope="row">{{ message.message_from }}</th>
-                                        <th>{{ message.message_from.email }}</th>
+                                        <th>{{ message.reply_email }}</th>
                                         <th>{{ message.message_subject }}</th>
                                         <th>{{ message.message_text }}</th>
                                         <th>{{ message.message_sent }}</th>
