@@ -59,3 +59,21 @@ def add_an_instructor(request):
 
     return render(request, 'instructors/add_an_instructor.html', context)
 
+
+@login_required
+def delete_instructor(request, instructor_id):
+    """ View to allow Admin to delete an Instructor """
+
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, only Admin allowed")
+        return redirect(reverse('home'))
+
+    instructor = Instructor.objects.get(id=instructor_id)
+
+    if instructor:
+        instructor.delete()
+        messages.success(request, "Instructor deleted")
+    else:
+        messages.error(request, "Unable to find Instructor to Delete")
+
+    return redirect(reverse('instructor_management'))

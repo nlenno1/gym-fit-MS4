@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block extracss %}
-    <link rel="stylesheet" href="{% static 'instructors/css/instructors.css' %}">
+    <link rel="stylesheet" href="{% static 'instructors/css/instructor.css' %}">
 {% endblock %}
 
 {% block page_header %}
@@ -44,7 +44,7 @@
                                             <a href="#" class="btn btn-dark float-start">Edit Instructor</a>
                                         </div>
                                         <div class="col-2">
-                                            <a href="#" type="button" class="mt-2 float-center confirm-delete" 
+                                            <a href="{% url 'delete_instructor' instructor.id %}" type="button" class="mt-2 float-center confirm-delete" 
                                             data-bs-container="body" data-bs-trigger="hover focus" data-bs-toggle="popover" data-bs-placement="bottom" 
                                             data-bs-content="Delete Instructor Profile">
                                                 <i class="fa-solid fa-trash-can"></i>
