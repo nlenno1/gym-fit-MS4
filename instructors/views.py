@@ -70,19 +70,18 @@ def edit_instructor(request, instructor_id):
 
     instructor = get_object_or_404(Instructor, id=instructor_id)
 
-    # if request.method == "POST":
-    #     form = ClassAccessPackageForm(request.POST, request.FILES,
-    #                                   instance=package)
-    #     if form.is_valid():
-    #         form.save()
-    #         messages.success(request, "Successfully Updated Class Access \
-    #                          Package")
-    #         return redirect(reverse('view_class_access_packages'))
-    #     else:
-    #         messages.error(request, "Failed to update Class Access \
-    #                        Package. Please ensure the form is valid")
-    # else:
-    form = InstructorForm(instance=instructor)
+    if request.method == "POST":
+        form = InstructorForm(request.POST, request.FILES, instance=instructor)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully Updated Instructor \
+                             Profile")
+            return redirect(reverse('instructor_management'))
+        else:
+            messages.error(request, "Failed to update Instrictor \
+                           Profile. Please ensure the form is valid")
+    else:
+        form = InstructorForm(instance=instructor)
     messages.info(request, f'You are now editing the Instructor Profile \
                     for "{instructor.friendly_name}"')
 
