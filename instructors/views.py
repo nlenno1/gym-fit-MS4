@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -58,6 +58,40 @@ def add_an_instructor(request):
     }
 
     return render(request, 'instructors/add_an_instructor.html', context)
+
+
+@login_required
+def edit_instructor(request, instructor_id):
+    """ A view to allow Admin to edit an Instructor """
+
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, only Admin allowed")
+        return redirect(reverse('home'))
+
+    instructor = get_object_or_404(Instructor, id=instructor_id)
+
+    # if request.method == "POST":
+    #     form = ClassAccessPackageForm(request.POST, request.FILES,
+    #                                   instance=package)
+    #     if form.is_valid():
+    #         form.save()
+    #         messages.success(request, "Successfully Updated Class Access \
+    #                          Package")
+    #         return redirect(reverse('view_class_access_packages'))
+    #     else:
+    #         messages.error(request, "Failed to update Class Access \
+    #                        Package. Please ensure the form is valid")
+    # else:
+    form = InstructorForm(instance=instructor)
+    messages.info(request, f'You are now editing the Instructor Profile \
+                    for "{instructor.friendly_name}"')
+
+    context = {
+        'form': form,
+        'instructor': instructor,
+    }
+
+    return render(request, 'instructors/edit_an_instructor.html', context)
 
 
 @login_required
