@@ -418,3 +418,27 @@ footer img {
 .allauth-form-inner-content input::placeholder {
     color: #aab7c4;
 }
+
+
+.instructor-card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 5rem;
+}
+
+.card {
+    margin: 5px;
+    width: 400px;
+}
+
+.card img {
+    margin: 0 auto;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}

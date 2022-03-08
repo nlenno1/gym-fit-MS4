@@ -17,6 +17,11 @@ def instructor_management(request):
 
     instructors = Instructor.objects.all()
 
+    for instructor in instructors:
+        print(instructor.can_lead_classes)
+        instructor.can_lead_classes_list = instructor.can_lead_classes.all()
+        print(instructor.can_lead_classes_list)
+
     context = {
         'instructors': instructors,
     }
@@ -37,7 +42,7 @@ def add_an_instructor(request):
     if request.method == "POST":
         form = InstructorForm(request.POST)
         if form.is_valid():
-            instructor = form.save(commit=False)
+            instructor = form.save()
             instructor.name = instructor.friendly_name.lower().replace(" ", "-")
             instructor.friendly_name = instructor.friendly_name.title()
             instructor.save()

@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block extracss %}
-  <link rel="stylesheet" href="{% static 'css/form-inputs.css' %}">
+    <link rel="stylesheet" href="{% static 'instructors/css/instructors.css' %}">
 {% endblock %}
 
 {% block page_header %}
@@ -22,13 +22,42 @@
         </div>
         <div class="row g-0">
             <div class="col-12">
-                {% if instructors|length > 0 %}
-                    {% for instructor in instructors %}
-                        {{ instructor }}
-                    {% endfor %}
-                {% else %}
-                    <h5 class="text-center">You don't have any instructors. Why don't you add some?</h5>
-                {% endif %}
+                <div class="instructor-card-container">
+                    {% if instructors|length > 0 %}
+                        {% for instructor in instructors %}
+                            <!-- Card Template from Bootstrap 5 Documentation https://getbootstrap.com/docs/5.0/components/card/ -->
+                            <div class="card">
+                                <img src="..." class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Name: {{ instructor.friendly_name|title }}</h5>
+                                    <p class="card-text">
+                                        Can Lead:
+                                        <ul class="list-group">
+                                            {% for category in instructor.can_lead_classes_list %}
+                                                <li class="list-group-item">{{ category.friendly_name }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </p>
+                                    <p class="card-text">Displayed on Website: {{ instructor.display_on_site }}</p>
+                                    <div class="row g-0 text-center">
+                                        <div class="col-10">
+                                            <a href="#" class="btn btn-dark float-start">Edit Instructor</a>
+                                        </div>
+                                        <div class="col-2">
+                                            <a href="#" type="button" class="mt-2 float-center confirm-delete" 
+                                            data-bs-container="body" data-bs-trigger="hover focus" data-bs-toggle="popover" data-bs-placement="bottom" 
+                                            data-bs-content="Delete Instructor Profile">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <h5 class="text-center">You don't have any instructors. Why don't you add some?</h5>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </section>
