@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-iet-tlnb_v$*odqig#(efngqe7b&sb4yfb8%nt)$j^$hx&jve(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gym-fit-ms4.herokuapp.com', 'localhost']
 
 CSRF_TRUSTED_ORIGINS = ['https://8000-nlenno1-gymfitms4-pycva174525.ws-eu32.gitpod.io',
                         'https://8000-nlenno1-gymfitms4-pycva174525.ws-eu33.gitpod.io',
@@ -132,12 +132,18 @@ WSGI_APPLICATION = 'gym_fit.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
