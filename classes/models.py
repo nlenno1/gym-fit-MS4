@@ -7,6 +7,9 @@ from instructors.models import Instructor
 from reviews.models import ClassCategoryReview
 
 
+ABILITY_CHOICES=[('BEG', 'Beginner'),('INT', 'Intermediate'),
+                 ('ADV', 'Advanced')]
+
 class ClassCategory(models.Model):
     """ Class for the Categories of Exercise Classes Available """
 
@@ -55,7 +58,7 @@ class SingleExerciseClass(models.Model):
                                  on_delete=models.CASCADE)
     class_date = models.DateField(auto_now=False, auto_now_add=False)
     start_time = models.TimeField(auto_now=False, auto_now_add=False)
-    end_time = models.TimeField(auto_now=False, auto_now_add=False)
+    end_time = models.TimeField(auto_now=False, auto_now_add=False)  # generated in view
     duration = models.PositiveSmallIntegerField(
                validators=[MaxValueValidator(120)], null=True, blank=True)
     location = models.CharField(max_length=100)
@@ -65,19 +68,14 @@ class SingleExerciseClass(models.Model):
                 validators=[MaxValueValidator(30)])
     max_capacity = models.PositiveSmallIntegerField(
                 validators=[MaxValueValidator(150)])
-    ability_level = models.CharField(
-                    max_length=30, choices=[
-                        ('BEG', 'Beginner'),
-                        ('INT', 'Intermediate'),
-                        ('ADV', 'Advanced')],
-                        null=True, blank=True)
-    additional_notes = models.TextField(null=True, blank=True)
-
-    # To be filled
-    participants = models.ManyToManyField(User, blank=True)
-    remaining_spaces = models.PositiveSmallIntegerField(
+    remaining_spaces = models.PositiveSmallIntegerField(  # generated in view
                        validators=[MaxValueValidator(150)],
                        null=True, blank=True)
+    participants = models.ManyToManyField(User, blank=True)  # generated in view
+    ability_level = models.CharField(
+                    max_length=30, choices=ABILITY_CHOICES,
+                        null=True, blank=True)
+    additional_notes = models.TextField(null=True, blank=True)
 
     def __str__(self):
         """ Return name string"""

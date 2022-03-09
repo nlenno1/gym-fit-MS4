@@ -6,6 +6,9 @@ import classes.models
 class Instructor(models.Model):
     """ Class for a Review """
 
+    class Meta:
+        ordering = ['friendly_name']
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=254, null=False, blank=False)
     friendly_name = models.CharField(max_length=254, null=False, blank=False)

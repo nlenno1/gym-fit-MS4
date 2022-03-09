@@ -5,7 +5,7 @@ from instructors.models import Instructor
 def index(request):
     """ View to render home page """
 
-    instructors = Instructor.objects.all().order_by('friendly_name')
+    instructors = Instructor.objects.all()
 
     context = {
         'instructors': instructors
