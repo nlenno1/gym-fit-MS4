@@ -344,8 +344,6 @@ def add_single_exercise_class(request):
         form = SingleExerciseClassForm(request.POST)
         if form.is_valid():
             exercise_class = form.save(commit=False)
-            print(exercise_class.end_time)
-            print(timedelta(minutes=exercise_class.duration))
             exercise_class.end_time = (datetime.combine(date.today(), exercise_class.start_time) + timedelta(minutes=exercise_class.duration)).time()
             exercise_class.remaining_spaces = exercise_class.max_capacity
             exercise_class.save()
@@ -380,7 +378,9 @@ def edit_single_exercise_class(request, class_id):
                                        instance=exercise_class)
         if form.is_valid():
             send_update_email(class_id, form)
-            form.save()
+            exercise_class = form.save(commit=False)
+            exercise_class.end_time = (datetime.combine(date.today(), exercise_class.start_time) + timedelta(minutes=exercise_class.duration)).time()
+            exercise_class.save()
             messages.success(request, "Successfully Updated Exercise Class")
             return redirect(reverse('classes_this_week'))
         else:
