@@ -80,8 +80,12 @@
         </div>
         {% endfor %}
     {% endif %}
-    {% if user.is_super_user %}
-        <a href="{% url 'add_class_access_package' %}" class="btn btn-dark blue-button text-center text-md-end">Add a Tokens Package</a>
+    {% if user.is_superuser %}
+        <div class="row">
+            <div class="col-12 text-center text-md-start">
+                <a href="{% url 'add_class_access_package' %}" class="btn btn-dark blue-button mt-4">Add a Tokens Package</a>
+            </div>
+        </div>
     {% endif %}
 
     <hr class="package-type-divider">
@@ -145,8 +149,12 @@
         </div>
         {% endfor %}
     {% endif %}
-    {% if user.is_super_user %}
-        <a href="{% url 'add_class_access_package' %}" class="btn btn-dark blue-button text-center text-md-end">Add a Unimited Package</a>
+    {% if user.is_superuser %}
+        <div class="row">
+            <div class="col-12 text-center text-md-start">
+                <a href="{% url 'add_class_access_package' %}" class="btn btn-dark blue-button mt-4">Add an Unlimited Package</a>
+            </div>
+        </div>
     {% endif %}
 </section>
 {% endblock %}
