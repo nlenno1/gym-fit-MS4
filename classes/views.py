@@ -193,7 +193,7 @@ def classes_this_week(request):
     return render(request, 'classes/classes_this_week.html', context)
 
 
-def filter_single_classes(request):
+def filter_single_classes(request):  
     """ A view to return all the single exercise classes
     filtered by date and category"""
 
@@ -207,7 +207,9 @@ def filter_single_classes(request):
     if request.GET:
         # Check for category & date filters and
         # assign previous if none
-        if request.GET['category_filter'] == 'None':
+        if request.GET['category_filter'] == "None" and request.GET['previous_category_filter'] == "None":
+            category_filter = 'all'
+        elif request.GET['category_filter'] == "None" and request.GET['previous_category_filter'] != "None":
             category_filter = request.GET['previous_category_filter']
         else:
             category_filter = request.GET['category_filter']
