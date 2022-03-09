@@ -28,8 +28,9 @@ class SingleExerciseClassForm(forms.ModelForm):
                    'start_time': TimePickerInput(),
                    'end_time': TimePickerInput(), }
         model = SingleExerciseClass
-        exclude = ['remaining_spaces', 'participants', ]
+        exclude = ['name', 'remaining_spaces', 'participants', ]
         labels = {
+            'friendly_name': 'Name',
             'duration': 'Duration (mins)*',
         }
 

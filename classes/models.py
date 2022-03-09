@@ -15,6 +15,7 @@ class ClassCategory(models.Model):
         """ Update Meta data for model """
         verbose_name_plural = "Class Categories"
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
@@ -39,6 +40,7 @@ class SingleExerciseClass(models.Model):
         """ Update Meta data for model """
         verbose_name_plural = "Single Exercise Classes"
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     category = models.ForeignKey(ClassCategory, null=True, blank=True,
                                  on_delete=models.CASCADE)
     class_date = models.DateField(auto_now=False, auto_now_add=False)

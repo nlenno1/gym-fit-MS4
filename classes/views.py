@@ -449,7 +449,10 @@ def add_class_category(request):
     if request.method == "POST":
         form = ClassCategoryForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            category = form.save()
+            category.name = instructor.friendly_name.lower().replace(" ", "-")
+            category.friendly_name = instructor.friendly_name.title()
+            category.save()
             messages.success(request, "Successfully Created A \
                              Class Category")
             return redirect(reverse('view_class_categories'))
