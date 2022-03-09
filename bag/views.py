@@ -86,7 +86,7 @@ def remove_from_bag(request, product_type, item_id):
         elif product_type == 'single_class':
             exercise_class = get_object_or_404(SingleExerciseClass, pk=item_id)
             bag['single_classes'].remove(item_id)
-            messages.success(request, f'Removed {exercise_class.category} at {exercise_class.start_time} on {exercise_class.date} from your bag')
+            messages.success(request, f'Removed {exercise_class.category} at {exercise_class.start_time} on {exercise_class.class_date} from your bag')
 
         request.session['bag'] = bag
     except Exception as err:
