@@ -343,7 +343,12 @@ def add_single_exercise_class(request):
     if request.method == "POST":
         form = SingleExerciseClassForm(request.POST)
         if form.is_valid():
-            form.save()
+            exercise_class = form.save(commit=False)
+            print(exercise_class.end_time)
+            print(timedelta(minutes=exercise_class.duration))
+            exercise_class.end_time = (datetime.combine(date.today(), exercise_class.start_time) + timedelta(minutes=exercise_class.duration)).time()
+            exercise_class.remaining_spaces = exercise_class.max_capacity
+            exercise_class.save()
             messages.success(request, "Successfully Created An \
                              Exercise Class")
             return redirect(reverse('filter_single_classes'))

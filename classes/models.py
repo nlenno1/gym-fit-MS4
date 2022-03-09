@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 from django.core.validators import MaxValueValidator
 
-# from instructors.models import Instructor
+from instructors.models import Instructor
 
 
 class ClassCategory(models.Model):
@@ -23,7 +23,7 @@ class ClassCategory(models.Model):
 
     def __str__(self):
         """ Return name string"""
-        return self.name
+        return self.friendly_name
 
     def get_friendly_name(self):
         """ Return friendly_name string"""
@@ -43,10 +43,9 @@ class SingleExerciseClass(models.Model):
     start_time = models.TimeField(auto_now=False, auto_now_add=False)
     end_time = models.TimeField(auto_now=False, auto_now_add=False)
     duration = models.PositiveSmallIntegerField(
-               validators=[MaxValueValidator(120)], null=True, blank=True)  # Calculated in function below
+               validators=[MaxValueValidator(120)], null=True, blank=True)
     location = models.CharField(max_length=100)
-    instructor = models.CharField(max_length=100)  # Will become ForeignKey
-    # instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
+    instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     token_cost = models.PositiveSmallIntegerField(
                 validators=[MaxValueValidator(30)])
@@ -65,6 +64,10 @@ class SingleExerciseClass(models.Model):
     remaining_spaces = models.PositiveSmallIntegerField(
                        validators=[MaxValueValidator(150)],
                        null=True, blank=True)
+
+    def __str__(self):
+        """ Return name string"""
+        return self.info()
 
     def info(self):
         """ return string of class info """

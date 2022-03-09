@@ -35,15 +35,16 @@ def profile(request):
 
     upcoming_classes = []
     previous_classes = []
-    for item in profile_object.classes.order_by("class_date"):
-        if item.class_date < date.today():
-            previous_classes.append(item)
-        elif item.class_date == date.today() and item.start_time.strftime('%H:%M:%S') < datetime.now().strftime('%H:%M:%S'):
-            previous_classes.append(item)
-        else:
-            upcoming_classes.append(item)
-    sorted_previous_classes = sorted(previous_classes, key=lambda x: (x.class_date, x.start_time), reverse=True)
-
+    if profile_object.classes.all().exists():
+        for item in profile_object.classes.order_by("class_date"):
+            if item.class_date < date.today():
+                previous_classes.append(item)
+            elif item.class_date == date.today() and item.start_time.strftime('%H:%M:%S') < datetime.now().strftime('%H:%M:%S'):
+                previous_classes.append(item)
+            else:
+                upcoming_classes.append(item)
+        previous_classes = sorted(previous_classes, key=lambda x: (x.class_date, x.start_time), reverse=True)
+    
     admin_messages = None
     if request.user.is_superuser:
         admin_messages = ContactMessage.objects.all()
@@ -58,7 +59,7 @@ def profile(request):
         'on_profile_page': True,
         'profile': profile_object,
         'upcoming_classes': upcoming_classes,
-        'previous_classes': sorted_previous_classes,
+        'previous_classes': previous_classes,
         'fav_class_list': profile_object.fav_class_categories.all(),
         'admin_messages': admin_messages,
     }
