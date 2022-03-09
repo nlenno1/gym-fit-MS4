@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator
 
 from instructors.models import Instructor
+from reviews.models import ClassCategoryReview
 
 
 class ClassCategory(models.Model):
@@ -28,6 +29,19 @@ class ClassCategory(models.Model):
     def get_friendly_name(self):
         """ Return friendly_name string"""
         return self.friendly_name
+
+    def generate_average_rating(self):
+        """ Function to return number of reviews and average rating """
+        reviews = ClassCategoryReview.objects.filter(review_subject=self)
+        numb_of_reviews = 0
+        rating_total = 0
+        review_average_rating = 0
+        for review in reviews:
+            numb_of_reviews += 1
+            rating_total += review.review_rating
+        if numb_of_reviews != 0:
+            review_average_rating = rating_total/numb_of_reviews
+        return review_average_rating, numb_of_reviews
 
 
 class SingleExerciseClass(models.Model):

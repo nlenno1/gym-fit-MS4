@@ -17,7 +17,7 @@
 {% block content %}
     <section id="content" class="container">
         <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">
-            {{ category.friendly_name|title }} 
+            {{ category.friendly_name }} 
             <!-- Information/Description Popover -->
             {% if fav_category %}
                 <form action="{% url 'remove_category_from_favs' category.id %}" method="POST" class="form">
@@ -50,7 +50,7 @@
             <div class="col-12 col-lg-8 text-center text-md-start">
                 <p>{{ category.description }}</p>
                 <p>Equipment Required: {{ category.equipment_required }}</p>
-                <p>3.56 stars average rating from 40 reviews</p>
+                <p>{{ category.average_rating }} Star Average Rating from {{ category.numb_of_reviews }} Review{{ category.numb_of_reviews|pluralize }}</p>
             </div>
             {% if user.is_superuser %}
                 <div class="row g-0 pt-4 px-md-5">

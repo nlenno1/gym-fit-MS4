@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator
 
-from classes.models import ClassCategory
+import classes.models
 
 
 class ClassCategoryReview(models.Model):
@@ -16,7 +16,7 @@ class ClassCategoryReview(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
-    review_subject = models.ForeignKey(ClassCategory, on_delete=models.CASCADE,
+    review_subject = models.ForeignKey("classes.ClassCategory", on_delete=models.CASCADE,
                                        null=False)
     review_text = models.TextField(null=False, blank=False)
     review_rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)],

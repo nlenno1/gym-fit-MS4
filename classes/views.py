@@ -64,6 +64,9 @@ def view_class_categories(request):
     categories = ClassCategory.objects.all().order_by('friendly_name')
     fav_categories = []
 
+    for category in categories:
+        category.average_rating, category.numb_of_reviews = category.generate_average_rating()
+
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
         for category in profile.fav_class_categories.all():
@@ -82,6 +85,7 @@ def view_single_class_category(request, category_id):
     """ A view to return details about an individual class category"""
 
     category = get_object_or_404(ClassCategory, pk=category_id)
+    category.average_rating, category.numb_of_reviews = category.generate_average_rating()
     reviews = ClassCategoryReview.objects.filter(review_subject=category).order_by('-created_on')
     fav_category = False
 
