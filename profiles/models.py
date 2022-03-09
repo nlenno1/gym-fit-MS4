@@ -1,4 +1,3 @@
-import uuid
 from datetime import date
 from django.contrib import messages
 from django.db import models
@@ -20,7 +19,6 @@ class UserProfile(models.Model):
         """ Define Class Spefic Data """
         verbose_name_plural = 'User Profiles'
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     default_phone_number = models.CharField(max_length=20, null=True, blank=True)
     default_street_address1 = models.CharField(max_length=80, null=True, blank=True)
