@@ -10,12 +10,15 @@ class ClassCategoryForm(forms.ModelForm):
     class Meta:
         """ Update Class Meta Data """
         model = ClassCategory
-        fields = ('__all__')
+        exclude = ['name', ]
+        labels = {
+            'friendly_name': 'Name',
+        }
 
     def __init__(self, *args, **kwargs):
         """ Add  classes and set autofocus on first field """
         super().__init__(*args, **kwargs)
-        self.fields['name'].widget.attrs['autofocus'] = True
+        self.fields['friendly_name'].widget.attrs['autofocus'] = True
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'stripe-style-input'
 
@@ -28,9 +31,8 @@ class SingleExerciseClassForm(forms.ModelForm):
                    'start_time': TimePickerInput(),
                    'end_time': TimePickerInput(), }
         model = SingleExerciseClass
-        exclude = ['name', 'remaining_spaces', 'participants', ]
+        exclude = ['remaining_spaces', 'participants', ]
         labels = {
-            'friendly_name': 'Name',
             'duration': 'Duration (mins)*',
         }
 

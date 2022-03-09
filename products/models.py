@@ -1,4 +1,3 @@
-import uuid
 from django.db import models
 from django.core.validators import MaxValueValidator
 
@@ -10,7 +9,6 @@ class ClassAccessPackage(models.Model):
         """ Update Meta data for model """
         verbose_name_plural = "Class Access Packages"
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
     sku = models.CharField(max_length=254, null=True, blank=True)
