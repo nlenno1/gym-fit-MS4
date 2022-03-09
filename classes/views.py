@@ -61,7 +61,7 @@ def send_update_email(class_id, form):
 def view_class_categories(request):
     """ A view to return all the categories"""
 
-    categories = ClassCategory.objects.all()
+    categories = ClassCategory.objects.all().order_by('friendly_name')
     fav_categories = []
 
     if request.user.is_authenticated:
