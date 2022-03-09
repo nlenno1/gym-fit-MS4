@@ -16,6 +16,7 @@ class ClassCategory(models.Model):
     class Meta:
         """ Update Meta data for model """
         verbose_name_plural = "Class Categories"
+        ordering = ['friendly_name']
 
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
@@ -53,6 +54,7 @@ class SingleExerciseClass(models.Model):
     class Meta:
         """ Update Meta data for model """
         verbose_name_plural = "Single Exercise Classes"
+        ordering = ['class_date', 'start_time']
 
     category = models.ForeignKey(ClassCategory, null=True, blank=True,
                                  on_delete=models.CASCADE)
