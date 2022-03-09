@@ -16,8 +16,15 @@
 
 {% block content %}
     <section id="content" class="container g-0">
-        <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Our Classes</h1>
-        <div class="class_category_container">
+        <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Our Classes </h1>
+        {% if user.is_superuser %}
+            <div class="row">
+                <div class="col-12 text-center text-md-end">
+                    <a href="{% url 'add_class_category' %}" class="btn btn-dark blue-button">Add Class Category</a>
+                </div>
+            </div>
+        {% endif %}
+        <div class="class_category_container mb-5">
             <!-- Category Cards -->
             {% if class_categories|length > 0 %}
                 {% for category in class_categories %}
@@ -37,21 +44,21 @@
                         <div class="col-6">Av. Rating: {{ category.average_rating }}</div>
                         <div class="col-6">
                             {% if category.id in fav_categories %}
-                            <form action="{% url 'remove_category_from_favs' category.id %}" method="POST" class="form">
-                                {% csrf_token %}
-                                <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
-                                <button type="submit" type="button"  data-bs-container="body" data-bs-trigger="hover focus"
-                                data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Remove from Favourite Categories"
-                                class="no-button"><i class="fa-solid fa-heart"></i></button>
-                            </form>
-                        {% else %}
-                            <form action="{% url 'add_category_to_favs' category.id %}" method="POST" class="form">
-                                {% csrf_token %}
-                                <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
-                                <button type="submit" type="button"  data-bs-container="body" data-bs-trigger="hover focus"
-                                data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Add to Favourite Categories"
-                                class="no-button"><i class="fa-regular fa-heart"></i></button>
-                            </form>
+                                <form action="{% url 'remove_category_from_favs' category.id %}" method="POST" class="form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+                                    <button type="submit" type="button"  data-bs-container="body" data-bs-trigger="hover focus"
+                                    data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Remove from Favourite Categories"
+                                    class="no-button"><i class="fa-solid fa-heart"></i></button>
+                                </form>
+                            {% else %}
+                                <form action="{% url 'add_category_to_favs' category.id %}" method="POST" class="form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+                                    <button type="submit" type="button"  data-bs-container="body" data-bs-trigger="hover focus"
+                                    data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Add to Favourite Categories"
+                                    class="no-button"><i class="fa-regular fa-heart"></i></button>
+                                </form>
                             {% endif %}
                         </div>
                         <div class="col-12">
