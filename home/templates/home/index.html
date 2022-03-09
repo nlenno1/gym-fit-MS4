@@ -39,19 +39,21 @@
     <section id="our-team" class="container-fluid g-0">
         <div class="our-team-container py-big">
             <h1 class="text-center w-100 display-3 text-blue">Our Team</h1>
-            <div class="team-cards-container py-big">
+            <div class="team-cards-container pt-big">
                 {% if instructors|length > 0 %}
                     {% for instructor in instructors %}
-                        <div class="trainer-card">
-                            {% if instructor.image_url %}
-                                <img src="{{ instructor.image_url }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
-                            {% elif instructor.image %}
-                                <img src="{{ MEDIA_URL }}{{ instructor.image }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
-                            {% else %}
-                                <img src="{{ MEDIA_URL }}/no-image.jpg" alt="Picture of {{ instructor.friendly_name }}, one of our instructors coming soon">
-                            {% endif %}
-                            <p class="text-uppercase">{{ instructor.friendly_name }}</p>
-                        </div>
+                        {% if instructor.display_on_site %}
+                            <div class="trainer-card">
+                                {% if instructor.image_url %}
+                                    <img src="{{ instructor.image_url }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
+                                {% elif instructor.image %}
+                                    <img src="{{ MEDIA_URL }}{{ instructor.image }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
+                                {% else %}
+                                    <img src="{{ MEDIA_URL }}/no-image.jpg" alt="Picture of {{ instructor.friendly_name }}, one of our instructors coming soon">
+                                {% endif %}
+                                <p class="text-uppercase">{{ instructor.friendly_name }}</p>
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 {% else %}
                     <h2 class="display-4 text-center text-light">Why don't you pop in and meet our team!</h2>
@@ -59,76 +61,28 @@
             </div>
         </div>
     </section>
-    <section id="shop-and-bar" class="container-lg py-big">
-        <div class="row g-0">
-            <div class="col-12 text-center">
-                <h2 class="mb-3 display-3">Health Bar</h2>
-            </div>
-            <div class="d-none d-md-block col-md-6">
-                <img id="smoothie-1" class="d-none d-md-block" src="{{ MEDIA_URL }}smoothie-portrait.jpg" alt="Smoothies from out Health Bar">
-                <img class="smoothie-2" src="{{ MEDIA_URL }}smoothie-landscape.jpg" alt="Smoothies from out Health Bar">
-            </div>
-            <div class="d-md-none col-12 text-center">
-                <img class="smoothie-2 mb-3" src="{{ MEDIA_URL }}smoothie-landscape.jpg" alt="Smoothies from out Health Bar">
-            </div>
-            <div class="col-12 col-md-6 text-center">
-                <div class="vertical-spread">
-                    <p>
-                        Come in and try our range of smoothies, protien shakes and smoothies along with a menu of health a delishous snacks and dishes.
-                    </p>
-                    <p>
-                        From a post work out snack to a lunch meet up with friends, our heath bar is the place to go
-                    </p>
-                    <p>
-                        The Health Bar Opening Hours: 8 am to 7 pm Monday to Saturday, 10 am to 4pm on Sunday
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row g-0">
-            <div class="col-12 text-center">
-                <h2 class="mt-5 mb-3 display-3">Shop</h2>
-                <p>
-                    We have a shop on onsite that carries a wide range of products from gym essentials, like waterbottles and towels, to branded apparell and sports equipment.
-                </p>
-            </div>
-            <div class="col-12 col-md-6 text-center">
-                <div class="vertical-spread p-md-2">
-                    <p>
-                        Our product select is sourced from ethical and enviromentally consious producers.
-                    </p>
-                    <p>
-                        Pop in for more details on all the items we stock.
-                    </p>
-                    <p>
-                        Shop Opening Hours: 8 am to 7 pm Monday to Saturday, 10 am to 4pm on Sunday
-                    </p>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 text-center">
-                <img id="shop-image" src="{{ MEDIA_URL }}small-fitness-equipment.jpg" alt="Fitness Equipment">
-            </div>
-        </div>
-    </section>
     <section>
-        <div id="home-find-us" class="container-fluid text-center px-sm-5 py-big">
-            <p class="mb-0 display-3">
-                <i class="fa-brands fa-instagram"></i>
-            </p>
-            <p class="">
+        <div id="home-find-us" class="container-fluid text-center px-sm-5 py-big text-grey">
+            <a href="http://www.instagram.com" target="_blank">
+                <p class="mb-0 display-3">
+                    <i class="fa-brands fa-instagram text-grey"></i>
+                </p>
+            </a>
+            <p class="fw-bold">
                 Follow us at @GYMFITLONDON for the latest news and offers
             </p>
-            <p class="mb-0 display-3">
-                <i class="fa-solid fa-location-arrow"></i>
-            </p>
-            <p>
+            <a href="https://www.google.co.uk/maps/place/87-95+Rye+Ln,+London+SE15+4TG/@51.4748384,-0.0749894,13.88z/data=!4m5!3m4!1s0x487603a051531199:0x7985ebcd285eaebc!8m2!3d51.4709398!4d-0.0665182" target="_blank">
+                <p class="mb-0 display-3">
+                    <i class="fa-solid fa-location-arrow text-grey"></i>
+                </p>
+            </a>
+            <p class="fw-bold">
                 Drop in and find out more about us and what we can offer at 87-95 Rye Ln, London SE15 4TG
             </p>
         </div>
     </section>
-    <section class="container-fluid">
-        <div id="map" class="px-0 px-sm-3">
+    <section class="container-fluid"id="map">
+        <div class="px-0 px-sm-3">
             <a href="https://www.google.co.uk/maps/place/87-95+Rye+Ln,+London+SE15+4TG/@51.4748384,-0.0749894,13.88z/data=!4m5!3m4!1s0x487603a051531199:0x7985ebcd285eaebc!8m2!3d51.4709398!4d-0.0665182" target="_blank">
                 <img src="{{ MEDIA_URL }}map.jpg" alt="Map">
             </a>

@@ -57,16 +57,16 @@ def add_single_class_to_bag(request, item_id):
         if profile.classes.filter(id=exercise_class.id):
             messages.error(request, f"You have already booked onto \
                             {exercise_class.category} on \
-                            {exercise_class.date} at \
+                            {exercise_class.class_date} at \
                             {exercise_class.start_time} \
                             so you can not add it to your bag")
             return redirect(redirect_url)
 
     if item_id not in bag['single_classes']:
         bag['single_classes'].append(item_id)
-        messages.success(request, f'Added {exercise_class.category} at {exercise_class.start_time} on {exercise_class.date} to your shopping bag')
+        messages.success(request, f'Added {exercise_class.category} at {exercise_class.start_time} on {exercise_class.class_date} to your shopping bag')
     else:
-        messages.warning(request, f'{exercise_class.category} at {exercise_class.start_time} on {exercise_class.date} is already in your shopping bag')
+        messages.warning(request, f'{exercise_class.category} at {exercise_class.start_time} on {exercise_class.class_date} is already in your shopping bag')
 
     request.session['bag'] = bag
 

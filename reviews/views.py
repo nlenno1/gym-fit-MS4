@@ -13,12 +13,12 @@ def create_a_category_review(request, category_id):
     form = ClassCategoryReviewForm
 
     previous_review = None
-    previous_review = ClassCategoryReview.objects.get(
-                      author=request.user, review_subject=category)
-    previous_review.created_on = previous_review.created_on.strftime("%d %B %Y")
 
     if request.method == "POST":
         if previous_review:
+            previous_review = ClassCategoryReview.objects.get(
+                      author=request.user, review_subject=category)
+            previous_review.created_on = previous_review.created_on.strftime("%d %B %Y")
             messages.error(request, f"You can't add a review as you have \
                 already written one on {previous_review.created_on}")
         else:

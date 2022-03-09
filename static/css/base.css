@@ -10,7 +10,7 @@ h1, h2, h3 ,h4, h5 {
     font-family: 'Overlock', cursive;
 }
 
-.blue-button {
+.blue-button, #home-find-us {
     background-color: #2AAFD3;
 }
 
@@ -61,17 +61,22 @@ h1, h2, h3 ,h4, h5 {
 
 /* Colours */
 
-#top-nav, footer, #our-team, #home-find-us {
-    background-color: #353535;
+.text-grey {
+    color: #353535;
 }
 
 #content i {
     color: #000;
 }
 
-#top-nav a, .text-blue, #home-find-us {
+#top-nav a, .text-blue {
     color: #2AAFD3;
 }
+
+#top-nav, footer, #our-team {
+    background-color: #353535;
+}
+
 
 /* Navbar */
 
@@ -188,8 +193,9 @@ h1, h2, h3 ,h4, h5 {
 .team-cards-container, .our-team-container {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-wrap: wrap;
+    
 }
 
 .team-cards-container {
@@ -210,38 +216,9 @@ h1, h2, h3 ,h4, h5 {
     transform-origin: right top;
     color: #fafafa;
     font-size: 2em;
-    margin-top: -55px;
+    margin-top: -48px;
     padding-right: 52px;
     margin-bottom: 0;
-}
-
-/* Bar and Shop */
-
-#smoothie-1 {
-    width: 20vw;
-    min-width: 210px;
-    margin-left: 30px;
-    float: left;
-}
-
-.smoothie-2 {
-    width: 35vw;
-    min-width: 260px;
-}
-
-#shop-image {
-    width: 35vw;
-    min-width: 260px;
-}
-
-@media(min-width:768px) {
-    .smoothie-2 {
-        width: 35vw;
-        min-width: 360px;
-        margin-top: -120px;
-        margin-right: 25px;
-        float: right;
-    }
 }
 
 /* Map */
