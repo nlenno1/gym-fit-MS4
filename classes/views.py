@@ -349,13 +349,39 @@ def add_single_exercise_class(request):
     if request.method == "POST":
         form = SingleExerciseClassForm(request.POST)
         if form.is_valid():
+            # schedule weekly classes
+            weekly_class = form.cleaned_data.get('weekly_class')
+            weekly_classes_until = form.cleaned_data.get('weekly_classes_until')
             exercise_class = form.save(commit=False)
             exercise_class.end_time = (datetime.combine(date.today(), exercise_class.start_time) + timedelta(minutes=exercise_class.duration)).time()
             exercise_class.remaining_spaces = exercise_class.max_capacity
             exercise_class.save()
-            messages.success(request, "Successfully Created An \
-                             Exercise Class")
-            return redirect(reverse('filter_single_classes'))
+            messages.success(request, f"Successfully Created An \
+                             Exercise Class {exercise_class}")
+            if weekly_class:  # check if this is a weekly class
+                # generate date of next class
+                current_date = exercise_class.class_date + timedelta(days=7)
+                while current_date <= weekly_classes_until:
+                    # add all values to new object
+                    new_exercise_class = SingleExerciseClass()
+                    new_exercise_class.category = exercise_class.category
+                    new_exercise_class.class_date = current_date
+                    new_exercise_class.start_time = exercise_class.start_time
+                    new_exercise_class.end_time = exercise_class.end_time
+                    new_exercise_class.duration = exercise_class.duration
+                    new_exercise_class.location = exercise_class.location
+                    new_exercise_class.instructor = exercise_class.instructor
+                    new_exercise_class.price = exercise_class.price
+                    new_exercise_class.token_cost = exercise_class.token_cost
+                    new_exercise_class.max_capacity = exercise_class.max_capacity
+                    new_exercise_class.remaining_spaces = exercise_class.remaining_spaces
+                    new_exercise_class.ability_level = exercise_class.ability_level
+                    new_exercise_class.additional_notes = exercise_class.additional_notes
+                    new_exercise_class.save()  # save new class
+                    messages.success(request, f"Successfully Created An \
+                             Exercise Class {new_exercise_class}")
+                    current_date += timedelta(days=7)
+            return redirect(reverse('classes_this_week'))
         else:
             messages.error(request, "Failed to create the Exercise Class\
                            . Please ensure the form is valid")

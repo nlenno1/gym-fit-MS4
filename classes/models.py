@@ -7,7 +7,7 @@ from instructors.models import Instructor
 from reviews.models import ClassCategoryReview
 
 
-ABILITY_CHOICES=[('BEG', 'Beginner'),('INT', 'Intermediate'),
+ABILITY_CHOICES = [('BEG', 'Beginner'), ('INT', 'Intermediate'),
                  ('ADV', 'Advanced')]
 
 class ClassCategory(models.Model):

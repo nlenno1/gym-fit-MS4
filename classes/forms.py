@@ -25,6 +25,10 @@ class ClassCategoryForm(forms.ModelForm):
 
 class SingleExerciseClassForm(forms.ModelForm):
     """ Class for Form to create Class Access Packages """
+
+    weekly_class = forms.BooleanField()
+    weekly_classes_until = forms.DateField(widget=DateInput())
+
     class Meta:
         """ Update Class Meta Data """
         widgets = {'class_date': DateInput(),
@@ -35,6 +39,7 @@ class SingleExerciseClassForm(forms.ModelForm):
         labels = {
             'duration': 'Duration (mins)*',
         }
+
 
     def __init__(self, *args, **kwargs):
         """
