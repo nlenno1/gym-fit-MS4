@@ -50,23 +50,18 @@ def add_single_class_to_bag(request, item_id):
     redirect_url = request.POST.get('redirect_url')
     bag = request.session.get('bag', {'class_access_package': None,
                                      'single_classes': []})
-    profile = UserProfile.objects.get(user=request.user)
-    profile.check_package_expired()
 
-    if profile:
-        if profile.classes.filter(id=exercise_class.id):
+    if exercise_class:
+        if exercise_class.participants.filter(id=request.user.id):
             messages.error(request, f"You have already booked onto \
-                            {exercise_class.category} on \
-                            {exercise_class.class_date} at \
-                            {exercise_class.start_time} \
-                            so you can not add it to your bag")
+                           {exercise_class} so you can not add it to your bag")
             return redirect(redirect_url)
 
     if item_id not in bag['single_classes']:
         bag['single_classes'].append(item_id)
-        messages.success(request, f'Added {exercise_class.category} at {exercise_class.start_time} on {exercise_class.class_date} to your shopping bag')
+        messages.success(request, f'Added {exercise_class} to your bag')
     else:
-        messages.warning(request, f'{exercise_class.category} at {exercise_class.start_time} on {exercise_class.class_date} is already in your shopping bag')
+        messages.warning(request, f'{exercise_class} is already in your bag')
 
     request.session['bag'] = bag
 

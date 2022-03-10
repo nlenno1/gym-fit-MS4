@@ -30,10 +30,6 @@ class ClassCategory(models.Model):
         """ Return name string"""
         return self.friendly_name
 
-    def get_friendly_name(self):
-        """ Return friendly_name string"""
-        return self.friendly_name
-
     def generate_average_rating(self):
         """ Function to return number of reviews and average rating """
         reviews = ClassCategoryReview.objects.filter(review_subject=self)
