@@ -186,7 +186,7 @@
                     <div class="text-center text-md-start">
                         <h2 class="display-3">You have no Bookings</h2>
                         <h3>Why not book onto one of our classes</h3>
-                        <a href="" class="btn btn-dark blue-button">Our Classes</a>
+                        <a href="{% url 'classes_this_week' %}" class="btn btn-dark blue-button">Our Classes</a>
                     </div>
                     {% endif %}
                 </section>
@@ -238,6 +238,8 @@
                         </div>
                     {% else %}
                         <h5 class="display-3">You have no Previous Orders</h5>
+                        <h3>Why not buy one of our Access Packages</h3>
+                        <a href="{% url 'view_class_access_packages' %}" class="btn btn-dark blue-button">Our Packages</a>
                     {% endif %}
                 </section>
                 <section id="favourite-class-list" class="profile-section mx-md-5 mb-5 mb-5">
