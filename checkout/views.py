@@ -178,44 +178,44 @@ def checkout_success(request, order_number):
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
 
-    profile = UserProfile.objects.get(user=request.user)
-    user_profile_object = User.objects.get(id=request.user.id)
+    if request.user.is_authenticated:
+        user_profile_object = User.objects.get(id=request.user.id)
+        profile = UserProfile.objects.get(user=request.user)
+        # Attach the user's profile to the order
+        order.user_profile = profile
+        order.save()
 
-    # attached user profile to the order
-    order.user_profile = profile
-    order.save()
+        if save_info:
+            profile_data = {
+                'default_phone_number': order.phone_number,
+                'default_street_address1': order.street_address1,
+                'default_street_address2': order.street_address2,
+                'default_town_or_city': order.town_or_city,
+                'default_county': order.county,
+                'default_postcode': order.postcode,
+                'default_country': order.country,
+            }
+            # split full name into first and last
+            list_name = order.full_name.split()
+            user_data = {
+                'first_name': list_name[0],
+                'last_name': list_name[-1],
+                'email': order.email,
+                'username': user_profile_object.username,
+            }
 
-    if save_info:
-        profile_data = {
-            'default_phone_number': order.phone_number,
-            'default_street_address1': order.street_address1,
-            'default_street_address2': order.street_address2,
-            'default_town_or_city': order.town_or_city,
-            'default_county': order.county,
-            'default_postcode': order.postcode,
-            'default_country': order.country,
-        }
-        # split full name into first and last
-        list_name = order.full_name.split()
-        user_data = {
-            'first_name': list_name[0],
-            'last_name': list_name[-1],
-            'email': order.email,
-            'username': user_profile_object.username,
-        }
+            user_profile_form = UserProfileForm(profile_data, instance=profile)
+            user_form = UserForm(user_data, instance=user_profile_object)
 
-        user_profile_form = UserProfileForm(profile_data, instance=profile)
-        user_form = UserForm(user_data, instance=user_profile_object)
-
-        if user_profile_form.is_valid() and user_form.is_valid():
-            try:
-                user_profile_form.save()
-                user_form.save()
-                messages.success(request, "Submitted Information Saved to Profile")
-            except Exception as err:
-                messages.error(request, f"User Not Saved. Error message: {err}")
+            if user_profile_form.is_valid() and user_form.is_valid():
+                try:
+                    user_profile_form.save()
+                    user_form.save()
+                    messages.success(request, "Submitted Information Saved to Profile")
+                except Exception as err:
+                    messages.error(request, f"User Data Not Saved. Error message: {err}")
         else:
-            messages.error(request, "User Not Saved")
+            messages.error(request, "User Data Not Saved")
 
     messages.success(request, f"Order sucessfully processed! {chr(10)}\
         Your order number is {order_number}.{chr(10)}A confirmation email will be sent \
@@ -241,13 +241,31 @@ def checkout_success(request, order_number):
     # Save Classes to Profile
     if len(current_bag['bag_items']['single_classes']) > 0:
         for item in current_bag['bag_items']['single_classes']:
-            # add user to class participants
-            item.participants.add(user_profile_object)
+            if request.user.is_authenticated:
+                item.participants.add(user_profile_object)
+                # add class to profile
+                profile.classes.add(item)
+                profile.save()
+            else:
+                # fill user data and add user to class list
+                list_name = order.full_name.split()
+                user_data = {
+                    'first_name': list_name[0],
+                    'last_name': list_name[-1],
+                    'email': order.email,
+                    'username': 'Guest_' + list_name[0] + "_" + list_name[-1],
+                }
+                user_form = UserForm(user_data)
+
+                if user_form.is_valid():
+                    try:
+                        guest_user = user_form.save()
+                        item.participants.add(guest_user)
+                        messages.success(request, "Saved Guest info to Class")
+                    except Exception as err:
+                        messages.error(request, f"Guest Info Not Saved. Error message: {err}")
             item.remaining_spaces -= 1
             item.save()
-            # add class to profile
-            profile.classes.add(item)
-            profile.save()
 
     if 'bag' in request.session:
         del request.session['bag']
