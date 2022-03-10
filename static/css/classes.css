@@ -1,5 +1,9 @@
 /* Our Classes */
 
+a {
+    text-decoration: none;
+}
+
 .class_category_container {
     display: flex;
     flex-wrap: wrap;

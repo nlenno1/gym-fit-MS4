@@ -90,8 +90,9 @@ def view_single_class_category(request, category_id):
     fav_category = False
 
     previous_review = None
-    previous_review = ClassCategoryReview.objects.filter(
-                      author=request.user, review_subject=category).exists()
+    if request.user.is_authenticated:
+        previous_review = ClassCategoryReview.objects.filter(
+                        author=request.user, review_subject=category).exists()
 
     for review in reviews:
         review.created_on = review.created_on.strftime("%d %B %Y at %H:%M")

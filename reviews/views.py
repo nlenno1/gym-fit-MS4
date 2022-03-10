@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from classes.models import ClassCategory
 from reviews.models import ClassCategoryReview
 from .forms import ClassCategoryReviewForm
 
 
+@login_required
 def create_a_category_review(request, category_id):
     """ View to allow users to create a review """
 
@@ -45,6 +47,7 @@ def create_a_category_review(request, category_id):
     return render(request, 'reviews/write_a_category_review.html', context)
 
 
+@login_required
 def delete_category_review(request, review_id):
     """ View to allow users to delete a review """
 
@@ -57,5 +60,5 @@ def delete_category_review(request, review_id):
     else:
         messages.error(request, "Unable to find review to delete")
 
-    return redirect(reverse('view_single_class_category', kwargs={'category_id':category.id}))
+    return redirect(reverse('view_single_class_category', kwargs={'category_id': category.id}))
 
