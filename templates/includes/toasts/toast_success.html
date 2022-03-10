@@ -10,7 +10,7 @@
                 {{ message }}
             </div>
         </div>
-        {% if total and not on_profile_page or show_bag_on_success %}
+        {% if total and show_bag_on_success %}
             <hr class="mt-1 mb-3">
             <p>Your Bag Item Count: {{product_count}}</p>
             <div class="bag-items-notification">

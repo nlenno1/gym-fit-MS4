@@ -264,33 +264,6 @@ footer img {
     width: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
-    border: 3px solid #c4c4c4;
+    border: 3px solid rgba(42, 175, 211, .5);
     padding: 10px 5px 0;
-}
-
-.instructor-card-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-bottom: 5rem;
-}
-
-.card {
-    margin: 5px;
-    width: 250px;
-}
-
-.card img {
-    margin: 0 auto;
-    height: 400px;
-    object-fit: cover;
-    object-position: center;
-    overflow: hidden;
-}
-
-.card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
 }

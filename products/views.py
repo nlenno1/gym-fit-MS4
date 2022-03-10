@@ -33,6 +33,7 @@ def view_class_access_packages(request):
         'token_packages': tokens,
         'unlimited_packages': unlimited,
         'profile': profile,
+        'show_bag_on_success': True,
     }
 
     return render(request, 'products/join_us.html', context)

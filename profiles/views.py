@@ -56,7 +56,6 @@ def profile(request):
         'form': form,
         'user_form': user_form,
         'orders': orders,
-        'on_profile_page': True,
         'profile': profile_object,
         'upcoming_classes': upcoming_classes,
         'previous_classes': previous_classes,

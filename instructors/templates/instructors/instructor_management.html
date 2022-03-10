@@ -27,8 +27,8 @@
                         {% for instructor in instructors %}
                             <!-- Card Template from Bootstrap 5 Documentation https://getbootstrap.com/docs/5.0/components/card/ -->
                             <div class="card">
-                                <div class="card-body text-center">
-                                    <h4 class="card-title">{{ instructor.friendly_name|title }}</h4>
+                                <div class="card-header text-center">
+                                    <h4 class="card-title mt-2">{{ instructor.friendly_name|title }}</h4>
                                 </div>
                                 {% if instructor.image_url %}
                                     <img src="{{ instructor.image_url }}" class="card-img-top" alt="Token image for {{ package.friendly_name }}">
@@ -38,31 +38,35 @@
                                     <img src="{{ MEDIA_URL }}/no-image.jpg" class="card-img-top" alt="Token image for {{ package.friendly_name }}">
                                 {% endif %}
                                 <div class="card-body">
-                                    <p class="card-text">
-                                        Can Lead:
-                                        <ul class="list-group">
-                                            {% for category in instructor.can_lead_classes_list %}
-                                                <li class="list-group-item">{{ category.friendly_name }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    </p>
-                                    <p class="card-text">Displayed on Website: 
-                                        {% if instructor.display_on_site %}
-                                            <i class="mt-1 me-2 float-end text-success fa-solid fa-check"></i>
-                                        {% else %}
-                                            <i class="mt-1 me-2 float-end text-danger fa-solid fa-xmark"></i>
-                                        {% endif %}
-                                    </p>
-                                    <div class="row g-0 text-center">
-                                        <div class="col-10">
-                                            <a href="{% url 'edit_instructor' instructor.id %}" class="btn btn-dark float-start">Edit Instructor</a>
-                                        </div>
-                                        <div class="col-2">
-                                            <a href="{% url 'delete_instructor' instructor.id %}" type="button" class="mt-2 float-center confirm-delete" 
-                                            data-bs-container="body" data-bs-trigger="hover focus" data-bs-toggle="popover" data-bs-placement="bottom" 
-                                            data-bs-content="Delete Instructor Profile">
-                                                <i class="fa-solid fa-trash-can"></i>
-                                            </a>
+                                    <div>
+                                        <p class="card-text">
+                                            Can Lead:
+                                            <ul class="list-group">
+                                                {% for category in instructor.can_lead_classes_list %}
+                                                    <li class="list-group-item">{{ category.friendly_name }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="card-text">Displayed on Website: 
+                                            {% if instructor.display_on_site %}
+                                                <i class="mt-1 me-2 float-end text-success fa-solid fa-check"></i>
+                                            {% else %}
+                                                <i class="mt-1 me-2 float-end text-danger fa-solid fa-xmark"></i>
+                                            {% endif %}
+                                        </p>
+                                        <div class="row g-0 text-center">
+                                            <div class="col-10">
+                                                <a href="{% url 'edit_instructor' instructor.id %}" class="btn btn-dark float-start">Edit Instructor</a>
+                                            </div>
+                                            <div class="col-2">
+                                                <a href="{% url 'delete_instructor' instructor.id %}" type="button" class="mt-2 float-center confirm-delete" 
+                                                data-bs-container="body" data-bs-trigger="hover focus" data-bs-toggle="popover" data-bs-placement="bottom" 
+                                                data-bs-content="Delete Instructor Profile">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

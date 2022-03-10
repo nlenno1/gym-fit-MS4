@@ -1,4 +1,4 @@
-/* .instructor-card-container {
+.instructor-card-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -8,15 +8,19 @@
 
 .card {
     margin: 5px;
-    width: 400px;
+    width: 250px;
 }
 
 .card img {
     margin: 0 auto;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
 }
 
 .card-body {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-} */
+    justify-content: space-between;
+}

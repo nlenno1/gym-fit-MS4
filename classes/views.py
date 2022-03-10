@@ -131,6 +131,7 @@ def filter_classes_by_fav_category(request, classes):
         filter_name = "Favourite Class Categories"
         return filter_name, filtered_classes
 
+
 def classes_this_week(request):
     """ A view to return all the single exercise classes in the current week"""
 
@@ -193,6 +194,7 @@ def classes_this_week(request):
         'days_with_classes': days_with_classes_sorted,
         'category_filter': filter_name,
         'profile_tokens': profile_tokens,
+        'show_bag_on_success': True,
     }
 
     return render(request, 'classes/classes_this_week.html', context)
@@ -257,6 +259,7 @@ def filter_single_classes(request):
         'category_filter_name': category_filter_name,
         'date_filter': date_filter,
         'profile_tokens': profile_tokens,
+        'show_bag_on_success': True,
     }
 
     return render(request, 'classes/classes_by_day.html', context)
@@ -264,6 +267,7 @@ def filter_single_classes(request):
 # Token Functions
 
 
+@login_required()
 def book_with_tokens(request, class_id):
     """ book class using user tokens """
 
