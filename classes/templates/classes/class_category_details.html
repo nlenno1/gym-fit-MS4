@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block extracss %}
-  <link rel="stylesheet" href="{% static 'css/classes.css' %}">
+    <link rel="stylesheet" href="{% static 'classes/css/classes.css' %}">
 {% endblock %}
 
 {% block page_header %}
@@ -126,7 +126,7 @@
                     <h5>There are no reviews to show</h5>
                     {% if not previous_review %}
                         {% if user.is_authenticated %}
-                            <a href="{% url 'create_a_category_review' category.id %}" class="float-end btn btn-dark blue-button">Write A Review</a>
+                            <a href="{% url 'create_a_category_review' category.id %}" class="btn btn-dark blue-button">Write A Review</a>
                         {% else %}
                             <a href="{% url 'account_login' %}">
                                 <h5 class="text-blue fw-bold">Sign In To Leave A Review</h5>

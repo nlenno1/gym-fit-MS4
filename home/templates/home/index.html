@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block extracss %}
+    <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+{% endblock %}
+
 {% block page_header %}
     <div class="container container-header">
         <div class="row">

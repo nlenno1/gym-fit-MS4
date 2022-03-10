@@ -1,44 +1,5 @@
 /* AllAuth Forms */
 
-.form-control {
-    box-sizing: border-box;
-    border: 1px solid #2AAFD3;
-    border-radius: 0.25rem;
-    background-color: fafafa;
-    box-shadow: 0 1px 3px 0 #e6ebf1;
-    -webkit-transition: box-shadow 150ms ease;
-    transition: box-shadow 150ms ease;
-}
-
-.form-control:not([type="file"], [type="checkbox"]) {
-    padding: 10px 12px;
-}
-
-.form-control:focus, 
-.form-control:active,
-.form-check-input:focus, 
-.form-check-input:active {
-  box-shadow: 0 1px 3px 0 #cfd7df;
-  border: 1px solid #2AAFD3;
-}
-
-.form-control:focus:not([type="file"], [type="checkbox"]),
-.form-control:active:not([type="file"], [type="checkbox"]) {
-    border: 2px solid #2AAFD3;
-    padding: 9px 11px;
-}
-
-.form-check-input:checked {
-    background-color: #2AAFD3;
-    border-color: #2AAFD3;
-}
-
-.form-check-input {
-    width: 1.2em;
-    height: 1.2em;
-    margin-top: 0.18em;
-}
-
 p a {
     text-decoration: none;
     font-weight: 600;
@@ -48,4 +9,21 @@ p a {
 
 p a:hover {
     color: #000;
+}
+
+#allauth-content {
+    min-height: calc(100vh - 200px)
+}
+
+.allauth-form-inner-content .text-center {
+    margin-top: 2rem;
+    margin-bottom: 3rem
+}
+
+.allauth-form-inner-content label:not([for='id_remember']){
+    display: none;
+}
+
+.allauth-form-inner-content input::placeholder {
+    color: #aab7c4;
 }

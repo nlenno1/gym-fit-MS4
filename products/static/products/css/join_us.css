@@ -1,0 +1,57 @@
+.package-type-divider {
+    width: 75%;
+    min-width: 180px;
+    margin: 8vh auto 7vh;
+    height: 5px !important;
+}
+
+#content {
+    margin-bottom: 12vh;
+}
+
+button i {
+    font-size: 1.2em;
+}
+
+.popover {
+    margin-top: 15px;
+}
+
+.package-display-buttons {
+    margin: 0 5px;
+    color: 000;
+}
+
+.package-display-buttons a {
+    text-decoration: none;
+}
+
+.single-class-schedule-display {
+    padding: 15px 5px;
+    margin: 1vh 0;
+    border: 2px solid #353535;
+}
+
+.single-class-schedule-display img {
+    height: 120px;
+    margin-top: -6px;
+}
+
+.single-class-schedule-display p {
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+.schedule-display-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 0 5px;
+}
+
+.schedule-display-buttons a {
+    text-decoration: none;
+    margin: 0 10px;
+}

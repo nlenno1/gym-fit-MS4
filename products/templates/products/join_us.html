@@ -3,8 +3,7 @@
 {% load static %}
 
 {% block extracss %}
-<link rel="stylesheet" href="{% static 'css/classes.css' %}">
-<link rel="stylesheet" href="{% static 'css/join_us.css' %}">
+<link rel="stylesheet" href="{% static 'products/css/join_us.css' %}">
 
 {% endblock %}
 
@@ -66,11 +65,11 @@
                         {% if profile.class_package_type == "UU" %}
                             <button type="submit" class="btn btn-dark" disabled>Active Package</button>
                         {% else %}
-                            <button type="submit" class="btn btn-dark text-light bag-button">Add to Bag</button>
+                            <button type="submit" class="btn btn-dark blue-button">Add to Bag</button>
                         {% endif %}
                     </form>
                     {% if user.is_superuser %}
-                        <a class="btn btn-dark text-light mt-2" href="{% url 'edit_class_access_package' package.id %}">Edit Package</a>
+                        <a class="btn btn-dark mt-2" href="{% url 'edit_class_access_package' package.id %}">Edit Package</a>
                         <a class="confirm-delete mt-2" href="{% url 'delete_class_access_package' package.id %}">
                             <i class="fa-solid fa-trash-can"></i>
                         </a>
@@ -135,11 +134,11 @@
                         {% elif profile.class_package_type == "TK" %}
                             <button type="submit" class="btn btn-dark" disabled>Active Tokens</button>
                         {% else %}
-                            <button type="submit" class="btn btn-dark text-light bag-button">Add to Bag</button>
+                            <button type="submit" class="btn btn-dark blue-button">Add to Bag</button>
                         {% endif %}
                     </form>
                     {% if user.is_superuser %}
-                        <a class="btn btn-dark text-light mt-2" href="{% url 'edit_class_access_package' package.id %}">Edit Package</a>
+                        <a class="btn btn-dark mt-2" href="{% url 'edit_class_access_package' package.id %}">Edit Package</a>
                         <a class="confirm-delete mt-2" href="{% url 'delete_class_access_package' package.id %}">
                             <i class="fa-solid fa-trash-can"></i>
                         </a>

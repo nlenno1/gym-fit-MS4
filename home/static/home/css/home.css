@@ -1,0 +1,118 @@
+/* Hero Image */
+
+#hero-image {
+    height: 300px;
+    background: url('/media/homepage-hero-image.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+#hero-image h1 {
+    height: 140px;
+    font-weight: 500;
+}
+
+.hero-logo {
+    height: 180px;
+    width: 180px;
+    margin: 0 auto;
+}
+
+#teamwork-image {
+    width: 75%;
+    max-width: 500px;
+    position: relative;
+    margin: -65px 0 15px;
+}
+
+@media(min-width:575px) {
+    .hero-logo {
+        height: 200px;
+        width: 200px;
+        position: absolute;
+        top: 112px;
+        right: calc(30% - 100px);
+    }
+    #hero-image {
+        height: 400px;
+    }
+    #hero-image h1 {
+        margin-left: 12vw !important;
+    }
+}
+
+@media(min-width:768px) {
+    #hero-image h1 {
+        width: 530px;
+    }
+}
+
+@media(min-width:997px) {
+    #hero-image {
+        height: 650px;
+    }
+    #hero-image h1 {
+        margin-top: 8vh !important;
+        margin-left: 15vw !important;
+    }
+    .hero-logo {
+        height: 340px;
+        width: 340px;
+        position: absolute;
+        top: 180px;
+        right: calc(28% - 100px);
+    }
+}
+
+/* Our Team */
+
+.our-team-container {
+    height: 100%;
+    min-height: 345px;
+}
+
+.team-cards-container, .our-team-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    
+}
+
+.team-cards-container {
+    max-width: 1200px;
+}
+
+.trainer-card {
+    display: relative;
+    width: 280px;
+}
+
+.trainer-card img {
+    width: 230px;
+}
+
+.trainer-card p {
+    transform: rotate(90deg);
+    transform-origin: right top;
+    color: #fafafa;
+    font-size: 2em;
+    margin-top: -48px;
+    padding-right: 52px;
+    margin-bottom: 0;
+}
+
+
+/* Map */
+
+#map {
+    padding: 4rem 1rem;
+    overflow: hidden;
+    text-align: center;
+}
+
+#map img {
+    width: 100%;
+    min-width: 438px;
+    min-height: 200px;
+}

@@ -3,23 +3,24 @@
 {% load static %}
 
 {% block extracss %}
-  <link rel="stylesheet" href="{% static 'css/classes.css' %}">
+<link rel="stylesheet" href="{% static 'classes/css/classes.css' %}">
 {% endblock %}
 
 {% block page_header %}
-    <div class="container container-header">
-        <div class="row">
-            <div class="col-12"></div>
-        </div>
+<div class="container container-header">
+    <div class="row">
+        <div class="col-12"></div>
     </div>
+</div>
 {% endblock %}
 
 {% block content %}
     <section id="content" class="container">
         <!-- Header -->
         <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Class Booking - By Day</h1>
-        <div id="results-container mb-5">
-            <div class="text-center text-md-start ps-md-5 my-3"><a class="btn btn-dark blue-button" href="{% url 'classes_this_week' %}">Classes This Week</a></div>
+        <div id="results-container">
+            <div class="text-center text-md-start ps-md-5 my-3"><a class="btn btn-dark blue-button"
+                    href="{% url 'classes_this_week' %}">Classes This Week</a></div>
             <form id="date-form" action="{% url 'filter_single_classes' %}" method="GET">
                 <div class="row align-items-center g-0 mt-3">
                     <div class="col-12 col-md-3 text-center text-md-start">
@@ -29,11 +30,13 @@
                     <div class="col-12 col-md-3">
                         <!-- date input - js change event hander calls function -->
                         <div class="my-3">
-                            <input value="{{ date_filter }}" id="date-picker" name="date_filter" type="date" class="form-control" aria-label="Select the date you want to see classes for">
+                            <input value="{{ date_filter }}" id="date-picker" name="date_filter" type="date"
+                                class="form-control" aria-label="Select the date you want to see classes for">
                         </div>
                     </div>
                     <div class="col-12 col-md-6 text-center text-md-end">
-                        <select class="form-select mx-auto mx-md-0 ms-md-auto" name="category_filter" id="category-filter-select" aria-label="Select what Category to filter the classes by">
+                        <select class="form-select mx-auto mx-md-0 ms-md-auto" name="category_filter"
+                            id="category-filter-select" aria-label="Select what Category to filter the classes by">
                             <option hidden value="None">
                                 {% if category_filter_name != '' %}
                                     Showing {{ category_filter_name|title }} Classes
@@ -46,12 +49,12 @@
                                 <option value="fav_categories">Favourite Class Categories</option>
                             {% endif %}
                             {% for category in class_categories %}
-                                <option value="{{ category.id }}" {% if category == category_filter.id %}
-                                selected {% endif %}>{{ category.friendly_name|title }}</option>
+                                <option value="{{ category.id }}" {% if category == category_filter.id %} selected {% endif %}>
+                                    {{ category.friendly_name|title }}</option>
                             {% endfor %}
                         </select>
                     </div>
-                <input type="text" name="previous_category_filter"  value="{{ category_filter }}" hidden readonly>
+                    <input type="text" name="previous_category_filter" value="{{ category_filter }}" hidden readonly>
                 </div>
             </form>
             <!-- Individual Class Display -->
@@ -68,24 +71,36 @@
                                 <div class="col-6 col-sm-4 col-md-7 col-lg-8">
                                     {% if class.remaining_spaces < 5 and class.remaining_spaces > 0 %}
                                         <div class="row g-0 align-items-center">
-                                            <div class="col-12 col-md-3"><p><strong>{{ class.category|title}}</strong></p></div>
-                                            <div class="col-12 col-md-3"><p>{{ class.instructor|title }}</p></div>
-                                            <div class="col-12 col-md-3"><p>{{ class.location|title }}</p></div>
+                                            <div class="col-12 col-md-3">
+                                                <p><strong>{{ class.category|title}}</strong></p>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <p>{{ class.instructor|title }}</p>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <p>{{ class.location|title }}</p>
+                                            </div>
                                             <div class="col-12 col-md-3 text-danger fw-bold">
-                                                    <p>{{ class.remaining_spaces }} Spaces!</p>
+                                                <p>{{ class.remaining_spaces }} Spaces!</p>
                                             </div>
                                         </div>
                                     {% else %}
                                         <div class="row g-0 align-items-center">
-                                            <div class="col-12 col-md-3"><p><strong>{{ class.category|title}}</strong></p></div>
-                                            <div class="col-12 col-md-3 d-none d-md-block"><p>{{ class.instructor|title }}</p></div>
-                                            <div class="col-12 col-md-3 d-none d-md-block"><p>{{ class.location|title }}</p></div>
+                                            <div class="col-12 col-md-3">
+                                                <p><strong>{{ class.category|title}}</strong></p>
+                                            </div>
+                                            <div class="col-12 col-md-3 d-none d-md-block">
+                                                <p>{{ class.instructor|title }}</p>
+                                            </div>
+                                            <div class="col-12 col-md-3 d-none d-md-block">
+                                                <p>{{ class.location|title }}</p>
+                                            </div>
                                             <div class="col-12 col-md-3">
                                                 <p>
                                                     {% if profile_tokens > 0 %}
-                                                        {{ class.token_cost }} Token{{ class.token_cost|pluralize  }}
+                                                    {{ class.token_cost }} Token{{ class.token_cost|pluralize  }}
                                                     {% else %}
-                                                        £{{ class.price }}
+                                                    £{{ class.price }}
                                                     {% endif %}
                                                 </p>
                                             </div>
@@ -100,11 +115,11 @@
                                     {% elif class.remaining_spaces is 0 %}
                                         <p class="text-danger fw-bold">Fully Booked</p>
                                     {% elif profile_tokens > class.token_cost %}
-                                    <form action="{% url 'book_with_tokens' class.id %}" method="POST" class="form">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
-                                        <button type="submit" class="btn btn-success">Book with Tokens</button>
-                                    </form>
+                                        <form action="{% url 'book_with_tokens' class.id %}" method="POST" class="form">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+                                            <button type="submit" class="btn btn-success">Book with Tokens</button>
+                                        </form>
                                     {% else %}
                                         <form action="{% url 'add_single_class_to_bag' class.id %}" method="POST" class="form">
                                             {% csrf_token %}
@@ -113,7 +128,8 @@
                                         </form>
                                     {% endif %}
                                     {% if user.is_superuser %}
-                                        <a class="btn btn-dark mt-2" href="{% url 'edit_single_exercise_class' class.id %}">Edit Class</a>
+                                        <a class="btn btn-dark mt-2" href="{% url 'edit_single_exercise_class' class.id %}">Edit
+                                            Class</a>
                                         <a class="mt-2 confirm-delete" href="{% url 'delete_single_exercise_class' class.id %}">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </a>
