@@ -1,4 +1,5 @@
 import json
+import uuid
 from datetime import date, timedelta
 
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
@@ -31,7 +32,6 @@ def cache_checkout_data(request):
         if len(current_bag['bag_items']['single_classes']) > 0:
             for item in current_bag['bag_items']['single_classes']:
                 classes_data.append(item.id)
-                print(item.id)
         # store package data in meta data
         if package:  # add required data to dict
             package_data['name'] = package.friendly_name
@@ -43,7 +43,8 @@ def cache_checkout_data(request):
         stripe.PaymentIntent.modify(pid, metadata={
             'bag': json.dumps(request.session.get('bag', {})),
             'save_info': request.POST.get('save_info'),
-            'username': request.user,
+            'username': request.user.username,
+            'has_account': request.user.is_authenticated,
             'package_data': json.dumps(package_data),
             'classes_data': json.dumps(classes_data),
         })
@@ -112,7 +113,6 @@ def checkout(request):
                     )
                     order.delete()
                     return redirect(reverse('view_bag'))
-
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
@@ -253,7 +253,7 @@ def checkout_success(request, order_number):
                     'first_name': list_name[0],
                     'last_name': list_name[-1],
                     'email': order.email,
-                    'username': 'Guest_' + list_name[0] + "_" + list_name[-1],
+                    'username': 'Guest_' + str(uuid.uuid4()),
                 }
                 user_form = UserForm(user_data)
 
