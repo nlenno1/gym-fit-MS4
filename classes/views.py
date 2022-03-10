@@ -564,16 +564,19 @@ def add_category_to_favs(request, category_id):
     """ A view to allow user to add a class category
     to their favourties list """
 
-    redirect_url = request.POST.get('redirect_url')
     profile = UserProfile.objects.get(user=request.user)
     category = ClassCategory.objects.get(pk=category_id)
 
     profile.fav_class_categories.add(category)
     messages.success(request, f"You have ADDED {category.friendly_name} to \
         your Class Category Favourites list")
-
-    return redirect(redirect_url)
-
+    try:
+        redirect_url = request.POST.get('redirect_url')
+        return redirect(redirect_url)
+    except TypeError as err:
+        messages.info(request, f"Redirected to all class categories \
+            due to {err}")
+        return redirect(reverse('view_class_categories'))
 
 
 @login_required
@@ -588,5 +591,10 @@ def remove_category_from_favs(request, category_id):
     profile.fav_class_categories.remove(category)
     messages.success(request, f"You have REMOVED {category.friendly_name} from \
         your Class Category Favourites list")
-
-    return redirect(redirect_url)
+    try:
+        redirect_url = request.POST.get('redirect_url')
+        return redirect(redirect_url)
+    except TypeError as err:
+        messages.info(request, f"Redirected to all class categories \
+            due to {err}")
+        return redirect(reverse('view_class_categories'))
