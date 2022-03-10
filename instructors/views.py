@@ -18,9 +18,7 @@ def instructor_management(request):
     instructors = Instructor.objects.all()
 
     for instructor in instructors:
-        print(instructor.can_lead_classes)
         instructor.can_lead_classes_list = instructor.can_lead_classes.all()
-        print(instructor.can_lead_classes_list)
 
     context = {
         'instructors': instructors,

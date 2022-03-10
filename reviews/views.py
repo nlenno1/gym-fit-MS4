@@ -61,4 +61,3 @@ def delete_category_review(request, review_id):
         messages.error(request, "Unable to find review to delete")
 
     return redirect(reverse('view_single_class_category', kwargs={'category_id': category.id}))
-
