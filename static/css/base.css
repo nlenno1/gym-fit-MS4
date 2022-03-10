@@ -106,11 +106,23 @@ h1, h2, h3 ,h4, h5 {
     background-color: #2AAFD3;
 }
 
-.dropdown-menu.show {
+#main-nav .dropdown-menu.show {
     border: 2px solid #353535;
     margin-top: 19px;
     padding: 0;
-    display: block;
+}
+
+#main-nav .dropdown-item {
+    padding: 1.8em 2.2em;
+}
+
+#top-nav .dropdown-menu.show {
+    margin-top: 0;
+    padding: 0;
+}
+
+#top-nav .dropdown-item {
+    padding: 0.79rem 1rem;
 }
 
 @media(min-width:997px) {
