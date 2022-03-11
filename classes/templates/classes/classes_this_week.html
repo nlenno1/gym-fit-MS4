@@ -138,3 +138,8 @@
         </div>
     </section>
 {% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script src="{% static 'classes/js/classes.js' %}"></script>
+{% endblock %}

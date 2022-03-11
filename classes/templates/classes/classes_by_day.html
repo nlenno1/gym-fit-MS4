@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block extracss %}
-<link rel="stylesheet" href="{% static 'classes/css/classes.css' %}">
+    <link rel="stylesheet" href="{% static 'classes/css/classes.css' %}">
 {% endblock %}
 
 {% block page_header %}
@@ -150,4 +150,9 @@
             <!-- /Individual Class Display -->
         </div>
     </section>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script src="{% static 'classes/js/classes.js' %}"></script>
 {% endblock %}

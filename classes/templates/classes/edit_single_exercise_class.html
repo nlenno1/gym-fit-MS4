@@ -30,7 +30,7 @@
 {% endblock %}
 
 {% block postloadjs %}
-    {{ super }}
+    {{ block.super }}
     <script>
         $(document).ready(function() {
             $('#div_id_weekly_class').hide();
