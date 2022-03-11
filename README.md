@@ -217,7 +217,8 @@ View the [Testing Document](readme/assets/testing.md)
 
 ## **TECHNOLOGY USED**
 
-### Languages and Libraries
+<details>
+<summary> Languages and Libraries</summary>
 
 - [HTML5](https://developer.mozilla.org/en-US/docs/Glossary/HTML5) - Programming Language
 - [CSS 3](https://developer.mozilla.org/en-US/docs/Web/CSS) - Programming Language
@@ -229,35 +230,45 @@ View the [Testing Document](readme/assets/testing.md)
 - [Bootstrap v5](https://getbootstrap.com/) - Library Import
 - [Google Fonts](https://fonts.google.com/) - Typography Import
 - [Font Awesome](https://fontawesome.com/) - Icon provider
+</details>
 
-### IDE and Version Control
+<details>
+<summary> IDE and Version Control</summary>
 
 - [Git Pod](https://gitpod.io/) - IDE (Integrated Development Environment)
 - [Git](https://git-scm.com/) - Version Control Tool
 - [Github](https://github.com/) - Cloud based hosting service to manager my Git Repositories
 - [Code Institute GitPod Template](https://github.com/Code-Institute-Org/gitpod-full-template) - Provides GitPod extensions to help with code production
+</details>
 
-### Design and Development
+<details>
+<summary> Design and Development</summary>
 
 - [Google Chrome Development Tools](https://developer.chrome.com/docs/devtools/) - Design/Development Tools
 - [Figma](https://www.figma.com/) - Wireframe designer software
+- [Balsamiq](https://balsamiq.com/) - Wireframe designer software
 - [Coolors](https://coolors.co/) - Colour scheme generator
 - [Lucid App](https://lucid.app/) - Diagram creator
 - [Draw.io](https://app.diagrams.net/) - Flow chart creator
-- [Animista](https://animista.net/) - CSS animation designer
+</details>
 
-### Validation and Testing
+<details>
+<summary> Validation and Testing</summary>
 
 - [CSS Beautifier](https://www.freeformatter.com/css-beautifier.html) - Beautifying CSS Code
 - [JavaScript Validator](https://beautifytools.com/javascript-validator.php) - Validating JS code
 - [Lambda Test](https://www.lambdatest.com/) - Browser Testing Cloud Service
 - [Am I Responsive?](http://ami.responsivedesign.is/) - Webpage Breakpoint visualizer and image generator
+- [Black](https://black.readthedocs.io/en/stable/)- Code Formatter
+</details>
 
-### Documentation
+<details>
+<summary> Documentation</summary>
 
 - [TinyPNG](https://tinypng.com/) - Image Compression
 - [CompressPNG](https://compresspng.com/) - Image Compression
 - [Markdown Table Generator](https://www.tablesgenerator.com/markdown_tables) - Markdown Table Production
+</details>
 
 ## **CREDITS**
 
