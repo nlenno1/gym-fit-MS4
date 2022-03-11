@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from products.models import ClassAccessPackage
 from classes.models import SingleExerciseClass
@@ -16,6 +17,7 @@ def view_bag(request):
     )
 
 
+@login_required
 def add_package_to_bag(request, item_id):
     """View to add a package to the shopping bag"""
 
@@ -24,6 +26,7 @@ def add_package_to_bag(request, item_id):
     bag = request.session.get(
         "bag", {"class_access_package": None, "single_classes": []}
     )
+
     profile = UserProfile.objects.get(user=request.user)
     profile.check_package_expired()
 

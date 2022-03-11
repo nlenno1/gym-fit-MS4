@@ -17,6 +17,7 @@ I requested peer review feedback from my friends, family and the Code Institute 
 |Anya McDonald |Class description seems too close to the image on the Class Details page |Added addition padding to this text section |
 |Anya McDonald |2nd image on the home page seems out of place |Updated design |
 |Anya McDonald |Would like some more general information etc opening hours etc  |Added opening hours to the home page |
+|Laila (Slack) |500 response when adding a package to their bag as a guest  |Added login_required decorator to prompt user to sign in/up to purchase a package |
 
 ## Responsive Design 
 
