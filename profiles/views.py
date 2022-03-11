@@ -3,14 +3,15 @@ from datetime import date, datetime
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from contact.models import ContactMessage
 from checkout.models import Order
 from .models import UserProfile
-
 from .forms import UserProfileForm, UserForm
 
 
+@login_required
 def profile(request):
     """Display User Profile"""
     profile_object = get_object_or_404(UserProfile, user=request.user)
