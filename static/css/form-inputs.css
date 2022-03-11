@@ -2,7 +2,8 @@
 
 .form-control,
 .stripe-style-input,
-.input-group {
+.input-group,
+.form-select {
     box-sizing: border-box;
     border: 1px solid #2AAFD3;
     border-radius: 0.25rem;
@@ -22,7 +23,9 @@
 .form-check-input:focus, 
 .form-check-input:active,
 .stripe-style-input:focus,
-.stripe-style-input:active {
+.stripe-style-input:active,
+.form-select:focus,
+.form-select:active {
   box-shadow: 0 1px 3px 0 #cfd7df;
   border: 1px solid #2AAFD3;
 }
