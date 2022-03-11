@@ -188,6 +188,17 @@ def classes_this_week(request):
             })
     days_with_classes_sorted = sorted(days_with_classes, key=lambda d: d['date'])
 
+    # format ability level attributes for display
+    for item in selected_classes:
+        if item.ability_level == "BEG":
+            item.ability_level = "Beginner"
+        elif item.ability_level == "INT":
+            item.ability_level = "Intermediate"
+        elif item.ability_level == "ADV":
+            item.ability_level = "Advanced"
+        else:
+            item.ability_level = "For All"
+
     context = {
         'classes': selected_classes,
         'class_categories': categories,
@@ -200,7 +211,7 @@ def classes_this_week(request):
     return render(request, 'classes/classes_this_week.html', context)
 
 
-def filter_single_classes(request):  
+def filter_single_classes(request):
     """ A view to return all the single exercise classes
     filtered by date and category"""
 
@@ -251,6 +262,17 @@ def filter_single_classes(request):
                 item.unavailable = True
 
         profile_tokens = profile.class_tokens
+    
+    # format ability level attributes for display
+    for item in filtered_classes:
+        if item.ability_level == "BEG":
+            item.ability_level = "Beginner"
+        elif item.ability_level == "INT":
+            item.ability_level = "Intermediate"
+        elif item.ability_level == "ADV":
+            item.ability_level = "Advanced"
+        else:
+            item.ability_level = "For All"
 
     context = {
         'classes': filtered_classes,
