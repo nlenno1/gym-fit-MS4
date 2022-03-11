@@ -30,15 +30,15 @@
                 {% for category in class_categories %}
                 <div class="class_catergory_card">
                     <div class="row g-0 text-center">
-                        <div class="col-12"><h4 class="pt-2">{{ category.friendly_name }}</h4></div>
+                        <div class="col-12"><h2 class="pt-2">{{ category.friendly_name }}</h2></div>
                         <div class="col-12">
                             <div class="image-container d-flex justify-content-center">
                                 {% if category.image_url %}
-                                    <img src="{{ category.image_url }}" alt="Image of {{ category.friendly_name }}"></div>
+                                    <img src="{{ category.image_url }}" alt="Representation of a {{ category.friendly_name }} class"></div>
                                 {% elif category.image %}
-                                    <img src="{{MEDIA_URL}}{{ category.image }}" alt="Image of {{ category.friendly_name }}"></div>
+                                    <img src="{{MEDIA_URL}}{{ category.image }}" alt="Representation of a {{ category.friendly_name }} class"></div>
                                 {% else %}
-                                    <img src="{{MEDIA_URL}}no-image.jpg" alt="Image of {{ category.friendly_name }}"></div>
+                                    <img src="{{MEDIA_URL}}no-image.jpg" alt="Representation of a {{ category.friendly_name }} class"></div>
                                 {% endif %}
                             </div>
                         <div class="col-6">Av. Rating: {{ category.average_rating }}</div>
@@ -49,7 +49,7 @@
                                     <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
                                     <button type="submit" data-bs-container="body" data-bs-trigger="hover focus"
                                     data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Remove from Favourite Categories"
-                                    class="no-button"><i class="fa-solid fa-heart"></i></button>
+                                    class="no-button" aria-label="Remove Category from Favourites List"><i class="fa-solid fa-heart text-danger"></i></button>
                                 </form>
                             {% else %}
                                 <form action="{% url 'add_category_to_favs' category.id %}" method="POST" class="form">
@@ -57,12 +57,12 @@
                                     <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
                                     <button type="submit" data-bs-container="body" data-bs-trigger="hover focus"
                                     data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Add to Favourite Categories"
-                                    class="no-button"><i class="fa-regular fa-heart"></i></button>
+                                    class="no-button" aria-label="Add Category to Favourites List"><i class="fa-regular fa-heart"></i></button>
                                 </form>
                             {% endif %}
                         </div>
                         <div class="col-12">
-                            <a class="btn btn-dark mt-2" href="{% url 'view_single_class_category' category.id %}">View Class Details</a>
+                            <a class="btn btn-dark blue-button mt-2" href="{% url 'view_single_class_category' category.id %}" aria-label="View Details about {{ category.friendly_name }} classes">View Class Details</a>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                     <h3 class="display-5 text-center">There are no Class Categories to display</h3>
                     {% if user.is_superuser %}
                         <h5>Why not add some...</h5>
-                        <a href="{% url 'add_class_category' %}" class="btn btn-dark blue-button">Add Class Category</a>
+                        <a href="{% url 'add_class_category' %}" class="btn btn-dark blue-button" aria-label="Add a new Class Category">Add Class Category</a>
                     {% else %}
                         <h5>Try again later or get in touch if this is a recurring issue</h5>
                     {% endif %}

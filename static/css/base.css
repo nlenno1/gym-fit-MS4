@@ -12,6 +12,8 @@ h1, h2, h3 ,h4, h5 {
 
 .blue-button, #home-find-us {
     background-color: #2AAFD3;
+    color: #000;
+    font-weight: 500;
 }
 
 .hover-blue:hover, footer a:hover, hr {
@@ -102,7 +104,7 @@ h1, h2, h3 ,h4, h5 {
     font-size: 0.8em;
 }
 
-.dropdown-item.active, .dropdown-item:active {
+.blue-background, .dropdown-item.active, .dropdown-item:active {
     background-color: #2AAFD3;
 }
 
@@ -217,8 +219,7 @@ footer a {
 }
 
 footer img {
-    width: 100%;
-    max-width: 200px;
+    width: 200px;
 }
 
 .footer-link-container, .footer-service-description {

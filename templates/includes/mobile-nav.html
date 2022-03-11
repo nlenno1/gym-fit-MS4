@@ -4,7 +4,7 @@
 <!-- The overlay -->
 <div id="mobileNav" class="overlay">
     <!-- Button to close the overlay navigation -->
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <button class="closebtn no-button" onclick="closeNav()" type="button">&times;</button>
     <!-- Overlay content -->
     <div class="overlay-content">
       <ul class="navbar-nav ">
@@ -33,7 +33,7 @@
       </ul>
       <hr class="h-5 w-75 my-4 mx-auto">
       <a href="{% url 'home' %}">
-        <img src="{{ MEDIA_URL }}gym-fit-logo-white-text-clear.png" alt="">
+        <img src="{{ MEDIA_URL }}gym-fit-logo-white-text-clear.png" alt="GymFit logo">
       </a>
     </div>
   </div>

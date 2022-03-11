@@ -20,8 +20,8 @@
                     {% csrf_token %}
                     {{ form | crispy }}
                     <div class="text-center my-5">
-                        <a href="{% url 'view_class_categories' %}" class="btn btn-dark">Cancel</a>
-                        <button type="submit" class="btn btn-dark blue-button">Update Category</button>
+                        <a href="{% url 'view_class_categories' %}" class="btn btn-dark" aria-label="Cancel and return to Class Catrgories">Cancel</a>
+                        <button type="submit" class="btn btn-dark blue-button" aria-label="Submit the update information for this Category">Update Category</button>
                     </div>
                 </form>
             </div>

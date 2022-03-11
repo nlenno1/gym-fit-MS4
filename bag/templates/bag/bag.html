@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-2 schedule-display-buttons mt-3 mt-sm-0 flex-lg-row">
-                                    <a class="" href="{% url 'remove_from_bag' 'package' bag_items.class_access_package.id %}">
+                                    <a class="" href="{% url 'remove_from_bag' 'package' bag_items.class_access_package.id %}" aria-label="Remove item from your bag">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </div>
@@ -87,7 +87,7 @@
                                     {% endif %}
                                 </div>
                                 <div class="col-12 col-sm-1 schedule-display-buttons mt-3 mt-sm-0 flex-lg-row">
-                                    <a href="{% url 'remove_from_bag' 'single_class' item.id %}">
+                                    <a href="{% url 'remove_from_bag' 'single_class' item.id %}" aria-label="Remove item from your bag">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </div>
@@ -103,11 +103,11 @@
             {% endif %}
         </div>
         <div class="text-center">
-            <a class="btn btn-dark mt-2" href="{% url 'classes_this_week' %}">More Classes</a>
-            <a class="btn btn-dark mt-2" href="{% url 'view_class_access_packages' %}">Class Packages</a>
+            <a class="btn btn-dark mt-2" href="{% url 'classes_this_week' %}" aria-label="View Classes this week">Classes This Week</a>
+            <a class="btn btn-dark mt-2" href="{% url 'view_class_access_packages' %}" aria-label="View our class packages">Class Packages</a>
         </div>
         <div class="text-center text-md-end mt-4 mb-5">
-            <a class="btn btn-dark blue-button mt-2" href="{% url 'checkout' %}">Proceed To Checkout</a>
+            <a class="btn btn-dark blue-button mt-2" href="{% url 'checkout' %}" aria-label="Go to the checkout page">Proceed To Checkout</a>
         </div>
     </section>
 {% endblock %}

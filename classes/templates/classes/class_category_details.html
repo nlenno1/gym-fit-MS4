@@ -28,15 +28,15 @@
                         {% csrf_token %}
                         <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
                         <button type="submit" data-bs-container="body" data-bs-trigger="hover focus"
-                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Remove from Favourite Categories"
-                        class="no-button w-25"><i class="fa-solid fa-heart"></i></button>
+                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Remove from Favourite Categories" aria-label="Remove this Class Category from your Favourites"
+                        class="no-button w-25"><i class="fa-solid fa-heart text-danger"></i></button>
                     </form>
                 {% else %}
                     <form action="{% url 'add_category_to_favs' category.id %}" method="POST" class="form">
                         {% csrf_token %}
                         <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
                         <button type="submit"  data-bs-container="body" data-bs-trigger="hover focus"
-                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Add to Favourite Categories"
+                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Add to Favourite Categories" aria-label="Add this Class Category from your Favourites"
                         class="no-button w-25"><i class="fa-regular fa-heart"></i></button>
                     </form>
                 {% endif %}
@@ -80,7 +80,7 @@
                             <a href="{% url 'create_a_category_review' category.id %}" class="float-end btn btn-dark blue-button">Write A Review</a>
                         {% else %}
                             <a href="{% url 'account_login' %}">
-                                <h5 class="text-blue fw-bold text-end">Sign In To Leave A Review</h5>
+                                <h5 class="fw-bold text-end text-black">Sign In To Leave A Review</h5>
                             </a>
                         {% endif %}
                         </div>

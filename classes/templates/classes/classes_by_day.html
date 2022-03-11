@@ -20,12 +20,12 @@
         <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Class Booking - By Day</h1>
         <div id="results-container">
             <div class="text-center text-md-start ps-md-5 my-3"><a class="btn btn-dark blue-button"
-                    href="{% url 'classes_this_week' %}">Classes This Week</a></div>
+                    href="{% url 'classes_this_week' %}" aria-label="View all the exercise classes on this week">Classes This Week</a></div>
             <form id="date-form" action="{% url 'filter_single_classes' %}" method="GET">
                 <div class="row align-items-center g-0 mt-3">
                     <div class="col-12 col-md-3 text-center text-md-start">
                         <!-- Label for Date input -->
-                        <h3 class="text-md-end mb-0 me-2">Classes on </h3>
+                        <h2 class="text-md-end mb-0 me-2 fw-bold">Classes on </h2>
                     </div>
                     <div class="col-12 col-md-3">
                         <!-- date input - js change event hander calls function -->
@@ -94,16 +94,16 @@
                                 </div>
                                 <div class="col-12 col-sm-4 col-md-3 col-lg-2 schedule-display-buttons mt-3 mt-sm-0 flex-col">
                                     {% if class.closed %}
-                                        <button class="btn btn-dark" disabled>Class Closed</button>
+                                        <button class="btn btn-dark" disabled aria-label="This class has already started">Class Closed</button>
                                     {% elif class.unavailable %}
-                                        <button class="btn btn-dark" disabled>Already Booked</button>
+                                        <button class="btn btn-dark" disabled aria-label="You are already booked onto this class">Already Booked</button>
                                     {% elif class.remaining_spaces is 0 %}
-                                        <button class="btn btn-danger" disabled>Fully Booked</button>
+                                        <button class="btn btn-danger" disabled aria-label="This class is fully booked">Fully Booked</button>
                                     {% elif profile_tokens > class.token_cost %}
                                         <form action="{% url 'book_with_tokens' class.id %}" method="POST" class="form">
                                             {% csrf_token %}
                                             <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
-                                            <button type="submit" class="btn btn-success">Book with Tokens</button>
+                                            <button type="submit" class="btn btn-success" aria-label="Book this class using your Class Tokens">Book with Tokens</button>
                                         </form>
                                     {% else %}
                                         <form action="{% url 'add_single_class_to_bag' class.id %}" method="POST" class="form">
@@ -113,8 +113,8 @@
                                         </form>
                                     {% endif %}
                                     {% if user.is_superuser %}
-                                        <a class="btn btn-dark mt-2" href="{% url 'edit_single_exercise_class' class.id %}">Edit Class</a>
-                                        <a class="mt-2 confirm-delete" href="{% url 'delete_single_exercise_class' class.id %}">
+                                        <a class="btn btn-dark mt-2" href="{% url 'edit_single_exercise_class' class.id %}" aria-label="Edit information about this exercise class">Edit Class</a>
+                                        <a class="mt-2 confirm-delete" href="{% url 'delete_single_exercise_class' class.id %}" aria-label="Cancel this exercise class">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </a>
                                     {% endif %}

@@ -20,8 +20,8 @@
                     {% csrf_token %}
                     {{ form | crispy }}
                     <div class="text-center my-5">
-                        <a href="{% url 'profile' %}" class="btn btn-dark">Cancel</a>
-                        <button type="submit" class="btn btn-dark blue-button">Update Class</button>
+                        <a href="{% url 'classes_this_week' %}" class="btn btn-dark" aria-label="Cancel and return to classes this week">Cancel</a>
+                        <button type="submit" class="btn btn-dark blue-button" aria-label="Submit updated Class information">Update Class</button>
                     </div>
                 </form>
             </div>

@@ -4,7 +4,7 @@
 
 {% block extracss %}
     <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
-    <link rel="stylesheet" href="{% static 'css/classes.css' %}">
+    <link rel="stylesheet" href="{% static 'classes/css/classes.css' %}">
 {% endblock %}
 
 {% block page_header %}
@@ -24,42 +24,42 @@
                 <!-- Nav Pills Taken from Bootstrap 5 Documentation -->
                 <ul class="nav nav-pills nav-justified">
                     <li class="nav-item">
-                      <button class="nav-link profile-menu-button" id="personal-details-button" type="button">Personal Details</button>
+                      <button class="nav-link profile-menu-button" id="personal-details-button" type="button" aria-label="Show your Personal Details">Personal Details</button>
                     </li>
                     <li class="nav-item">
-                      <button class="nav-link profile-menu-button" id="my-bookings-button" type="button">My Bookings</button>
+                      <button class="nav-link profile-menu-button" id="my-bookings-button" type="button" aria-label="Show your class bookings">My Bookings</button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link profile-menu-button" id="previous-puchases-button" type="button">Previous Purchases</button>
+                        <button class="nav-link profile-menu-button" id="previous-puchases-button" type="button" aria-label="Show a list of your previous orders">Previous Purchases</button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link profile-menu-button" id="favourite-class-list-button" type="button">Favourite Class List</button>
+                        <button class="nav-link profile-menu-button" id="favourite-class-list-button" type="button" aria-label="Show your Favourite Class Categories list">Favourite Class List</button>
                     </li>
                 </ul>
                 {% if request.user.is_superuser %}
                     <hr>
                     <ul class="nav nav-pills nav-justified">
                         <li class="nav-item profile-menu-button" id="admin-messages-button">
-                            <button class="nav-link" type="button">Admin Messages ({{ admin_messages|length }})</button>
+                            <button class="nav-link" type="button" aria-label="View the adming messages">Admin Messages ({{ admin_messages|length }})</button>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'add_class_category' %}" class="nav-link">Add A Class Catergory</a>
+                            <a href="{% url 'add_class_category' %}" class="nav-link" aria-label="Add a Class Category">Add A Class Catergory</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'add_single_exercise_class' %}" class="nav-link">Schedule A Class</a>
+                            <a href="{% url 'add_single_exercise_class' %}" class="nav-link" aria-label="Schedule a new class">Schedule A Class</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'add_class_access_package' %}" class="nav-link">Create a Class Access Package</a>
+                            <a href="{% url 'add_class_access_package' %}" class="nav-link" aria-label="Create a Class Access Package">Create a Class Access Package</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'instructor_management' %}" class="nav-link">Instructor Management</a>
+                            <a href="{% url 'instructor_management' %}" class="nav-link" aria-label="Go to the instructor management page">Instructor Management</a>
                         </li>
                     </ul>
                 {% endif %}
                 <hr>
                 <ul class="nav nav-pills nav-justified mb-5">
                     <li class="nav-item">
-                        <a href="{% url 'account_logout' %}" class="nav-link">Sign Out</a>
+                        <a href="{% url 'account_logout' %}" class="nav-link" aria-label="Sign Out">Sign Out</a>
                     </li>
                 </ul> 
                 <!-- Class Access Package/Tokens View -->
@@ -105,11 +105,11 @@
                         <hr class="my-4">
                         {{ form|crispy }}
                         <div class="text-center">
-                            <button type="submit" class="btn btn-dark blue-button">Update Information</button>
+                            <button type="submit" class="btn btn-dark blue-button" aria-label="Submit the updated information">Update Information</button>
                         </div>
                     </form>
                 </section>
-                <section id="my-bookings" class="profile-section mx-md-5 mb-5">
+                <section id="my-bookings" class="profile-section mx-lg-5 mb-5">
                     {% if upcoming_classes|length > 0 or previous_classes|length > 0 %}
                         {% if upcoming_classes|length > 0 %}
                             <h5 class="display-4">Upcoming Classes</h5>
@@ -137,7 +137,7 @@
                                         </div>
                                         <div class="col-12 col-sm-2">
                                             <a href="{% url 'cancel_class_booking' class.id %}" data-bs-container="body" data-bs-trigger="hover focus"
-                                                data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Cancel this class booking">
+                                                data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Cancel this class booking" aria-label="Cancel this class booking">
                                                     <i class="fa-solid fa-calendar-xmark"></i>
                                             </a>
                                         </div>
@@ -186,7 +186,7 @@
                     <div class="text-center text-md-start">
                         <h2 class="display-3">You have no Bookings</h2>
                         <h3>Why not book onto one of our classes</h3>
-                        <a href="{% url 'classes_this_week' %}" class="btn btn-dark blue-button">Our Classes</a>
+                        <a href="{% url 'classes_this_week' %}" class="btn btn-dark blue-button" aria-label="View all the class types we provide">Our Classes</a>
                     </div>
                     {% endif %}
                 </section>
@@ -209,7 +209,7 @@
                                             <td>
                                                 <a href="{% url 'order_history' order.order_number %}" data-bs-container="body" data-bs-trigger="hover focus"
                                                 data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click to view more about this purchase"
-                                                title="{{ order.order_number }}">
+                                                title="{{ order.order_number }}" aria-label="View more details about this order">
                                                     {{ order.order_number|truncatechars:6 }}
                                                 </a>
                                             </td>
@@ -239,7 +239,7 @@
                     {% else %}
                         <h5 class="display-3">You have no Previous Orders</h5>
                         <h3>Why not buy one of our Access Packages</h3>
-                        <a href="{% url 'view_class_access_packages' %}" class="btn btn-dark blue-button">Our Packages</a>
+                        <a href="{% url 'view_class_access_packages' %}" class="btn btn-dark blue-button" aria-label="View all the Class Access Packages we provide">Our Packages</a>
                     {% endif %}
                 </section>
                 <section id="favourite-class-list" class="profile-section mx-md-5 mb-5 mb-5">
@@ -259,7 +259,8 @@
                                     <th scope="row">{{ category.friendly_name }}</th>
                                     <td>
                                         <a href="#" class="confirm-cancel" data-bs-container="body" data-bs-trigger="hover focus"
-                                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Remove this Category from the list">
+                                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Remove this Category from the list"
+                                        aria-label="Remove this category from your Class Category Favourites List">
                                             <i class="fa-solid fa-eraser"></i>
                                         </a>
                                     </td>
@@ -298,7 +299,7 @@
                                         <th>{{ message.message_sent }}</th>
                                         <td>
                                             <a href="{% url 'delete_contact_message' message.id %}" class="confirm-delete" data-bs-container="body" data-bs-trigger="hover focus"
-                                            data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Delete this message">
+                                            data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Delete this message" aria-label="Delete this message">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
                                         </td>

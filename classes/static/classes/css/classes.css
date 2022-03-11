@@ -31,12 +31,7 @@ a {
 }
 
 .class_catergory_card img {
-    height: 100%;
-}
-
-.class_catergory_card a {
-    text-decoration: none;
-    background-color: #2AAFD3;
+    height: 180px;
 }
 
 /* Class Bookings */
