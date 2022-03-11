@@ -322,20 +322,6 @@
 {% block postloadjs %}
     {{ block.super }}
     <script src="{% static 'profiles/js/countryfield.js' %}"></script>
-    <script>
-        // Tab View Control
-        $('.profile-menu-button').click(function(){
-            section = this.id.slice(0, -7)
-            $('#' + section).show();
-            $(".profile-section").not($('#' + section)).hide();
-            $("#visible-section-name").html(section.replace(/-/g, " ").toUpperCase());
-        })
-        $(document).ready(function(){
-            $('#personal-details').show();
-        })
-        // Confirm Cancellation 
-        $(document).on('click', '.confirm-cancel', function(){
-            return confirm('Are you sure you want to cancel this booking?');
-        })
-    </script>
+    <script src="{% static 'profiles/js/pill-menu-control.js' %}"></script>
+    <script src="{% static 'profiles/js/confirm-cancellation.js' %}"></script>
 {% endblock %}
