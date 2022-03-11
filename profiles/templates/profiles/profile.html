@@ -24,23 +24,23 @@
                 <!-- Nav Pills Taken from Bootstrap 5 Documentation -->
                 <ul class="nav nav-pills nav-justified">
                     <li class="nav-item">
-                      <button class="nav-link profile-menu-button" id="personal-details-button" aria-current="page" href="#">Personal Details</button>
+                      <button class="nav-link profile-menu-button" id="personal-details-button" type="button">Personal Details</button>
                     </li>
                     <li class="nav-item">
-                      <button class="nav-link profile-menu-button" id="my-bookings-button">My Bookings</button>
+                      <button class="nav-link profile-menu-button" id="my-bookings-button" type="button">My Bookings</button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link profile-menu-button" id="previous-puchases-button">Previous Purchases</button>
+                        <button class="nav-link profile-menu-button" id="previous-puchases-button" type="button">Previous Purchases</button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link profile-menu-button" id="favourite-class-list-button">Favourite Class List</button>
+                        <button class="nav-link profile-menu-button" id="favourite-class-list-button" type="button">Favourite Class List</button>
                     </li>
                 </ul>
                 {% if request.user.is_superuser %}
                     <hr>
                     <ul class="nav nav-pills nav-justified">
                         <li class="nav-item profile-menu-button" id="admin-messages-button">
-                            <button class="nav-link">Admin Messages ({{ admin_messages|length }})</button>
+                            <button class="nav-link" type="button">Admin Messages ({{ admin_messages|length }})</button>
                         </li>
                         <li class="nav-item">
                             <a href="{% url 'add_class_category' %}" class="nav-link">Add A Class Catergory</a>
@@ -136,7 +136,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-2">
-                                            <a href="{% url 'cancel_class_booking' class.id %}" type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                            <a href="{% url 'cancel_class_booking' class.id %}" data-bs-container="body" data-bs-trigger="hover focus"
                                                 data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Cancel this class booking">
                                                     <i class="fa-solid fa-calendar-xmark"></i>
                                             </a>
@@ -207,7 +207,7 @@
                                     {% for order in orders %}
                                         <tr>
                                             <td>
-                                                <a href="{% url 'order_history' order.order_number %}" type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                                <a href="{% url 'order_history' order.order_number %}" data-bs-container="body" data-bs-trigger="hover focus"
                                                 data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click to view more about this purchase"
                                                 title="{{ order.order_number }}">
                                                     {{ order.order_number|truncatechars:6 }}
@@ -258,7 +258,7 @@
                                     <tr>
                                     <th scope="row">{{ category.friendly_name }}</th>
                                     <td>
-                                        <a href="#" class="confirm-cancel" type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                        <a href="#" class="confirm-cancel" data-bs-container="body" data-bs-trigger="hover focus"
                                         data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Remove this Category from the list">
                                             <i class="fa-solid fa-eraser"></i>
                                         </a>
@@ -297,7 +297,7 @@
                                         <th>{{ message.message_text }}</th>
                                         <th>{{ message.message_sent }}</th>
                                         <td>
-                                            <a href="{% url 'delete_contact_message' message.id %}" class="confirm-delete" type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                            <a href="{% url 'delete_contact_message' message.id %}" class="confirm-delete" data-bs-container="body" data-bs-trigger="hover focus"
                                             data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Delete this message">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
@@ -321,7 +321,7 @@
 
 {% block postloadjs %}
     {{ block.super }}
-    <script type="text/javascript" src="{% static 'profiles/js/countryfield.js' %}"></script>
+    <script src="{% static 'profiles/js/countryfield.js' %}"></script>
     <script>
         // Tab View Control
         $('.profile-menu-button').click(function(){

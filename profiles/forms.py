@@ -37,8 +37,7 @@ class UserForm(forms.ModelForm):
             "last_name": "Last Name",
             "email": "Email",
         }
-
-        self.fields["username"].widget.attrs["autofocus"] = True
+        
         for field in self.fields:
             if self.fields[field].required:
                 placeholder = f"{placeholders[field]} *"
@@ -46,7 +45,6 @@ class UserForm(forms.ModelForm):
                 placeholder = placeholders[field]
             self.fields[field].widget.attrs["placeholder"] = placeholder
             self.fields[field].widget.attrs["class"] = "stripe-style-input"
-            self.fields[field].label = False
 
 
 class UserProfileForm(forms.ModelForm):
@@ -82,17 +80,18 @@ class UserProfileForm(forms.ModelForm):
             "default_street_address1": "Street Address 1",
             "default_street_address2": "Street Address 2",
             "default_county": "County",
-            "dob": "Date Of Birth",
             "health_conditions": "Medical Conditions",
         }
 
         self.fields["default_phone_number"].widget.attrs["autofocus"] = True
         for field in self.fields:
-            if field != "default_country":
+            if field != "default_country" and field != "dob":
                 if self.fields[field].required:
                     placeholder = f"{placeholders[field]} *"
                 else:
                     placeholder = placeholders[field]
                 self.fields[field].widget.attrs["placeholder"] = placeholder
+                self.fields[field].label = placeholder
             self.fields[field].widget.attrs["class"] = "stripe-style-input"
-            self.fields[field].label = False
+        self.fields["dob"].label = "Date of Birth"
+        self.fields["default_country"].label = "Country"

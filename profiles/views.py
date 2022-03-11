@@ -4,9 +4,9 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
 
+from contact.models import ContactMessage
 from checkout.models import Order
 from .models import UserProfile
-from contact.models import ContactMessage
 
 from .forms import UserProfileForm, UserForm
 
