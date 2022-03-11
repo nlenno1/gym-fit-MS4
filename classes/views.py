@@ -170,10 +170,8 @@ def classes_this_week(request):
     current_date = datetime.strptime(
         datetime.now().strftime("%Y,%m,%d"), "%Y,%m,%d"
     )
-    this_week = [
-        (current_date + timedelta(days=x)).strftime("%Y-%m-%d")
-        for x in range(7)
-    ]
+    this_week = [(current_date + timedelta(days=x)).strftime(
+                 "%Y-%m-%d")for x in range(9)]
     selected_classes = classes.filter(
         class_date__gte=this_week[0], class_date__lt=this_week[-1]
     )
