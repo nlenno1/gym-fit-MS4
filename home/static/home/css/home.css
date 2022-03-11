@@ -7,6 +7,12 @@
     position: relative;
 }
 
+.visible {
+    opacity: 1 !important;
+    visibility: visible;
+    top: 0;
+}
+
 .b-b-b {
     border-bottom: 15px #2AAFD3 solid;
 }
@@ -16,7 +22,7 @@
     font-weight: 600;
 }
 
-.hero-logo {
+#hero-logo {
     height: 180px;
     width: 180px;
     margin: 0 auto;
@@ -31,10 +37,21 @@
     /* box-shadow from w3 ('https://www.w3schools.com/css/css3_shadows_box.asp') */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 0.1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: ease-in-out 2.5s;
+}
+
+#intro_para, 
+#teamwork-image,
+#hero-image {
+    opacity: 0;
+    visibility: hidden;
+    transition: ease-in-out 1.5s;
 }
 
 @media(min-width:575px) {
-    .hero-logo {
+    #hero-logo {
         height: 200px;
         width: 200px;
         position: absolute;
@@ -63,7 +80,7 @@
         margin-top: 8vh !important;
         margin-left: 15vw !important;
     }
-    .hero-logo {
+    #hero-logo {
         height: 340px;
         width: 340px;
         position: absolute;

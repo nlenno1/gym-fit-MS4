@@ -220,16 +220,18 @@ View the [Testing Document](readme/assets/testing.md)
 <details>
 <summary> Languages and Libraries</summary>
 
+- [Django](https://www.djangoproject.com/) - Python Framework
 - [HTML5](https://developer.mozilla.org/en-US/docs/Glossary/HTML5) - Programming Language
 - [CSS 3](https://developer.mozilla.org/en-US/docs/Web/CSS) - Programming Language
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - Programming Language
 - [Python](https://www.python.org/) - Programming Language
-- [Werkzeug ](https://www.python.org/) - Python library to manage user management integrity
 - [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) - Templating Language
 - [jQuery](https://jquery.com/) - JavaScript Library
 - [Bootstrap v5](https://getbootstrap.com/) - Library Import
 - [Google Fonts](https://fonts.google.com/) - Typography Import
 - [Font Awesome](https://fontawesome.com/) - Icon provider
+- [AOS](https://github.com/michalsnik/aos) - Scroll Animation Library
+
 </details>
 
 <details>

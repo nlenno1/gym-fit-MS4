@@ -22,7 +22,7 @@
                     <h1 class="display-5 text-center text-sm-start ms-sm-5 mt-3 mt-sm-5">Welcome to Community Fitness</h1>
                 </div>
                 <div class="col-12 text-center text-sm-start">
-                    <img class="hero-logo" src="{{ MEDIA_URL }}gym-fit-logo.png" alt="Gym Fit Logo">
+                    <img id="hero-logo" src="{{ MEDIA_URL }}gym-fit-logo.png" alt="Gym Fit Logo">
                 </div>
             </div>
         </div>
@@ -33,6 +33,7 @@
                         <img id="teamwork-image" src="{{ MEDIA_URL }}gym-teamwork.jpg" alt="Two hands clasping in a handshake">
                     </div>
                     <div class="col-12 col-lg-6 text-center py-5">
+                        <div id="intro_para">
                             <p>
                                 Gym Fit is a community based fitness centre designed to bring people together to enjoy the experience of 
                                 group fitness, reap the benefits of having a healthier lifestyle and meet like minded people along the way
@@ -43,24 +44,25 @@
                                 <p>8am to 6pm on Weekends</p>
                             </div>
                             <p>If you have any questions get in touch or come down and chat to us</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <section id="our-team" class="container-fluid">
             <div class="our-team-container py-big">
-                <h2 class="text-center w-100 display-3 text-blue">Our Team</h2>
+                <h2 class="text-center w-100 display-3 text-blue" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">Our Team</h2>
                 <div class="team-cards-container pt-big">
                     {% if instructors|length > 0 %}
                         {% for instructor in instructors %}
                             {% if instructor.display_on_site %}
                                 <div class="trainer-card">
                                     {% if instructor.image_url %}
-                                        <img src="{{ instructor.image_url }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
+                                        <img data-aos="fade-down" data-aos-anchor-placement="bottom-bottom" src="{{ instructor.image_url }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
                                     {% elif instructor.image %}
-                                        <img src="{{ MEDIA_URL }}{{ instructor.image }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
+                                        <img data-aos="fade-down" data-aos-anchor-placement="bottom-bottom" src="{{ MEDIA_URL }}{{ instructor.image }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
                                     {% else %}
-                                        <img src="{{ MEDIA_URL }}/no-image.jpg" alt="Picture of {{ instructor.friendly_name }}, one of our instructors coming soon">
+                                        <img data-aos="fade-down" data-aos-anchor-placement="bottom-bottom" src="{{ MEDIA_URL }}/no-image.jpg" alt="Picture of {{ instructor.friendly_name }}, one of our instructors coming soon">
                                     {% endif %}
                                     <p class="text-uppercase">{{ instructor.friendly_name }}</p>
                                 </div>
@@ -74,7 +76,7 @@
         </section>
         <section>
             <div id="home-find-us" class="container-fluid text-center px-sm-5 py-big text-grey">
-                <a href="http://www.instagram.com" target="_blank">
+                <a href="http://www.instagram.com" target="_blank" aria-label="Go to GymFit's instagram page">
                     <p class="mb-0 display-3">
                         <i class="fa-brands fa-instagram text-grey"></i>
                     </p>
@@ -82,7 +84,7 @@
                 <p class="fw-bold">
                     Follow us at @GYMFITLONDON for the latest news and offers
                 </p>
-                <a href="https://www.google.co.uk/maps/place/87-95+Rye+Ln,+London+SE15+4TG/@51.4748384,-0.0749894,13.88z/data=!4m5!3m4!1s0x487603a051531199:0x7985ebcd285eaebc!8m2!3d51.4709398!4d-0.0665182" target="_blank">
+                <a href="https://www.google.co.uk/maps/place/87-95+Rye+Ln,+London+SE15+4TG/@51.4748384,-0.0749894,13.88z/data=!4m5!3m4!1s0x487603a051531199:0x7985ebcd285eaebc!8m2!3d51.4709398!4d-0.0665182" target="_blank" aria-label="Find us on google maps">
                     <p class="mb-0 display-3">
                         <i class="fa-solid fa-location-arrow text-grey"></i>
                     </p>
@@ -100,4 +102,15 @@
             </div>
         </section>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script>
+        window.onload = function() {
+            $('#hero-image').addClass('visible');
+            $('#intro_para').addClass('visible');
+            $('#teamwork-image').addClass('visible');
+        };
+    </script>
 {% endblock %}
