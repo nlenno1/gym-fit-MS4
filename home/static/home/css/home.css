@@ -2,27 +2,35 @@
 
 #hero-image {
     height: 300px;
-    background: url('/media/homepage-hero-image.jpg') no-repeat center center;
+    background: url('/media/homepage-hero-image.jpg') no-repeat 50% 40%;
     background-size: cover;
     position: relative;
 }
 
+.b-b-b {
+    border-bottom: 15px #2AAFD3 solid;
+}
+
 #hero-image h1 {
     height: 140px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .hero-logo {
     height: 180px;
     width: 180px;
     margin: 0 auto;
+    background-color: rgba(256, 256, 256, .5);
+    border-radius: 50%;
 }
 
 #teamwork-image {
     width: 75%;
-    max-width: 500px;
+    max-width: 450px;
     position: relative;
-    margin: -65px 0 15px;
+    /* box-shadow from w3 ('https://www.w3schools.com/css/css3_shadows_box.asp') */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 0.1rem;
 }
 
 @media(min-width:575px) {
@@ -49,7 +57,7 @@
 
 @media(min-width:997px) {
     #hero-image {
-        height: 650px;
+        height: 630px;
     }
     #hero-image h1 {
         margin-top: 8vh !important;
@@ -86,6 +94,7 @@
 .trainer-card {
     display: relative;
     width: 280px;
+    margin-left: 15px;
 }
 
 .trainer-card img {
