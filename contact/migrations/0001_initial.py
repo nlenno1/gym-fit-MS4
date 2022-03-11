@@ -8,19 +8,26 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='ContactMessage',
+            name="ContactMessage",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('message_from', models.CharField(max_length=100)),
-                ('reply_email', models.EmailField(max_length=254)),
-                ('message_subject', models.CharField(max_length=200)),
-                ('message_text', models.TextField()),
-                ('message_sent', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("message_from", models.CharField(max_length=100)),
+                ("reply_email", models.EmailField(max_length=254)),
+                ("message_subject", models.CharField(max_length=200)),
+                ("message_text", models.TextField()),
+                ("message_sent", models.DateTimeField(auto_now_add=True)),
             ],
         ),
     ]

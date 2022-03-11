@@ -6,16 +6,22 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('classes', '0002_alter_singleexerciseclass_instructor'),
+        ("classes", "0002_alter_singleexerciseclass_instructor"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='classcategory',
-            options={'ordering': ['friendly_name'], 'verbose_name_plural': 'Class Categories'},
+            name="classcategory",
+            options={
+                "ordering": ["friendly_name"],
+                "verbose_name_plural": "Class Categories",
+            },
         ),
         migrations.AlterModelOptions(
-            name='singleexerciseclass',
-            options={'ordering': ['class_date', 'start_time'], 'verbose_name_plural': 'Single Exercise Classes'},
+            name="singleexerciseclass",
+            options={
+                "ordering": ["class_date", "start_time"],
+                "verbose_name_plural": "Single Exercise Classes",
+            },
         ),
     ]

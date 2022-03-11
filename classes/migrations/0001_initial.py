@@ -16,41 +16,126 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='ClassCategory',
+            name="ClassCategory",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=254)),
-                ('friendly_name', models.CharField(blank=True, max_length=254, null=True)),
-                ('description', models.TextField(blank=True, null=True)),
-                ('equipment_required', models.CharField(blank=True, max_length=254, null=True)),
-                ('image', models.ImageField(blank=True, null=True, upload_to='')),
-                ('image_url', models.URLField(blank=True, max_length=1024, null=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=254)),
+                (
+                    "friendly_name",
+                    models.CharField(blank=True, max_length=254, null=True),
+                ),
+                ("description", models.TextField(blank=True, null=True)),
+                (
+                    "equipment_required",
+                    models.CharField(blank=True, max_length=254, null=True),
+                ),
+                (
+                    "image",
+                    models.ImageField(blank=True, null=True, upload_to=""),
+                ),
+                (
+                    "image_url",
+                    models.URLField(blank=True, max_length=1024, null=True),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Class Categories',
+                "verbose_name_plural": "Class Categories",
             },
         ),
         migrations.CreateModel(
-            name='SingleExerciseClass',
+            name="SingleExerciseClass",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('class_date', models.DateField()),
-                ('start_time', models.TimeField()),
-                ('end_time', models.TimeField()),
-                ('duration', models.PositiveSmallIntegerField(blank=True, null=True, validators=[django.core.validators.MaxValueValidator(120)])),
-                ('location', models.CharField(max_length=100)),
-                ('instructor', models.CharField(max_length=100)),
-                ('price', models.DecimalField(decimal_places=2, max_digits=5)),
-                ('token_cost', models.PositiveSmallIntegerField(validators=[django.core.validators.MaxValueValidator(30)])),
-                ('max_capacity', models.PositiveSmallIntegerField(validators=[django.core.validators.MaxValueValidator(150)])),
-                ('ability_level', models.CharField(blank=True, choices=[('BEG', 'Beginner'), ('INT', 'Intermediate'), ('ADV', 'Advanced')], max_length=30, null=True)),
-                ('additional_notes', models.TextField(blank=True, null=True)),
-                ('remaining_spaces', models.PositiveSmallIntegerField(blank=True, null=True, validators=[django.core.validators.MaxValueValidator(150)])),
-                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='classes.classcategory')),
-                ('participants', models.ManyToManyField(blank=True, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("class_date", models.DateField()),
+                ("start_time", models.TimeField()),
+                ("end_time", models.TimeField()),
+                (
+                    "duration",
+                    models.PositiveSmallIntegerField(
+                        blank=True,
+                        null=True,
+                        validators=[
+                            django.core.validators.MaxValueValidator(120)
+                        ],
+                    ),
+                ),
+                ("location", models.CharField(max_length=100)),
+                ("instructor", models.CharField(max_length=100)),
+                ("price", models.DecimalField(decimal_places=2, max_digits=5)),
+                (
+                    "token_cost",
+                    models.PositiveSmallIntegerField(
+                        validators=[
+                            django.core.validators.MaxValueValidator(30)
+                        ]
+                    ),
+                ),
+                (
+                    "max_capacity",
+                    models.PositiveSmallIntegerField(
+                        validators=[
+                            django.core.validators.MaxValueValidator(150)
+                        ]
+                    ),
+                ),
+                (
+                    "ability_level",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("BEG", "Beginner"),
+                            ("INT", "Intermediate"),
+                            ("ADV", "Advanced"),
+                        ],
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                ("additional_notes", models.TextField(blank=True, null=True)),
+                (
+                    "remaining_spaces",
+                    models.PositiveSmallIntegerField(
+                        blank=True,
+                        null=True,
+                        validators=[
+                            django.core.validators.MaxValueValidator(150)
+                        ],
+                    ),
+                ),
+                (
+                    "category",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="classes.classcategory",
+                    ),
+                ),
+                (
+                    "participants",
+                    models.ManyToManyField(
+                        blank=True, to=settings.AUTH_USER_MODEL
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Single Exercise Classes',
+                "verbose_name_plural": "Single Exercise Classes",
             },
         ),
     ]

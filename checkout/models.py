@@ -10,27 +10,38 @@ from products.models import ClassAccessPackage
 from classes.models import SingleExerciseClass
 from profiles.models import UserProfile
 
+
 class Order(models.Model):
-    """ Model for any Order created """
+    """Model for any Order created"""
+
     order_number = models.CharField(max_length=32, null=False, editable=False)
-    user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
-                                     null=True, blank=True,
-                                     related_name='orders')
+    user_profile = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="orders",
+    )
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
-    country = CountryField(blank_label='Country *', null=False, blank=False)
+    country = CountryField(blank_label="Country *", null=False, blank=False)
     postcode = models.CharField(max_length=20, null=True, blank=True)
     town_or_city = models.CharField(max_length=40, null=False, blank=False)
     street_address1 = models.CharField(max_length=80, null=False, blank=False)
     street_address2 = models.CharField(max_length=80, null=True, blank=True)
     county = models.CharField(max_length=80, null=True, blank=True)
     order_date = models.DateTimeField(auto_now_add=True)
-    order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
-    grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
-    original_bag = models.TextField(null=False, blank=False, default='')
-    stripe_pid = models.CharField(max_length=254, null=False, blank=False,
-                                  default='')
+    order_total = models.DecimalField(
+        max_digits=10, decimal_places=2, null=False, default=0
+    )
+    grand_total = models.DecimalField(
+        max_digits=10, decimal_places=2, null=False, default=0
+    )
+    original_bag = models.TextField(null=False, blank=False, default="")
+    stripe_pid = models.CharField(
+        max_length=254, null=False, blank=False, default=""
+    )
 
     def _generate_order_number(self):
         """
@@ -43,7 +54,12 @@ class Order(models.Model):
         Update grand total each time a line item is added,
         accounting for delivery costs.
         """
-        self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
+        self.order_total = (
+            self.lineitems.aggregate(Sum("lineitem_total"))[
+                "lineitem_total__sum"
+            ]
+            or 0
+        )
         self.grand_total = self.order_total
         self.save()
 
@@ -61,11 +77,24 @@ class Order(models.Model):
 
 
 class OrderLineItem(models.Model):
-    """ Model for individual items in an order """
-    order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
-    exercise_class = models.ForeignKey(SingleExerciseClass,  on_delete=models.CASCADE, null=True, blank=True)
-    access_package = models.ForeignKey(ClassAccessPackage,  on_delete=models.CASCADE, null=True, blank=True)
-    lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
+    """Model for individual items in an order"""
+
+    order = models.ForeignKey(
+        Order,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        related_name="lineitems",
+    )
+    exercise_class = models.ForeignKey(
+        SingleExerciseClass, on_delete=models.CASCADE, null=True, blank=True
+    )
+    access_package = models.ForeignKey(
+        ClassAccessPackage, on_delete=models.CASCADE, null=True, blank=True
+    )
+    lineitem_total = models.DecimalField(
+        max_digits=6, decimal_places=2, null=False, blank=False, editable=False
+    )
 
     def save(self, *args, **kwargs):
         """
@@ -76,14 +105,16 @@ class OrderLineItem(models.Model):
             self.lineitem_total = self.exercise_class.price
         elif self.access_package:
             self.lineitem_total = self.access_package.price
-        
-        
+
         super().save(*args, **kwargs)
 
     def __str__(self):
         if self.exercise_class:
-            description = f"{self.exercise_class.category} on {self.exercise_class.date} at {self.exercise_class.start_time}"
-            return f'{description} on order {self.order.order_number}'
+            description = f"{self.exercise_class.category} \
+                on {self.exercise_class.date} \
+                    at {self.exercise_class.start_time}"
+            return f"{description} on order \
+                {self.order.order_number}"
         elif self.access_package:
-            return f'{self.access_package.name} on order {self.order.order_number}'
-
+            return f"{self.access_package.name} on order \
+                {self.order.order_number}"

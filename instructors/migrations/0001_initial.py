@@ -9,21 +9,38 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('classes', '0001_initial'),
+        ("classes", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Instructor',
+            name="Instructor",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=254)),
-                ('friendly_name', models.CharField(max_length=254)),
-                ('description', models.TextField(max_length=255)),
-                ('image', models.ImageField(blank=True, null=True, upload_to='')),
-                ('image_url', models.URLField(blank=True, max_length=1024, null=True)),
-                ('display_on_site', models.BooleanField(default=False)),
-                ('can_lead_classes', models.ManyToManyField(to='classes.ClassCategory')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("name", models.CharField(max_length=254)),
+                ("friendly_name", models.CharField(max_length=254)),
+                ("description", models.TextField(max_length=255)),
+                (
+                    "image",
+                    models.ImageField(blank=True, null=True, upload_to=""),
+                ),
+                (
+                    "image_url",
+                    models.URLField(blank=True, max_length=1024, null=True),
+                ),
+                ("display_on_site", models.BooleanField(default=False)),
+                (
+                    "can_lead_classes",
+                    models.ManyToManyField(to="classes.ClassCategory"),
+                ),
             ],
         ),
     ]

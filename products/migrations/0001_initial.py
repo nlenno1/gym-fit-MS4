@@ -8,26 +8,69 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='ClassAccessPackage',
+            name="ClassAccessPackage",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=254)),
-                ('friendly_name', models.CharField(blank=True, max_length=254, null=True)),
-                ('sku', models.CharField(blank=True, max_length=254, null=True)),
-                ('type', models.CharField(blank=True, choices=[('UU', 'Unlimited Use'), ('TK', 'Token Package')], max_length=30, null=True)),
-                ('description', models.TextField(blank=True, null=True)),
-                ('price', models.DecimalField(decimal_places=2, max_digits=6)),
-                ('duration', models.PositiveSmallIntegerField(validators=[django.core.validators.MaxValueValidator(365)])),
-                ('amount_of_tokens', models.PositiveSmallIntegerField(blank=True, null=True, validators=[django.core.validators.MaxValueValidator(50)])),
-                ('image', models.ImageField(blank=True, null=True, upload_to='')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=254)),
+                (
+                    "friendly_name",
+                    models.CharField(blank=True, max_length=254, null=True),
+                ),
+                (
+                    "sku",
+                    models.CharField(blank=True, max_length=254, null=True),
+                ),
+                (
+                    "type",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("UU", "Unlimited Use"),
+                            ("TK", "Token Package"),
+                        ],
+                        max_length=30,
+                        null=True,
+                    ),
+                ),
+                ("description", models.TextField(blank=True, null=True)),
+                ("price", models.DecimalField(decimal_places=2, max_digits=6)),
+                (
+                    "duration",
+                    models.PositiveSmallIntegerField(
+                        validators=[
+                            django.core.validators.MaxValueValidator(365)
+                        ]
+                    ),
+                ),
+                (
+                    "amount_of_tokens",
+                    models.PositiveSmallIntegerField(
+                        blank=True,
+                        null=True,
+                        validators=[
+                            django.core.validators.MaxValueValidator(50)
+                        ],
+                    ),
+                ),
+                (
+                    "image",
+                    models.ImageField(blank=True, null=True, upload_to=""),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Class Access Packages',
+                "verbose_name_plural": "Class Access Packages",
             },
         ),
     ]

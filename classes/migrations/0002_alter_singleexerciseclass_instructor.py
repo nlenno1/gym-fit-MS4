@@ -7,14 +7,17 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('instructors', '0002_alter_instructor_description'),
-        ('classes', '0001_initial'),
+        ("instructors", "0002_alter_instructor_description"),
+        ("classes", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='singleexerciseclass',
-            name='instructor',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='instructors.instructor'),
+            model_name="singleexerciseclass",
+            name="instructor",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="instructors.instructor",
+            ),
         ),
     ]
