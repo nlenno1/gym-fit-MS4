@@ -26,8 +26,8 @@ class ClassCategoryForm(forms.ModelForm):
 class SingleExerciseClassForm(forms.ModelForm):
     """ Class for Form to create Class Access Packages """
 
-    weekly_class = forms.BooleanField()
-    weekly_classes_until = forms.DateField(widget=DateInput())
+    weekly_class = forms.BooleanField(required=False)
+    weekly_classes_until = forms.DateField(widget=DateInput(), required=False)
 
     class Meta:
         """ Update Class Meta Data """
