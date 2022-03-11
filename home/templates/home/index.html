@@ -58,11 +58,11 @@
                             {% if instructor.display_on_site %}
                                 <div class="trainer-card">
                                     {% if instructor.image_url %}
-                                        <img data-aos="fade-down" data-aos-anchor-placement="bottom-bottom" src="{{ instructor.image_url }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
+                                        <img data-aos="fade-up" data-aos-anchor-placement="center-bottom" src="{{ instructor.image_url }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
                                     {% elif instructor.image %}
-                                        <img data-aos="fade-down" data-aos-anchor-placement="bottom-bottom" src="{{ MEDIA_URL }}{{ instructor.image }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
+                                        <img data-aos="fade-up" data-aos-anchor-placement="center-bottom" src="{{ MEDIA_URL }}{{ instructor.image }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
                                     {% else %}
-                                        <img data-aos="fade-down" data-aos-anchor-placement="bottom-bottom" src="{{ MEDIA_URL }}/no-image.jpg" alt="Picture of {{ instructor.friendly_name }}, one of our instructors coming soon">
+                                        <img data-aos="fade-up" data-aos-anchor-placement="center-bottom" src="{{ MEDIA_URL }}/no-image.jpg" alt="Picture of {{ instructor.friendly_name }}, one of our instructors coming soon">
                                     {% endif %}
                                     <p class="text-uppercase">{{ instructor.friendly_name }}</p>
                                 </div>
@@ -75,7 +75,7 @@
             </div>
         </section>
         <section>
-            <div id="home-find-us" class="container-fluid text-center px-sm-5 py-big text-grey">
+            <div id="home-find-us" class="container-fluid text-center px-3 px-md-5 py-big text-grey">
                 <a href="http://www.instagram.com" target="_blank" aria-label="Go to GymFit's instagram page">
                     <p class="mb-0 display-3">
                         <i class="fa-brands fa-instagram text-grey"></i>
