@@ -167,13 +167,38 @@ This diagram shows the database models and the relationship between them.
 
 ![Database Structure and Schema Diagram](readme/assets/gym-fit-db-schema.png)
 
-Color Key:
+Color Key for app that contains the model:
 
-- Yellow - Orders
-- Green - Products/Purchasable items
-- Blue - User/Acounts
-- Red - Categories/Auto Fill Options
-- Orange - Reviews
+- Yellow - checkout
+- Purple - classes
+- Green - products
+- Orange - profiles
+- Grey - allauth
+- Red - instructors
+- Pink - reviews
+- Blue - contact
+
+### **Model Descriptions**
+
+**User** - Provied by AllAuth application and contains basic user information including username, email etc. This model does not link to any other model but if filled by the Order model on occasion.
+
+**UserProfile** - Stores more detail about a User and is created when the User signs up for a profile. Contains default informtion, used in Order and ContactMessage froms, as well as details about the classes the User has booked on to and the Users class packages, for example the amount of tokens they have to use and the package expiry date. This model is uses ClassCategory for its fav_class_category field and SingleExerciseClass for its classes field which are both ManyToManyFields
+
+**SingleExerciseClass** - Model for all the single exercise class events that can be booked onto using a one time payment or class access package. The model including details like the class location, start time, instructor, price etc. This model is uses ClassCategory for its category ForeignKeyField, Instructor for its instructor ForeignKeyField and User for its participants ManyToManyField
+
+**ClassCategory** - Model for the categories of exercise classes that are offered by GymFit. This model includes detail about the categories required equipment and a short description of the class category. This does't use any other model and was created first.
+
+**ClassCategoryReview** - Model contains all the information for a review of a exercise class category like the review author, subject, rating etc. This mode uses the User model for its author field and ClassCategory model for its review_subject field which are both ForeignKeys.
+
+**ClassAccessPackage** - Model for a type or puchasable product that will allow users access to book onto single exercise classes having unlimited access or a limited number of tokens attributed to their UserProfile. This model contains details such as the type of package, price, package duration until expiry etc. This model doesn't use any other models as the data contained with in it is generally used to alter the information in the UserProfile after purchase.
+
+**Order** - Model that contains all the data related to a single user purchase of a Class Access Package and/or Single Exercise Classes. This model includes shipping details, order total price and the Stripe PID. This model uses the UserProfile model through a ForeignKey field.
+
+**OrderLineItem** - A model for individual items in an order including what the item type and what order it belongs to." This model used the SingleExerciseClass, ClassAccessPackage and Order models as ForeignKeys.
+
+**Instructor** - This model contains the information about the instructors that work at GymFit like their description and if they will be shown on the website. This model uses the ClassCategory for its can_lead_classes ManyToManyField.
+
+**ContactMessage** - Model for storing all the messages sent from the contact page to admin including information like senders name, email address and the message. This model doesn't use any other model as the data is stored as strings as there is not the functionality to reply on the site.
 
 In the database, the OrderLineItem model is not necessary however, it has been included for code reusability and to speed up future develpment.
 
