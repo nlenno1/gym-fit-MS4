@@ -136,7 +136,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-2">
-                                            <a href="{% url 'cancel_class_booking' class.id %}" data-bs-container="body" data-bs-trigger="hover focus"
+                                            <a href="{% url 'cancel_class_booking' class.id %}" class="confirm-cancel" data-bs-container="body" data-bs-trigger="hover focus"
                                                 data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Cancel this class booking" aria-label="Cancel this class booking">
                                                     <i class="fa-solid fa-calendar-xmark"></i>
                                             </a>
@@ -258,7 +258,7 @@
                                     <tr>
                                     <th scope="row">{{ category.friendly_name }}</th>
                                     <td>
-                                        <a href="#" class="confirm-cancel" data-bs-container="body" data-bs-trigger="hover focus"
+                                        <a href="#" class="confirm-remove" data-bs-container="body" data-bs-trigger="hover focus"
                                         data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Remove this Category from the list"
                                         aria-label="Remove this category from your Class Category Favourites List">
                                             <i class="fa-solid fa-eraser"></i>
@@ -324,5 +324,4 @@
     {{ block.super }}
     <script src="{% static 'profiles/js/countryfield.js' %}"></script>
     <script src="{% static 'profiles/js/pill-menu-control.js' %}"></script>
-    <script src="{% static 'profiles/js/confirm-cancellation.js' %}"></script>
 {% endblock %}
