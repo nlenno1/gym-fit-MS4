@@ -58,7 +58,8 @@ class UserProfile(models.Model):
     def check_package_expired(self):
         """Check if package assigned to profile has expired"""
         if self.active_class_package:
-            if date.today() > self.package_expiry:
+            if (date.today() > self.package_expiry or
+              self.class_package_type == "TK" and self.class_tokens == 0):
                 self.active_class_package = False
                 self.package_name = None
                 self.class_package_type = None

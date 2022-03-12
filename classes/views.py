@@ -411,34 +411,41 @@ def cancel_class_booking(request, class_id):
     profile.classes.remove(exercise_class)
     profile.save()
 
-    if profile.class_package_type == "TK":
-        if date.today() > exercise_class.class_date - timedelta(days=1):
-            messages.success(
-                request,
-                "You have cancelled this class booking \
-                but have not been issued a refund due to notice given",
-            )
-        else:
-            profile.class_tokens += exercise_class.token_cost
-            messages.success(request, "You have cancelled this class booking")
-            if exercise_class.token_cost > 1:
-                messages.info(
-                    request,
-                    f"You have been refunded {exercise_class.token_cost} \
-                    Class Tokens",
-                )
-            else:
-                messages.info(request, "You have been refunded 1 Class Token")
-    else:
+    messages.success(request, "You have cancelled this class booking")
+
+    if date.today() > exercise_class.class_date - timedelta(days=1):
         messages.success(
             request,
-            f"You have cancelled your class booking for \
-            {exercise_class.info()}",
+            "You have cancelled this class booking \
+            but have not been issued a refund due to notice given",
         )
-
+    else:
+        if (not profile.class_package_type and
+             not profile.active_class_package):
+            profile.active_class_package = True
+            profile.class_package_type = "TK"
+            profile.package_name = "Refund Package"
+            profile.class_tokens = exercise_class.token_cost
+            profile.package_expiry = date.today() + timedelta(days=48)
+            messages.info(
+                request,
+                f"You have been refunded {exercise_class.token_cost} \
+                Class Token/s to a new class access package assigned \
+                to your profile (Valid until \
+                {profile.package_expiry.strftime('%d %b')})",
+            )
+        elif (profile.class_package_type == "TK" and
+              profile.active_class_package):
+            profile.class_tokens += exercise_class.token_cost
+            profile.package_expiry = date.today() + timedelta(days=48)
+            messages.info(
+                request,
+                f"You have been refunded {exercise_class.token_cost} \
+                Class Token/s (Valid until \
+                {profile.package_expiry.strftime('%d %b')})",
+            )
     profile.save()
     return redirect(reverse("profile"))
-
 
 # Single Exercise Class CRUD Operations
 
