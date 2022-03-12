@@ -594,7 +594,7 @@ def delete_single_exercise_class(request, class_id):
                 profile.active_class_package = True
                 profile.class_package_type = "TK"
                 profile.class_tokens = exercise_class.token_cost
-                profile.package_name = "Tokens for a Refunded Class"
+                profile.package_name = "Refund Package"
                 profile.package_expiry = date.today() + timedelta(days=84)
                 profile.save()
                 refund_total += exercise_class.token_cost
