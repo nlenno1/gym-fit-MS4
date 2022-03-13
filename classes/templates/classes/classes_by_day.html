@@ -58,7 +58,7 @@
                 </div>
             </form>
             <!-- Individual Class Display -->
-            <div class="mt-4 mb-5">
+            <div class="mt-4 mb-5 fade-on-load">
                 {% if classes|length > 0 %}
                     {% for class in classes %}
                         <div class="single-class-schedule-display text-center">
@@ -114,8 +114,8 @@
                                     {% endif %}
                                     {% if user.is_superuser %}
                                         <a class="btn btn-dark mt-2" href="{% url 'edit_single_exercise_class' class.id %}" aria-label="Edit information about this exercise class">Edit Class</a>
-                                        <a class="mt-2 confirm-delete" href="{% url 'delete_single_exercise_class' class.id %}" aria-label="Cancel this exercise class">
-                                            <i class="fa-solid fa-trash-can"></i>
+                                        <a class="mt-2 confirm-delete btn btn-danger" href="{% url 'delete_single_exercise_class' class.id %}" aria-label="Cancel this exercise class">
+                                            Cancel Class
                                         </a>
                                     {% endif %}
                                 </div>

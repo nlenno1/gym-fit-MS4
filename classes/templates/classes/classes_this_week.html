@@ -105,8 +105,8 @@
                                             {% endif %}
                                             {% if user.is_superuser %}
                                                 <a class="btn btn-dark mt-2" href="{% url 'edit_single_exercise_class' class.id %}" aria-label="Edit details about this Exercise Class">Edit Class</a>
-                                                <a class="mt-2 confirm-delete" href="{% url 'delete_single_exercise_class' class.id %}" aria-label="Delete this exercise class">
-                                                    <i class="fa-solid fa-trash-can"></i>
+                                                <a class="mt-2 confirm-delete btn btn-danger" href="{% url 'delete_single_exercise_class' class.id %}" aria-label="Delete this exercise class">
+                                                    Cancel Class
                                                 </a>
                                             {% endif %}
                                         </div>

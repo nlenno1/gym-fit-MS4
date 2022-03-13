@@ -41,7 +41,7 @@ urlpatterns = [
         "classes_this_week/", views.classes_this_week, name="classes_this_week"
     ),
     path(
-        "single_classes/",
+        "classes_by_day/",
         views.filter_single_classes,
         name="filter_single_classes",
     ),
