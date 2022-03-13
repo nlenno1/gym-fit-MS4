@@ -80,6 +80,10 @@ def order_history(request, order_number):
     """Display Previous Orders"""
     # Find the order
     order = get_object_or_404(Order, order_number=order_number)
+    # Set item_name value if it is empty
+    for item in order.lineitems.all():
+        if item.item_name is None:
+            item.save()
     # Message to tell user that this is a previous order
     messages.info(
         request,

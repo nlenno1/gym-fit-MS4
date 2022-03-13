@@ -6,7 +6,7 @@ class OrderLineItemAdminInline(admin.TabularInline):
     """Class to allow admin to add a new order line item"""
 
     model = OrderLineItem
-    readonly_fields = ("lineitem_total",)
+    readonly_fields = ("lineitem_total", "item_name")
 
 
 class OrderAdmin(admin.ModelAdmin):

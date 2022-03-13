@@ -31,7 +31,7 @@ class ClassAccessPackage(models.Model):
 
     def __str__(self):
         """Return name string"""
-        return self.name
+        return self.friendly_name
 
     def get_friendly_name(self):
         """Return friendly_name string"""

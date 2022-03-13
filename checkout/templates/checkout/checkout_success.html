@@ -150,7 +150,7 @@
                     {% if item.access_package %}
                     <div class="row g-0 px-3">
                         <div class="col-9">
-                            <p> {{ item.access_package.friendly_name }}</p>
+                            <p> {{ item.item_name }}</p>
                         </div>
                         <div class="col-3 text-end">
                             <p>£ {{ item.lineitem_total }}</p>
@@ -159,8 +159,7 @@
                     {% elif item.exercise_class %}
                     <div class="row g-0 px-3">
                         <div class="col-9">
-                            <p> {{ item.exercise_class.category }} on {{ item.exercise_class.date }} at
-                                {{ item.exercise_class.start_time }}</p>
+                            <p>{{ item.item_name }}</p>
                         </div>
                         <div class="col-3 text-end">
                             <p>£ {{ item.lineitem_total }}</p>

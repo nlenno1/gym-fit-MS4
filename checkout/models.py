@@ -87,10 +87,13 @@ class OrderLineItem(models.Model):
         related_name="lineitems",
     )
     exercise_class = models.ForeignKey(
-        SingleExerciseClass, on_delete=models.CASCADE, null=True, blank=True
+        SingleExerciseClass, on_delete=models.CASCADE, null=True, blank=True,
     )
     access_package = models.ForeignKey(
-        ClassAccessPackage, on_delete=models.CASCADE, null=True, blank=True
+        ClassAccessPackage, on_delete=models.CASCADE, null=True, blank=True,
+    )
+    item_name = models.CharField(
+        max_length=100, null=True, blank=True
     )
     lineitem_total = models.DecimalField(
         max_digits=6, decimal_places=2, null=False, blank=False, editable=False
@@ -103,18 +106,19 @@ class OrderLineItem(models.Model):
         """
         if self.exercise_class:
             self.lineitem_total = self.exercise_class.price
+            self.item_name = self.exercise_class.info()
         elif self.access_package:
             self.lineitem_total = self.access_package.price
-
+            self.item_name = self.access_package.friendly_name
         super().save(*args, **kwargs)
 
     def __str__(self):
         if self.exercise_class:
             description = f"{self.exercise_class.category} \
-                on {self.exercise_class.date} \
-                    at {self.exercise_class.start_time}"
+                on {self.exercise_class.class_date.strftime('%d/%b/%Y')} \
+                    at {self.exercise_class.start_time.strftime('%H:%M')}"
             return f"{description} on order \
                 {self.order.order_number}"
         elif self.access_package:
-            return f"{self.access_package.name} on order \
+            return f"{self.access_package} on order \
                 {self.order.order_number}"
