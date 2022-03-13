@@ -49,7 +49,7 @@ $(document).on('click', '.confirm-delete', function(){
   return confirm('Are you sure you want to delete this?');
 })
 
-// Confirm Delete taken from https://stackoverflow.com/questions/37398416/django-delete-confirmation
+// Confirm Remove taken from https://stackoverflow.com/questions/37398416/django-delete-confirmation
 $(document).on('click', '.confirm-remove', function(){
   return confirm('Are you sure you want to remove this?');
 })

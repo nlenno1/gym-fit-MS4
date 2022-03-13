@@ -50,7 +50,9 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-2 schedule-display-buttons mt-3 mt-sm-0 flex-lg-row">
-                                    <a class="" href="{% url 'remove_from_bag' 'package' bag_items.class_access_package.id %}" aria-label="Remove item from your bag">
+                                    <a class="confirm-remove" href="{% url 'remove_from_bag' 'package' bag_items.class_access_package.id %}" aria-label="Remove item from your bag"
+                                    data-bs-container="body" data-bs-trigger="hover focus"
+                                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Remove this Package from your Bag">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </div>
@@ -87,7 +89,8 @@
                                     {% endif %}
                                 </div>
                                 <div class="col-12 col-sm-1 schedule-display-buttons mt-3 mt-sm-0 flex-lg-row">
-                                    <a href="{% url 'remove_from_bag' 'single_class' item.id %}" aria-label="Remove item from your bag">
+                                    <a class="confirm-remove" href="{% url 'remove_from_bag' 'single_class' item.id %}" data-bs-container="body" data-bs-trigger="hover focus"
+                                    data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Remove this Class from your Bag" aria-label="Remove item from your bag">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </div>
