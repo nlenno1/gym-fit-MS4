@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-    <section id="content" class="container">
+    <section id="content" class="container mb-5">
         <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Order Review</h1>
         <h5 class="mb-1 fw-bold">Thank You for your Order </h5>
         {% if from_profile %}
@@ -145,7 +145,7 @@
                         <h5 class="fw-bold">Order Summary</h5>
                     </div>
                 </div>
-                <div class="no-p-margin pb-5">
+                <div class="no-p-margin">
                     {% for item in order.lineitems.all %}
                     {% if item.access_package %}
                     <div class="row g-0 px-3">
