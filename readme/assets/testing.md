@@ -27,17 +27,14 @@ I requested peer review feedback from my friends, family and the Code Institute 
 
 ## Browser Testing
 
-
 # Automated Testing
 
-## General Testing
-
-### Performance - Lighthouse
+## Performance - Lighthouse
 I tested the Performance, Accessibility, Best Practices and SEO of MovieWiki using [Lighthouse](https://developers.google.com/web/tools/lighthouse) in Chrome Developer Tools.
 
-### Colour Tester - A11y
+## Colour Tester - A11y
 
-## Validation
+# Validation
 
 ### HTML
 

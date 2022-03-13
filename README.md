@@ -396,10 +396,6 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 - Cancel button which redirect to Instructor Management
 - "Update Instructor" buttons validates form data and updates Instructor data in database with user feedback message
 
-
-
-
-
 ### **CRUD Table**
 
 ### **Defensive Programming**
@@ -417,6 +413,12 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 - Messaging system to allow admin to respond to customers with accounts
 - Add accessory products to the store like apparel, water bottles etc
 - Refactor Profile into seperate pages to allow redirection to specific sections
+
+### **Known Limitations**
+
+1. Deleting a product like a Class Access Package removes it from the Users Previous Orders so a Product Inactive Field Needs to be Put In to Keep the Product Existing but not have it shown on the Products Page.
+2. The expiry date of an Unlimited Used package includes the current day so if the User buys it later in the day, they wont get full use out of it. To combat this, packages could be activated on the next full day or on a selected date.
+3. If an AnnonomousUser buys a SingleExerciseClass their details are added to the class participants but only in the checkout_success view which leaves it open to missing this step if the User diverts away before this function is called but after the Webhook is sent. The remaining_spaces field on the SingleExerciseClass model will still be reduced by 1 as this is included when the webhook handler searches for the existing order but the users details will not be saved if the Order object is created in the webhook handler.
 
 ## **TESTING**
 
