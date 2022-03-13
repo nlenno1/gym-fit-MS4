@@ -24,6 +24,9 @@ window.onload = (event) => {
   var toastList = toastElList.map(function (toastEl) {
     return new bootstrap.Toast(toastEl, option).show()
   })
+
+  // Fade On Load Animation
+  $('.fade-on-load').addClass('visible');
 }
 
 // Date formatting taken from Stack Overflow (https://stackoverflow.com/questions/32378590/set-date-input-fields-max-date-to-today)
@@ -55,8 +58,3 @@ $(document).on('click', '.confirm-remove', function(){
 $(document).on('click', '.confirm-cancel', function(){
   return confirm('Are you sure you want to cancel this booking?');
 })
-
-// Fade on load
-window.onload = function() {
-  $('.fade-on-load').addClass('visible');
-};
