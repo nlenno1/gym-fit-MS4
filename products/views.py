@@ -11,7 +11,7 @@ from .forms import ClassAccessPackageForm
 def view_class_access_packages(request):
     """A view to return the class access packages available"""
 
-    packages = ClassAccessPackage.objects.all()
+    packages = ClassAccessPackage.objects.all().order_by('price')
     tokens = []
     unlimited = []
     profile = None
