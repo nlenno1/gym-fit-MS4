@@ -30,12 +30,6 @@ def bag_contents(request):
         )
         total += exercise_class_object.price
         product_count += 1
-        exercise_class_object.start_time = (
-            exercise_class_object.start_time.strftime("%H:%M")
-        )
-        exercise_class_object.end_time = (
-            exercise_class_object.end_time.strftime("%H:%M")
-        )
         bag_items["single_classes"].append(exercise_class_object)
 
     context = {
