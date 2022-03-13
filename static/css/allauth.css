@@ -3,12 +3,12 @@
 p a {
     text-decoration: none;
     font-weight: 600;
-    color: #2AAFD3;
+    color: #000;
     transition: ease-in-out .3s;
 }
 
 p a:hover {
-    color: #000;
+    color: #2AAFD3;
 }
 
 #allauth-content {
