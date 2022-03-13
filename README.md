@@ -216,6 +216,128 @@ In the database, the OrderLineItem model is not necessary however, it has been i
 
 This is a full, page by page, breakdown of all the features & elements that have been implemented for the first production release of the Gym Fit E-Commerce platform.
 
+### Multi Page Elements
+
+**User Feedback** - All User Feedback messages will come in the form of "Toasts" supplied by Boostrap and displayed on the bottom right of the screen. These Toasts change heading color and contents depending on the message displayed
+
+**Navbar**
+- Logo - to establish identity and act as a home button
+- "Our Classes" - links to Class Category display to show the user what class types are on offer
+- "Book Classes" Dropdown Menu which links to:
+    - "Classes This Week" which allows the user to see and filter all the classes this week
+    - "Classes By Day" which allows the user to search for classes on individual days and filter the classes found
+- "Join Now" - Links to the "Join Us" page which shows the user the Class Access Packages the company has to offer
+- "Contact" - Links to the Contact page
+
+**Top Navbar**
+- "My Account" - When a User is signed in this links to the Users profile page but when the User is a Guest it is a dropdown menu which links too
+    - Register to allow the User to create an Account or 
+    - Sign In to allow a User to sign into an existing account
+- Shopping Cart Icon - Links to the Users current bag display
+
+At Mobile screen widths, the Navbar links will be contained in a full screen menu which can be toggled with a button on the Navbar.
+
+**Footer**
+- Logo - to establish identity and act as a home button
+- Links to socials for promotion and to encourage user engaguement
+- Address of GymFit
+
+### home App
+
+**/**
+- Our Team Display - Display generated from Instructor models in the database. Each model has a display_on_site field which determines which instructors are show. A maximum of 8 instructors will be displayed
+- Map and Links section - Links to GymFit instagram account and location on GoogleMaps. Image provided to represent use of GoogleMaps API.
+
+### classes App
+
+**All Class Categories - /classes/our_classes/**
+- Card Display of Individual Class Categories which includes:
+    - Average Rating display data generated from ClassCategory Model,
+    - Heart Icon Button to Add or Remove the Class Category from the Users Favourite Class Categories list,
+    - "View Class Details" button links to /classes/class_category/<category_id> for the specific Class Category
+- "Add Class Category" Button (ADMIN) - Link to classes/class_category/add
+
+**Class Category Details - /classes/class_category/<category_id>/**
+- Class Category details including Name, Representation Image, Average Ratings and Description
+- Heart Icon Button to Add or Remove the Class Category from the Users Favourite Class Categories list,
+- "Update Class Category" Button (ADMIN) - links to /classes/class_category/<category_id>/edit
+- "Delete Class Category" Button (ADMIN) - deletes the selected Class Category after a confirmation check
+- Class Category Reviews section which displays all reviews left for the class ordered newest to oldest. If user has left a review, a delete review button is displayed beside their review if they wish to remove it.
+- "Write a Review" Button - links to Add Category Review to allow a user to add a review
+
+**Add a Class Category - classes/class_category/add** (ADMIN)
+- ClassCategoryForm displayed using Crispy Forms with labels
+- Cancel button - Links to All Class Categories
+- "Add Class Category" Button - Validates form and adds new Class Category to the database, redirecting to the Class Category Details for the Category just created
+
+**Edit a Class Category - classes/class_category/<category_id>/edit** (ADMIN)
+- ClassCategoryForm which is filled with current Category data, displayed using Crispy Forms with labels
+- Cancel button - Links to Class Category Details for the class you were editing
+- "Edit Class Category" Button - Validates form, updates the Class Category in the database and redirects to the Class Category Details for the Category just edited
+
+**Classes this Week - /classes/classes_this_week/**
+- Single Exercise Class Display - Individual Responsive display items for the scheduled classes from the current date until 8 days in the future (to include the same day a week later). If no classes are scheduled, the date will not display. These display items include:
+    - Details about the event including date, start time, ability level, location, cost(in tokens or currency depending on user package status) etc
+    - Add to Bag button - Adds the selected class to the users shopping bag
+    - Book with Tokens button - Books the user onto the class by adding the user to the class participants and the class to the users classes and updates the users package status
+    - Edit Class (ADMIN) - links to the Edit Single Exercise Class page
+    - Cancel Class Button (ADMIN) - deletes the selected Single Exercise Class after a confirmation check, sends a notification to all participants and refunds tokens
+- "Filter By" Dropdown Menu - On selection filters the classes displayed by any single Class Category or using the categories in the Users Favourite Category List
+- "Classes By Day" Button - links to Classes by Day
+
+**Classes by Day - /classes/classes_by_day/**
+
+- Single Exercise Class Display - Same as Classes this Week
+- "Filter By" Dropdown Menu - On selection filters the classes displayed using any single Class Category or using the categories in the Users Favourite Category List
+- "Classes on" Date Select -  On selection filters the classes displayed using the chosen date
+- "Classes This Week" Button - links to Classes this Week
+
+**Schedule a Single Exercise Class - /classes/single_class/add/** (ADMIN)
+- SingleExerciseClassForm displayed using Crispy Forms with labels
+- Cancel button - Links to Profile as that is the only place you can schedule a class from
+- "Schedule Class" Button - Validates form and adds new Single Exercise Class to the database, redirecting to Classes This Week
+
+**Update a Single Exercise Class - /classes/single_class/edit/** (ADMIN)
+- SingleExerciseClassForm which is filled with current Exercise Class data, displayed using Crispy Forms with labels
+- Cancel button - Links to Class Category Details for the class you were editing
+- Edit Class Category Button - Validates form, updates the Class Category in the database and redirects to the redirecting to Classes This Week
+
+### products App
+
+**View Class Access Packages - /products/class_access_packages/**
+- Display for Token Packages including a repesentation image, package name, popover with more information and package price, ordered by price
+- Display for Unlimited Use Packages including a repesentation image, package name, popover with more information, package expiry and package price
+- Edit Class (ADMIN) - links to the Edit Class Access Package page
+- Delete Package Button (ADMIN) - deletes the selected Class Access Package after a confirmation check and redirects to View Class Access Packages
+- Add a Tokens Package / Add an Unlimited Package (ADMIN) - links to Add a Class Access Package
+
+**Add a Class Access Package - classes/class_category/add/** (ADMIN)
+- ClassAccessPackageForm displayed using Crispy Forms with labels
+- Cancel button - Links to Profile
+- "Add Access Package" Button - Validates form and adds new Class Access Package to the database, redirecting to View Class Access Packages
+
+**Edit a Class Access Package - classes/class_category/<package_id>/edit/** (ADMIN)
+- ClassCategoryForm which is filled with current Category data, displayed using Crispy Forms with labels including JS check on value of select to see if Class Tokens should be disabled or not
+- Cancel button - Links to Class Category Details for the class you were editing
+- "Edit Class Category" Button - Validates form, updates the Class Category in the database and redirects to the Class Category Details for the Category just edited
+
+### contact App
+
+**Contact Page - /contact/**
+- ContactMessageForm displayed using Crispy Forms with labels. If user is annonomous then name and email inputs are provided. If user is signed in then these details are provided from the database.
+- Cancel button - Links to Home
+- "Send Message" Button - Validates form, saves data to database and display sent message user feedback after reloading the page
+
+### profiles App
+
+### bag App
+
+### checkout App
+
+### reviews App
+
+### instructors App
+
 ### **CRUD Table**
 
 ### **Defensive Programming**
@@ -225,12 +347,14 @@ This is a full, page by page, breakdown of all the features & elements that have
 ### **Features for Future Releases**
 
 - Sign In and Out with other social media accounts
-- Schedule weekly classes until a set date or for a certain number of weeks
 - Add customers to waiting lists if a class is full, with email notification on space opening up
 - Purchase multiple classes with a weekly interval with a specified number of weeks
 - Create, View, Edit and Delete Class Access Packages for specific class categories
 - Allow Instructors to Update their publicly visible profiles and manage their classes
 - Automated subscription payment service
+- Messaging system to allow admin to respond to customers with accounts
+- Add accessory products to the store like apparel, water bottles etc
+- Refactor Profile into seperate pages to allow redirection to specific sections
 
 ## **TESTING**
 
