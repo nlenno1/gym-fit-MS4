@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block extracss %}
-<link rel="stylesheet" href="{% static 'css/join_us.css' %}">
+<link rel="stylesheet" href="{% static 'products/css/join_us.css' %}">
 <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
 {% endblock %}
 
@@ -35,3 +35,28 @@
 </section>
 {% endblock %}
 
+{% block postloadjs %}
+    {{ block.super }}
+    <script>
+        function delay(time) {
+            return new Promise(resolve => setTimeout(resolve, time));
+        }
+        $('select').change(function () {
+            console.log(this.value)
+            if (this.value == "UU"){
+                $("#id_amount_of_tokens").prop('disabled', true);
+                $("#id_amount_of_tokens").val('');
+            } else {
+                $("#id_amount_of_tokens").prop('disabled', false);
+            }
+        })  
+        $('document').ready(function () {
+            if ($('#id_type')[0].value == "UU"){
+                $("#id_amount_of_tokens").prop('disabled', true);
+                $("#id_amount_of_tokens").val('');
+            } else {
+                $("#id_amount_of_tokens").prop('disabled', false);
+            }
+        })
+    </script>
+{% endblock %}

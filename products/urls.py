@@ -13,12 +13,12 @@ urlpatterns = [
         name="add_class_access_package",
     ),
     path(
-        "class_access_package/edit/<package_id>",
+        "class_access_package/<package_id>/edit/",
         views.edit_class_access_package,
         name="edit_class_access_package",
     ),
     path(
-        "class_access_package/delete/<package_id>",
+        "class_access_package/<package_id>/delete/",
         views.delete_class_access_package,
         name="delete_class_access_package",
     ),

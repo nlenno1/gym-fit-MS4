@@ -637,7 +637,8 @@ def add_class_category(request):
                 "Successfully Created A \
                              Class Category",
             )
-            return redirect(reverse("view_class_categories"))
+            return redirect(reverse("view_single_class_category",
+                            args=[category.id]))
         else:
             messages.error(
                 request,
