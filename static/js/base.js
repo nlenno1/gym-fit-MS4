@@ -55,3 +55,8 @@ $(document).on('click', '.confirm-remove', function(){
 $(document).on('click', '.confirm-cancel', function(){
   return confirm('Are you sure you want to cancel this booking?');
 })
+
+// Fade on load
+window.onload = function() {
+  $('.fade-on-load').addClass('visible');
+};

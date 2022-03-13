@@ -29,7 +29,7 @@
     {% if token_packages|length > 0%}
         <h4 class="mt-5 mb-3 ps-3">Class Tokens</h4>
         {% for package in token_packages %}
-        <div class="single-class-schedule-display text-center">
+        <div class="single-class-schedule-display text-center fade-on-load">
             <div class="row g-0 align-items-md-center">
                 <div class="col-12 col-sm-4 col-md-2">
                     {% if package.image %}
@@ -92,7 +92,7 @@
     {% if unlimited_packages|length > 0 %}
         <h4 class="mt-5 mb-3 ps-3">Unlimited Use</h4>
         {% for package in unlimited_packages %}
-        <div class="single-class-schedule-display text-center">
+        <div class="single-class-schedule-display text-center fade-on-load">
             <div class="row g-0 align-items-md-center">
                 <div class="col-12 col-sm-4 col-md-2">
                     {% if package.image %}

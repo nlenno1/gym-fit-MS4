@@ -16,7 +16,7 @@
 
 {% block content %}
     <div id="content" class="container-fluid g-0">
-        <div id="hero-image" class="b-b-b">
+        <div id="hero-image" class="b-b-b fade-on-load">
             <div class="row g-0">
                 <div class="col-12">
                     <h1 class="display-5 text-center text-sm-start ms-sm-5 mt-3 mt-sm-5">Welcome to Community Fitness</h1>
@@ -30,10 +30,10 @@
             <div class="container px-2 px-sm-0">
                 <div class="row g-0 align-items-center">
                     <div class="d-none d-lg-block col-lg-6">
-                        <img id="teamwork-image" src="{{ MEDIA_URL }}gym-teamwork.jpg" alt="Two hands clasping in a handshake">
+                        <img id="teamwork-image" class="fade-on-load" src="{{ MEDIA_URL }}gym-teamwork.jpg" alt="Two hands clasping in a handshake">
                     </div>
                     <div class="col-12 col-lg-6 text-center py-5">
-                        <div id="intro_para">
+                        <div class="fade-on-load">
                             <p>
                                 Gym Fit is a community based fitness centre designed to bring people together to enjoy the experience of 
                                 group fitness, reap the benefits of having a healthier lifestyle and meet like minded people along the way
@@ -102,15 +102,4 @@
             </div>
         </section>
     </div>
-{% endblock %}
-
-{% block postloadjs %}
-    {{ block.super }}
-    <script>
-        window.onload = function() {
-            $('#hero-image').addClass('visible');
-            $('#intro_para').addClass('visible');
-            $('#teamwork-image').addClass('visible');
-        };
-    </script>
 {% endblock %}
