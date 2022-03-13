@@ -6,7 +6,7 @@ from instructors.models import Instructor
 def index(request):
     """View to render home page"""
 
-    instructors = Instructor.objects.all()[:8]
+    instructors = Instructor.objects.all()[:9]
 
     context = {"instructors": instructors}
 

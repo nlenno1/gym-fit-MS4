@@ -55,14 +55,12 @@
                 <div class="team-cards-container pt-big">
                     {% if instructors|length > 0 %}
                         {% for instructor in instructors %}
-                            {% if instructor.display_on_site %}
+                            {% if instructor.display_on_site and instructor.image_url or instructor.image %}
                                 <div class="trainer-card">
                                     {% if instructor.image_url %}
                                         <img data-aos="fade-up" data-aos-anchor-placement="center-bottom" src="{{ instructor.image_url }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
                                     {% elif instructor.image %}
                                         <img data-aos="fade-up" data-aos-anchor-placement="center-bottom" src="{{ MEDIA_URL }}{{ instructor.image }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
-                                    {% else %}
-                                        <img data-aos="fade-up" data-aos-anchor-placement="center-bottom" src="{{ MEDIA_URL }}/no-image.jpg" alt="Picture of {{ instructor.friendly_name }}, one of our instructors coming soon">
                                     {% endif %}
                                     <p class="text-uppercase">{{ instructor.friendly_name }}</p>
                                 </div>

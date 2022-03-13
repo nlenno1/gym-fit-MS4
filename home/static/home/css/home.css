@@ -92,22 +92,26 @@
 }
 
 .trainer-card {
-    display: relative;
+    height: 345px;
     width: 280px;
     margin-left: 15px;
 }
 
 .trainer-card img {
+    height: 345px;
     width: 230px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .trainer-card p {
     transform: rotate(90deg);
     transform-origin: right top;
     color: #fafafa;
+    float: right;
     font-size: 2em;
-    margin-top: -48px;
-    padding-right: 52px;
+    width: 345px;
+    padding-left: 12px;
     margin-bottom: 0;
 }
 
