@@ -244,7 +244,7 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 
 ### home App
 
-**/**
+**View Home Page - /**
 - Our Team Display - Display generated from Instructor models in the database. Each model has a display_on_site field which determines which instructors are show. A maximum of 8 instructors will be displayed
 - Map and Links section - Links to GymFit instagram account and location on GoogleMaps. Image provided to represent use of GoogleMaps API.
 
@@ -262,7 +262,7 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 - Heart Icon Button to Add or Remove the Class Category from the Users Favourite Class Categories list,
 - "Update Class Category" Button (ADMIN) - links to /classes/class_category/<category_id>/edit
 - "Delete Class Category" Button (ADMIN) - deletes the selected Class Category after a confirmation check
-- Class Category Reviews section which displays all reviews left for the class ordered newest to oldest. If user has left a review, a delete review button is displayed beside their review if they wish to remove it.
+- Class Category Reviews section which displays all reviews left for the class ordered newest to oldest. If user has left a review, a delete review button is displayed beside their review if they wish to remove it and the "Write a Review" button is hidden. If the User is a Guest they are prompted to sign up/in to be able to add a review.
 - "Write a Review" Button - links to Add Category Review to allow a user to add a review
 
 **Add a Class Category - classes/class_category/add** (ADMIN)
@@ -330,13 +330,75 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 
 ### profiles App
 
+**Profile Page - /profile/**
+- All sections are accessable from the profile menu buttons.
+- Personal Details Section - contains UserForm and UserProfileForm prefilled with existing User information which can be updated by the "Update Information" button below the forms
+- My Booking Section - Display of Upcoming and Previous classes the used has booked onto. Upcoming class display includes a button to cancel their booking which will remove the user from the class participants and remove the class forom the users profile and issuing a class token refund if cancellation notice is more than 24 hours.
+- Previous Purchases Section - Display all the previous orders in the users account with a link to Previous Order Details which is the same as Checkout Success but has a few notes explains that it is a previous order and 
+- Favourite Class List - Contains all Class Categories in the users Faviourite Class Category List with a button to remove the from the list if desired
+
+- Admin Messages Section (ADMIN) - Displays all the user messages to admin, including sender name and reply email, sorted by date sent with a delete button to remove the messages individually
+- "Add A Class Catergory" Button (ADMIN) - links to Add a Class Category
+- "Schedule a Class" Button (ADMIN) - links to Schedule a Single Exercise Class
+- "Create A Class Access Package" Button (ADMIN) - links to Add a Class Access Package
+- "Instructor Management" Button (ADMIN) - links to Instructor Management
+
+- Sign Out Button - links to the AllAuth sign out confirmation page
+
 ### bag App
+
+**View Bag - /bag/**
+- Displays the Class Access Package and individual classes in the Users bag, in seperate sections, with details including type, duration, location with the single classes ordered by date. Each item has a delete button with a popover explaining its functionand a remove confirmation notification with a toast message on completion.
 
 ### checkout App
 
+**Checkout - /checkout/**
+- Displays order summay with Item names/details and cost with Total price below them
+- Form for all the Users details including name, address and email which will be auto filled if the User is signed in
+- Stripe Payment Element which will verify card number and details on entry with error messages displayed below
+- "Back To Bag" button returns user to the Bag page
+- "Complete Order" button processes order, disabling and hiding form and buttons with an overlay which is removed on completion and redirects to Checkout Success. Any Card issues are dealt with on the processing overlay. If any errors with the form, User is bounced back to the Checkout page.
+
+**Checkout Success - /checkout_success/<order_number>/**
+
+- Displays a full Order Review with all details useing in the order including items purchased, billing information and the order date and number with a confirmation email sent to the supplied email address.
+- This page is also used for the Profile Previous Order Details display
+
 ### reviews App
 
-### instructors App
+**Write A Class Category Review - /reviews/<category_id>/add/**
+- Title with Category Name included in it
+- ClassCategoryReviewForm with validation messages
+- Cancel Button which redirects to the chosen Category
+- "Submit Review" button which validates data, creates and stores the review and redirects to the Category Details page
+
+### instructors App (ADMIN)
+
+**Instructor Management - /instructors/instructor_management/** (ADMIN)
+- "Add An Instructor" button links to the Add an Instructor Page
+- Instructor Profile Display Cards which include:
+    - Instructor Name
+    - Profile Picture
+    - List of Classes the Instructor can lead
+    - Icon for if the account is being displayed on the website
+    - "Edit Instructor" button which links to the Edit Instructor page for the chosen Instructor
+    - Delete instructor icon with popover to explain its function with a delete confirmation message on click
+
+**Add an Instructor - /instructors/instructor_management/add/** (ADMIN)
+
+- InstructorForm with validation messages
+- Cancel button which redirect to Instructor Management
+- "Add Instructor" buttons validates form data and adds Instructor to database redirecting to Instructor Management
+
+**Edit an Instructor - /instructors/instructor_management/add/** (ADMIN)
+
+- InstructorForm pre-filled with existing Instructor data with validation messages
+- Cancel button which redirect to Instructor Management
+- "Update Instructor" buttons validates form data and updates Instructor data in database with user feedback message
+
+
+
+
 
 ### **CRUD Table**
 
