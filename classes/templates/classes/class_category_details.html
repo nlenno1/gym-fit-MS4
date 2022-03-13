@@ -55,7 +55,7 @@
             <div class="col-12 col-lg-8 ps-lg-4 pt-4 pt-lg-0 text-center text-md-start">
                 <p>{{ category.description }}</p>
                 <p>Equipment Required: {{ category.equipment_required }}</p>
-                <p>{{ category.average_rating }} Star Average Rating from {{ category.numb_of_reviews }} Review{{ category.numb_of_reviews|pluralize }}</p>
+                <p>{{ category.average_rating }}/5 Star Average Rating from {{ category.numb_of_reviews }} Review{{ category.numb_of_reviews|pluralize }}</p>
             </div>
             {% if user.is_superuser %}
                 <div class="row g-0 pt-4 px-md-5">

@@ -41,8 +41,8 @@
                                     <img src="{{MEDIA_URL}}no-image.jpg" alt="Representation of a {{ category.friendly_name }} class"></div>
                                 {% endif %}
                             </div>
-                        <div class="col-6">Av. Rating: {{ category.average_rating }}</div>
-                        <div class="col-6">
+                        <div class="col-8">Av. Rating: {{ category.average_rating }}/5</div>
+                        <div class="col-4">
                             {% if category.id in fav_categories %}
                                 <form action="{% url 'remove_category_from_favs' category.id %}" method="POST" class="form">
                                     {% csrf_token %}
