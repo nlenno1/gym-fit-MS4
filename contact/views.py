@@ -24,7 +24,9 @@ def send_contact_message(request):
                 )
                 new_message.reply_email = request.user.email
                 new_message.save()
-                messages.success(request, "Message sent to Admin")
+                messages.success(request, "Your message has been sent to \
+                    us here at GymFit. Thank you for your message and \
+                        we will get back to you ASAP")
             else:
                 messages.error(
                     request,
