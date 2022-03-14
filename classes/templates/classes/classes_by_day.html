@@ -113,10 +113,12 @@
                                         </form>
                                     {% endif %}
                                     {% if user.is_superuser %}
-                                        <a class="btn btn-dark mt-2" href="{% url 'edit_single_exercise_class' class.id %}" aria-label="Edit information about this exercise class">Edit Class</a>
-                                        <a class="mt-2 confirm-delete btn btn-danger" href="{% url 'delete_single_exercise_class' class.id %}" aria-label="Cancel this exercise class">
-                                            Cancel Class
-                                        </a>
+                                        {% if not class.closed %}
+                                            <a class="btn btn-dark mt-2" href="{% url 'edit_single_exercise_class' class.id %}" aria-label="Edit information about this exercise class">Edit Class</a>
+                                            <a class="mt-2 confirm-delete btn btn-danger" href="{% url 'delete_single_exercise_class' class.id %}" aria-label="Cancel this exercise class">
+                                                Cancel Class
+                                            </a>
+                                        {% endif %}
                                     {% endif %}
                                 </div>
                             </div>

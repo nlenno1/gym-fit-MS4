@@ -13,7 +13,7 @@
 {% block content %}
     <section id="content" class="container">
         <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Update an Exercise Class</h1>
-        <h2 class="text-center text-md-start ps-md-5 mb-5">Fill out the form below to update a scheduled exercise class</h2>
+        <h2 class="text-center text-md-start ps-md-5 mb-5">Fill out the form below to update the class of {{ exercise_class }}</h2>
         <div class="row">
             <div class="col-12 col-md-6 offset-md-3">
                 <form action="{% url 'edit_single_exercise_class' exercise_class.id %}" method="POST" enctype="multipart/form-data">
