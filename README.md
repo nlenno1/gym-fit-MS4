@@ -212,6 +212,25 @@ In the database, the OrderLineItem model is not necessary however, it has been i
 
 ### **Design Decisions**
 
+Bootstrap provides a clean user-friendly appearance to the website which is easy to customise for the situation using its extensive supporting documentation.
+
+**Colour Scheme**
+
+I designed the colour scheme for this website from the logo image that was designed for me.
+
+The colour scheme is high contrast and easily viewable. This is the final colour scheme I used:
+![Colour Scheme Diagram](readme/assets/gym-fit-colors-diagram.jpg)
+
+All navigational sections are either on a grey (#353535) or a while (#FFFFFF) background with blue (#2AAFD3) or Black (#000) nav-links respectively. All buttons are black with white text or blue with black text. I chose these colours to keep the contrast up as much as possible
+Mobile devices use a hamburger-menu-naigation button to access the full screen mobile navigation.
+
+The forms and fields follow the same custom look consistently across the website. The corners of the inputs are slightly rounded with the outline of the input in a solid blue (#2AAFD3), which changes color if the input is not validated
+
+**Typography**
+
+To give the website a clean and professional look, I chose to use [Overlock](https://fonts.google.com/specimen/Overlock) for the headers and [Open Sans](https://fonts.google.com/specimen/Open+Sans) for the rest of the text to make it look as professional as possible.
+
+
 ## **FEATURES**
 
 This is a full, page by page, breakdown of all the features & elements that have been implemented for the first production release of the Gym Fit E-Commerce platform.
