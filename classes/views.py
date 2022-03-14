@@ -415,7 +415,8 @@ def cancel_class_booking(request, class_id):
     profile.classes.remove(exercise_class)
     profile.save()
 
-    messages.success(request, "You have cancelled this class booking")
+    messages.success(request, f"You have cancelled your booking on the class \
+        {exercise_class}")
 
     if date.today() > exercise_class.class_date - timedelta(days=1):
         messages.success(
@@ -430,7 +431,8 @@ def cancel_class_booking(request, class_id):
             profile.class_package_type = "TK"
             profile.package_name = "Refund Package"
             profile.class_tokens = exercise_class.token_cost
-            profile.package_expiry = date.today() + timedelta(days=48)
+            if profile.package_expiry < date.today() + timedelta(days=42):
+                profile.package_expiry = date.today() + timedelta(days=42)
             messages.info(
                 request,
                 f"You have been refunded {exercise_class.token_cost} \
@@ -447,6 +449,11 @@ def cancel_class_booking(request, class_id):
                 f"You have been refunded {exercise_class.token_cost} \
                 Class Token/s (Valid until \
                 {profile.package_expiry.strftime('%d %b')})",
+            )
+            messages.info(
+                request,
+                f"You have {profile.class_tokens} \
+                token/s remaining",
             )
     profile.save()
     return redirect(reverse("profile"))
