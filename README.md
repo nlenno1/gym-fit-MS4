@@ -210,6 +210,24 @@ In the database, the OrderLineItem model is not necessary however, it has been i
 
 ### **Design Alterations**
 
+During the building of GymFit some alterations were made to the initial wireframe designs. These are the main changes that were made:
+
+|Page/Section |Alteration |Reason |
+|-----|-----|-----|
+|Confirm Class Booking/Cancel Class Booking Page |Removed pages completely |Used JS alert functions to achive a similar functionality |
+|Home |Removed overlap of hero image and first image on page |Peer review testing feedback mentioned it as looking out of place |
+|Home|Removed Shop and Health Bar sections |Feedback mentioned that the confused the User's understand of the purpose of the site initially |
+|Profile |Moved the Admin Contrls into the Profile Pill Menu |Easier Access |
+|Profile |Removed Delete Account button |Functionality not required |
+|Add a Review |Removed Review Subject |Field not required |
+|Class Booking |Split into Class This Week and Classes by Day |Allows the user to view classes on several days at once or one specific day |
+|Class Booking |Full Calendar view date picker removed |Django limitations and an overcomplicated implementation process |
+|Class Booking |Go to day button replaced with date picker and on change submit functionality |Improves the UX |
+|Join Now |Packages display made full screen width |More in fitting with the other data layouts and allows for greater responsivness in the design |
+|Instructor Management |Instructor Profiles Layout/Design |Allows for greater responsivness in the design |
+|Schedule a Class Form |Form in a single column |More uniformity in design across the site|
+
+
 ### **Design Decisions**
 
 Bootstrap provides a clean user-friendly appearance to the website which is easy to customise for the situation using its extensive supporting documentation.
