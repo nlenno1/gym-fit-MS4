@@ -163,6 +163,7 @@ def classes_this_week(request):
     classes = SingleExerciseClass.objects.all()
     categories = ClassCategory.objects.all()
     profile_tokens = None
+    profile = None
     category_filter = ""
     filter_name = ""
     # generate the current date, list of dates for this week and a list of
@@ -197,6 +198,7 @@ def classes_this_week(request):
             "%H:%M"
         ) <= now.strftime("%d:%m:%Y - %H:%M:%S"):
             item.closed = True
+
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
@@ -244,6 +246,7 @@ def classes_this_week(request):
         "category_filter": filter_name,
         "profile_tokens": profile_tokens,
         "show_bag_on_success": True,
+        'profile': profile,
     }
 
     return render(request, "classes/classes_this_week.html", context)
@@ -343,7 +346,7 @@ def filter_single_classes(request):
 
 
 @login_required()
-def book_with_tokens(request, class_id):
+def book_with_package(request, class_id):
     """book class using user tokens"""
 
     redirect_url = request.POST.get("redirect_url")
@@ -382,12 +385,13 @@ def book_with_tokens(request, class_id):
         profile.classes.add(exercise_class)
         if profile.class_package_type == "TK":
             profile.class_tokens -= exercise_class.token_cost
+            messages.info(request, f"You have \
+            {profile.class_tokens} Class Tokens remaining")
         profile.save()
         messages.success(
             request,
-            f"You have booked onto the \
-            {exercise_class.info()}. You have \
-            {profile.class_tokens} Class Tokens remaining",
+            f"You have booked onto the class \
+            {exercise_class.info()}.",
         )
     try:
         return redirect(redirect_url)

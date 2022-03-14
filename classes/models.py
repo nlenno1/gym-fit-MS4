@@ -99,5 +99,5 @@ class SingleExerciseClass(models.Model):
         category = self.category.friendly_name
         class_date = self.class_date.strftime("%d/%m/%Y")
         start_time = self.start_time.strftime("%H:%M")
-        return f"{category} on {class_date} at \
-            {start_time}"
+        return f"{category} at {start_time} on the \
+            {class_date}"

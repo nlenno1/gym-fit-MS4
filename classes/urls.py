@@ -62,8 +62,8 @@ urlpatterns = [
     ),
     path(
         "single_class/<class_id>/book",
-        views.book_with_tokens,
-        name="book_with_tokens",
+        views.book_with_package,
+        name="book_with_package",
     ),
     path(
         "single_class/<class_id>/cancel",
