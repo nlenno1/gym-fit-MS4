@@ -44,9 +44,11 @@
                             <!-- Information/Description Popover -->
                             <p>
                                 <strong>{{ package.friendly_name|title }}
-                                    <button type="button" data-bs-container="body" data-bs-trigger="hover focus"
-                                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{ package.description }}"><i class="fas fa-info-circle"></i>
-                                    </button>
+                                    {% if package.description %}
+                                        <button type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                            data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{ package.description }}"><i class="fas fa-info-circle"></i>
+                                        </button>
+                                    {% endif %}
                                 </strong>
                             </p>
                         </div>
@@ -107,9 +109,11 @@
                             <!-- Information/Description Popover -->
                             <p>
                                 <strong>{{ package.friendly_name|title }}
-                                    <button type="button" data-bs-container="body" data-bs-trigger="hover focus"
-                                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{ package.description }}"><i class="fas fa-info-circle"></i>
-                                    </button>
+                                    {% if package.description %}
+                                        <button type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                            data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{ package.description }}"><i class="fas fa-info-circle"></i>
+                                        </button>
+                                    {% endif %}
                                 </strong>
                             </p>
                         </div>
