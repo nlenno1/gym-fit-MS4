@@ -49,7 +49,7 @@
             <div class="mt-4 mb-5 fade-on-load">
                 {% if classes|length > 0 %}
                     {% for date in days_with_classes %}
-                        <h2 class="fw-bold ps-5 py-4 mt-5 blue-background border border-dark border-2">{{ date.text_date }}</h2>
+                        <h2 class="fw-bold ps-5 py-4 mt-5 brown-background border border-dark border-2">{{ date.text_date }}</h2>
                         {% for class in classes %}
                             {% if class.class_date == date.date %}
                                 <div class="single-class-schedule-display text-center">
@@ -95,9 +95,9 @@
                                                     {% csrf_token %}
                                                     <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
                                                     {% if profile.class_package_type == "UU" %}
-                                                        <button type="submit" class="btn btn-success" aria-label="Book this class using your Unlimited Use Package">Book with Package</button>
+                                                        <button type="submit" class="btn btn-dark blue-button" aria-label="Book this class using your Unlimited Use Package">Book with Package</button>
                                                     {% else %}
-                                                        <button type="submit" class="btn btn-success" aria-label="Book this class using your Class Tokens">Book with Tokens</button>
+                                                        <button type="submit" class="btn btn-dark blue-button" aria-label="Book this class using your Class Tokens">Book with Tokens</button>
                                                     {% endif %}
                                                 </form>
                                             {% else %}

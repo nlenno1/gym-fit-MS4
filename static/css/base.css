@@ -10,10 +10,15 @@ h1, h2, h3 ,h4, h5 {
     font-family: 'Overlock', cursive;
 }
 
-.blue-button, #home-find-us {
+.blue-button {
     background-color: #2AAFD3;
     color: #000;
     font-weight: 500;
+}
+
+#home-find-us {
+    background-color: #E0A458;
+
 }
 
 .hover-blue:hover, footer a:hover, hr {
@@ -79,7 +84,7 @@ h1, h2, h3 ,h4, h5 {
     color: #2AAFD3;
 }
 
-#top-nav, footer, #our-team {
+#top-nav, footer, #our-team{
     background-color: #353535;
 }
 
@@ -110,6 +115,10 @@ h1, h2, h3 ,h4, h5 {
 
 .blue-background, .dropdown-item.active, .dropdown-item:active {
     background-color: #2AAFD3;
+}
+
+.brown-background {
+    background-color: #E0A458;
 }
 
 #main-nav .dropdown-menu.show {

@@ -27,7 +27,7 @@
                         {% for instructor in instructors %}
                             <!-- Card Template from Bootstrap 5 Documentation https://getbootstrap.com/docs/5.0/components/card/ -->
                             <div class="card">
-                                <div class="card-header text-center">
+                                <div class="card-header text-center brown-background">
                                     <h4 class="card-title mt-2">{{ instructor.friendly_name|title }}</h4>
                                 </div>
                                 {% if instructor.image_url %}
@@ -43,7 +43,7 @@
                                             Can Lead:
                                             <ul class="list-group">
                                                 {% for category in instructor.can_lead_classes_list %}
-                                                    <li class="list-group-item">{{ category.friendly_name }}</li>
+                                                    <li class="list-group-item brown-background">{{ category.friendly_name }}</li>
                                                 {% endfor %}
                                             </ul>
                                         </p>
