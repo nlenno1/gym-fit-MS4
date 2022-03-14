@@ -467,6 +467,29 @@ View the [Testing Document](readme/assets/testing.md)
 
 ## **BUGS AND ISSUES**
 
+This is a table of the major bugs and issues that I experienced when building this project.
+
+| **Bug ID** | **Description of Bug** | **Problem** | **Fix/Solution** |
+|---|---|---|---|
+| 1 | Font Awesome not providing icons | Issues with using the kit assigned to an email | Use a CDN link to import the icons |
+| 2 | Dynamic URLS for images not rendering with {{MEDIA_URL}} | Variable not being passed to HTML files | Update context processors in settings.py |
+| 3 | Table Header cells not removing with display none applied | Table Head elements don't respond to display:none | Added d-none to the row containing the Table Head |
+| 4 | Dropdown Menu from bootstrap not working | Wrong version of Bootstrap | Added updated Bootstrap links |
+| 5 | Multiple instances of the same date in week view | Not accessing the data from the dictionary, was referencing the entire dict | Added search storage list to add single values to and check against |
+| 6 | Empty days showing on week view | Day label generation happening before the category filter | Rearranged functions to create day labels after filtering |
+| 7 | Popovers broken | Was using Bootstrap 5 with popover JS and structure from Bootstrap 4 | Added correct Bootstrap 5 JS and changed attribute names in popovers to include "bs-" |
+| 8 | Filters changing when add to bag clicked | URLs leaving out the filter variables being passed in initially | Add .get_full_path to redirect_url values in templates |
+| 9 | GenericForeignKey not working due to not completely understanding how to call ContentType | ContentType matching query does not exist. | Refactored to remove the use of the GenericForeignKey |
+| 10 | User variables storing as tuples | Added comma to end of assignment so it generated a tuple | Removed the comma |
+| 11 | Adding double expected tokens to account with TK purchase | Function being called in webhook handler even if order was found in database | Move function to after order creation in webhook |
+| 12 | classes and packages pages not loading due to typeError | user being referenced to find profile when user is guest | Add conditionals to check if user is_authenticated |
+| 13 | unable to find profile when user not signed in for review search for class category details | when guest, no profile was found | Removed the comma |
+| 14 | AnonymousUser' object is not iterable for add to basket | when guest, no profile found for add to basket | Add if user is superuser  |
+| 15 | After being directed to sign in for add class category to favourites, when sign in completed, typeError from having no redirect url | Redirect url is stored on page | Added an if check on the existence of the redirect url |
+| 16 | Toast messages not showing | Multiple JavaScript on load functions in base.js | Combined both functions |
+| 17 | Password validation failing from AllAuth | I had broken the password validator strings up to comply with PEP8 | Removed the line break |
+
+
 ## **DEPLOYMENT**
 
 ## **TECHNOLOGY USED**
@@ -524,6 +547,7 @@ View the [Testing Document](readme/assets/testing.md)
 - [TinyPNG](https://tinypng.com/) - Image Compression
 - [CompressPNG](https://compresspng.com/) - Image Compression
 - [Markdown Table Generator](https://www.tablesgenerator.com/markdown_tables) - Markdown Table Production
+- [Table Converter](https://tableconvert.com/excel-to-markdown) - Excel to Markdown table converter 
 </details>
 
 ## **CREDITS**
