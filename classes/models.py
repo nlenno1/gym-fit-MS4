@@ -23,8 +23,8 @@ class ClassCategory(models.Model):
         verbose_name_plural = "Class Categories"
         ordering = ["friendly_name"]
 
-    name = models.CharField(max_length=254)
-    friendly_name = models.CharField(max_length=254, null=True, blank=True)
+    name = models.CharField(max_length=254, null=False, blank=False)
+    friendly_name = models.CharField(max_length=254, null=False, blank=False)
     description = models.TextField(null=True, blank=True)
     equipment_required = models.CharField(
         max_length=254, null=True, blank=True
@@ -60,7 +60,7 @@ class SingleExerciseClass(models.Model):
         ordering = ["class_date", "start_time"]
 
     category = models.ForeignKey(
-        ClassCategory, null=True, blank=True, on_delete=models.CASCADE
+        ClassCategory, null=False, blank=False, on_delete=models.CASCADE
     )
     class_date = models.DateField(auto_now=False, auto_now_add=False)
     start_time = models.TimeField(auto_now=False, auto_now_add=False)

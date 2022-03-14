@@ -13,15 +13,24 @@ class ClassCategoryForm(forms.ModelForm):
         exclude = [
             "name",
         ]
-        labels = {
-            "friendly_name": "Name",
-        }
 
     def __init__(self, *args, **kwargs):
         """Add  classes and set autofocus on first field"""
         super().__init__(*args, **kwargs)
+        labels = {
+            "friendly_name": "Name",
+        }
+
         self.fields["friendly_name"].widget.attrs["autofocus"] = True
+        for field in labels:
+            self.fields[field].label = labels[field]
         for field in self.fields:
+            if self.fields[field].required:
+                self.fields[field].label += " "
+                placeholder = f"{self.fields[field].label} *"
+            else:
+                placeholder = self.fields[field].label
+            self.fields[field].widget.attrs["placeholder"] = placeholder
             self.fields[field].widget.attrs["class"] = "stripe-style-input"
 
 
@@ -45,9 +54,6 @@ class SingleExerciseClassForm(forms.ModelForm):
             "participants",
             "end_time",
         ]
-        labels = {
-            "duration": "Duration (mins)*",
-        }
 
     def __init__(self, *args, **kwargs):
         """
@@ -55,7 +61,18 @@ class SingleExerciseClassForm(forms.ModelForm):
         labels and set autofocus on first field
         """
         super(SingleExerciseClassForm, self).__init__(*args, **kwargs)
-
+        labels = {
+            "duration": "Duration (mins) *",
+        }
+        
         self.fields["category"].widget.attrs["autofocus"] = True
+        for field in labels:
+            self.fields[field].label = labels[field]
         for field in self.fields:
+            if self.fields[field].required:
+                self.fields[field].label += " "
+                placeholder = f"{self.fields[field].label} *"
+            else:
+                placeholder = self.fields[field].label
+            self.fields[field].widget.attrs["placeholder"] = placeholder
             self.fields[field].widget.attrs["class"] = "stripe-style-input"

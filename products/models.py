@@ -10,14 +10,14 @@ class ClassAccessPackage(models.Model):
 
         verbose_name_plural = "Class Access Packages"
 
-    name = models.CharField(max_length=254)
-    friendly_name = models.CharField(max_length=254, null=True, blank=True)
+    name = models.CharField(max_length=254, null=False, blank=False)
+    friendly_name = models.CharField(max_length=254, null=False, blank=False)
     sku = models.CharField(max_length=254, null=True, blank=True)
     type = models.CharField(
         max_length=30,
         choices=[("UU", "Unlimited Use"), ("TK", "Token Package")],
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
     )
     description = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)

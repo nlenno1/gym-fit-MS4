@@ -25,7 +25,7 @@ class ClassAccessPackageForm(forms.ModelForm):
         labels and set autofocus on first field
         """
         super().__init__(*args, **kwargs)
-        placeholders = {
+        labels = {
             "friendly_name": "Package Name",
             "type": "Package Type",
             "description": "Package Description",
@@ -37,9 +37,10 @@ class ClassAccessPackageForm(forms.ModelForm):
 
         self.fields["friendly_name"].widget.attrs["autofocus"] = True
         for field in self.fields:
+            self.fields[field].label = labels[field] + " "
             if self.fields[field].required:
-                placeholder = f"{placeholders[field]} *"
+                placeholder = f"{labels[field]} *"
             else:
-                placeholder = placeholders[field]
+                placeholder = labels[field]
             self.fields[field].widget.attrs["placeholder"] = placeholder
             self.fields[field].widget.attrs["class"] = "stripe-style-input"
