@@ -419,6 +419,10 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 1. Deleting a product like a Class Access Package removes it from the Users Previous Orders so a Product Inactive Field Needs to be Put In to Keep the Product Existing but not have it shown on the Products Page.
 2. The expiry date of an Unlimited Used package includes the current day so if the User buys it later in the day, they wont get full use out of it. To combat this, packages could be activated on the next full day or on a selected date.
 3. If an AnnonomousUser buys a SingleExerciseClass their details are added to the class participants but only in the checkout_success view which leaves it open to missing this step if the User diverts away before this function is called but after the Webhook is sent. The remaining_spaces field on the SingleExerciseClass model will still be reduced by 1 as this is included when the webhook handler searches for the existing order but the users details will not be saved if the Order object is created in the webhook handler.
+4. AnnonomousUser can book on to the same class multiple times when user can't
+5. If a Users class access tokens are nearing their expiry date, they can just book a class and cancel it and the refund will update their token expiry date to 6 weeks time
+6. Deleting a category will not refund all the Users booked onto future classes of that category (stored in the participants list)
+
 
 ## **TESTING**
 
