@@ -595,6 +595,7 @@ def delete_single_exercise_class(request, class_id):
     exercise_class = get_object_or_404(SingleExerciseClass, id=class_id)
     # refund customers tokens
     refund_total = 0
+    class_name = exercise_class.info()
     for user_profile in exercise_class.participants.all():
         refunded = False
         # if user has a profile
@@ -616,12 +617,12 @@ def delete_single_exercise_class(request, class_id):
                 profile.save()
                 refund_total += exercise_class.token_cost
                 refunded = True
-
         send_class_cancellation_email(exercise_class, user_profile, refunded)
 
     exercise_class.delete()
-    messages.success(request, "Exercise Class Deleted")
-    messages.info(request, f"Refunded a total of {refund_total} Token/s")
+    messages.success(request, f"Exercise Class {class_name} Cancelled")
+    messages.info(request, f"Refunded a total of {refund_total} Token/s \
+        to customers booked onto the class of {class_name}")
     return redirect(reverse("classes_this_week"))
 
 

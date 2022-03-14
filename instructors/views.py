@@ -4,6 +4,8 @@ from django.contrib import messages
 
 from .models import Instructor
 from .forms import InstructorForm
+from classes.models import SingleExerciseClass
+from classes.views import delete_single_exercise_class
 
 
 @login_required
@@ -117,6 +119,12 @@ def delete_instructor(request, instructor_id):
         return redirect(reverse("home"))
 
     instructor = Instructor.objects.get(id=instructor_id)
+
+    classes_to_remove = SingleExerciseClass.objects.filter(
+                        instructor=instructor)
+    print(classes_to_remove)
+    for class_event in classes_to_remove:
+        delete_single_exercise_class(request, class_event.id)
 
     if instructor:
         instructor.delete()
