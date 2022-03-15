@@ -78,6 +78,13 @@ def add_single_class_to_bag(request, item_id):
                            {exercise_class} so you can not add it to your bag",
             )
             return redirect(redirect_url)
+        elif exercise_class.remaining_spaces == 0:
+            messages.error(
+                request,
+                "Sorry, we can't add this to your bag as this\
+                class is fully booked",
+            )
+
 
     if item_id not in bag["single_classes"]:
         bag["single_classes"].append(item_id)

@@ -419,7 +419,7 @@ def cancel_class_booking(request, class_id):
         {exercise_class}")
 
     if date.today() > exercise_class.class_date - timedelta(days=1):
-        messages.success(
+        messages.info(
             request,
             "You have cancelled this class booking \
             but have not been issued a refund due to notice given",
