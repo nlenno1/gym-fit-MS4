@@ -13,6 +13,7 @@ from profiles.models import UserProfile
 from .models import ClassCategory, SingleExerciseClass
 from .forms import ClassCategoryForm, SingleExerciseClassForm
 from reviews.models import ClassCategoryReview
+from instructors.models import Instructor
 
 
 def send_class_cancellation_email(exercise_class, user_profile, refunded):
@@ -45,6 +46,7 @@ def send_class_cancellation_email(exercise_class, user_profile, refunded):
 def send_update_email(class_id, form):
     """Send the user a class update email"""
     exercise_class = SingleExerciseClass.objects.get(id=class_id)
+
     for person in exercise_class.participants.all():
         user = User.objects.get(id=person.id)
 
