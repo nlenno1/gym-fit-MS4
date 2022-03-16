@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
+<!-- Page header for spacing -->
 {% block page_header %}
     <div class="container container-header">
         <div class="row">
@@ -20,6 +21,7 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-last">
                 <h5 class="mb-5 mb-md-3 fw-bold">Fill out this form to complete your order</h5>
+                <!-- Checkout Form -->
                 <form id="payment-form" action="{% url 'checkout' %}" method="POST">
                     {% csrf_token %}
                     <fieldset class="px-3 mb-4">
@@ -64,6 +66,7 @@
                         <!-- Pass the client secret to the view so we can get the payment intent id -->
                         <input type="hidden" value="{{ client_secret }}" name="client_secret">
                     </fieldset>
+                    <!-- Navigational buttons -->
                     <div class="mt-2">                    
 						<a href="{% url 'view_bag' %}" class="btn btn-dark ms-3" aria-label="Back to your bag">
                             Back to Bag
@@ -83,6 +86,7 @@
 					</div>
                 </form>
             </div>
+            <!-- Order Summary -->
             <div class="col-12 col-md-6">
                 <h5 class="fw-bold">Order Summary</h5>
                 <div class="mx-3">
@@ -98,6 +102,7 @@
                         </div>
                         <hr>
                     {% endif %}
+                    <!-- Item Display -->
                     {% if bag_items.single_classes|length > 0 %}
                         {% for item in bag_items.single_classes %}
                         <div class="row g-0 mx-3">
@@ -123,6 +128,7 @@
             </div>
         </div>
     </section>
+    <!-- Loading overlay - visible when processing payment -->
     <div id="loading-overlay">
         <div class="spinner">
             <img src="{{ MEDIA_URL }}transaction.gif" alt="Loading Gif">
@@ -132,7 +138,9 @@
 
 {% block postloadjs %}
     {{ block.super }}
+    <!-- JS to store values in the HTML to pass onto Stripe -->
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
     {{ client_secret|json_script:"id_client_secret" }}
+    <!-- Stripe JS link for Stripe Element creation etc -->
     <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}

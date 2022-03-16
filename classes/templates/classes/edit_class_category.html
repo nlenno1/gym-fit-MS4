@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
-
+<!-- Page header for spacing -->
 {% block page_header %}
     <div class="container container-header">
         <div class="row">
@@ -16,6 +16,7 @@
         <h2 class="text-center text-md-start ps-md-5 mb-5">Fill out the form below to Update the Class Category called {{ category.friendly_name }}</h2>
         <div class="row">
             <div class="col-12 col-md-6 offset-md-3">
+                <!-- Edit Class Category Form -->
                 <form action="{% url 'edit_class_category' category.id %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form | crispy }}

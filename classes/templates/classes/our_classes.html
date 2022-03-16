@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{% static 'classes/css/classes.css' %}">
 {% endblock %}
 
+<!-- Page header for spacing -->
 {% block page_header %}
     <div class="container container-header">
         <div class="row">
@@ -17,6 +18,7 @@
 {% block content %}
     <section id="content" class="container g-0">
         <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Our Classes </h1>
+        <!-- Add Cass Catrgory Button -->
         {% if user.is_superuser %}
             <div class="row">
                 <div class="col-12 text-center text-md-end">
@@ -32,6 +34,7 @@
                     <div class="row g-0 text-center">
                         <div class="col-12"><h2 class="pt-2">{{ category.friendly_name }}</h2></div>
                         <div class="col-12">
+                            <!-- Image Display -->
                             <div class="image-container d-flex justify-content-center">
                                 {% if category.image_url %}
                                     <img src="{{ category.image_url }}" alt="Representation of a {{ category.friendly_name }} class"></div>
@@ -43,6 +46,7 @@
                             </div>
                         <div class="col-8">Av. Rating: {{ category.average_rating }}/5</div>
                         <div class="col-4">
+                            <!-- Favourite Category Icon Button Display -->
                             {% if category.id in fav_categories %}
                                 <form action="{% url 'remove_category_from_favs' category.id %}" method="POST" class="form">
                                     {% csrf_token %}
@@ -61,6 +65,7 @@
                                 </form>
                             {% endif %}
                         </div>
+                        <!-- View Category Details Button -->
                         <div class="col-12">
                             <a class="btn btn-dark blue-button mt-2" href="{% url 'view_single_class_category' category.id %}" aria-label="View Details about {{ category.friendly_name }} classes">View Class Details</a>
                         </div>
@@ -68,6 +73,7 @@
                 </div>
                 {% endfor %}
             {% else %}
+            <!-- Empty Display Message -->
             <div class="row">
                 <div class="col-12 text-center">
                     <h3 class="display-5 text-center">There are no Class Categories to display</h3>

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
 {% endblock %}
 
+<!-- Page header for spacing -->
 {% block page_header %}
     <div class="container container-header">
         <div class="row">
@@ -16,6 +17,7 @@
 
 {% block content %}
     <div id="content" class="container-fluid g-0">
+        <!-- Hero Image with Logo -->
         <div id="hero-image" class="b-b-b fade-on-load">
             <div class="row g-0">
                 <div class="col-12">
@@ -26,6 +28,7 @@
                 </div>
             </div>
         </div>
+        <!-- Intro Paragraph and Image -->
         <div class="div b-b-b">
             <div class="container px-2 px-sm-0">
                 <div class="row g-0 align-items-center">
@@ -49,10 +52,12 @@
                 </div>
             </div>
         </div>
+        <!-- Instructor Display -->
         <section id="our-team" class="container-fluid">
             <div class="our-team-container py-big">
                 <h2 class="text-center w-100 display-3 text-blue" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">Our Team</h2>
                 <div class="team-cards-container pt-big">
+                    <!-- Instructor Cards -->
                     {% if instructors|length > 0 %}
                         {% for instructor in instructors %}
                             {% if instructor.display_on_site and instructor.image_url or instructor.image %}
@@ -67,11 +72,13 @@
                             {% endif %}
                         {% endfor %}
                     {% else %}
+                        <!-- Empyty Display Message -->
                         <h2 class="display-4 text-center text-light">Why don't you pop in and meet our team!</h2>
                     {% endif %}
                 </div>
             </div>
         </section>
+        <!-- Navigation and Socials Section -->
         <section>
             <div id="home-find-us" class="container-fluid text-center px-3 px-md-5 py-big text-grey">
                 <a href="http://www.instagram.com" target="_blank" aria-label="Go to GymFit's instagram page">
@@ -92,6 +99,7 @@
                 </p>
             </div>
         </section>
+        <!-- Map Section to replicate Google Maps API integration -->
         <section class="container-fluid" id="map">
             <div class="px-0 px-sm-3">
                 <a href="https://www.google.co.uk/maps/place/87-95+Rye+Ln,+London+SE15+4TG/@51.4748384,-0.0749894,13.88z/data=!4m5!3m4!1s0x487603a051531199:0x7985ebcd285eaebc!8m2!3d51.4709398!4d-0.0665182" target="_blank">

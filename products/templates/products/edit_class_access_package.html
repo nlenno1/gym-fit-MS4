@@ -3,10 +3,10 @@
 {% load static %}
 
 {% block extracss %}
-<link rel="stylesheet" href="{% static 'products/css/join_us.css' %}">
-<link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'products/css/join_us.css' %}">
 {% endblock %}
 
+<!-- Page header for spacing -->
 {% block page_header %}
 <div class="container container-header">
     <div class="row">
@@ -22,6 +22,7 @@
     <h2 class="text-center text-md-start ps-md-5 mb-5">Fill out the form below to update the Class Access Package called <strong>"{{ package.friendly_name }}"</strong> </h2>
     <div class="row">
         <div class="col-12 col-md-6 offset-md-3">
+            <!-- Edit Class Access Package From -->
             <form action="{% url 'edit_class_access_package' package.id %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form | crispy }}

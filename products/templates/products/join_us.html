@@ -3,10 +3,10 @@
 {% load static %}
 
 {% block extracss %}
-<link rel="stylesheet" href="{% static 'products/css/join_us.css' %}">
-
+    <link rel="stylesheet" href="{% static 'products/css/join_us.css' %}">
 {% endblock %}
 
+<!-- Page header for spacing -->
 {% block page_header %}
 <div class="container container-header">
     <div class="row">
@@ -16,147 +16,159 @@
 {% endblock %}
 
 {% block content %}
-{% if bag_items.class_access_package %}
-<div class="alter alert-warning text-center py-3 px-3">
-    You have the Class Access Package <strong>{{ bag_items.class_access_package.friendly_name|title }}</strong> in your bag already. Adding a new package will replace this one.
-</div>
-{% endif %}
-<section id="content" class="container">
-    <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Join Us</h1>
-    <h2 class="text-center text-md-start ps-md-5 mt-5 mb-3">Here you can find our selection of Class Access Packages
-    </h2>
-
-    {% if token_packages|length > 0%}
-        <h3 class="mt-5 mb-3 ps-3">Class Tokens</h3>
-        {% for package in token_packages %}
-        <div class="single-class-schedule-display text-center fade-on-load">
-            <div class="row g-0 align-items-md-center">
-                <div class="col-12 col-sm-4 col-md-2">
-                    {% if package.image %}
-                        <img src="{{ MEDIA_URL }}{{ package.image }}" alt="Token image for {{ package.friendly_name }}">
-                    {% else %}
-                        <img src="{{ MEDIA_URL }}no-image.jpg" alt="Token image for {{ package.friendly_name }}">
-                    {% endif %}
-                </div>
-                <div class="col-12 col-sm-4 col-md-6 col-lg-8">
-                    <div class="row g-0 align-items-md-center">
-                        <div class="col-12 col-lg-4">
-                            <!-- Information/Description Popover -->
-                            <p>
-                                <strong>{{ package.friendly_name|title }}
-                                    {% if package.description %}
-                                        <i class="fas fa-info-circle" data-bs-container="body" data-bs-trigger="hover focus"
-                                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{ package.description }}"></i>
-                                    {% endif %}
-                                </strong>
-                            </p>
-                        </div>
-                        <div class="col-12 col-lg-4">
-                            <p>{{ package.amount_of_tokens }} Tokens Included</p>
-                        </div>
-                        <div class="col-12 col-lg-4">
-                            <p>£{{ package.price }}</p>
+    <!-- Currently Selected Class Access Package Warning -->
+    {% if bag_items.class_access_package %}
+    <div class="alter alert-warning text-center py-3 px-3">
+        You have the Class Access Package <strong>{{ bag_items.class_access_package.friendly_name|title }}</strong> in your bag already. Adding a new package will replace this one.
+    </div>
+    {% endif %}
+    <section id="content" class="container">
+        <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Join Us</h1>
+        <h2 class="text-center text-md-start ps-md-5 mt-5 mb-3">Here you can find our selection of Class Access Packages</h2>
+        <!-- Token Packages Display -->
+        {% if token_packages|length > 0%}
+            <h3 class="mt-5 mb-3 ps-3">Class Tokens</h3>
+            <!-- Individual Packages -->
+            {% for package in token_packages %}
+            <div class="single-class-schedule-display text-center fade-on-load">
+                <div class="row g-0 align-items-md-center">
+                    <div class="col-12 col-sm-4 col-md-2">
+                        <!-- Image Display -->
+                        {% if package.image %}
+                            <img src="{{ MEDIA_URL }}{{ package.image }}" alt="Token image for {{ package.friendly_name }}">
+                        {% else %}
+                            <img src="{{ MEDIA_URL }}no-image.jpg" alt="Token image for {{ package.friendly_name }}">
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-sm-4 col-md-6 col-lg-8">
+                        <!-- Package Information -->
+                        <div class="row g-0 align-items-md-center">
+                            <div class="col-12 col-lg-4">
+                                <!-- Information/Description Popover -->
+                                <p>
+                                    <strong>{{ package.friendly_name|title }}
+                                        {% if package.description %}
+                                            <i class="fas fa-info-circle" data-bs-container="body" data-bs-trigger="hover focus"
+                                            data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{ package.description }}"></i>
+                                        {% endif %}
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <p>{{ package.amount_of_tokens }} Tokens Included</p>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <p>£{{ package.price }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-4 col-lg-2 schedule-display-buttons mt-3 mt-sm-0 flex-col">
-                    <form action="{% url 'add_package_to_bag' package.id %}" method="POST" class="form">
-                        {% csrf_token %}
-                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                        {% if profile.class_package_type == "UU" %}
-                            <button type="submit" class="btn btn-dark" disabled>Active Package</button>
-                        {% else %}
-                            <button type="submit" class="btn btn-dark blue-button">Add to Bag</button>
+                    <div class="col-12 col-sm-4 col-lg-2 schedule-display-buttons mt-3 mt-sm-0 flex-col">
+                        <!-- Add Package to Bag Form -->
+                        <form action="{% url 'add_package_to_bag' package.id %}" method="POST" class="form">
+                            {% csrf_token %}
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            {% if profile.class_package_type == "UU" %}
+                                <button type="submit" class="btn btn-dark" disabled>Active Package</button>
+                            {% else %}
+                                <button type="submit" class="btn btn-dark blue-button">Add to Bag</button>
+                            {% endif %}
+                        </form>
+                        <!-- Superuser Package Control Buttons -->
+                        {% if user.is_superuser %}
+                            <a class="btn btn-dark mt-2" href="{% url 'edit_class_access_package' package.id %}">Edit Package</a>
+                            <a class="confirm-delete mt-2 btn btn-danger" href="{% url 'delete_class_access_package' package.id %}">
+                                Delete Package
+                            </a>
                         {% endif %}
-                    </form>
-                    {% if user.is_superuser %}
-                        <a class="btn btn-dark mt-2" href="{% url 'edit_class_access_package' package.id %}">Edit Package</a>
-                        <a class="confirm-delete mt-2 btn btn-danger" href="{% url 'delete_class_access_package' package.id %}">
-                            Delete Package
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    {% endif %}
-    {% if user.is_superuser %}
-        <div class="row">
-            <div class="col-12 text-center text-md-start">
-                <a href="{% url 'add_class_access_package' %}" class="btn btn-dark blue-button mt-4">Add a Tokens Package</a>
-            </div>
-        </div>
-    {% endif %}
-
-    <hr class="package-type-divider">
-    
-    {% if unlimited_packages|length > 0 %}
-        <h3 class="mt-5 mb-3 ps-3">Unlimited Use</h3>
-        {% for package in unlimited_packages %}
-        <div class="single-class-schedule-display text-center fade-on-load">
-            <div class="row g-0 align-items-md-center">
-                <div class="col-12 col-sm-4 col-md-2">
-                    {% if package.image %}
-                        <img src="{{ MEDIA_URL }}{{ package.image }}" alt="Token image for {{ package.friendly_name }}">
-                    {% else %}
-                        <img src="{{ MEDIA_URL }}no-image.jpg" alt="Token image for {{ package.friendly_name }}">
-                    {% endif %}
-                </div>
-                <div class="col-12 col-sm-4 col-md-6 col-lg-8">
-                    <div class="row g-0 align-items-md-center">
-                        <div class="col-12 col-lg-4">
-                            <!-- Information/Description Popover -->
-                            <p>
-                                <strong>{{ package.friendly_name|title }}
-                                    {% if package.description %}
-                                        <i class="fas fa-info-circle" data-bs-container="body" data-bs-trigger="hover focus"
-                                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{ package.description }}"></i>
-                                    {% endif %}
-                                </strong>
-                            </p>
-                        </div>
-                        <div class="col-12 col-lg-4">
-                            <p>{{ package.duration }} Days Class Access</p>
-                            <p><strong>
-                                Expires: {{ package.today_expires }}
-                            </strong> </p>
-                            <p>(if purchased today)</p>
-                        </div>
-                        <div class="col-12 col-lg-4">
-                            <p>£{{ package.price }}</p>
-                        </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-4 col-lg-2 schedule-display-buttons mt-3 mt-sm-0 flex-col">
-                    <form action="{% url 'add_package_to_bag' package.id %}" method="POST" class="form">
-                        {% csrf_token %}
-                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                        {% if profile.class_package_type == "UU" %}
-                            <button type="submit" class="btn btn-dark" disabled>Active Package</button>
-                        {% elif profile.class_package_type == "TK" %}
-                            <button type="submit" class="btn btn-dark" disabled>Active Tokens</button>
-                        {% else %}
-                            <button type="submit" class="btn btn-dark blue-button">Add to Bag</button>
-                        {% endif %}
-                    </form>
-                    {% if user.is_superuser %}
-                        <a class="btn btn-dark mt-2" href="{% url 'edit_class_access_package' package.id %}">Edit Package</a>
-                        <a class="confirm-delete mt-2 btn btn-danger" href="{% url 'delete_class_access_package' package.id %}">
-                            Delete Package
-                        </a>
-                    {% endif %}
+            </div>
+            {% endfor %}
+        {% endif %}
+        <!-- Add A Package button -->
+        {% if user.is_superuser %}
+            <div class="row">
+                <div class="col-12 text-center text-md-start">
+                    <a href="{% url 'add_class_access_package' %}" class="btn btn-dark blue-button mt-4">Add a Tokens Package</a>
                 </div>
             </div>
-        </div>
-        {% endfor %}
-    {% endif %}
-    {% if user.is_superuser %}
-        <div class="row">
-            <div class="col-12 text-center text-md-start">
-                <a href="{% url 'add_class_access_package' %}" class="btn btn-dark blue-button mt-4">Add an Unlimited Package</a>
+        {% endif %}
+
+        <hr class="package-type-divider">
+        <!-- Unlimited Use Package Display -->
+        {% if unlimited_packages|length > 0 %}
+            <h3 class="mt-5 mb-3 ps-3">Unlimited Use</h3>
+            {% for package in unlimited_packages %}
+            <!-- Individual Package Display -->
+            <div class="single-class-schedule-display text-center fade-on-load">
+                <div class="row g-0 align-items-md-center">
+                    <div class="col-12 col-sm-4 col-md-2">
+                        <!-- Image Display -->
+                        {% if package.image %}
+                            <img src="{{ MEDIA_URL }}{{ package.image }}" alt="Token image for {{ package.friendly_name }}">
+                        {% else %}
+                            <img src="{{ MEDIA_URL }}no-image.jpg" alt="Token image for {{ package.friendly_name }}">
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-sm-4 col-md-6 col-lg-8">
+                        <!-- Package Information -->
+                        <div class="row g-0 align-items-md-center">
+                            <div class="col-12 col-lg-4">
+                                <!-- Information/Description Popover -->
+                                <p>
+                                    <strong>{{ package.friendly_name|title }}
+                                        {% if package.description %}
+                                            <i class="fas fa-info-circle" data-bs-container="body" data-bs-trigger="hover focus"
+                                            data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{ package.description }}"></i>
+                                        {% endif %}
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <p>{{ package.duration }} Days Class Access</p>
+                                <p><strong>
+                                    Expires: {{ package.today_expires }}
+                                </strong> </p>
+                                <p>(if purchased today)</p>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <p>£{{ package.price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-4 col-lg-2 schedule-display-buttons mt-3 mt-sm-0 flex-col">
+                        <!-- Add to Bag Button -->
+                        <form action="{% url 'add_package_to_bag' package.id %}" method="POST" class="form">
+                            {% csrf_token %}
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            {% if profile.class_package_type == "UU" %}
+                                <button type="submit" class="btn btn-dark" disabled>Active Package</button>
+                            {% elif profile.class_package_type == "TK" %}
+                                <button type="submit" class="btn btn-dark" disabled>Active Tokens</button>
+                            {% else %}
+                                <button type="submit" class="btn btn-dark blue-button">Add to Bag</button>
+                            {% endif %}
+                        </form>
+                        <!-- Superuser Control Buttons -->
+                        {% if user.is_superuser %}
+                            <a class="btn btn-dark mt-2" href="{% url 'edit_class_access_package' package.id %}">Edit Package</a>
+                            <a class="confirm-delete mt-2 btn btn-danger" href="{% url 'delete_class_access_package' package.id %}">
+                                Delete Package
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-        </div>
-    {% endif %}
-</section>
+            {% endfor %}
+        {% endif %}
+        <!-- Add A Package button -->
+        {% if user.is_superuser %}
+            <div class="row">
+                <div class="col-12 text-center text-md-start">
+                    <a href="{% url 'add_class_access_package' %}" class="btn btn-dark blue-button mt-4">Add an Unlimited Package</a>
+                </div>
+            </div>
+        {% endif %}
+    </section>
 {% endblock %}
 

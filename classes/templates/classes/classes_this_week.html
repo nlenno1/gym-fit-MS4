@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{% static 'classes/css/classes.css' %}">
 {% endblock %}
 
+<!-- Page header for spacing -->
 {% block page_header %}
     <div class="container container-header">
         <div class="row">
@@ -22,9 +23,9 @@
             <form id="date-form" action="{% url 'classes_this_week' %}" method="GET">
                 <div class="row align-items-center g-0 mt-3">
                     <div class="col-12 col-md-6 text-center text-md-start">
-                        <!-- Label for Date input -->
                         <div class="text-center text-md-start ps-md-5 my-3"><a class="btn btn-dark blue-button" href="{% url 'filter_single_classes' %}" aria-label="View all the classes on a specific day">Classes By Day</a></div>
                     </div>
+                    <!-- Category Filter - js change event hander calls function -->
                     <div class="col-12 col-md-6 text-center text-md-end">
                         <select class="form-select mx-auto mx-md-0 ms-md-auto" name="category_filter" id="category-filter-select" aria-label="Select what Category to filter the classes by">
                             <option selected hidden value="None">
@@ -35,9 +36,11 @@
                                 {% endif %}
                             </option>
                             <option value="all">Show All</option>
+                            <!-- Favourite Category List Option -->
                             {% if request.user.is_authenticated %}
                                 <option value="fav_categories">Favourite Class Categories</option>
                             {% endif %}
+                            <!-- Single Category Options to Display -->
                             {% for category in class_categories %}
                                 <option value="{{ category.id }}">{{ category.friendly_name|title }}</option>
                             {% endfor %}
@@ -54,11 +57,13 @@
                             {% if class.class_date == date.date %}
                                 <div class="single-class-schedule-display text-center {% if class.closed %}class-closed{% endif %}">
                                     <div class="row g-0 align-items-center">
+                                        <!-- Class Time, location and duration -->
                                         <div class="col-6 col-sm-4 col-md-2">
                                             <p class="d-xl-none"><strong>{{ class.start_time }}</strong></p>
                                             <p class="d-none d-xl-block"><strong>{{ class.start_time }} - {{ class.end_time }}</strong></p>
                                             <p class="d-xl-none">{{ class.duration|title }} mins</p>
                                         </div>
+                                        <!-- Class General Info -->
                                         <div class="col-6 col-sm-4 col-md-7 col-lg-8">
                                             <div class="row g-0 align-items-center">
                                                 <div class="col-12 col-md-3">
@@ -70,10 +75,13 @@
                                                 <div class="d-none d-md-block col-md-3"><p>{{ class.instructor|title }}</p></div>
                                                 <div class="col-12 col-md-3"><p>{{ class.location|title }}</p></div>
                                                 <div class="col-12 col-md-3">
+                                                    <!-- Class Started Check -->
                                                     {% if not class.closed %}
+                                                        <!-- Limited Capacity Remaining Warning -->
                                                         {% if class.remaining_spaces < 5 and class.remaining_spaces > 0 %}
                                                             <p class="text-danger fw-bold">Only {{ class.remaining_spaces }} Spaces Left!</p>
                                                         {% endif %}    
+                                                        <!-- Not Enough Tokens Warning -->
                                                         {% if profile.class_package_type == "TK" and profile_tokens < class.token_cost %}
                                                             <p>£{{ class.price }} / {{ class.token_cost }} Token/s</p>
                                                             <p class="text-warning">
@@ -82,6 +90,7 @@
                                                                 </button>
                                                             </p>
                                                         {% else %}
+                                                        <!-- Price Displayed in Tokens or Currency depending on User Package -->
                                                         <p>
                                                             {% if profile_tokens > 0 %}
                                                                 {{ class.token_cost }} Token{{ class.token_cost|pluralize  }}
@@ -90,12 +99,14 @@
                                                             {% endif %}
                                                         </p>
                                                         {% endif %}
+                                                    <!-- Class Started Notification -->
                                                     {% else %}
                                                     <p>This class has already started</p>
                                                     {% endif %}
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- Single Exercise Class Button Display -->
                                         <div class="col-12 col-sm-4 col-md-3 col-lg-2 schedule-display-buttons mt-3 mt-sm-0 flex-col">
                                             {% if class.closed %}
                                                 <button class="btn btn-dark" disabled aria-label="This class has already started">Class Closed</button>
@@ -104,6 +115,7 @@
                                             {% elif class.remaining_spaces is 0 %}
                                                 <button class="btn btn-danger" disabled aria-label="This class is fully booked">Fully Booked</button>
                                             {% elif profile.class_package_type == "TK" and profile_tokens >= class.token_cost or profile.class_package_type == "UU" %}
+                                                <!-- Book Class With Package Form -->
                                                 <form action="{% url 'book_with_package' class.id %}" method="POST" class="form">
                                                     {% csrf_token %}
                                                     <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
@@ -114,12 +126,14 @@
                                                     {% endif %}
                                                 </form>
                                             {% else %}
+                                                <!-- Add To Bag Form -->
                                                 <form action="{% url 'add_single_class_to_bag' class.id %}" method="POST" class="form">
                                                     {% csrf_token %}
                                                     <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
                                                     <button type="submit" class="btn btn-dark blue-button" aria-label="Add this single exercise class to your bag">Add to Bag</button>
                                                 </form>
                                             {% endif %}
+                                            <!-- Superuser Single Exercise Class Controls -->
                                             {% if user.is_superuser %}
                                                 {% if not class.closed %}
                                                     <a class="btn btn-dark mt-2" href="{% url 'edit_single_exercise_class' class.id %}" aria-label="Edit details about this Exercise Class">Edit Class</a>
@@ -135,6 +149,7 @@
                         {% endfor %}
                     {% endfor %}
                 {% else %}
+                    <!-- Empty Display Message -->
                     <div class="row">
                         <div class="col-12 text-center">
                             <p class="display-4">No Classes To Display</p>
@@ -143,12 +158,12 @@
                     </div>
                 {% endif %}
             </div>
-            <!-- /Individual Class Display -->
         </div>
     </section>
 {% endblock %}
 
 {% block postloadjs %}
     {{ block.super }}
+    <!-- Form Submission JS Link -->
     <script src="{% static 'classes/js/classes.js' %}"></script>
 {% endblock %}

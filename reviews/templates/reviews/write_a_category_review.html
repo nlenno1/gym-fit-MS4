@@ -3,9 +3,10 @@
 {% load static %}
 
 {% block extracss %}
-  <link rel="stylesheet" href="{% static 'css/form-inputs.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form-inputs.css' %}">
 {% endblock %}
 
+<!-- Page header for spacing -->
 {% block page_header %}
     <div class="container container-header">
         <div class="row">
@@ -20,6 +21,7 @@
         <h2 class="text-center text-md-start ps-md-5 mb-5">Fill out the form below write a review on the {{ category.friendly_name }} classes at Gym Fit </h2>
         <div class="row">
             <div class="col-12 col-md-6 offset-md-3">
+                <!-- Write A Review Form -->
                 <form action="{% url 'create_a_category_review' category.id %}" method="POST">
                     {% csrf_token %}
                     {{ form | crispy }}

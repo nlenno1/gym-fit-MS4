@@ -4,9 +4,10 @@
 
 {% block extracss %}
     <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+    <!-- Classes link for Single Exercise Class Display -->
     <link rel="stylesheet" href="{% static 'classes/css/classes.css' %}">
 {% endblock %}
-
+<!-- Page header for spacing -->
 {% block page_header %}
     <div class="container container-header">
         <div class="row">
@@ -36,6 +37,7 @@
                         <button class="nav-link profile-menu-button" id="favourite-class-list-button" type="button" aria-label="Show your Favourite Class Categories list">Favourite Class List</button>
                     </li>
                 </ul>
+                <!-- Admin Profile Buttons -->
                 {% if request.user.is_superuser %}
                     <hr>
                     <ul class="nav nav-pills nav-justified">
@@ -57,12 +59,13 @@
                     </ul>
                 {% endif %}
                 <hr>
+                <!-- Sign Out Button -->
                 <ul class="nav nav-pills nav-justified mb-5">
                     <li class="nav-item">
                         <a href="{% url 'account_logout' %}" class="nav-link" aria-label="Sign Out">Sign Out</a>
                     </li>
                 </ul> 
-                <!-- Class Access Package/Tokens View -->
+                <!-- Profile Class Access Package View -->
                 {% if profile.active_class_package  %}
                     <div class="active_class_package_display py-5">
                         <hr>
@@ -98,6 +101,7 @@
                 {% endif %}
             </div>
             <div class="col-12 col-md-7 col-lg-8 col-xl-9">
+                <!-- Personal Details Section -->
                 <section id="personal-details" class="profile-section">
                     <form class="mb-5" action="{% url 'profile' %}" method="POST" id="profile-update-form">
                         {% csrf_token %}
@@ -109,12 +113,14 @@
                         </div>
                     </form>
                 </section>
+                <!-- My Bookings Section -->
                 <section id="my-bookings" class="profile-section mx-lg-5 mb-5">
                     {% if upcoming_classes|length > 0 or previous_classes|length > 0 %}
                         {% if upcoming_classes|length > 0 %}
                             <h5 class="display-4">Upcoming Classes</h5>
                             <hr>
                             {% for class in upcoming_classes %}
+                                <!-- Single Upcoming Class Display -->
                                 <div class="single-class-schedule-display text-center">
                                     <div class="row g-0 align-items-center">
                                         <div class="col-6 col-sm-5">
@@ -149,6 +155,7 @@
                             <h5 class="display-4">Previous Classes</h5>
                             <hr>
                             {% for class in previous_classes %}
+                                <!-- Single Previous Classes Display -->
                                 <div class="single-class-schedule-display text-center">
                                     <div class="row g-0 align-items-center">
                                         <div class="col-6 col-sm-4">
@@ -184,6 +191,7 @@
                         {% endif %}
                     {% else %}
                     <div class="text-center text-md-start">
+                        <!-- Empty Display Message -->
                         <h2 class="display-3">You have no Bookings</h2>
                         <h3>Why not book onto one of our classes</h3>
                         <a href="{% url 'classes_this_week' %}" class="btn btn-dark blue-button" aria-label="View all the class types we provide">Our Classes</a>
@@ -192,8 +200,9 @@
                 </section>
                 <section id="previous-puchases" class="profile-section mx-md-5 mb-5 mb-5">
                     {% if orders|length > 0 %}
-                        <h5 class="text-center text-md-start">Click onto the order number to view more details</h5>
+                    <h5 class="text-center text-md-start">Click onto the order number to view more details</h5>
                         <div class="table-responsive">
+                            <!-- Previous Order Table -->
                             <table class="table table-sm table-borderless">
                                 <thead>
                                     <tr>
@@ -205,6 +214,7 @@
                                 </thead>
                                 <tbody>
                                     {% for order in orders %}
+                                        <!-- Individual Order Display with link to Order Review -->
                                         <tr>
                                             <td>
                                                 <a href="{% url 'order_history' order.order_number %}" data-bs-container="body" data-bs-trigger="hover focus"
@@ -216,6 +226,7 @@
                                             <td>{{ order.order_date }}</td>
                                             <td>
                                                 <ul class="list-unstyled">
+                                                    <!-- Previous Order Items Description -->
                                                     {% for item in order.lineitems.all %}
                                                         <li class="small">
                                                             {% if item.access_package %}
@@ -237,15 +248,18 @@
                             </table>
                         </div>
                     {% else %}
+                        <!-- Empty Display Message -->
                         <h5 class="display-3">You have no Previous Orders</h5>
                         <h3>Why not buy one of our Access Packages</h3>
                         <a href="{% url 'view_class_access_packages' %}" class="btn btn-dark blue-button" aria-label="View all the Class Access Packages we provide">Our Packages</a>
                     {% endif %}
                 </section>
+                <!-- Favourite Class List Section -->
                 <section id="favourite-class-list" class="profile-section mx-md-5 mb-5 mb-5">
                     {% if fav_class_list|length > 0 %}
                         <h2 class="text-center text-md-start">This is a list of your favourite classes</h2>
                         <h3>To add a class to this list go to Our Classes and click the heart icon</h3>
+                        <!-- Table containing the Class Category and the Removal Button -->
                         <table class="table text-center">
                             <thead>
                                 <tr>
@@ -271,16 +285,19 @@
                             </tbody>
                         </table>
                     {% else %}
+                    <!-- Empty Display Message -->
                     <div class="text-center text-md-start">
                         <h5 class="display-3">You have no Categories in Your Favourites List</h5>
                         <p>To add a class to this list go to Our Classes and click the heart icon</p>
                     </div>
                     {% endif %}
                 </section>
+                <!-- Admin Messages Section -->
                 {% if user.is_superuser %}
                     <section id="admin-messages" class="profile-section mx-md-5 mb-5 mb-5">
                         {% if admin_messages|length > 0 %}
-                        <hr>
+                            <hr>
+                            <!-- Individual Message Display -->
                             {% for message in admin_messages %}
                                 <div class="row">
                                     <div class="col-12 col-xl-4">
@@ -292,6 +309,7 @@
                                         <h4 class="fw-bold">{{ message.message_subject }}</h4>
                                         <p>{{ message.message_text }}</p>
                                         <div class="text-end">
+                                            <!-- Delete Message Button with Popover -->
                                             <a href="{% url 'delete_contact_message' message.id %}" class="confirm-delete" data-bs-container="body" data-bs-trigger="hover focus"
                                             data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Delete this message" aria-label="Delete this message">
                                             <i class="fa-solid fa-trash-can"></i>
@@ -312,6 +330,7 @@
 
 {% block postloadjs %}
     {{ block.super }}
+    <!-- Country Field Dropdown and Pill Menu Control import JS -->
     <script src="{% static 'profiles/js/countryfield.js' %}"></script>
     <script src="{% static 'profiles/js/pill-menu-control.js' %}"></script>
 {% endblock %}

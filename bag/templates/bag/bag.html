@@ -3,9 +3,10 @@
 {% load static %}
 
 {% block extracss %}
-  <link rel="stylesheet" href="{% static 'classes/css/classes.css' %}">
+    <!-- Classes link for Single Exercise Class Display -->
+    <link rel="stylesheet" href="{% static 'classes/css/classes.css' %}">
 {% endblock %}
-
+<!-- Page header for spacing -->
 {% block page_header %}
     <div class="container container-header">
         <div class="row">
@@ -19,17 +20,20 @@
         <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Shopping Bag</h1>
         <div class="mt-4 mb-5">
             {% if product_count > 0 %}
+                <!-- Products in bag display -->
                 {% if bag_items.class_access_package %}
+                    <!-- Class Access Package Display -->
                     <h3>Class Access Package</h3>
                         <div class="single-class-schedule-display text-center">
                             <div class="row g-0 align-items-md-center">
+                                <!-- Package Images -->
                                 <div class="col-12 col-sm-2 ">
                                     <img src="{{ MEDIA_URL }}{{ bag_items.class_access_package.image }}" alt="Token image for {{ bag_items.class_access_package.friendly_name }}">
                                 </div>
+                                <!-- Name and Expiry with Information Popover -->
                                 <div class="col-12 col-sm-8">
                                     <div class="row g-0 align-items-md-center">
                                         <div class="col-12 col-lg-4">
-                                            <!-- Information/Description Popover -->
                                             <p>
                                                 <strong>{{ bag_items.class_access_package.friendly_name }}
                                                     {% if package.description %}
@@ -51,6 +55,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- Remove from Bag Icon with Popover -->
                                 <div class="col-12 col-sm-2 schedule-display-buttons mt-3 mt-sm-0 flex-lg-row">
                                     <a class="confirm-remove" href="{% url 'remove_from_bag' 'package' bag_items.class_access_package.id %}" aria-label="Remove item from your bag"
                                     data-bs-container="body" data-bs-trigger="hover focus"
@@ -61,17 +66,19 @@
                             </div>
                         </div>
                 {% endif %}
-
                 {% if bag_items.single_classes|length > 0 %}
+                    <!-- Single Exercise Class Display -->
                     <h3>Single Exercise Classes</h3>
                     {% for item in bag_items.single_classes %}
                         <div class="single-class-schedule-display text-center {% if class.closed %}class-closed{% endif %}">
                             <div class="row g-0 align-items-center">
+                                <!-- Date and Time Information -->
                                 <div class="col-6 col-sm-4">
                                     <p class="d-xl-none"><strong>{{ item.class_date }} : {{ item.start_time }}</strong></p>
                                     <p class="d-none d-xl-block"><strong>{{ item.class_date }} : {{ item.start_time }} - {{ item.end_time }}</strong></p>
                                     <p class="d-xl-none">{{ item.duration }} mins</p>
                                 </div>
+                                <!-- Location, Instructor and Price Information -->
                                 <div class="col-6 col-sm-7">
                                     <div class="row g-0 align-items-center">
                                         <div class="col-12 col-md-4"><p><strong>{{ item.category|title}}</strong></p></div>
@@ -79,6 +86,7 @@
                                         <div class="col-12 col-md-4"><p>£{{ item.price }}</p></div>
                                     </div>
                                 </div>
+                                <!-- Remove from Bag Icon with Popover -->
                                 <div class="col-12 col-sm-1 schedule-display-buttons mt-3 mt-sm-0 flex-lg-row">
                                     <a class="confirm-remove" href="{% url 'remove_from_bag' 'single_class' item.id %}" data-bs-container="body" data-bs-trigger="hover focus"
                                     data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Remove this Class from your Bag" aria-label="Remove item from your bag">
@@ -93,9 +101,11 @@
                 Total: £{{ total }}
             </p>
             {% else %}
+                <!-- Empty display message -->
                 <h2 class="mb text-center">Your bag is empty</h2>
             {% endif %}
         </div>
+        <!-- Navigational buttons -->
         <div class="text-center">
             <a class="btn btn-dark mt-2" href="{% url 'classes_this_week' %}" aria-label="View Classes this week">Classes This Week</a>
             <a class="btn btn-dark mt-2" href="{% url 'view_class_access_packages' %}" aria-label="View our class packages">Class Packages</a>

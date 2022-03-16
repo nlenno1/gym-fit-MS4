@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{% static 'classes/css/classes.css' %}">
 {% endblock %}
 
+<!-- Page header for spacing -->
 {% block page_header %}
     <div class="container container-header">
         <div class="row">
@@ -23,6 +24,7 @@
                 </h1>
             </div>
             <div class="col-12 col-md-3 display-3 text-center">
+                <!-- Favourite Category Heart Display with Popover -->
                 {% if fav_category %}
                     <form action="{% url 'remove_category_from_favs' category.id %}" method="POST" class="form">
                         {% csrf_token %}
@@ -43,6 +45,7 @@
             </div>
         </div>
         <div class="row g-0">
+            <!-- Category Image Display -->
             <div class="col-12 col-lg-4 text-center">
                 {% if category.image_url %}
                     <img class="w-100 mx-auto px-md-2" src="{{ category.image_url }}" alt="Image of {{ category.friendly_name }}">
@@ -52,11 +55,13 @@
                     <img class="w-100 mx-auto px-md-2" src="{{MEDIA_URL}}no-image.jpg" alt="Image of {{ category.friendly_name }}">
                 {% endif %}
             </div>
+            <!-- Category Information -->
             <div class="col-12 col-lg-8 ps-lg-4 pt-4 pt-lg-0 text-center text-md-start">
                 <p>{{ category.description }}</p>
                 <p>Equipment Required: {{ category.equipment_required }}</p>
                 <p>{{ category.average_rating }}/5 Star Average Rating from {{ category.numb_of_reviews }} Review{{ category.numb_of_reviews|pluralize }}</p>
             </div>
+            <!-- Superuser Category Control Buttons -->
             {% if user.is_superuser %}
                 <div class="row g-0 pt-4 px-md-5">
                     <div class="col-12 col-md-6 text-center text-md-start">
@@ -68,10 +73,12 @@
                 </div>
             {% endif %}
         </div>
+        <!-- Category Reviews Container -->
         <div class="row g-0 mt-5 align-items-center">
             <div class="col-12 col-md-6">
                 <h4 class="fw-bold display-5 text-center text-md-start mb-0">Class Reviews</h4>
             </div>
+            <!-- Display add review button if the user hasn't previously made one -->
             {% if not previous_review %}
                 <div class="col-12 col-md-6 text-center text-md-end">
                     {% if user.is_authenticated %}
@@ -84,6 +91,7 @@
                 </div>
             {% endif %}
         </div>
+        <!-- Responsive Table Reviews Display -->
         {% if reviews|length > 0 %}
             <div class="row g-0">
                 <div class="col-12">
@@ -101,6 +109,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                            <!-- Line Item for Reviews -->
                             {% for review in reviews %}  
                                 <tr >
                                     <td scope="row" class="d-none d-md-table-cell">{{ review.created_on }}</th>
@@ -123,6 +132,7 @@
                 </div>
             </div>
         {% else %}
+            <!-- No Reviews to Display message -->
             <div class="row g-0">
                 <div class="col-12 text-center text-md-start">
                     <h5 class="my-5">There are no reviews to show</h5>
