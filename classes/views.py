@@ -558,15 +558,22 @@ def edit_single_exercise_class(request, class_id):
             request.POST, request.FILES, instance=exercise_class
         )
         if form.is_valid():
-            send_update_email(class_id, form)
-            exercise_class = form.save(commit=False)
-            exercise_class.end_time = (
-                datetime.combine(date.today(), exercise_class.start_time)
-                + timedelta(minutes=exercise_class.duration)
-            ).time()
-            exercise_class.save()
-            messages.success(request, "Successfully Updated Exercise Class")
-            return redirect(reverse("classes_this_week"))
+            if form.cleaned_data['max_capacity'] < len(exercise_class.participants.all()):
+                messages.error(request, "There are more people signed up to the class \
+                    than the new max capacity allows")
+                return redirect(reverse("classes_this_week"))
+            else:
+                send_update_email(class_id, form)
+                exercise_class = form.save(commit=False)
+                exercise_class.remaining_spaces = (
+                        exercise_class.max_capacity - len(exercise_class.participants.all()))
+                exercise_class.end_time = (
+                    datetime.combine(date.today(), exercise_class.start_time)
+                    + timedelta(minutes=exercise_class.duration)
+                ).time()
+                exercise_class.save()
+                messages.success(request, "Successfully Updated Exercise Class")
+                return redirect(reverse("classes_this_week"))
         else:
             messages.error(
                 request,
