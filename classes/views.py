@@ -15,67 +15,9 @@ from .forms import ClassCategoryForm, SingleExerciseClassForm
 from reviews.models import ClassCategoryReview
 from instructors.models import Instructor
 
-
-def send_class_cancellation_email(exercise_class, user_profile, refunded):
-    """Send the user a class cancellation email"""
-
-    subject = render_to_string(
-        "classes/cancellation_emails/cancellation_email_subject.txt",
-        {"class": exercise_class},
-    )
-    body = render_to_string(
-        "classes/cancellation_emails/cancellation_email_body.txt",
-        {
-            "user": user_profile,
-            "contact_email": settings.DEFAULT_FROM_EMAIL,
-            "class": exercise_class,
-            "refunded": refunded,
-        },
-    )
-
-    send_mail(
-        subject,
-        body,
-        settings.DEFAULT_FROM_EMAIL,
-        [
-            user_profile.email,
-        ],
-    )
-
-
-def send_update_email(class_id, form):
-    """Send the user a class update email"""
-    exercise_class = SingleExerciseClass.objects.get(id=class_id)
-
-    for person in exercise_class.participants.all():
-        user = User.objects.get(id=person.id)
-
-        subject = render_to_string(
-            "classes/update_emails/update_email_subject.txt",
-            {"class": exercise_class},
-        )
-        body = render_to_string(
-            "classes/update_emails/update_email_body.txt",
-            {
-                "user": user,
-                "contact_email": settings.DEFAULT_FROM_EMAIL,
-                "class": exercise_class,
-                "form": form,
-            },
-        )
-
-        send_mail(
-            subject,
-            body,
-            settings.DEFAULT_FROM_EMAIL,
-            [
-                user.email,
-            ],
-        )
-
+from .utils import send_class_cancellation_email, send_update_email, convert_ability_level_to_str
 
 # Class Categories
-
 
 def view_class_categories(request):
     """A view to return all the categories"""
@@ -232,14 +174,7 @@ def classes_this_week(request):
 
     # format ability level attributes for display
     for item in selected_classes:
-        if item.ability_level == "BEG":
-            item.ability_level = "Beginner"
-        elif item.ability_level == "INT":
-            item.ability_level = "Intermediate"
-        elif item.ability_level == "ADV":
-            item.ability_level = "Advanced"
-        else:
-            item.ability_level = "For All"
+        convert_ability_level_to_str(item)
 
     context = {
         "classes": selected_classes,
@@ -323,14 +258,7 @@ def filter_single_classes(request):
 
     # format ability level attributes for display
     for item in filtered_classes:
-        if item.ability_level == "BEG":
-            item.ability_level = "Beginner"
-        elif item.ability_level == "INT":
-            item.ability_level = "Intermediate"
-        elif item.ability_level == "ADV":
-            item.ability_level = "Advanced"
-        else:
-            item.ability_level = "For All"
+        convert_ability_level_to_str(item)
 
     context = {
         "classes": filtered_classes,
