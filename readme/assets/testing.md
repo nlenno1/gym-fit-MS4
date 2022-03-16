@@ -35,7 +35,13 @@ I requested peer review feedback from my friends, family and the Code Institute 
 ## Performance - Lighthouse
 I tested the Performance, Accessibility, Best Practices and SEO of GymFit using [Lighthouse](https://developers.google.com/web/tools/lighthouse) in Chrome Developer Tools.
 
+
+
 ## Colour Tester - A11y
+
+To test the color contrast on GymFit I used [A11y the Color Contrast Accessibility Validator](https://color.a11y.com/). After testing a few pages, there were no issues found. Here is the result from the Classes this Week page as it contained all the color combinations that have been used in the project.
+
+![Image of Color Validator Result](gymfit-a11y-color-test.jpg)
 
 # Validation
 
