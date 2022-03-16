@@ -122,7 +122,6 @@ def delete_instructor(request, instructor_id):
 
     classes_to_remove = SingleExerciseClass.objects.filter(
                         instructor=instructor)
-    print(classes_to_remove)
     for class_event in classes_to_remove:
         delete_single_exercise_class(request, class_event.id)
 

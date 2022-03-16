@@ -20,7 +20,7 @@
         <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">{{ request.user|upper }} - <span id="visible-section-name">PERSONAL DETAILS</span></h1>
         <div class="row">
             <!-- My Profile Menu Pills -->
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+            <div class="col-12 col-md-5 col-lg-4 col-xl-3">
                 <!-- Nav Pills Taken from Bootstrap 5 Documentation -->
                 <ul class="nav nav-pills nav-justified">
                     <li class="nav-item">
@@ -97,7 +97,7 @@
                     </div>
                 {% endif %}
             </div>
-            <div class="col-12 col-md-6 col-lg-8 col-xl-9">
+            <div class="col-12 col-md-7 col-lg-8 col-xl-9">
                 <section id="personal-details" class="profile-section">
                     <form class="mb-5" action="{% url 'profile' %}" method="POST" id="profile-update-form">
                         {% csrf_token %}
@@ -280,39 +280,25 @@
                 {% if user.is_superuser %}
                     <section id="admin-messages" class="profile-section mx-md-5 mb-5 mb-5">
                         {% if admin_messages|length > 0 %}
-                            <table class="table table-hover text-center">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">Sender</th>
-                                    <th scope="col">Reply Email</th>
-                                    <th scope="col">Subject</th>
-                                    <th scope="col">Message</th>
-                                    <th scope="col">Sent</th>
-                                    <th scope="col">Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for message in admin_messages %}
-                                        <tr>
-                                        <th scope="row">{{ message.message_from }}</th>
-                                        <th>{{ message.reply_email }}</th>
-                                        <th>{{ message.message_subject }}</th>
-                                        <th>{{ message.message_text }}</th>
-                                        <th>{{ message.message_sent }}</th>
-                                        <td>
+                            {% for message in admin_messages %}
+                                <div class="row">
+                                    <div class="col-12 col-xl-4">
+                                        <h4 class="fw-bold">Sender : {{ message.message_from }}</h4>
+                                        <p class="mb-0">Reply Email : {{ message.reply_email }}</p>
+                                        <p>Date Sent : {{ message.message_sent }}</p>
+                                    </div>
+                                    <div class="col-12 col-xl-8">
+                                        <h4 class="fw-bold">{{ message.message_subject }}</h4>
+                                        <p>{{ message.message_text }}</p>
+                                        <div class="text-end">
                                             <a href="{% url 'delete_contact_message' message.id %}" class="confirm-delete" data-bs-container="body" data-bs-trigger="hover focus"
                                             data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Delete this message" aria-label="Delete this message">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
-                                        </td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        {% else %}
-                            <div class="text-center text-md-start">
-                                <h5 class="display-3">You have no Messages</h5>
-                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
                         {% endif %}
                     </section>
                 {% endif %}
