@@ -280,6 +280,7 @@
                 {% if user.is_superuser %}
                     <section id="admin-messages" class="profile-section mx-md-5 mb-5 mb-5">
                         {% if admin_messages|length > 0 %}
+                        <hr>
                             {% for message in admin_messages %}
                                 <div class="row">
                                     <div class="col-12 col-xl-4">
@@ -298,6 +299,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
                             {% endfor %}
                         {% endif %}
                     </section>
