@@ -52,7 +52,7 @@
                         <h2 class="fw-bold ps-5 py-4 mt-5 brown-background border border-dark border-2">{{ date.text_date }}</h2>
                         {% for class in classes %}
                             {% if class.class_date == date.date %}
-                                <div class="single-class-schedule-display text-center">
+                                <div class="single-class-schedule-display text-center {% if class.closed %}class-closed{% endif %}">
                                     <div class="row g-0 align-items-center">
                                         <div class="col-6 col-sm-4 col-md-2">
                                             <p class="d-xl-none"><strong>{{ class.start_time }}</strong></p>
@@ -70,24 +70,28 @@
                                                 <div class="d-none d-md-block col-md-3"><p>{{ class.instructor|title }}</p></div>
                                                 <div class="col-12 col-md-3"><p>{{ class.location|title }}</p></div>
                                                 <div class="col-12 col-md-3">
-                                                    {% if class.remaining_spaces < 5 and class.remaining_spaces > 0 %}
-                                                        <p class="text-danger fw-bold">Only {{ class.remaining_spaces }} Spaces Left!</p>
-                                                    {% endif %}    
-                                                    {% if profile.class_package_type == "TK" and profile_tokens < class.token_cost %}
-                                                        <p>£{{ class.price }} / {{ class.token_cost }} Token/s</p>
-                                                        <p class="text-warning">
-                                                            <button type="button" data-bs-container="body" data-bs-trigger="hover focus"
-                                                                data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="You don't have enough tokens to book this so either buy some more or buy this class individually"><i class="fa-solid fa-triangle-exclamation"></i>
-                                                            </button>
-                                                        </p>
-                                                    {% else %}
-                                                    <p>
-                                                        {% if profile_tokens > 0 %}
-                                                            {{ class.token_cost }} Token{{ class.token_cost|pluralize  }}
+                                                    {% if not class.closed %}
+                                                        {% if class.remaining_spaces < 5 and class.remaining_spaces > 0 %}
+                                                            <p class="text-danger fw-bold">Only {{ class.remaining_spaces }} Spaces Left!</p>
+                                                        {% endif %}    
+                                                        {% if profile.class_package_type == "TK" and profile_tokens < class.token_cost %}
+                                                            <p>£{{ class.price }} / {{ class.token_cost }} Token/s</p>
+                                                            <p class="text-warning">
+                                                                <button type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                                                    data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="You don't have enough tokens to book this so either buy some more or buy this class individually"><i class="fa-solid fa-triangle-exclamation"></i>
+                                                                </button>
+                                                            </p>
                                                         {% else %}
-                                                            £{{ class.price }}
+                                                        <p>
+                                                            {% if profile_tokens > 0 %}
+                                                                {{ class.token_cost }} Token{{ class.token_cost|pluralize  }}
+                                                            {% else %}
+                                                                £{{ class.price }}
+                                                            {% endif %}
+                                                        </p>
                                                         {% endif %}
-                                                    </p>
+                                                    {% else %}
+                                                    <p>This class has already started</p>
                                                     {% endif %}
                                                 </div>
                                             </div>

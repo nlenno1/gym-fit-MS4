@@ -314,3 +314,7 @@ footer img {
     visibility: visible;
     top: 0;
 }
+
+.class-closed {
+    background-color: rgba(196, 196, 196, 0.8);
+}

@@ -65,12 +65,12 @@
                 {% if bag_items.single_classes|length > 0 %}
                     <h3>Single Exercise Classes</h3>
                     {% for item in bag_items.single_classes %}
-                        <div class="single-class-schedule-display text-center">
+                        <div class="single-class-schedule-display text-center {% if class.closed %}class-closed{% endif %}">
                             <div class="row g-0 align-items-center">
                                 <div class="col-6 col-sm-4">
-                                    <p class="d-xl-none"><strong>{{ item.class_date }} : {{ item.start_time|title }}</strong></p>
-                                    <p class="d-none d-xl-block"><strong>{{ item.class_date }} : {{ item.start_time|title }} - {{ item.end_time|title }}</strong></p>
-                                    <p class="d-xl-none">{{ item.duration|title }} mins</p>
+                                    <p class="d-xl-none"><strong>{{ item.class_date }} : {{ item.start_time }}</strong></p>
+                                    <p class="d-none d-xl-block"><strong>{{ item.class_date }} : {{ item.start_time }} - {{ item.end_time }}</strong></p>
+                                    <p class="d-xl-none">{{ item.duration }} mins</p>
                                 </div>
                                 <div class="col-6 col-sm-7">
                                     <div class="row g-0 align-items-center">
