@@ -264,6 +264,7 @@ def filter_single_classes(request):
     category_filter_name = ""
     date_filter = datetime.today().strftime("%Y-%m-%d")
     profile_tokens = None
+    profile = None
 
     if request.GET:
         # Check for category & date filters and
