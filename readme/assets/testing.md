@@ -7,6 +7,8 @@ Find all my manual testing criteria, procedure and outcomes in my [Manual Testin
 
 ## User Stories
 
+For full details on the User Stories testing, please see my [User Stories Testing Document](gym-fit-user-stories-testing-document.pdf)
+
 ## Peer Review
 
 I requested peer review feedback from my friends, family and the Code Institute slack community. Below you can find any issues or suggestions from my peers and any changes I made in response to the feedback. Apart from that logged below, all other peer review feedback was positive.
