@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from profiles.models import UserProfile
 from .models import ClassAccessPackage
 from .forms import ClassAccessPackageForm
+from .constants import PACKAGE_TYPES
 
 
 def view_class_access_packages(request):
@@ -21,7 +22,7 @@ def view_class_access_packages(request):
         profile.check_package_expired()
 
     for package in packages:
-        if package.type == "UU":
+        if package.type == PACKAGE_TYPES['UNLIMITED']:
             unlimited.append(package)
         else:
             tokens.append(package)
@@ -50,9 +51,9 @@ def add_class_access_package(request):
     if request.method == "POST":
         form = ClassAccessPackageForm(request.POST, request.FILES)
         if form.is_valid():
-            if form["type"] == "TK":
+            if form["type"] == PACKAGE_TYPES['TOKENS']:
                 form.duration = 86
-            elif form["type"] == "UU":
+            elif form["type"] == PACKAGE_TYPES['UNLIMITED']:
                 form.amount_of_tokens = None
             form.save()
             messages.success(

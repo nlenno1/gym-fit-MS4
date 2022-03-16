@@ -7,6 +7,7 @@ from products.models import ClassAccessPackage
 from classes.models import SingleExerciseClass
 from profiles.models import UserProfile
 
+from products.constants import PACKAGE_TYPES
 
 def view_bag(request):
     """View to render the shopping bag"""
@@ -30,7 +31,7 @@ def add_package_to_bag(request, item_id):
     profile = UserProfile.objects.get(user=request.user)
     profile.check_package_expired()
 
-    if profile.active_class_package and profile.class_package_type == "UU":
+    if profile.active_class_package and profile.class_package_type == PACKAGE_TYPES['UNLIMITED']:
         messages.error(
             request,
             f"You can not add {package.friendly_name} to your bag \
@@ -38,7 +39,7 @@ def add_package_to_bag(request, item_id):
         )
         return redirect(redirect_url)
 
-    if profile.active_class_package and profile.class_package_type == "TK":
+    if profile.active_class_package and profile.class_package_type == PACKAGE_TYPES['TOKENS']:
         messages.info(
             request,
             "Purchasing a new Token Package with tokens on \
