@@ -73,6 +73,14 @@
                                                     {% if class.remaining_spaces < 5 and class.remaining_spaces > 0 %}
                                                         <p class="text-danger fw-bold">Only {{ class.remaining_spaces }} Spaces Left!</p>
                                                     {% endif %}    
+                                                    {% if profile.class_package_type == "TK" and profile_tokens < class.token_cost %}
+                                                        <p>£{{ class.price }} / {{ class.token_cost }} Token/s</p>
+                                                        <p class="text-warning">
+                                                            <button type="button" data-bs-container="body" data-bs-trigger="hover focus"
+                                                                data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="You don't have enough tokens to book this so either buy some more or buy this class individually"><i class="fa-solid fa-triangle-exclamation"></i>
+                                                            </button>
+                                                        </p>
+                                                    {% else %}
                                                     <p>
                                                         {% if profile_tokens > 0 %}
                                                             {{ class.token_cost }} Token{{ class.token_cost|pluralize  }}
@@ -80,6 +88,7 @@
                                                             £{{ class.price }}
                                                         {% endif %}
                                                     </p>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>

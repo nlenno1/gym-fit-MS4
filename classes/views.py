@@ -339,6 +339,7 @@ def filter_single_classes(request):
         "date_filter": date_filter,
         "profile_tokens": profile_tokens,
         "show_bag_on_success": True,
+        "profile": profile,
     }
 
     return render(request, "classes/classes_by_day.html", context)
