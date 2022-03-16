@@ -451,6 +451,7 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 - Add accessory products to the store like apparel, water bottles etc
 - Refactor Profile into separate pages to allow redirection to specific sections
 - When a Single Exercise Class is created or update, the Superuser would be taken to the day view for that class to make it easier to find.
+- Update Stripe integration to the latest release from Stripe to improve functionality.
 
 ## **TESTING**
 

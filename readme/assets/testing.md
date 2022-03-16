@@ -35,7 +35,17 @@ I requested peer review feedback from my friends, family and the Code Institute 
 ## Performance - Lighthouse
 I tested the Performance, Accessibility, Best Practices and SEO of GymFit using [Lighthouse](https://developers.google.com/web/tools/lighthouse) in Chrome Developer Tools.
 
+|Page | Lighthouse result |
+| --- | --- |
+|Home | ![Lighthouse Result for Home](gymfit-lighthouse-home.jpg) |
+|Our Classes | ![Lighthouse Result for Home](gymfit-lighthouse-our-classes.jpg) |
+|Join Us | ![Lighthouse Result for Home](gymfit-lighthouse-class-access-packages.jpg) |
 
+The results from all pages were similar to the results shown, for desktop and mobile. The main performance degradation happened when displaying images but especially the instructor images as they are being hosted remotely and I can not control the size of the hosted images. To solve this issue, the images could be stored in the project AWS storage. The model allows for external URLs to be used for the image and I wanted to test for the worst possible scenario after deployment.
+
+The best practice issues have all come from the Stripe import. There is now an updated application for the Stripe system, which might remove these issues, that can be implemented in future releases.
+
+![Lighthouse Best Practice Issues for all pages](gymfit-lighthouse-best-practice-issues.jpg)
 
 ## Colour Tester - A11y
 
