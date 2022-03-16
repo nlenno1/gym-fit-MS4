@@ -2,9 +2,9 @@
 
 This project is designed to fufill the needs of a gym or fitness center looking to move thier booking system online and to help them grow their online sales.
 
-![Live Project Representation Image](#)
+![Live Project Representation Image](readme/assets/gymfit-representational-image.jpg)
 
-[Link to Live Project](#)
+[Link to Live Project](https://gym-fit-ms4.herokuapp.com/)
 
 This is the last of the Milestone Projects that make up the Full Stack Web Development Program at The Code Institute. The main requirements of this project are to *"build a full-stack framework based around business logic used to control a centrally-owned dataset"* using the technologies: **HTML**, **CSS**, **Javascript**, **Python+Django** with a relational database and using the Stripe payments system.
 
