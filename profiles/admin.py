@@ -20,6 +20,7 @@ class UserProfileAdmin(admin.ModelAdmin):
         "dob",
         "health_conditions",
         "active_class_package",
+        "package_name",
         "class_package_type",
         "class_tokens",
         "package_expiry",
