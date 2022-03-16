@@ -39,6 +39,10 @@ During testing, I realised the Admin Messages table was acting responsively howe
 
 ## Browser Testing
 
+I manually tested the project on the Browsers Firefox (version 94), Chrome (version 96) and Edge (version 95) on my Windows 10 machine and called a peer to talk them through testing the page on Safari (version 15.1), so I could manually test all browsers desktop.
+
+All features and designs were as expected.
+
 # Automated Testing
 
 ## Performance - Lighthouse
