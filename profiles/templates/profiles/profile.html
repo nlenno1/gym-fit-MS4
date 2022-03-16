@@ -138,7 +138,7 @@
                                         <div class="col-12 col-sm-2">
                                             <a href="{% url 'cancel_class_booking' class.id %}" class="confirm-cancel" data-bs-container="body" data-bs-trigger="hover focus"
                                                 data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Click here to Cancel this class booking" aria-label="Cancel this class booking">
-                                                    <i class="fa-solid fa-calendar-xmark"></i>
+                                                    <i class="fa-solid fa-trash-can"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -263,7 +263,7 @@
                                             <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
                                             <button type="submit" data-bs-container="body" data-bs-trigger="hover focus"
                                             data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Remove from Favourite Categories" aria-label="Remove this Class Category from your Favourites"
-                                            class="no-button w-25"><i class="fa-solid fa-eraser"></i></button>
+                                            class="no-button w-25"><i class="fa-solid fa-trash-can"></i></button>
                                         </form>
                                     </td>
                                     </tr>
@@ -294,7 +294,7 @@
                                         <div class="text-end">
                                             <a href="{% url 'delete_contact_message' message.id %}" class="confirm-delete" data-bs-container="body" data-bs-trigger="hover focus"
                                             data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Delete this message" aria-label="Delete this message">
-                                                <i class="fa-solid fa-trash"></i>
+                                            <i class="fa-solid fa-trash-can"></i>
                                             </a>
                                         </div>
                                     </div>
