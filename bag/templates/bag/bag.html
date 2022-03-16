@@ -73,22 +73,11 @@
                                     <p class="d-xl-none">{{ item.duration|title }} mins</p>
                                 </div>
                                 <div class="col-6 col-sm-7">
-                                    {% if item.remaining_spaces < 5 and item.remaining_spaces > 0 %}
-                                        <div class="row g-0 align-items-center">
-                                            <div class="col-12 col-md-3"><p><strong>{{ item.category|title}}</strong></p></div>
-                                            <div class="col-12 col-md-3"><p>{{ item.instructor|title }}</p></div>
-                                            <div class="col-12 col-md-3"><p>£{{ item.price }}</p></div>
-                                            <div class="col-12 col-md-3 text-danger fw-bold">
-                                                    <p>{{ item.remaining_spaces }} Spaces!</p>
-                                            </div>
-                                        </div>
-                                    {% else %}
-                                        <div class="row g-0 align-items-center">
-                                            <div class="col-12 col-md-4"><p><strong>{{ item.category|title}}</strong></p></div>
-                                            <div class="col-12 col-md-4"><p>{{ item.instructor|title }}</p></div>
-                                            <div class="col-12 col-md-4"><p>£{{ item.price }}</p></div>
-                                        </div>
-                                    {% endif %}
+                                    <div class="row g-0 align-items-center">
+                                        <div class="col-12 col-md-4"><p><strong>{{ item.category|title}}</strong></p></div>
+                                        <div class="col-12 col-md-4"><p>{{ item.instructor|title }}</p></div>
+                                        <div class="col-12 col-md-4"><p>£{{ item.price }}</p></div>
+                                    </div>
                                 </div>
                                 <div class="col-12 col-sm-1 schedule-display-buttons mt-3 mt-sm-0 flex-lg-row">
                                     <a class="confirm-remove" href="{% url 'remove_from_bag' 'single_class' item.id %}" data-bs-container="body" data-bs-trigger="hover focus"
