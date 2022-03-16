@@ -24,9 +24,18 @@ I requested peer review feedback from my friends, family and the Code Institute 
 
 ## Responsive Design 
 
-### Mobile
-### Tablet
-### Desktop
+After researching the most commonly used screen resolutions ([Screen Resolutions Research Link](https://www.browserstack.com/guide/responsive-design-breakpoints)), I tested the responsive design on all the pages in this project at the resolutions widths of:
+
+![Resolutions Image](responsive-test-resolutions.jpg)
+
+as they are the very common resolutions. I carried out the tests using a combination of the [Browser Stack Responsive Design Tester](https://www.browserstack.com/responsive), [Media Genesis RESPONSIVE WEB DESIGN CHECKER](https://responsivedesignchecker.com/) and [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/). 
+
+I also added 2560 × 1440 screen resolution into the tests to enable site display durability as this resolution is becoming more widely used.
+
+Here are the results to these tests:
+![Responsive Design Test Results](gymfit-responsive-testing-results.png)
+
+During testing, I realised the Admin Messages table was acting responsively however this led to the table being horizontally scrollable, at smaller screen widths, which was hampering the UX. To correct this I refactored the Admin Message display to a custom design which was more responsive, before running my responsive tests again.
 
 ## Browser Testing
 

@@ -429,7 +429,7 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 
 **Edit an Instructor - /instructors/instructor_management/add/** (ADMIN)
 
-- InstructorForm pre-filled with existing Instructor data with validation messages
+- Instructor Form pre-filled with existing Instructor data with validation messages
 - Cancel button which redirect to Instructor Management
 - "Update Instructor" buttons validates form data and updates Instructor data in database with user feedback message
 
