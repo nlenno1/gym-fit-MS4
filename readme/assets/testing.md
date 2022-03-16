@@ -3,7 +3,7 @@
 # Manual Testing
 
 ## Features Testing
-Find all my manual testing criteria, procedure and outcomes in my [Manual Testing Document](ms4-manual-feature-testing.pdf)
+Find all my manual testing criteria, procedure and outcomes in my [Manual Testing Document](gym-fit-manual-testing-document.pdf)
 
 ## User Stories
 
@@ -32,7 +32,7 @@ I requested peer review feedback from my friends, family and the Code Institute 
 # Automated Testing
 
 ## Performance - Lighthouse
-I tested the Performance, Accessibility, Best Practices and SEO of MovieWiki using [Lighthouse](https://developers.google.com/web/tools/lighthouse) in Chrome Developer Tools.
+I tested the Performance, Accessibility, Best Practices and SEO of GymFit using [Lighthouse](https://developers.google.com/web/tools/lighthouse) in Chrome Developer Tools.
 
 ## Colour Tester - A11y
 
