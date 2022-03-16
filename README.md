@@ -104,7 +104,7 @@ The graph shows an axis of up to 6 however data scores range from 1 to 5 making 
 
 Not all users will be able to access all features.
 
-#### **I-V Analysis Conclusion**
+#### **Analysis Conclusion**
 
 After the analysis of the features suggested, all features will be implemented **apart** from feature **3, 11, 15, 16, 18, 20**. These have been removed due to complexity and time restraints mainly but have been added to the list of features for future releases.
 
@@ -173,7 +173,7 @@ Color Key for app that contains the model:
 - Purple - classes
 - Green - products
 - Orange - profiles
-- Grey - allauth
+- Grey - allauth provided
 - Red - instructors
 - Pink - reviews
 - Blue - contact
@@ -459,7 +459,6 @@ Error handling is being managed by the supplied functions and templates from Dja
 
 ### **Features for Future Releases**
 
-- Sign In and Out with other social media accounts
 - Add customers to waiting lists if a class is full, with email notification on space opening up
 - Purchase multiple classes with a weekly interval with a specified number of weeks
 - Create, View, Edit and Delete Class Access Packages for specific class categories
@@ -468,6 +467,7 @@ Error handling is being managed by the supplied functions and templates from Dja
 - Messaging system to allow admin to respond to customers with accounts
 - Add accessory products to the store like apparel, water bottles etc
 - Refactor Profile into separate pages to allow redirection to specific sections
+- Sign In and Out with other social media accounts
 - When a Single Exercise Class is created or update, the Superuser would be taken to the day view for that class to make it easier to find.
 - Update Stripe integration to the latest release from Stripe to improve functionality.
 
@@ -513,6 +513,8 @@ This is a table of the major bugs and issues that I experienced when building th
 8. If there is an error in the Edit a Single Exercise Class function, it will redirect to the Classes this Week.
 
 ## **DEPLOYMENT**
+
+For the steps required to deploy this project, please view the [GymFit Deployment Document]()
 
 ## **TECHNOLOGY USED**
 

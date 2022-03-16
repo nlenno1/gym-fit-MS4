@@ -21,6 +21,7 @@ I requested peer review feedback from my friends, family and the Code Institute 
 |Anya McDonald |Would like some more about opening hours  |Added opening hours to the home page |
 |Laila (Slack) |500 response when adding a package to their bag as a guest  |Added login_required decorator to prompt user to sign in/up to purchase a package |
 |Tayla Joel |Would like to be able to sign in using social media accounts  |Added to the future development features list |
+|Frannie Yip (Slack) |Missed the sent message notification. Maybe redirect to a different page to make it clearer the message has been sent  |Changed message redirect to the home page |
 
 ## Responsive Design 
 
@@ -37,9 +38,14 @@ Here are the results to these tests:
 
 During testing, I realised the Admin Messages table was acting responsively however this led to the table being horizontally scrollable, at smaller screen widths, which was hampering the UX. To correct this I refactored the Admin Message display to a custom design which was more responsive, before running my responsive tests again.
 
+For device responsive testing I used:
+- A Samsung Galaxy S10 (360px) as it is roughly in the middle of the range of screen sizes I tested for mobile, 
+- A Samsung Galaxy Tab 4 Tablet (800px) as again it is roughly in the middle of the range of tablet screen resolutions test 
+- A full HD 15" laptop and full HD 32" monitor (1920x1080).
+
 ## Browser Testing
 
-I manually tested the project on the Browsers Firefox (version 94), Chrome (version 96) and Edge (version 95) on my Windows 10 machine and called a peer to talk them through testing the page on Safari (version 15.1), so I could manually test all browsers desktop.
+I manually tested the project on the Browsers Firefox (version 94), Chrome (version 96) and Edge (version 95) on my Windows 10 machine and called a peer to talk them through testing the page on Safari (version 15.1), so I could manually test all browsers on desktop.
 
 All features and designs were as expected.
 
