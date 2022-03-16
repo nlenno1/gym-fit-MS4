@@ -279,13 +279,13 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 - Links to socials for promotion and to encourage user engaguement
 - Address of GymFit
 
-### home App
+### Home App
 
 **View Home Page - /**
 - Our Team Display - Display generated from Instructor models in the database. Each model has a display_on_site field which determines which instructors are show. A maximum of 8 instructors will be displayed
 - Map and Links section - Links to GymFit instagram account and location on GoogleMaps. Image provided to represent use of GoogleMaps API.
 
-### classes App
+### Classes App
 
 **All Class Categories - /classes/our_classes/**
 - Card Display of Individual Class Categories which includes:
@@ -339,7 +339,7 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 - Cancel button - Links to Class Category Details for the class you were editing
 - Edit Class Category Button - Validates form, updates the Class Category in the database and redirects to the redirecting to Classes This Week
 
-### products App
+### Products App
 
 **View Class Access Packages - /products/class_access_packages/**
 - Display for Token Packages including a repesentation image, package name, popover with more information and package price, ordered by price
@@ -358,14 +358,14 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 - Cancel button - Links to Class Category Details for the class you were editing
 - "Edit Class Category" Button - Validates form, updates the Class Category in the database and redirects to the Class Category Details for the Category just edited
 
-### contact App
+### Contact App
 
 **Contact Page - /contact/**
 - ContactMessageForm displayed using Crispy Forms with labels. If user is annonomous then name and email inputs are provided. If user is signed in then these details are provided from the database.
 - Cancel button - Links to Home
 - "Send Message" Button - Validates form, saves data to database and display sent message user feedback after reloading the page
 
-### profiles App
+### Profiles App
 
 **Profile Page - /profile/**
 - All sections are accessable from the profile menu buttons.
@@ -382,12 +382,12 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 
 - Sign Out Button - links to the AllAuth sign out confirmation page
 
-### bag App
+### Bag App
 
 **View Bag - /bag/**
 - Displays the Class Access Package and individual classes in the Users bag, in seperate sections, with details including type, duration, location with the single classes ordered by date. Each item has a delete button with a popover explaining its functionand a remove confirmation notification with a toast message on completion.
 
-### checkout App
+### Checkout App
 
 **Checkout - /checkout/**
 - Displays order summay with Item names/details and cost with Total price below them
@@ -401,7 +401,7 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 - Displays a full Order Review with all details useing in the order including items purchased, billing information and the order date and number with a confirmation email sent to the supplied email address.
 - This page is also used for the Profile Previous Order Details display
 
-### reviews App
+### Reviews App
 
 **Write A Class Category Review - /reviews/<category_id>/add/**
 - Title with Category Name included in it
@@ -409,7 +409,7 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 - Cancel Button which redirects to the chosen Category
 - "Submit Review" button which validates data, creates and stores the review and redirects to the Category Details page
 
-### instructors App (ADMIN)
+### Instructors App (ADMIN)
 
 **Instructor Management - /instructors/instructor_management/** (ADMIN)
 - "Add An Instructor" button links to the Add an Instructor Page
@@ -437,7 +437,25 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 
 ### **Defensive Programming**
 
+Throughout the building of this project I used the built in [Django Decorator login_required](https://docs.djangoproject.com/en/4.0/topics/auth/default/#the-login-required-decorator) to secure any functions that the User needs to have a verified account to use for example:
+
+    @login_required
+    def delete_contact_message(request, message_id):
+        """View to allow admin to delete a message"""
+
+If an unverified user attempted to access this function, they would be taken to the sign-in page to sign in or create an account.
+
+To secure all Admin restricted functions I used a simple check of the [Django .is_superuser](https://docs.djangoproject.com/en/4.0/topics/auth/customizing/#custom-users-and-permissions) attribute included in its User model.
+
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, only Admin allowed")
+        return redirect(reverse("home"))
+
+If an unverified user attempted to access this function, they would be taken to the home page with an error user feedback message displayed.
+
 ### **Error Handling**
+
+Error handling is being managed by the supplied functions and templates from Django to deal with any issues or bugs that are outside my control.
 
 ### **Features for Future Releases**
 
