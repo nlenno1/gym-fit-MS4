@@ -4,10 +4,10 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 from products.models import ClassAccessPackage
+from products.constants import PACKAGE_TYPES
 from classes.models import SingleExerciseClass
 from profiles.models import UserProfile
 
-from products.constants import PACKAGE_TYPES
 
 def view_bag(request):
     """View to render the shopping bag"""

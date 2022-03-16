@@ -30,3 +30,8 @@ class ClassCategoryReview(models.Model):
     created_on = models.DateTimeField(
         auto_now_add=True, null=False, blank=False, editable=False
     )
+
+    def friendly_created_on(self):
+        """ function to return display friendly date """
+        return self.created_on.strftime("%d %B %Y")
+
