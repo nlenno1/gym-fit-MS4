@@ -13,6 +13,7 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
   return new bootstrap.Popover(popoverTriggerEl)
 })
 
+// Options for toasts
 var option = {
   autohide: true,
   delay: 5000,
@@ -54,7 +55,7 @@ $(document).on('click', '.confirm-remove', function(){
   return confirm('Are you sure you want to remove this?');
 })
 
-// Confirm Cancellation 
+// Confirm Cancellation taken from https://stackoverflow.com/questions/37398416/django-delete-confirmation
 $(document).on('click', '.confirm-cancel', function(){
   return confirm('Are you sure you want to cancel this booking?');
 })
