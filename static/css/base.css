@@ -100,7 +100,7 @@ h1, h2, h3 ,h4, h5 {
 
 #main-nav ul a {
     font-size: 1.2em;
-    padding: 1em 1.4em;
+    padding: 1em 0.8em;
 }
 
 #main-nav img {
@@ -145,7 +145,13 @@ h1, h2, h3 ,h4, h5 {
         padding: 0 0 0 5vw;
     }
     #main-nav ul a {
-        padding: 1em 2.2em;
+        padding: 1em 1.6em;
+    }
+}
+
+@media(min-width:1200px) {
+    #main-nav ul a {
+        padding: 1em 2.4em;
     }
 }
 
