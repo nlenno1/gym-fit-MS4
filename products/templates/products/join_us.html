@@ -27,7 +27,7 @@
     </h2>
 
     {% if token_packages|length > 0%}
-        <h4 class="mt-5 mb-3 ps-3">Class Tokens</h4>
+        <h3 class="mt-5 mb-3 ps-3">Class Tokens</h3>
         {% for package in token_packages %}
         <div class="single-class-schedule-display text-center fade-on-load">
             <div class="row g-0 align-items-md-center">
@@ -45,9 +45,8 @@
                             <p>
                                 <strong>{{ package.friendly_name|title }}
                                     {% if package.description %}
-                                        <button type="button" data-bs-container="body" data-bs-trigger="hover focus"
-                                            data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{ package.description }}"><i class="fas fa-info-circle"></i>
-                                        </button>
+                                        <i class="fas fa-info-circle" data-bs-container="body" data-bs-trigger="hover focus"
+                                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{ package.description }}"></i>
                                     {% endif %}
                                 </strong>
                             </p>
@@ -92,7 +91,7 @@
     <hr class="package-type-divider">
     
     {% if unlimited_packages|length > 0 %}
-        <h4 class="mt-5 mb-3 ps-3">Unlimited Use</h4>
+        <h3 class="mt-5 mb-3 ps-3">Unlimited Use</h3>
         {% for package in unlimited_packages %}
         <div class="single-class-schedule-display text-center fade-on-load">
             <div class="row g-0 align-items-md-center">
@@ -110,9 +109,8 @@
                             <p>
                                 <strong>{{ package.friendly_name|title }}
                                     {% if package.description %}
-                                        <button type="button" data-bs-container="body" data-bs-trigger="hover focus"
-                                            data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{ package.description }}"><i class="fas fa-info-circle"></i>
-                                        </button>
+                                        <i class="fas fa-info-circle" data-bs-container="body" data-bs-trigger="hover focus"
+                                        data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{ package.description }}"></i>
                                     {% endif %}
                                 </strong>
                             </p>
