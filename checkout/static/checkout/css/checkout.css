@@ -1,3 +1,5 @@
+/* Stripe Elements  */
+
 .StripeElement,
 .stripe-style-input {
   box-sizing: border-box;
@@ -26,6 +28,8 @@
 .stripe-style-input::placeholder {
     color: #aab7c4;
 }
+
+/* Labels and Inputs */
 
 .fieldset-label {
     position: relative;
