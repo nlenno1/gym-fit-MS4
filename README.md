@@ -578,6 +578,19 @@ For the steps required to deploy this project, please view the [GymFit Deploymen
 
 ### **Code snippets**
 
+The full screen overlay navigation desgin and css was taken from [W3 School's How To - Full screen Overlay Navigation](https://www.w3schools.com/howto/howto_js_fullscreen_overlay.asp)
+
+Some elements of the code in this project were taken from the Bootstrap documentation and then customised to fit their purpose, using their supplied styles and designs as a base. These elements were:
+
+- [NavBar](https://getbootstrap.com/docs/5.0/components/navbar/) 
+- [Toast Messages](https://getbootstrap.com/docs/5.0/components/toasts/) 
+- [Popovers](https://getbootstrap.com/docs/5.0/components/popovers/)
+- [Tabels](https://getbootstrap.com/docs/5.0/content/tables/)
+- [Button Classes](https://getbootstrap.com/docs/5.0/components/buttons/)
+- [Alerts](https://getbootstrap.com/docs/5.0/components/alerts/)
+- [Dropdowns](https://getbootstrap.com/docs/5.0/components/dropdowns/)
+- [List Groups ](https://getbootstrap.com/docs/5.0/components/list-group/)
+
 ### **Resources**
 
 ### **Content**
