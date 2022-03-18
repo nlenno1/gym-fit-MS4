@@ -609,6 +609,12 @@ For the steps required to deploy this project, please view the [GymFit Deploymen
 
 ## **CREDITS**
 
+- Formatting date to use in a Datepicker input min value - [Stack Overflow](https://stackoverflow.com/questions/32378590/set-date-input-fields-max-date-to-today)
+- Sorting A List Of Dictionaries - [Stack Overflow](https://stackoverflow.com/questions/72899/how-do-i-sort-a-list-of-dictionaries-by-a-value-of-the-dictionary)
+- Adding the Date Field in a Model Form - [YouTube](https://www.youtube.com/watch?v=I2-JYxnSiB0)
+- JavaScript Confirm Delete functionality - [Stack Overflow](https://stackoverflow.com/questions/37398416/django-delete-confirmation)
+
+
 ### **Code snippets**
 
 The full screen overlay navigation desgin and css was taken from [W3 School's How To - Full screen Overlay Navigation](https://www.w3schools.com/howto/howto_js_fullscreen_overlay.asp)
@@ -649,6 +655,7 @@ Images sourced from:
 - [Pexels](https://www.pexels.com)
 - [Pixabay](https://www.pixabay.com)
 - [Unslapsh](https://www.unsplash.com)
+- [No Image Image](https://www.ncenet.com/no-image-png-2) 
 
 ### **Acknowledgements**
 
