@@ -547,7 +547,7 @@ This is a table of the major bugs and issues that I experienced when building th
 
 ## **DEPLOYMENT**
 
-For the steps required to deploy this project, please view the [GymFit Deployment Document]()
+For the steps required to deploy this project, please view the [GymFit Deployment Document](readme/assets/gym-fit-deployment-document.pdf)
 
 ## **TECHNOLOGY USED**
 
