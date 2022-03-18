@@ -34,11 +34,11 @@ def cache_checkout_data(request):
         classes_data = []
         current_bag = bag_contents(request)
         package = current_bag["bag_items"]["class_access_package"]
-        # store exercise class id numbers in meta data
+        # store exercise class id numbers in meta data variable
         if len(current_bag["bag_items"]["single_classes"]) > 0:
             for item in current_bag["bag_items"]["single_classes"]:
                 classes_data.append(item.id)
-        # store package data in meta data
+        # store package data in meta data variable
         if package:  # add required data to dict
             package_data["name"] = package.friendly_name
             package_data["type"] = package.type
@@ -46,8 +46,10 @@ def cache_checkout_data(request):
             package_data["expiry_date"] = (
                 date.today() + timedelta(days=package.duration)
             ).strftime("%d,%m,%Y")
+        # retrieve stripe api key from settings and pid from template
         pid = request.POST.get("client_secret").split("_secret")[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
+        # add all required information to the meta data
         stripe.PaymentIntent.modify(
             pid,
             metadata={
@@ -60,6 +62,7 @@ def cache_checkout_data(request):
             },
         )
         return HttpResponse(status=200)
+    # error message
     except Exception as err:
         messages.error(
             request,
@@ -91,12 +94,12 @@ def checkout(request):
         order_form = OrderForm(form_data)
         if order_form.is_valid():  # save order_form if valid
             order = order_form.save(commit=False)
-
+            # save variables in order
             pid = request.POST.get("client_secret").split("_secret")[0]
             order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
             order.save()
-
+            # create line item for the class access package
             if bag["class_access_package"]:
                 try:
                     package = ClassAccessPackage.objects.get(
@@ -107,6 +110,7 @@ def checkout(request):
                         access_package=package,
                     )
                     order_line_item.save()
+                # error message and delete order
                 except package.DoesNotExist:
                     messages.error(
                         request,
@@ -118,7 +122,7 @@ def checkout(request):
                     )
                     order.delete()
                     return redirect(reverse("view_bag"))
-
+            # create line items for the single exercise classes
             for item_id in bag["single_classes"]:
                 try:
                     exercise_class = SingleExerciseClass.objects.get(
@@ -129,6 +133,7 @@ def checkout(request):
                         exercise_class=exercise_class,
                     )
                     order_line_item.save()
+                # error message and delete order
                 except exercise_class.DoesNotExist:
                     messages.error(
                         request,
@@ -140,10 +145,13 @@ def checkout(request):
                     )
                     order.delete()
                     return redirect(reverse("view_bag"))
+            # store save info selection
             request.session["save_info"] = "save-info" in request.POST
+            # display checkout success
             return redirect(
                 reverse("checkout_success", args=[order.order_number])
             )
+        # error message
         else:
             messages.error(
                 request,
@@ -153,13 +161,14 @@ def checkout(request):
 
     else:
         bag = request.session.get("bag", {})
+        # empty bag error message
         if not bag:
             messages.error(
                 request,
                 "You can't checkout as there is nothing in your shopping bag",
             )
             return redirect(reverse("view_bag"))
-
+        # not logged in error message
         if not request.user.is_authenticated and bag["class_access_package"]:
             messages.error(
                 request,
@@ -197,7 +206,7 @@ def checkout(request):
                 order_form = OrderForm()
         else:
             order_form = OrderForm()
-
+    # stripe public key error message
     if not stripe_public_key:
         messages.warning(
             request,
@@ -228,6 +237,7 @@ def checkout_success(request, order_number):
         order.save()
 
         if save_info:
+            # save the information in the order form to the user profile
             profile_data = {
                 "default_phone_number": order.phone_number,
                 "default_street_address1": order.street_address1,
@@ -245,7 +255,7 @@ def checkout_success(request, order_number):
                 "email": order.email,
                 "username": user_profile_object.username,
             }
-
+            
             user_profile_form = UserProfileForm(profile_data, instance=profile)
             user_form = UserForm(user_data, instance=user_profile_object)
 
@@ -295,7 +305,7 @@ def checkout_success(request, order_number):
                 profile.classes.add(item)
                 profile.save()
             else:
-                # fill user data and add user to class list
+                # fill guest user data and add to class list
                 list_name = order.full_name.split()
                 user_data = {
                     "first_name": list_name[0],
@@ -315,9 +325,10 @@ def checkout_success(request, order_number):
                             request,
                             f"Guest Info Not Saved. Error message: {err}",
                         )
+            # adjust remaining spaces
             item.remaining_spaces -= 1
             item.save()
-
+    # delete the bag in session
     if "bag" in request.session:
         del request.session["bag"]
 

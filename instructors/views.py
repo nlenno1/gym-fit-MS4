@@ -18,7 +18,7 @@ def instructor_management(request):
         return redirect(reverse("home"))
 
     instructors = Instructor.objects.all()
-
+    # generate a temp list of the classes an instructor can lead
     for instructor in instructors:
         instructor.can_lead_classes_list = instructor.can_lead_classes.all()
 
@@ -43,6 +43,7 @@ def add_an_instructor(request):
         form = InstructorForm(request.POST)
         if form.is_valid():
             instructor = form.save()
+            # edit data for instructor object
             instructor.name = instructor.friendly_name.lower().replace(
                 " ", "-"
             )
@@ -81,7 +82,13 @@ def edit_instructor(request, instructor_id):
     if request.method == "POST":
         form = InstructorForm(request.POST, request.FILES, instance=instructor)
         if form.is_valid():
-            form.save()
+            instructor = form.save()
+            # edit data for instructor object
+            instructor.name = instructor.friendly_name.lower().replace(
+                " ", "-"
+            )
+            instructor.friendly_name = instructor.friendly_name.title()
+            instructor.save()
             messages.success(
                 request,
                 "Successfully Updated Instructor \
@@ -118,14 +125,16 @@ def delete_instructor(request, instructor_id):
         messages.error(request, "Sorry, only Admin allowed")
         return redirect(reverse("home"))
 
-    instructor = Instructor.objects.get(id=instructor_id)
-
-    classes_to_remove = SingleExerciseClass.objects.filter(
-                        instructor=instructor)
-    for class_event in classes_to_remove:
-        delete_single_exercise_class(request, class_event.id)
+    instructor = get_object_or_404(Instructor, id=instructor_id)
 
     if instructor:
+        # delete the classes that this instructor has been scheduled to run
+        # including sending cancellation emails and issuing refunds
+        classes_to_remove = SingleExerciseClass.objects.filter(
+                            instructor=instructor)
+        for class_event in classes_to_remove:
+            delete_single_exercise_class(request, class_event.id)
+
         instructor.delete()
         messages.success(request, "Instructor deleted")
     else:

@@ -2,16 +2,17 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path(
+    path(  # view all class categories
         "our_classes/",
         views.view_class_categories,
         name="view_class_categories",
     ),
-    path(
+    path(  # view class category details
         "class_category/<int:category_id>",
         views.view_single_class_category,
         name="view_single_class_category",
     ),
+    # class category CRD
     path(
         "class_category/add",
         views.add_class_category,
@@ -27,24 +28,26 @@ urlpatterns = [
         views.delete_class_category,
         name="delete_class_category",
     ),
+    # Class Category Favourites List Control
     path(
-        "class_category/favourites/add/<category_id>",
+        "class_category/favourites/<category_id>/add",
         views.add_category_to_favs,
         name="add_category_to_favs",
     ),
     path(
-        "class_category/favourites/remove/<category_id>",
+        "class_category/favourites/<category_id>/remove",
         views.remove_category_from_favs,
         name="remove_category_from_favs",
     ),
-    path(
+    path(  # view classes this week
         "classes_this_week/", views.classes_this_week, name="classes_this_week"
     ),
-    path(
+    path(  # view classes by day
         "classes_by_day/",
         views.filter_single_classes,
         name="filter_single_classes",
     ),
+    # Single Exercise Class CRD
     path(
         "single_class/add",
         views.add_single_exercise_class,
@@ -60,6 +63,7 @@ urlpatterns = [
         views.delete_single_exercise_class,
         name="delete_single_exercise_class",
     ),
+    # Book and Cancel Single Exercise Classes
     path(
         "single_class/<class_id>/book",
         views.book_with_package,

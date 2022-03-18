@@ -1,4 +1,4 @@
-# Definition of Package Type constants for use
+# Definition of Package Type constants
 PACKAGE_TYPES = {
     'UNLIMITED': "UU",
     'TOKENS': "TK",

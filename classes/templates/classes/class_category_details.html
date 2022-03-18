@@ -112,7 +112,7 @@
                             <!-- Line Item for Reviews -->
                             {% for review in reviews %}  
                                 <tr >
-                                    <td scope="row" class="d-none d-md-table-cell">{{ review.created_on }}</th>
+                                    <td scope="row" class="d-none d-md-table-cell">{{ review.friendly_created_on }}</th>
                                     <td class="d-none d-md-table-cell">{{ review.author }}</td>
                                     <td>{{ review.review_text }}</td>
                                     <td>{{ review.review_rating }}

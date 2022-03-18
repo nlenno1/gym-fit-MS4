@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -19,6 +19,7 @@ def send_contact_message(request):
             form = ContactMessageForm(request.POST)
             if form.is_valid():
                 new_message = form.save(commit=False)
+                # add user data to message fields
                 new_message.message_from = (
                     request.user.first_name + " " + request.user.last_name
                 )
@@ -64,8 +65,8 @@ def delete_contact_message(request, message_id):
         messages.error(request, "Sorry, only Admin allowed")
         return redirect(reverse("home"))
 
-    message = None
-    message = ContactMessage.objects.get(id=message_id)
+    message = None  # find the message
+    message = get_object_or_404(ContactMessage, id=message_id)
     if message:
         message.delete()
         messages.success(request, "Message Deleted")

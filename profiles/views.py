@@ -2,7 +2,6 @@ from datetime import date, datetime
 
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from contact.models import ContactMessage
@@ -14,13 +13,14 @@ from .forms import UserProfileForm, UserForm
 @login_required
 def profile(request):
     """Display User Profile"""
+
     profile_object = get_object_or_404(UserProfile, user=request.user)
     profile_object.check_package_expired()
-    user_object = get_object_or_404(User, id=request.user.id)
 
+    # personal information forms
     if request.method == "POST":
         form = UserProfileForm(request.POST, instance=profile_object)
-        user_form = UserForm(request.POST, instance=user_object)
+        user_form = UserForm(request.POST, instance=request.user)
         if form.is_valid() and user_form.is_valid():
             form.save()
             user_form.save()
@@ -33,10 +33,12 @@ def profile(request):
             )
     else:
         form = UserProfileForm(instance=profile_object)
+        user_form = UserForm(instance=request.user)
 
-    user_form = UserForm(instance=user_object)
+    # collect all users previous orders
     orders = profile_object.orders.all().order_by("-order_date")
 
+    # sort classes into previous and upcoming by date and time
     upcoming_classes = []
     previous_classes = []
     if profile_object.classes.all().exists():
@@ -49,12 +51,15 @@ def profile(request):
                 previous_classes.append(item)
             else:
                 upcoming_classes.append(item)
+        # sort previous classes from highest to lowest
+        # using class date and then start time
         previous_classes = sorted(
             previous_classes,
             key=lambda x: (x.class_date, x.start_time),
             reverse=True,
         )
 
+    # find and store all admin messages
     admin_messages = None
     if request.user.is_superuser:
         admin_messages = ContactMessage.objects.all()

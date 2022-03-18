@@ -2,35 +2,39 @@ from datetime import date, datetime, timedelta
 
 from django.shortcuts import render, redirect, reverse
 from django.shortcuts import get_object_or_404
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+# These imports are required for the send mail function in the utils
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
-from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 
 from profiles.models import UserProfile
+from reviews.models import ClassCategoryReview
+from products.constants import PACKAGE_TYPES
 from .models import ClassCategory, SingleExerciseClass
 from .forms import ClassCategoryForm, SingleExerciseClassForm
-from reviews.models import ClassCategoryReview
 from instructors.models import Instructor
 
-from .utils import send_class_cancellation_email, send_update_email, convert_ability_level_to_str
+from .utils import (send_class_cancellation_email, send_update_email,
+                    convert_ability_level_to_str)
 
 # Class Categories
+
 
 def view_class_categories(request):
     """A view to return all the categories"""
 
     categories = ClassCategory.objects.all().order_by("friendly_name")
     fav_categories = []
-
+    # generate average rating
     for category in categories:
         (
             category.average_rating,
             category.numb_of_reviews,
         ) = category.generate_average_rating()
-
+    # store favoutire categeory ids
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
         for category in profile.fav_class_categories.all():
@@ -46,26 +50,25 @@ def view_class_categories(request):
 
 def view_single_class_category(request, category_id):
     """A view to return details about an individual class category"""
-
+    # find category and generate average rating
     category = get_object_or_404(ClassCategory, pk=category_id)
     (
         category.average_rating,
         category.numb_of_reviews,
     ) = category.generate_average_rating()
+    # find reviews for the category and order by date
+    # create on newest to oldest
     reviews = ClassCategoryReview.objects.filter(
         review_subject=category
     ).order_by("-created_on")
-    fav_category = False
-
+    # find if user has a previous review
     previous_review = None
     if request.user.is_authenticated:
         previous_review = ClassCategoryReview.objects.filter(
             author=request.user, review_subject=category
         ).exists()
-
-    for review in reviews:
-        review.created_on = review.created_on.strftime("%d %B %Y at %H:%M")
-
+    # set favourite category variable for heart icon display
+    fav_category = False
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
         if profile.fav_class_categories.filter(pk=category.id).exists():
@@ -142,7 +145,6 @@ def classes_this_week(request):
             "%H:%M"
         ) <= now.strftime("%d:%m:%Y - %H:%M:%S"):
             item.closed = True
-
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
@@ -285,20 +287,22 @@ def book_with_package(request, class_id):
     exercise_class = SingleExerciseClass.objects.get(pk=class_id)
     profile = UserProfile.objects.get(user=request.user)
     profile.check_package_expired()
-
-    if profile.classes.filter(id=exercise_class.id):
+    # check the user profile for class in classes field
+    if profile.classes.filter(id=exercise_class.id).exists():
         messages.error(
             request,
             f"You have already booked onto \
                             {exercise_class.info()} \
                             so you can not add it to your bag",
         )
+    # check if the class is fully booked
     elif exercise_class.remaining_spaces == 0:
         messages.error(
             request,
             "Sorry, we can't make this booking as this \
             class is fully booked",
         )
+    # check if user has enough tokens
     elif (
         profile.class_package_type
         == "\
@@ -311,9 +315,11 @@ def book_with_package(request, class_id):
             don't have enough Class Tokens remaining",
         )
     else:
+        # add profile to class and update
         exercise_class.participants.add(profile.user)
         exercise_class.remaining_spaces -= 1
         exercise_class.save()
+        # add class to profile and deduct tokens if required
         profile.classes.add(exercise_class)
         if profile.class_package_type == "TK":
             profile.class_tokens -= exercise_class.token_cost
@@ -339,17 +345,17 @@ def cancel_class_booking(request, class_id):
     exercise_class = SingleExerciseClass.objects.get(pk=class_id)
     profile = UserProfile.objects.get(user=request.user)
     profile.check_package_expired()
-
+    # update exercise class
     exercise_class.participants.remove(profile.user)
     exercise_class.remaining_spaces += 1
     exercise_class.save()
-
+    # update profile
     profile.classes.remove(exercise_class)
     profile.save()
 
     messages.success(request, f"You have cancelled your booking on the class \
         {exercise_class}")
-
+    # check if user qualifies for a refund
     if date.today() > exercise_class.class_date - timedelta(days=1):
         messages.info(
             request,
@@ -357,8 +363,10 @@ def cancel_class_booking(request, class_id):
             but have not been issued a refund due to notice given",
         )
     else:
+        # create refund package and add tokens and expiry date
+        # if user has no active package
         if (not profile.class_package_type and
-             not profile.active_class_package):
+                not profile.active_class_package):
             profile.active_class_package = True
             profile.class_package_type = "TK"
             profile.package_name = "Refund Package"
@@ -372,6 +380,7 @@ def cancel_class_booking(request, class_id):
                 to your profile (Valid until \
                 {profile.package_expiry.strftime('%d %b')})",
             )
+        # add refund tokens to existing package and update expiry date
         elif (profile.class_package_type == "TK" and
               profile.active_class_package):
             profile.class_tokens += exercise_class.token_cost
@@ -409,6 +418,7 @@ def add_single_exercise_class(request):
             weekly_classes_until = form.cleaned_data.get(
                 "weekly_classes_until"
             )
+            # create single class
             exercise_class = form.save(commit=False)
             exercise_class.end_time = (
                 datetime.combine(date.today(), exercise_class.start_time)
@@ -424,6 +434,7 @@ def add_single_exercise_class(request):
             if weekly_class:  # check if this is a weekly class
                 # generate date of next class
                 current_date = exercise_class.class_date + timedelta(days=7)
+                # iterate until the date is higher than the date selected
                 while current_date <= weekly_classes_until:
                     # add all values to new object
                     new_exercise_class = SingleExerciseClass()
@@ -487,21 +498,26 @@ def edit_single_exercise_class(request, class_id):
             request.POST, request.FILES, instance=exercise_class
         )
         if form.is_valid():
-            if form.cleaned_data['max_capacity'] < len(exercise_class.participants.all()):
+            # max capacity less than the amount of people signed up check
+            if form.cleaned_data['max_capacity'] < len(
+                exercise_class.participants.all()):
                 messages.error(request, "There are more people signed up to the class \
                     than the new max capacity allows")
                 return redirect(reverse("classes_this_week"))
             else:
-                send_update_email(class_id, form)
+                send_update_email(class_id, form)  # send updates class email
                 exercise_class = form.save(commit=False)
+                # adjust the remaining spaces value
                 exercise_class.remaining_spaces = (
-                        exercise_class.max_capacity - len(exercise_class.participants.all()))
-                exercise_class.end_time = (
+                    exercise_class.max_capacity - len(
+                        exercise_class.participants.all()))
+                exercise_class.end_time = (  # generate the end time
                     datetime.combine(date.today(), exercise_class.start_time)
                     + timedelta(minutes=exercise_class.duration)
                 ).time()
                 exercise_class.save()
-                messages.success(request, "Successfully Updated Exercise Class")
+                messages.success(
+                    request, "Successfully Updated Exercise Class")
                 return redirect(reverse("classes_this_week"))
         else:
             messages.error(
@@ -533,31 +549,33 @@ def delete_single_exercise_class(request, class_id):
 
     exercise_class = get_object_or_404(SingleExerciseClass, id=class_id)
     # refund customers tokens
-    refund_total = 0
+    refund_total = 0  # total amount of tokens refunded
     class_name = exercise_class.info()
     for user_profile in exercise_class.participants.all():
         refunded = False
         # if user has a profile
         if user_profile.is_authenticated:
             profile = UserProfile.objects.get(user=user_profile)
+            # UU packages don't get refunded
             # if the user currently doesn't have a package
             if not profile.active_class_package:
                 profile.active_class_package = True
                 profile.class_package_type = "TK"
                 profile.class_tokens = exercise_class.token_cost
                 profile.package_name = "Refund Package"
+                # 12 weeks to use the refund tokens
                 profile.package_expiry = date.today() + timedelta(days=84)
                 profile.save()
                 refund_total += exercise_class.token_cost
                 refunded = True
             # if the user is on a token package
-            elif profile.class_package_type != "UU":
+            elif profile.class_package_type != PACKAGE_TYPES['UNLIMITED']:
                 profile.class_tokens += exercise_class.token_cost
                 profile.save()
                 refund_total += exercise_class.token_cost
                 refunded = True
+        # send email to all class participants
         send_class_cancellation_email(exercise_class, user_profile, refunded)
-
     exercise_class.delete()
     messages.success(request, f"Exercise Class {class_name} Cancelled")
     messages.info(request, f"Refunded a total of {refund_total} Token/s \
@@ -580,6 +598,7 @@ def add_class_category(request):
         form = ClassCategoryForm(request.POST, request.FILES)
         if form.is_valid():
             category = form.save()
+            # edit form data for category
             category.name = category.friendly_name.lower().replace(" ", "-")
             category.friendly_name = category.friendly_name.title()
             category.save()
@@ -621,7 +640,11 @@ def edit_class_category(request, category_id):
             request.POST, request.FILES, instance=category
         )
         if form.is_valid():
-            form.save()
+            category = form.save()
+            # edit form data for category
+            category.name = category.friendly_name.lower().replace(" ", "-")
+            category.friendly_name = category.friendly_name.title()
+            category.save()
             messages.success(request, "Successfully Updated Class Category")
             return redirect(
                 reverse("view_single_class_category", args=[category.id])
@@ -669,8 +692,8 @@ def add_category_to_favs(request, category_id):
     """A view to allow user to add a class category
     to their favourties list"""
 
-    profile = UserProfile.objects.get(user=request.user)
-    category = ClassCategory.objects.get(pk=category_id)
+    profile = get_object_or_404(UserProfile, user=request.user)
+    category = get_object_or_404(ClassCategory, pk=category_id)
 
     profile.fav_class_categories.add(category)
     messages.success(
@@ -696,9 +719,9 @@ def remove_category_from_favs(request, category_id):
     from their favourties list"""
 
     redirect_url = request.POST.get("redirect_url")
-    profile = UserProfile.objects.get(user=request.user)
-
+    profile = get_object_or_404(UserProfile, user=request.user)
     category = profile.fav_class_categories.get(id=category_id)
+
     profile.fav_class_categories.remove(category)
     messages.success(
         request,

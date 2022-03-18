@@ -18,17 +18,17 @@ def view_class_access_packages(request):
     profile = None
 
     if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user=request.user)
+        profile = get_object_or_404(UserProfile, user=request.user)
         profile.check_package_expired()
-
+    # seperate packages into lists by type and
+    # add expiry for Unlimited Use Packages if bought today
     for package in packages:
         if package.type == PACKAGE_TYPES['UNLIMITED']:
+            package.today_expires = date.today() + timedelta(
+                    days=package.duration)
             unlimited.append(package)
         else:
             tokens.append(package)
-
-    for package in unlimited:
-        package.today_expires = date.today() + timedelta(days=package.duration)
 
     context = {
         "token_packages": tokens,
@@ -51,8 +51,9 @@ def add_class_access_package(request):
     if request.method == "POST":
         form = ClassAccessPackageForm(request.POST, request.FILES)
         if form.is_valid():
+            # set expiry date or amount of tokens depending on package type
             if form["type"] == PACKAGE_TYPES['TOKENS']:
-                form.duration = 86
+                form.duration = 84  # Tokens expire after 12 weeks
             elif form["type"] == PACKAGE_TYPES['UNLIMITED']:
                 form.amount_of_tokens = None
             form.save()
@@ -93,6 +94,11 @@ def edit_class_access_package(request, package_id):
             request.POST, request.FILES, instance=package
         )
         if form.is_valid():
+            # set expiry date or amount of tokens depending on package type
+            if form["type"] == PACKAGE_TYPES['TOKENS']:
+                form.duration = 84  # Tokens expire after 12 weeks
+            elif form["type"] == PACKAGE_TYPES['UNLIMITED']:
+                form.amount_of_tokens = None
             form.save()
             messages.success(
                 request,
