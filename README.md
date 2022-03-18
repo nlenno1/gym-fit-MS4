@@ -594,9 +594,14 @@ For the steps required to deploy this project, please view the [GymFit Deploymen
 
 - [CSS Beautifier](https://www.freeformatter.com/css-beautifier.html) - Beautifying CSS Code
 - [JavaScript Validator](https://beautifytools.com/javascript-validator.php) - Validating JS code
-- [Lambda Test](https://www.lambdatest.com/) - Browser Testing Cloud Service
 - [Am I Responsive?](http://ami.responsivedesign.is/) - Webpage Breakpoint visualizer and image generator
 - [Black](https://black.readthedocs.io/en/stable/)- Code Formatter
+- [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/)
+- [Browser Stack Responsive Design Tester](https://www.browserstack.com/responsive)
+- [Media Genesis RESPONSIVE WEB DESIGN CHECKER](https://responsivedesignchecker.com/)
+- [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/)
+- [Lighthouse](https://developers.google.com/web/tools/lighthouse)
+- [pylint](https://pylint.org/)
 </details>
 
 <details>
