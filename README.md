@@ -2,6 +2,8 @@
 
 This project is designed to fufill the needs of a gym or fitness center looking to move thier booking system online and to help them grow their online sales.
 
+**DISCLAIMER** - This project is for educational purposes only. This project has no affiliation with any professional companies.
+
 ![Live Project Representation Image](readme/assets/gymfit-representational-image.jpg)
 
 [Link to Live Project](https://gym-fit-ms4.herokuapp.com/)
@@ -624,7 +626,19 @@ Some elements of the code in this project were taken from the Bootstrap document
 
 ### **Resources**
 
+- [Code Institute Course Content](https://courses.codeinstitute.net/) - Code fundamental learning platform
+- [Stack Overflow](https://stackoverflow.com/)
+- [W3Schools](https://www.w3schools.com/)
+- [Django Documentation](https://www.djangoproject.com/)
+
+- Readme structure and component ideas from https://github.com/C-Undritz/Boardgame-Bazaar
+- README template used to produce this documentation is from [Code Institute README Template](https://github.com/Code-Institute-Solutions/readme-template)
+
 ### **Content**
+
+All reviews are provided by the users and only reflects the Users opinions.
+
+GymFit location, address and google map images are based on [The Gym Group London Peckham Rye](https://www.thegymgroup.com/find-a-gym/peckham-rye/?utm_source=google&utm_medium=organic&utm_campaign=gmb-listing&utm_content=London%20Peckham%20Rye). The Gym Group has no affiliation with this project.
 
 ### **Media**
 
@@ -637,3 +651,5 @@ Images sourced from:
 - [Unslapsh](https://www.unsplash.com)
 
 ### **Acknowledgements**
+
+I would like to say a big thank you to my CI mentor Akshat, the CI Slack Community and my family and friends who have offered support and encouragement throughout the building of this project and the Code Institue Full Stack Web Development Course.
