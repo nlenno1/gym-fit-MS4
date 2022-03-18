@@ -6,4 +6,4 @@ $('#id_type').change(function () {
     } else {
         $("#id_amount_of_tokens").prop('disabled', false);
     }
-})  
+});
