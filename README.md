@@ -227,7 +227,6 @@ During the building of GymFit some alterations were made to the initial wirefram
 |Instructor Management |Instructor Profiles Layout/Design |Allows for greater responsivness in the design |
 |Schedule a Class Form |Form in a single column |More uniformity in design across the site|
 
-
 ### **Design Decisions**
 
 Bootstrap provides a clean user-friendly appearance to the website which is easy to customise for the situation using its extensive supporting documentation.
@@ -435,6 +434,32 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 
 ### **CRUD Table**
 
+This table shows what CRUD functionality is avaliable from what page.
+
+| Page | Create | Read | Update | Delete |
+|-----|-----|-----|-----|-----|
+| View Home Page - / ||Instructor Profiles|||
+| All Class Categories - /classes/our_classes/ |Class Favourites List Category|Class Categories||Class Favourites List Category|
+| Class Category Details - /classes/class_category/<category_id>/  |Class Favourites List Category|Single Class Category||Class Category, Class Favourites List Category, Category Review|
+| Add a Class Category - classes/class_category/add |Single Class Category|||
+| Edit a Class Category - classes/class_category/<category_id>/edit ||Single Class Category|Single Class Category||
+| Classes this Week - /classes/classes_this_week/ |User Profile (Class Favourites List)|Single Exercise Classes, User Profile (Classes)||Single Exercise Class|
+| Classes by Day - /classes/classes_by_day/ |User Profile (Class Favourites List)|Single Exercise Classes, User Profile (Classes)||Single Exercise Class|
+| Schedule a Single Exercise Class - /classes/single_class/add/ |Single Exercise Class||||
+| Update a Single Exercise Class - /classes/single_class/edit/ ||Single Exercise Class|Single Exercise Class||
+| View Class Access Packages - /products/class_access_packages/ ||Class Access Packages|||
+| Add a Class Access Package - classes/class_category/add/ |Class Access Package||||
+| Edit a Class Access Package - classes/class_category/<package_id>/edit/ ||Class Access Package|Class Access Package||
+| Contact Page - /contact/ ||User Profile||
+| Profile Page - /profile/ ||User Profile ||User Profile (Class Favourites List Category, Class Booking)|
+| View Bag - /bag/ ||Bag Contexts||Bag Context Items|
+| Checkout - /checkout/ ||Bag Contexts|||
+| Checkout Success - /checkout_success/<order_number>/ ||Order|||
+| Write A Class Category Review - /reviews/<category_id>/add/ |Category Review|Category|||
+| Instructor Management - /instructors/instructor_management/ ||Instructor Profiles||Instructor Profile|
+| Add an Instructor - /instructors/instructor_management/add/ |Instructor Profile||||
+| Edit an Instructor - /instructors/instructor_management/add/ ||Instructor Profile|Instructor Profile||
+
 ### **Defensive Programming**
 
 Throughout the building of this project I used the built in [Django Decorator login_required](https://docs.djangoproject.com/en/4.0/topics/auth/default/#the-login-required-decorator) to secure any functions that the User needs to have a verified account to use for example:
@@ -444,6 +469,12 @@ Throughout the building of this project I used the built in [Django Decorator lo
         """View to allow admin to delete a message"""
 
 If an unverified user attempted to access this function, they would be taken to the sign-in page to sign in or create an account.
+
+There are several occasions where part of a function should run or only be access if the user account is verified. To facilitate this functionality, I have used the built in Django 
+
+    .is_verified
+
+User model attribute to avoid errors and to reduce the amount an unverified user can do.
 
 To secure all Admin restricted functions I used a simple check of the [Django .is_superuser](https://docs.djangoproject.com/en/4.0/topics/auth/customizing/#custom-users-and-permissions) attribute included in its User model.
 
