@@ -64,7 +64,7 @@ class SingleExerciseClassForm(forms.ModelForm):
         labels = {
             "duration": "Duration (mins) *",
         }
-        
+
         self.fields["category"].widget.attrs["autofocus"] = True
         for field in labels:
             self.fields[field].label = labels[field]

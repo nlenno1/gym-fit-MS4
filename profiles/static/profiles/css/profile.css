@@ -1,5 +1,10 @@
 /* Profile Nav Pill Menu Display */
 
+/* Hide all the setions on the profile page */
+.profile-section {
+    display: none;
+}
+
 .nav-pills {
     flex-direction: column;
     align-content: center;
