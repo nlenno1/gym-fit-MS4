@@ -495,7 +495,8 @@ Error handling is being managed by the supplied functions and templates from Dja
 - Add customers to waiting lists if a class is full, with email notification on space opening up
 - Purchase multiple classes with a weekly interval with a specified number of weeks
 - Create, View, Edit and Delete Class Access Packages for specific class categories
-- Allow Instructors to Update their publicly visible profiles and manage their classes
+- Allow Instructors to Update their publicly visible profiles and manage their classes, see registers etc
+- Only show Instructors that are qualified to lead that Class Category when scheduling a class
 - Automated subscription payment service
 - Messaging system to allow admin to respond to customers with accounts
 - Add accessory products to the store like apparel, water bottles etc
