@@ -20,7 +20,8 @@ def create_a_category_review(request, category_id):
             author=request.user, review_subject=category
         ).exists()
         if previous_review:
-            # show error message with date to help the User find their previous review
+            # show error message with date to help the
+            # User find their previous review
             messages.error(
                 request,
                 f"You can't add a review as you have \

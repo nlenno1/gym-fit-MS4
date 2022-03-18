@@ -1,5 +1,4 @@
 from datetime import date, datetime, timedelta
-
 from django.shortcuts import render, redirect, reverse
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
@@ -500,7 +499,7 @@ def edit_single_exercise_class(request, class_id):
         if form.is_valid():
             # max capacity less than the amount of people signed up check
             if form.cleaned_data['max_capacity'] < len(
-                exercise_class.participants.all()):
+                    exercise_class.participants.all()):
                 messages.error(request, "There are more people signed up to the class \
                     than the new max capacity allows")
                 return redirect(reverse("classes_this_week"))

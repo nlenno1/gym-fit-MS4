@@ -107,3 +107,58 @@ To validate the Python code used in this project, I ran manual checks to confirm
 During development I had [pylint](https://pylint.org/) installed on my workspace which highlighted any problems which were correct as and when they arrose.
 
 I also used the [Black Code Formatter](https://black.readthedocs.io/en/stable/) to format and beautify the code. 
+
+Using the flake8 display error fucntion:
+
+    python3 -m flake8
+
+displayed these issues that I have not resolved. The reasons why are displayed below:
+
+|Unresolved Errors  |Reason |
+| --- | --- |
+|./.vscode/arctictern.py:10:1: F401 'subprocess' imported but unused
+./.vscode/arctictern.py:14:80: E501 line too long (94 > 79 characters)
+./.vscode/arctictern.py:34:23: E127 continuation line over-indented for visual indent
+./.vscode/arctictern.py:35:23: E128 continuation line under-indented for visual indent
+./.vscode/arctictern.py:36:23: E124 closing bracket does not match visual indentation
+./.vscode/arctictern.py:70:22: E124 closing bracket does not match visual indentation
+./.vscode/arctictern.py:92:1: W293 blank line contains whitespace
+./.vscode/arctictern.py:107:10: E231 missing whitespace after ','
+./.vscode/arctictern.py:116:1: W293 blank line contains whitespace
+./.vscode/arctictern.py:117:80: E501 line too long (80 > 79 characters)
+./.vscode/arctictern.py:162:80: E501 line too long (91 > 79 characters)
+./.vscode/arctictern.py:167:1: W293 blank line contains whitespace
+./.vscode/arctictern.py:184:80: E501 line too long (82 > 79 characters)
+./.vscode/arctictern.py:188:80: E501 line too long (96 > 79 characters)
+./.vscode/arctictern.py:190:80: E501 line too long (101 > 79 characters)
+./.vscode/make_url.py:10:39: E231 missing whitespace after ','
+./.vscode/make_url.py:11:36: E231 missing whitespace after ','
+./.vscode/make_url.py:12:39: E231 missing whitespace after ',' | Files are not part of my code base |
+|./checkout/apps.py:9:9: F401 'checkout.signals' imported but unused
+./checkout/models.py:5:1: F401 'django.conf.settings' imported but unused  |Imports used by functionality outside their files |
+| ./classes/utils.py:4:15: F821 undefined name 'render_to_string'
+./classes/utils.py:8:12: F821 undefined name 'render_to_string'
+./classes/utils.py:12:30: F821 undefined name 'settings'
+./classes/utils.py:18:5: F821 undefined name 'send_mail'
+./classes/utils.py:21:9: F821 undefined name 'settings'
+./classes/utils.py:30:22: F821 undefined name 'SingleExerciseClass'
+./classes/utils.py:33:16: F821 undefined name 'User'
+./classes/utils.py:35:19: F821 undefined name 'render_to_string'
+./classes/utils.py:39:16: F821 undefined name 'render_to_string'
+./classes/utils.py:43:34: F821 undefined name 'settings'
+./classes/utils.py:49:9: F821 undefined name 'send_mail'
+./classes/utils.py:52:13: F821 undefined name 'settings' | Imports defined in the file that the functions defined un utils.py are used |
+| ./classes/views.py:8:1: F401 'django.core.mail.send_mail' imported but unused
+./classes/views.py:9:1: F401 'django.template.loader.render_to_string' imported but unused
+./classes/views.py:10:1: F401 'django.conf.settings' imported but unused
+./classes/views.py:11:1: F401 'django.contrib.auth.models.User' imported but unused
+./classes/views.py:18:1: F401 'instructors.models.Instructor' imported but unused | Imports used by untils imported from utils.py |
+| ./classes/migrations/0004_alter_classcategory_friendly_name.py:16:80: E501 line too long (90 > 79 characters)
+./classes/migrations/0005_alter_singleexerciseclass_category.py:17:80: E501 line too long (122 > 79 characters)
+./products/migrations/0002_alter_classaccesspackage_friendly_name_and_more.py:22:80: E501 line too long (124 > 79 characters) | Migration files are automatically generated |
+| ./gym_fit/settings.py:155:80: E501 line too long (91 > 79 characters)
+./gym_fit/settings.py:158:80: E501 line too long (81 > 79 characters)
+./gym_fit/settings.py:161:80: E501 line too long (82 > 79 characters)
+./gym_fit/settings.py:164:80: E501 line too long (83 > 79 characters) | Breakin these lines stop break the function |
+| ./instructors/models.py:4:1: F401 'classes.models' imported but unused
+./reviews/models.py:6:1: F401 'classes.models' imported but unused | imports used in this manor to avoid circular import errors |

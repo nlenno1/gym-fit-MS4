@@ -34,4 +34,3 @@ class ClassCategoryReview(models.Model):
     def friendly_created_on(self):
         """ function to return display friendly date """
         return self.created_on.strftime("%d %B %Y at %H:%M")
-

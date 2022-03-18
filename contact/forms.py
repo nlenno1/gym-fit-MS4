@@ -21,7 +21,7 @@ class ContactMessageForm(forms.ModelForm):
             "message_subject": "Message Subject",
             "message_text": "Message",
         }
-        
+
         self.fields["message_subject"].widget.attrs["autofocus"] = True
         for field in labels:
             self.fields[field].label = labels[field]

@@ -255,7 +255,7 @@ def checkout_success(request, order_number):
                 "email": order.email,
                 "username": user_profile_object.username,
             }
-            
+
             user_profile_form = UserProfileForm(profile_data, instance=profile)
             user_form = UserForm(user_data, instance=user_profile_object)
 
