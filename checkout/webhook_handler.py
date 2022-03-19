@@ -27,7 +27,8 @@ class StripeWebhookHandler:
         if bag["class_access_package"]:
             package = get_object_or_404(
                 ClassAccessPackage, id=bag["class_access_package"])
-            order_items = order_items + f"Class Access Package : {package} - £{package.price} \n"
+            order_items = order_items + f"\
+                Class Access Package : {package} - £{package.price} \n"
         # get classes from db and add attributes to string
         class_list = []
         for item_id in bag["single_classes"]:
@@ -36,17 +37,18 @@ class StripeWebhookHandler:
             )
             class_list.append(exercise_class)
         for exercise_class in class_list:
-            order_items = order_items + f"Exercise Class : {exercise_class} - £{exercise_class.price} \n"
+            order_items = order_items + f"\
+                Exercise Class : {exercise_class} - £{exercise_class.price} \n"
 
         customer_email = order.email
         subject = render_to_string(
             "checkout/confirmation_emails/confirmation_email_subject.txt",
-            {"order": order,},
+            {"order": order},
         )
         body = render_to_string(
-            "checkout/confirmation_emails/confirmation_email_body.txt",
-            {"order": order, "contact_email": settings.DEFAULT_FROM_EMAIL,
-            "order_items": order_items},
+                "checkout/confirmation_emails/confirmation_email_body.txt",
+                {"order": order, "contact_email": settings.DEFAULT_FROM_EMAIL,
+                    "order_items": order_items},
         )
 
         send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [customer_email])

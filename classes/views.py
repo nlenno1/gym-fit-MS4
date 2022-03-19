@@ -498,8 +498,8 @@ def edit_single_exercise_class(request, class_id):
                 messages.error(request, "There are more people signed up to the class \
                     than the new max capacity allows")
                 return redirect(reverse("classes_this_week"))
-            else:
-                send_update_email(class_id, form, request)  # send updates class email
+            else:  # send updates class email
+                send_update_email(class_id, form, request)
                 exercise_class = form.save(commit=False)
                 # adjust the remaining spaces value
                 exercise_class.remaining_spaces = (
@@ -676,7 +676,8 @@ def delete_class_category(request, category_id):
     category = get_object_or_404(ClassCategory, id=category_id)
     # delete the classes that use this category and have been scheduled
     # including sending cancellation emails and issuing refunds
-    classes_to_remove = SingleExerciseClass.objects.filter(category=category.id)
+    classes_to_remove = SingleExerciseClass.objects.filter(
+        category=category.id)
     print(classes_to_remove)
     for class_event in classes_to_remove:
         delete_single_exercise_class(request, class_event.id)

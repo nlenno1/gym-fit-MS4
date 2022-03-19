@@ -140,24 +140,9 @@ displayed these issues that I have not resolved. The reasons why are displayed b
 ./.vscode/make_url.py:11:36: E231 missing whitespace after ','
 ./.vscode/make_url.py:12:39: E231 missing whitespace after ',' | Files are not part of my code base |
 |./checkout/apps.py:9:9: F401 'checkout.signals' imported but unused
+./checkout/models.py:5:1: F401 'django.conf.settings' imported but unused| Flake8 does't have access to see the use|
+|./checkout/apps.py:9:9: F401 'checkout.signals' imported but unused
 ./checkout/models.py:5:1: F401 'django.conf.settings' imported but unused  |Imports used by functionality outside their files |
-| ./classes/utils.py:4:15: F821 undefined name 'render_to_string'
-./classes/utils.py:8:12: F821 undefined name 'render_to_string'
-./classes/utils.py:12:30: F821 undefined name 'settings'
-./classes/utils.py:18:5: F821 undefined name 'send_mail'
-./classes/utils.py:21:9: F821 undefined name 'settings'
-./classes/utils.py:30:22: F821 undefined name 'SingleExerciseClass'
-./classes/utils.py:33:16: F821 undefined name 'User'
-./classes/utils.py:35:19: F821 undefined name 'render_to_string'
-./classes/utils.py:39:16: F821 undefined name 'render_to_string'
-./classes/utils.py:43:34: F821 undefined name 'settings'
-./classes/utils.py:49:9: F821 undefined name 'send_mail'
-./classes/utils.py:52:13: F821 undefined name 'settings' | Imports defined in the file that the functions defined un utils.py are used |
-| ./classes/views.py:8:1: F401 'django.core.mail.send_mail' imported but unused
-./classes/views.py:9:1: F401 'django.template.loader.render_to_string' imported but unused
-./classes/views.py:10:1: F401 'django.conf.settings' imported but unused
-./classes/views.py:11:1: F401 'django.contrib.auth.models.User' imported but unused
-./classes/views.py:18:1: F401 'instructors.models.Instructor' imported but unused | Imports used by untils imported from utils.py |
 | ./classes/migrations/0004_alter_classcategory_friendly_name.py:16:80: E501 line too long (90 > 79 characters)
 ./classes/migrations/0005_alter_singleexerciseclass_category.py:17:80: E501 line too long (122 > 79 characters)
 ./products/migrations/0002_alter_classaccesspackage_friendly_name_and_more.py:22:80: E501 line too long (124 > 79 characters) | Migration files are automatically generated |
