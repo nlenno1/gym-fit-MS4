@@ -41,9 +41,15 @@ def bag_contents(request):
             exercise_class_object.closed = True
         bag_items["single_classes"].append(exercise_class_object)
         # sort single classes in the bag items by date and start time
+        # sort function from Stack Overflow (see README credits for link)
         bag_items["single_classes"] = sorted(
                 bag_items["single_classes"], key=lambda d: (
                     d.class_date, d.start_time))
+    # clear bag items id list and re add them in chronological order
+    if len(bag_items["single_classes"]) > 0:
+        bag["single_classes"] = []
+        for exercise_class in bag_items["single_classes"]:
+            bag["single_classes"].append(exercise_class.id)
 
     context = {
         "bag": bag,

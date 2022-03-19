@@ -35,9 +35,6 @@ class StripeWebhookHandler:
                 id=item_id
             )
             class_list.append(exercise_class)
-        # sort classes in chronological order
-        class_list = sorted(class_list, key=lambda d: (
-                    d.class_date, d.start_time))
         for exercise_class in class_list:
             order_items = order_items + f"Exercise Class : {exercise_class} - £{exercise_class.price} \n"
 
