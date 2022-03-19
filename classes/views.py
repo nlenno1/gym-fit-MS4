@@ -547,8 +547,9 @@ def delete_single_exercise_class(request, class_id):
     class_name = exercise_class.info()
     for user_profile in exercise_class.participants.all():
         refunded = False
-        # if user has a profile
-        if user_profile.is_authenticated:
+        # if user is not a guest
+        if str(user_profile.username)[0:11] != "Guest_User_":
+            print(user_profile)
             profile = UserProfile.objects.get(user=user_profile)
             # UU packages don't get refunded
             # if the user currently doesn't have a package
@@ -569,8 +570,8 @@ def delete_single_exercise_class(request, class_id):
                 refund_total += exercise_class.token_cost
                 refunded = True
         # send email to all class participants
-        # send_class_cancellation_email(exercise_class, user_profile, refunded)
-    # exercise_class.delete()
+        send_class_cancellation_email(exercise_class, user_profile, refunded)
+    exercise_class.delete()
     messages.success(request, f"Exercise Class {class_name} Cancelled")
     messages.info(request, f"Refunded a total of {refund_total} Token/s \
         to customers booked onto the class of {class_name}")

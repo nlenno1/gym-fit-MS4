@@ -302,12 +302,33 @@ def checkout_success(request, order_number):
             for item in current_bag["bag_items"]["single_classes"]:
                 # add profile to class
                 item.participants.add(user_profile_object)
-                item.remaining_spaces -= 1
-                item.save()
                 # add class to profile
                 profile.classes.add(item)
                 profile.save()
-
+        else:
+            # fill guest user data and add to class list
+            list_name = order.full_name.split()
+            guest_user = User(first_name=list_name[0], last_name=list_name[-1],
+                              email=order.email, username="Guest_User_" +
+                              list_name[-1] + "_" + str(uuid.uuid4()))
+            guest_user.save()
+            print(guest_user.username)
+            print(str(guest_user.username)[0:11])
+            print(UserProfile.objects.filter(user=guest_user))
+            for item in current_bag["bag_items"]["single_classes"]:
+                try:
+                    # add guest to class
+                    item.participants.add(guest_user)
+                    messages.success(request, f"Saved Guest info \
+                        to Class {item}")
+                except Exception as err:
+                    messages.error(
+                        request,
+                        f"Guest Info Not Saved. Error message: {err}",
+                    )
+                # adjust remaining spaces
+                item.remaining_spaces -= 1
+                item.save()
     # delete the bag in session
     if "bag" in request.session:
         del request.session["bag"]
