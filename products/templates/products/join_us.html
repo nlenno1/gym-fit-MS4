@@ -28,7 +28,7 @@
         <h1 class="display-3 text-center text-md-start ps-md-5 mt-5 mb-3">Join Us</h1>
         <h2 class="text-center text-md-start ps-md-5 mt-5 mb-3">Here you can find our selection of Class Access Packages</h2>
         {% if not user.is_authenticated %}
-        <p class="text-center text-md-start ps-md-5 mb-3">To purchase one of these packages you need to have a GymFit account so <a href="account_signup" class="text-black text-decoration-none"><strong>Sign Up</strong></a></p>
+        <p class="text-center text-md-start ps-md-5 mb-3">To purchase one of these packages you need to have a GymFit account so <a href="{% url 'account_signup' %}" class="text-black text-decoration-none"><strong>Sign Up</strong></a></p>
         {% endif %}
         <p class="text-center text-md-start ps-md-5 mb-3">Use the <i class="fas fa-info-circle"></i> icon for more information about the packages</p>
         <!-- Token Packages Display -->
