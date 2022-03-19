@@ -40,6 +40,10 @@ def bag_contents(request):
                 "%H:%M") <= now.strftime("%d:%m:%Y - %H:%M:%S"):
             exercise_class_object.closed = True
         bag_items["single_classes"].append(exercise_class_object)
+        # sort single classes in the bag items by date and start time
+        bag_items["single_classes"] = sorted(
+                bag_items["single_classes"], key=lambda d: (
+                    d.class_date, d.start_time))
 
     context = {
         "bag": bag,
