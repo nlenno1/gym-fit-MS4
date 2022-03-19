@@ -616,6 +616,7 @@ For the steps required to deploy this project, please view the [GymFit Deploymen
 
 ## **CREDITS**
 
+- Some major systems, such as the Checkout, Bag and Stripe Payments, have been heavily based on the Code Institute Boutique Ado E-Commerce walk through tutorials with customisation for this project.
 - Formatting date to use in a Datepicker input min value - [Stack Overflow](https://stackoverflow.com/questions/32378590/set-date-input-fields-max-date-to-today)
 - Sorting A List Of Dictionaries - [Stack Overflow](https://stackoverflow.com/questions/72899/how-do-i-sort-a-list-of-dictionaries-by-a-value-of-the-dictionary)
 - Adding the Date Field in a Model Form - [YouTube](https://www.youtube.com/watch?v=I2-JYxnSiB0)
