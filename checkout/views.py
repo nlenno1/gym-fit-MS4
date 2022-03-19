@@ -312,9 +312,6 @@ def checkout_success(request, order_number):
                               email=order.email, username="Guest_User_" +
                               list_name[-1] + "_" + str(uuid.uuid4()))
             guest_user.save()
-            print(guest_user.username)
-            print(str(guest_user.username)[0:11])
-            print(UserProfile.objects.filter(user=guest_user))
             for item in current_bag["bag_items"]["single_classes"]:
                 try:
                     # add guest to class
