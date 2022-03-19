@@ -674,6 +674,13 @@ def delete_class_category(request, category_id):
         return redirect(reverse("home"))
 
     category = get_object_or_404(ClassCategory, id=category_id)
+    # delete the classes that use this category and have been scheduled
+    # including sending cancellation emails and issuing refunds
+    classes_to_remove = SingleExerciseClass.objects.filter(category=category.id)
+    print(classes_to_remove)
+    for class_event in classes_to_remove:
+        delete_single_exercise_class(request, class_event.id)
+
     category.delete()
     messages.success(request, "Category deleted")
     return redirect(reverse("view_class_categories"))
