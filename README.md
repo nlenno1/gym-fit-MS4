@@ -550,6 +550,8 @@ This is a table of the major bugs and issues that I experienced when building th
 6. Deleting a category will not refund all the Users booked onto future classes of that category (stored in the participants list)
 7. Every time the Update Class button is clicked to update a Single Exercise Class the notification email is sent, even if nothing changes. The email only includes the details of class_date, start_time, location and duration, so if another detail is changed, it is not included on the email.
 8. If there is an error in the Edit a Single Exercise Class function, it will redirect to the Classes this Week.
+9. The refund cancellation notice is calculated using dates and not datetime so is not as accurate as it could be
+10. If you change any data for the class category or instructor that an exercise class uses, then current class participants are not informed.
 
 ## **DEPLOYMENT**
 
