@@ -28,10 +28,17 @@ class StripeWebhookHandler:
             package = get_object_or_404(
                 ClassAccessPackage, id=bag["class_access_package"])
             order_items = order_items + f"Class Access Package : {package} - £{package.price} \n"
+        # get classes from db and add attributes to string
+        class_list = []
         for item_id in bag["single_classes"]:
             exercise_class = SingleExerciseClass.objects.get(
                 id=item_id
             )
+            class_list.append(exercise_class)
+        # sort classes in chronological order
+        class_list = sorted(class_list, key=lambda d: (
+                    d.class_date, d.start_time))
+        for exercise_class in class_list:
             order_items = order_items + f"Exercise Class : {exercise_class} - £{exercise_class.price} \n"
 
         customer_email = order.email
