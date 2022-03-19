@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% block extratitle %} &nbsp||&nbsp {{ request.user }}'s Profile {% endblock %}
+
 {% block extracss %}
     <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
     <!-- Classes link for Single Exercise Class Display -->

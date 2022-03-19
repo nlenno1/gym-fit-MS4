@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% block extratitle %} &nbsp||&nbsp Edit Instructor {{ instructor.friendly_name }}{% endblock %}
+
 {% block extracss %}
     <link rel="stylesheet" href="{% static 'css/form-inputs.css' %}">
 {% endblock %}
