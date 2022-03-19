@@ -619,7 +619,8 @@ For the steps required to deploy this project, please view the [GymFit Deploymen
 - Some major systems, such as the Checkout, Bag, Toast Messaging system and Stripe Payments, have been heavily based on the Code Institute Boutique Ado E-Commerce walk through tutorials with customisation for this project.
 - Formatting date to use in a Datepicker input min value - [Stack Overflow](https://stackoverflow.com/questions/32378590/set-date-input-fields-max-date-to-today)
 - Sorting A List Of Dictionaries - [Stack Overflow](https://stackoverflow.com/questions/72899/how-do-i-sort-a-list-of-dictionaries-by-a-value-of-the-dictionary)
-- Adding the Date Field in a Model Form - [YouTube](https://www.youtube.com/watch?v=I2-JYxnSiB0)
+- Adding the Date Field Widget in a Model Form - [YouTube](https://www.youtube.com/watch?v=I2-JYxnSiB0)
+- Adding the Time Field Widget in a Model Form - [Nancy Lin's Blog](https://nancylin.xyz/how-to-implement-date-time-picker-in-django-without-javascript/)
 - JavaScript Confirm Delete functionality - [Stack Overflow](https://stackoverflow.com/questions/37398416/django-delete-confirmation)
 
 ### **Code snippets**

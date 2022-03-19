@@ -169,6 +169,7 @@ def classes_this_week(request):
                     "text_date": item.class_date.strftime("%A %d %b"),
                 }
             )
+    # sort function from Stack Overflow (see README credits for link)
     days_with_classes_sorted = sorted(
         days_with_classes, key=lambda d: d["date"]
     )

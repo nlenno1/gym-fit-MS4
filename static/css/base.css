@@ -166,8 +166,9 @@ h1, h2, h3 ,h4, h5 {
     padding-top: 140px;
 }
 
-/* Mobile Menu - template taken from W3 documentation */
-/* The Overlay (background) */
+/* Mobile Menu - template taken from W3 documentation
+https://www.w3schools.com/howto/howto_js_fullscreen_overlay.asp
+The Overlay (background) */
 .overlay {
     /* Height & width depends on how you want to reveal the overlay (see JS below) */   
     height: 0%;

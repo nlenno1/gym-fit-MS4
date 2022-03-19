@@ -53,6 +53,7 @@ def profile(request):
                 upcoming_classes.append(item)
         # sort previous classes from highest to lowest
         # using class date and then start time
+        # sort function from Stack Overflow (see README credits for link)
         previous_classes = sorted(
             previous_classes,
             key=lambda x: (x.class_date, x.start_time),

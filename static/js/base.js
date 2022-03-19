@@ -1,8 +1,10 @@
-/* Open Mobile Menu */
+/* Mobile Menu - template taken from W3 documentation
+ https://www.w3schools.com/howto/howto_js_fullscreen_overlay.asp
+Open Mobile Menu */
 function openNav() {
   document.getElementById("mobileNav").style.height = "100%";
 }
-/* Close Mobile Menu */
+// Close Mobile Menu
 function closeNav() {
   document.getElementById("mobileNav").style.height = "0%";
 }
@@ -20,7 +22,7 @@ var option = {
 };
 
 window.onload = (event) => {
-  // Initialize toasts 
+  // Initialize toasts taken from Bootstrap Documentation
   var toastElList = [].slice.call(document.querySelectorAll('.toast'));
   var toastList = toastElList.map(function (toastEl) {
     return new bootstrap.Toast(toastEl, option).show();

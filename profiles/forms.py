@@ -6,13 +6,16 @@ from .models import UserProfile
 
 class DateInput(forms.DateInput):
     """Add date picker widget to date field"""
+    # Date Widget From Youtube Tutorial
+    # (https://www.youtube.com/watch?v=I2-JYxnSiB0)
 
     input_type = "date"
 
 
 class TimePickerInput(forms.TimeInput):
     """Add time picker widget to time field"""
-
+    # Time Widget From Nancy Lin's Blog
+    # (For link see README Credits)
     input_type = "time"
 
 
