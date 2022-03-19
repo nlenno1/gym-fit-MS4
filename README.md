@@ -225,9 +225,10 @@ During the building of GymFit some alterations were made to the initial wirefram
 |Class Booking |Split into Class This Week and Classes by Day |Allows the user to view classes on several days at once or one specific day |
 |Class Booking |Full Calendar view date picker removed |Django limitations and an overcomplicated implementation process |
 |Class Booking |Go to day button replaced with date picker and on change submit functionality |Improves the UX |
-|Join Now |Packages display made full screen width |More in fitting with the other data layouts and allows for greater responsivness in the design |
+|Join Us |Packages display made full screen width |More in fitting with the other data layouts and allows for greater responsivness in the design |
 |Instructor Management |Instructor Profiles Layout/Design |Allows for greater responsivness in the design |
 |Schedule a Class Form |Form in a single column |More uniformity in design across the site|
+|Join Now | Updated to be called Join Us | Gives more of a sense of community and feels less like a demand but still encouraging users |
 
 ### **Design Decisions**
 
@@ -264,7 +265,7 @@ This is a full, page by page, breakdown of all the features & elements that have
 - "Book Classes" Dropdown Menu which links to:
     - "Classes This Week" which allows the user to see and filter all the classes this week
     - "Classes By Day" which allows the user to search for classes on individual days and filter the classes found
-- "Join Now" - Links to the "Join Us" page which shows the user the Class Access Packages the company has to offer
+- "Join Us" - Links to the "Join Us" page which shows the user the Class Access Packages the company has to offer
 - "Contact" - Links to the Contact page
 
 **Top Navbar**
@@ -620,7 +621,6 @@ For the steps required to deploy this project, please view the [GymFit Deploymen
 - Adding the Date Field in a Model Form - [YouTube](https://www.youtube.com/watch?v=I2-JYxnSiB0)
 - JavaScript Confirm Delete functionality - [Stack Overflow](https://stackoverflow.com/questions/37398416/django-delete-confirmation)
 
-
 ### **Code snippets**
 
 The full screen overlay navigation desgin and css was taken from [W3 School's How To - Full screen Overlay Navigation](https://www.w3schools.com/howto/howto_js_fullscreen_overlay.asp)
@@ -665,4 +665,4 @@ Images sourced from:
 
 ### **Acknowledgements**
 
-I would like to say a big thank you to my CI mentor Akshat, the CI Slack Community and my family and friends who have offered support and encouragement throughout the building of this project and the Code Institue Full Stack Web Development Course.
+I would like to say a big thank you to my CI mentor Akshat, the CI Slack Community and my family and friends who have offered support and encouragement throughout the building of this project and the whole of the Code Institue Full Stack Web Development Course.

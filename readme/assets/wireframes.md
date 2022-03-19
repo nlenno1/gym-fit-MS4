@@ -32,7 +32,7 @@ Confirm Class Booking
 Cancel Class Booking
 ![Page Wireframe](wireframes/cancel-class-booking.png)
 
-Join Now
+Join Us
 ![Page Wireframe](wireframes/join-now.png)
 
 Contact
