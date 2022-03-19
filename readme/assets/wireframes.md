@@ -1,6 +1,6 @@
 # Wireframes
 
-To to use the development time most efficiently, the Home page was designed using the [Figma](https://www.figma.com) software to be able to show design elements like the color scheme, fonts ets and then traditional wireframes, produced using the [Balsamiq](https://www.balsamiq.com), were used to design the other pages.
+To use the development time most efficiently, the Home page was designed using the [Figma](https://www.figma.com) software to be able to show design elements like the color scheme, fonts etc and then traditional wireframes, produced using the [Balsamiq](https://www.balsamiq.com), were used to design the other pages.
 
 Home
 ![Page Wireframe](wireframes/home-wireframe.png)

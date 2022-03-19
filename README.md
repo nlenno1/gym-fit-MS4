@@ -8,7 +8,7 @@ This project is designed to fufill the needs of a gym or fitness center looking 
 
 [Link to Live Project](https://gym-fit-ms4.herokuapp.com/)
 
-This is the last of the Milestone Projects that make up the Full Stack Web Development Program at The Code Institute. The main requirements of this project are to *"build a full-stack framework based around business logic used to control a centrally-owned dataset"* using the technologies: **HTML**, **CSS**, **Javascript**, **Python+Django** with a relational database and using the Stripe payments system.
+This is the last of the Milestone Projects that make up the Full Stack Web Development Program at The Code Institute. The main requirements of this project are to *"build a full-stack framework based around business logic used to control a centrally-owned dataset"* using the technologies: **HTML**, **CSS**, **JavaScript**, **Python+Django** with a relational database and using the Stripe payments system.
 
 This e-commerce platform allows a small to medium size fitness business to transition from in person to online sales of products and class admittance, and will drive a growth in sales with the opportunity to support fully online operation. Working fully online can be an avenue for business development however the need for this functionality/ability was emphasized most recently by the COVID pandemic where many in person businesses were forced to move online.
 
@@ -155,7 +155,7 @@ At this level, Users can;
 
 ## Topology
 
-This diagram explains how the pages will be linked or accessed from each other. The red lines are Admin only access pathways. All the blue elements are accessible at all times from the navbar element.
+This diagram explains how the pages will be linked or accessed from each other. The red lines are Admin only access pathways. All the blue elements are accessible at all times from the NavBar element.
 
 ![Topology Diagram](readme/assets/gym-fit-topology-diagram.png)
 
@@ -182,17 +182,17 @@ Color Key for app that contains the model:
 
 ### **Model Descriptions**
 
-**User** - Provied by AllAuth application and contains basic user information including username, email etc. This model does not link to any other model but if filled by the Order model on occasion.
+**User** - Provided by AllAuth application and contains basic user information including username, email etc. This model does not link to any other model but if filled by the Order model on occasion.
 
-**UserProfile** - Stores more detail about a User and is created when the User signs up for a profile. Contains default informtion, used in Order and ContactMessage froms, as well as details about the classes the User has booked on to and the Users class packages, for example the amount of tokens they have to use and the package expiry date. This model is uses ClassCategory for its fav_class_category field and SingleExerciseClass for its classes field which are both ManyToManyFields
+**UserProfile** - Stores more detail about a User and is created when the User signs up for a profile. Contains default information, used in Order and ContactMessage forms, as well as details about the classes the User has booked on to and the Users class packages, for example the amount of tokens they have to use and the package expiry date. This model is uses ClassCategory for its fav_class_category field and SingleExerciseClass for its classes field which are both ManyToManyFields
 
 **SingleExerciseClass** - Model for all the single exercise class events that can be booked onto using a one time payment or class access package. The model including details like the class location, start time, instructor, price etc. This model is uses ClassCategory for its category ForeignKeyField, Instructor for its instructor ForeignKeyField and User for its participants ManyToManyField
 
-**ClassCategory** - Model for the categories of exercise classes that are offered by GymFit. This model includes detail about the categories required equipment and a short description of the class category. This does't use any other model and was created first.
+**ClassCategory** - Model for the categories of exercise classes that are offered by GymFit. This model includes detail about the categories required equipment and a short description of the class category. This doesn't use any other model and was created first.
 
-**ClassCategoryReview** - Model contains all the information for a review of a exercise class category like the review author, subject, rating etc. This mode uses the User model for its author field and ClassCategory model for its review_subject field which are both ForeignKeys.
+**ClassCategoryReview** - Model contains all the information for a review of an exercise class category like the review author, subject, rating etc. This mode uses the User model for its author field and ClassCategory model for its review_subject field which are both ForeignKeys.
 
-**ClassAccessPackage** - Model for a type or puchasable product that will allow users access to book onto single exercise classes having unlimited access or a limited number of tokens attributed to their UserProfile. This model contains details such as the type of package, price, package duration until expiry etc. This model doesn't use any other models as the data contained with in it is generally used to alter the information in the UserProfile after purchase.
+**ClassAccessPackage** - Model for a type or purchasable product that will allow users access to book onto single exercise classes having unlimited access or a limited number of tokens attributed to their UserProfile. This model contains details such as the type of package, price, package duration until expiry etc. This model doesn't use any other models as the data contained with in it is generally used to alter the information in the UserProfile after purchase.
 
 **Order** - Model that contains all the data related to a single user purchase of a Class Access Package and/or Single Exercise Classes. This model includes shipping details, order total price and the Stripe PID. This model uses the UserProfile model through a ForeignKey field.
 
@@ -202,7 +202,7 @@ Color Key for app that contains the model:
 
 **ContactMessage** - Model for storing all the messages sent from the contact page to admin including information like senders name, email address and the message. This model doesn't use any other model as the data is stored as strings as there is not the functionality to reply on the site.
 
-In the database, the OrderLineItem model is not necessary however, it has been included for code reusability and to speed up future develpment.
+In the database, the OrderLineItem model is not necessary however, it has been included for code reusability and to speed up future development.
 
 ## **SKELETON**
 
@@ -216,18 +216,18 @@ During the building of GymFit some alterations were made to the initial wirefram
 
 |Page/Section |Alteration |Reason |
 |-----|-----|-----|
-|Confirm Class Booking/Cancel Class Booking Page |Removed pages completely |Used JS alert functions to achive a similar functionality |
+|Confirm Class Booking/Cancel Class Booking Page |Removed pages completely |Used JS alert functions to achieve a similar functionality |
 |Home |Removed overlap of hero image and first image on page |Peer review testing feedback mentioned it as looking out of place |
 |Home|Removed Shop and Health Bar sections |Feedback mentioned that the confused the User's understand of the purpose of the site initially |
-|Profile |Moved the Admin Contrls into the Profile Pill Menu |Easier Access |
+|Profile |Moved the Admin Controls into the Profile Pill Menu |Easier Access |
 |Profile |Removed Delete Account button |Functionality not required |
 |Add a Review |Removed Review Subject |Field not required |
 |Class Booking |Split into Class This Week and Classes by Day |Allows the user to view classes on several days at once or one specific day |
 |Class Booking |Full Calendar view date picker removed |Django limitations and an overcomplicated implementation process |
 |Class Booking |Go to day button replaced with date picker and on change submit functionality |Improves the UX |
-|Join Us |Packages display made full screen width |More in fitting with the other data layouts and allows for greater responsivness in the design |
-|Instructor Management |Instructor Profiles Layout/Design |Allows for greater responsivness in the design |
-|Schedule a Class Form |Form in a single column |More uniformity in design across the site|
+|Join Us |Packages display made full screen width |More in fitting with the other data layouts and allows for greater responsiveness in the design |
+|Instructor Management |Instructor Profiles Layout/Design |Allows for greater responsiveness in the design |
+|Schedule a Class Form | Form in a single column |More uniformity in design across the site|
 |Join Now | Updated to be called Join Us | Gives more of a sense of community and feels less like a demand but still encouraging users |
 
 ### **Design Decisions**
@@ -257,7 +257,7 @@ This is a full, page by page, breakdown of all the features & elements that have
 
 ### Multi Page Elements
 
-**User Feedback** - All User Feedback messages will come in the form of "Toasts" supplied by Boostrap and displayed on the bottom right of the screen. These Toasts change heading color and contents depending on the message displayed
+**User Feedback** - All User Feedback messages will come in the form of "Toasts" supplied by Bootstrap and displayed on the bottom right of the screen. These Toasts change heading color and contents depending on the message displayed
 
 **Navbar**
 - Logo - to establish identity and act as a home button
@@ -269,7 +269,7 @@ This is a full, page by page, breakdown of all the features & elements that have
 - "Contact" - Links to the Contact page
 
 **Top Navbar**
-- "My Account" - When a User is signed in this links to the Users profile page but when the User is a Guest it is a dropdown menu which links too
+- "My Account" - When a User is signed in, this links to the Users profile page but when the User is a Guest it is a dropdown menu which links too
     - Register to allow the User to create an Account or 
     - Sign In to allow a User to sign into an existing account
 - Shopping Cart Icon - Links to the Users current bag display
@@ -278,14 +278,14 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 
 **Footer**
 - Logo - to establish identity and act as a home button
-- Links to socials for promotion and to encourage user engaguement
+- Links to socials for promotion and to encourage user engagement
 - Address of GymFit
 
 ### Home App
 
 **View Home Page - /**
 - Our Team Display - Display generated from Instructor models in the database. Each model has a display_on_site field which determines which instructors are show. A maximum of 8 instructors will be displayed
-- Map and Links section - Links to GymFit instagram account and location on GoogleMaps. Image provided to represent use of GoogleMaps API.
+- Map and Links section - Links to GymFit Instagram account and location on GoogleMaps. Image provided to represent use of GoogleMaps API.
 
 ### Classes App
 
@@ -328,7 +328,7 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 
 - Single Exercise Class Display - Same as Classes this Week
 - "Filter By" Dropdown Menu - On selection filters the classes displayed using any single Class Category or using the categories in the Users Favourite Category List
-- "Classes on" Date Select -  On selection filters the classes displayed using the chosen date
+- "Classes on" Date Select - On selection filters the classes displayed using the chosen date
 - "Classes This Week" Button - links to Classes this Week
 
 **Schedule a Single Exercise Class - /classes/single_class/add/** (ADMIN)
@@ -344,8 +344,8 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 ### Products App
 
 **View Class Access Packages - /products/class_access_packages/**
-- Display for Token Packages including a repesentation image, package name, popover with more information and package price, ordered by price
-- Display for Unlimited Use Packages including a repesentation image, package name, popover with more information, package expiry and package price
+- Display for Token Packages including a representation image, package name, popover with more information and package price, ordered by price
+- Display for Unlimited Use Packages including a representation image, package name, popover with more information, package expiry and package price
 - Edit Class (ADMIN) - links to the Edit Class Access Package page
 - Delete Package Button (ADMIN) - deletes the selected Class Access Package after a confirmation check and redirects to View Class Access Packages
 - Add a Tokens Package / Add an Unlimited Package (ADMIN) - links to Add a Class Access Package
@@ -363,21 +363,21 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 ### Contact App
 
 **Contact Page - /contact/**
-- ContactMessageForm displayed using Crispy Forms with labels. If user is annonomous then name and email inputs are provided. If user is signed in then these details are provided from the database.
+- ContactMessageForm displayed using Crispy Forms with labels. If user is anonymous then name and email inputs are provided. If user is signed in then these details are provided from the database.
 - Cancel button - Links to Home
 - "Send Message" Button - Validates form, saves data to database and display sent message user feedback after reloading the page
 
 ### Profiles App
 
 **Profile Page - /profile/**
-- All sections are accessable from the profile menu buttons.
+- All sections are accessible from the profile menu buttons.
 - Personal Details Section - contains UserForm and UserProfileForm prefilled with existing User information which can be updated by the "Update Information" button below the forms
-- My Booking Section - Display of Upcoming and Previous classes the used has booked onto. Upcoming class display includes a button to cancel their booking which will remove the user from the class participants and remove the class forom the users profile and issuing a class token refund if cancellation notice is more than 24 hours.
+- My Booking Section - Display of Upcoming and Previous classes the used has booked onto. Upcoming class display includes a button to cancel their booking which will remove the user from the class participants and remove the class from the users profile and issuing a class token refund if cancellation notice is more than 24 hours.
 - Previous Purchases Section - Display all the previous orders in the users account with a link to Previous Order Details which is the same as Checkout Success but has a few notes explains that it is a previous order and 
-- Favourite Class List - Contains all Class Categories in the users Faviourite Class Category List with a button to remove the from the list if desired
+- Favourite Class List - Contains all Class Categories in the users Favourite Class Category List with a button to remove the Category from the list if desired.
 
 - Admin Messages Section (ADMIN) - Displays all the user messages to admin, including sender name and reply email, sorted by date sent with a delete button to remove the messages individually
-- "Add A Class Catergory" Button (ADMIN) - links to Add a Class Category
+- "Add A Class Category" Button (ADMIN) - links to Add a Class Category
 - "Schedule a Class" Button (ADMIN) - links to Schedule a Single Exercise Class
 - "Create A Class Access Package" Button (ADMIN) - links to Add a Class Access Package
 - "Instructor Management" Button (ADMIN) - links to Instructor Management
@@ -387,7 +387,7 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 ### Bag App
 
 **View Bag - /bag/**
-- Displays the Class Access Package and individual classes in the Users bag, in seperate sections, with details including type, duration, location with the single classes ordered by date. Each item has a delete button with a popover explaining its functionand a remove confirmation notification with a toast message on completion.
+- Displays the Class Access Package and individual classes in the Users bag, in separate sections, with details including type, duration, location with the single classes ordered by date. Each item has a delete button with a popover explaining its function and a remove confirmation notification with a toast message on completion.
 
 ### Checkout App
 
@@ -396,11 +396,11 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 - Form for all the Users details including name, address and email which will be auto filled if the User is signed in
 - Stripe Payment Element which will verify card number and details on entry with error messages displayed below
 - "Back To Bag" button returns user to the Bag page
-- "Complete Order" button processes order, disabling and hiding form and buttons with an overlay which is removed on completion and redirects to Checkout Success. Any Card issues are dealt with on the processing overlay. If any errors with the form, User is bounced back to the Checkout page.
+- "Complete Order" button processes order, disabling and hiding form and buttons with an overlay which is removed on completion and redirects to the Checkout Success template. Any Card issues are dealt with on the processing overlay. If any errors with the form, User is bounced back to the Checkout page.
 
 **Checkout Success - /checkout_success/<order_number>/**
 
-- Displays a full Order Review with all details useing in the order including items purchased, billing information and the order date and number with a confirmation email sent to the supplied email address.
+- Displays a full Order Review with all details using in the order including items purchased, billing information and the order date and number with a confirmation email sent to the supplied email address.
 - This page is also used for the Profile Previous Order Details display
 
 ### Reviews App
@@ -421,7 +421,7 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
     - List of Classes the Instructor can lead
     - Icon for if the account is being displayed on the website
     - "Edit Instructor" button which links to the Edit Instructor page for the chosen Instructor
-    - Delete instructor icon with popover to explain its function with a delete confirmation message on click
+    - Delete instructor icon with popover to explain its function with a delete confirmation message shown on click
 
 **Add an Instructor - /instructors/instructor_management/add/** (ADMIN)
 
@@ -437,7 +437,7 @@ At Mobile screen widths, the Navbar links will be contained in a full screen men
 
 ### **CRUD Table**
 
-This table shows what CRUD functionality is avaliable from what page.
+This table shows what CRUD functionality is available from what page.
 
 | Page | Create | Read | Update | Delete |
 |-----|-----|-----|-----|-----|
@@ -521,7 +521,7 @@ This is a table of the major bugs and issues that I experienced when building th
 | 2 | Dynamic URLS for images not rendering with {{MEDIA_URL}} | Variable not being passed to HTML files | Update context processors in settings.py |
 | 3 | Table Header cells not removing with display none applied | Table Head elements don't respond to display:none | Added d-none to the row containing the Table Head |
 | 4 | Dropdown Menu from bootstrap not working | Wrong version of Bootstrap | Added updated Bootstrap links |
-| 5 | Multiple instances of the same date in week view | Not accessing the data from the dictionary, was referencing the entire dict | Added search storage list to add single values to and check against |
+| 5 | Multiple instances of the same date occurring in Classes this Week | Function was referencing the entire dictionary without using a key to access a specific value | Added search storage list to add single values to and check against |
 | 6 | Empty days showing on week view | Day label generation happening before the category filter | Rearranged functions to create day labels after filtering |
 | 7 | Popovers broken | Was using Bootstrap 5 with popover JS and structure from Bootstrap 4 | Added correct Bootstrap 5 JS and changed attribute names in popovers to include "bs-" |
 | 8 | Filters changing when add to bag clicked | URLs leaving out the filter variables being passed in initially | Add .get_full_path to redirect_url values in templates |
@@ -535,7 +535,7 @@ This is a table of the major bugs and issues that I experienced when building th
 | 16 | Toast messages not showing | Multiple JavaScript on load functions in base.js | Combined both functions |
 | 17 | Password validation failing from AllAuth | I had broken the password validator strings up to comply with PEP8 | Removed the line break |
 | 18 | Webhooks failing and Order Confirmation emails not being sent when buying classes as a user | The intent metadata Username check was breaking as when using as a Guest, there is no username | Altered the check to use the has_account variable in the metadata which is always there after using request.user.is_authenticated |
-| 19 | Saving a Guest User object creating a unwanted UserProfile object | The signal reciever in the User model was creating the UserProfile object | Added a conditional to check the first 10 letters of the username as every guest account has the prefix "Guest_User_" |
+| 19 | Saving a Guest User object created an unwanted UserProfile object | The signal receiver in the User model was creating the UserProfile object | Added a conditional to check the first 10 letters of the username as every guest account has the prefix "Guest_User_" |
 
 
 ### **Unresolved Bugs**
@@ -565,7 +565,7 @@ For the steps required to deploy this project, please view the [GymFit Deploymen
 - [CSS 3](https://developer.mozilla.org/en-US/docs/Web/CSS) - Programming Language
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - Programming Language
 - [Python](https://www.python.org/) - Programming Language
-- [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) - Templating Language
+- [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) - Template Language
 - [jQuery](https://jquery.com/) - JavaScript Library
 - [Bootstrap v5](https://getbootstrap.com/) - Library Import
 - [Google Fonts](https://fonts.google.com/) - Typography Import
@@ -621,7 +621,7 @@ For the steps required to deploy this project, please view the [GymFit Deploymen
 ## **CREDITS**
 
 - Some major systems, such as the Checkout, Bag, Toast Messaging system and Stripe Payments, have been heavily based on the Code Institute Boutique Ado E-Commerce walk through tutorials with customisation for this project.
-- Formatting date to use in a Datepicker input min value - [Stack Overflow](https://stackoverflow.com/questions/32378590/set-date-input-fields-max-date-to-today)
+- Formatting date to use in a DatePicker input min value - [Stack Overflow](https://stackoverflow.com/questions/32378590/set-date-input-fields-max-date-to-today)
 - Sorting A List Of Dictionaries - [Stack Overflow](https://stackoverflow.com/questions/72899/how-do-i-sort-a-list-of-dictionaries-by-a-value-of-the-dictionary)
 - Adding the Date Field Widget in a Model Form - [YouTube](https://www.youtube.com/watch?v=I2-JYxnSiB0)
 - Adding the Time Field Widget in a Model Form - [Nancy Lin's Blog](https://nancylin.xyz/how-to-implement-date-time-picker-in-django-without-javascript/)
@@ -649,7 +649,7 @@ Some elements of the code in this project were taken from the Bootstrap document
 - [W3Schools](https://www.w3schools.com/)
 - [Django Documentation](https://www.djangoproject.com/)
 
-- Readme structure and component ideas from https://github.com/C-Undritz/Boardgame-Bazaar
+- README structure and component ideas from https://github.com/C-Undritz/Boardgame-Bazaar
 - README template used to produce this documentation is from [Code Institute README Template](https://github.com/Code-Institute-Solutions/readme-template)
 
 ### **Content**
