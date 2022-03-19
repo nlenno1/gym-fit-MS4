@@ -678,7 +678,6 @@ def delete_class_category(request, category_id):
     # including sending cancellation emails and issuing refunds
     classes_to_remove = SingleExerciseClass.objects.filter(
         category=category.id)
-    print(classes_to_remove)
     for class_event in classes_to_remove:
         delete_single_exercise_class(request, class_event.id)
 
