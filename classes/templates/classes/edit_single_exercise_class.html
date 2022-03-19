@@ -35,11 +35,5 @@
 
 {% block postloadjs %}
     {{ block.super }}
-    <script>
-        // Hide fields that are not required when updating
-        $(document).ready(function() {
-            $('#div_id_weekly_class').hide();
-            $('#div_id_weekly_classes_until').hide();
-        });
-    </script>
+    <script src="{% static 'classes/js/edit_class_hide_fields.js' %}"></script>
 {% endblock %}
