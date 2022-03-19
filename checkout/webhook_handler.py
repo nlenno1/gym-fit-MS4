@@ -61,8 +61,9 @@ class StripeWebhookHandler:
 
         # update profile information if save_info
         profile = None
-        username = intent.metadata.username
-        if username != "AnonymousUser":  # user has been authenticated
+        if intent.metadata.has_account == "True":
+            # user has been authenticated
+            username = intent.metadata.username
             profile = UserProfile.objects.get(user__username=username)
             user_profile = User.objects.get(username=username)
             if save_info:
