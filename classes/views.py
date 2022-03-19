@@ -548,8 +548,8 @@ def delete_single_exercise_class(request, class_id):
     for user_profile in exercise_class.participants.all():
         refunded = False
         # if user is not a guest
-        if str(user_profile.username)[0:11] != "Guest_User_":
-            print(user_profile)
+        if (len(str(user_profile.username)) < 11 or
+                str(user_profile.username)[0:11] != "Guest_User_"):
             profile = UserProfile.objects.get(user=user_profile)
             # UU packages don't get refunded
             # if the user currently doesn't have a package
