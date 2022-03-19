@@ -5,6 +5,9 @@ This is a confirmation email for your order at Gym Fit. Your order information i
 Order Number: {{ order.order_number }}
 Order Date: {{ order.order_date }}
 
+Order Details:
+{{order_items}}
+
 Grand Total: £{{ order.grand_total }}
 
 If you have any questions, feel free to contact us at {{ contact_email }}.

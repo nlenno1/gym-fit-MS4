@@ -21,14 +21,28 @@ class StripeWebhookHandler:
 
     def _send_confirmation_email(self, order):
         """Send the user a confirmation email"""
+        # add order item details to email
+        bag = json.loads(order.original_bag)
+        order_items = ""
+        if bag["class_access_package"]:
+            package = get_object_or_404(
+                ClassAccessPackage, id=bag["class_access_package"])
+            order_items = order_items + f"Class Access Package : {package} - £{package.price} \n"
+        for item_id in bag["single_classes"]:
+            exercise_class = SingleExerciseClass.objects.get(
+                id=item_id
+            )
+            order_items = order_items + f"Exercise Class : {exercise_class} - £{exercise_class.price} \n"
+
         customer_email = order.email
         subject = render_to_string(
             "checkout/confirmation_emails/confirmation_email_subject.txt",
-            {"order": order},
+            {"order": order,},
         )
         body = render_to_string(
             "checkout/confirmation_emails/confirmation_email_body.txt",
-            {"order": order, "contact_email": settings.DEFAULT_FROM_EMAIL},
+            {"order": order, "contact_email": settings.DEFAULT_FROM_EMAIL,
+            "order_items": order_items},
         )
 
         send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [customer_email])

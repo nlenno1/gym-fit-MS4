@@ -319,7 +319,7 @@ def checkout_success(request, order_number):
                     try:
                         guest_user = user_form.save()
                         item.participants.add(guest_user)
-                        messages.success(request, "Saved Guest info to Class")
+                        messages.success(request, f"Saved Guest info to Class {item}")
                     except Exception as err:
                         messages.error(
                             request,
