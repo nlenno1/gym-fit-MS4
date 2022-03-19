@@ -3,18 +3,12 @@ from django.shortcuts import render, redirect, reverse
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-# These imports are required for the send mail function in the utils
-from django.core.mail import send_mail
-from django.template.loader import render_to_string
-from django.conf import settings
-from django.contrib.auth.models import User
 
 from profiles.models import UserProfile
 from reviews.models import ClassCategoryReview
 from products.constants import PACKAGE_TYPES
 from .models import ClassCategory, SingleExerciseClass
 from .forms import ClassCategoryForm, SingleExerciseClassForm
-from instructors.models import Instructor
 
 from .utils import (send_class_cancellation_email, send_update_email,
                     convert_ability_level_to_str)
@@ -505,7 +499,7 @@ def edit_single_exercise_class(request, class_id):
                     than the new max capacity allows")
                 return redirect(reverse("classes_this_week"))
             else:
-                send_update_email(class_id, form)  # send updates class email
+                send_update_email(class_id, form, request)  # send updates class email
                 exercise_class = form.save(commit=False)
                 # adjust the remaining spaces value
                 exercise_class.remaining_spaces = (
@@ -575,8 +569,8 @@ def delete_single_exercise_class(request, class_id):
                 refund_total += exercise_class.token_cost
                 refunded = True
         # send email to all class participants
-        send_class_cancellation_email(exercise_class, user_profile, refunded)
-    exercise_class.delete()
+        # send_class_cancellation_email(exercise_class, user_profile, refunded)
+    # exercise_class.delete()
     messages.success(request, f"Exercise Class {class_name} Cancelled")
     messages.info(request, f"Refunded a total of {refund_total} Token/s \
         to customers booked onto the class of {class_name}")
