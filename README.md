@@ -552,6 +552,7 @@ This is a table of the major bugs and issues that I experienced when building th
 8. If there is an error in the Edit a Single Exercise Class function, it will redirect to the Classes this Week.
 9. The refund cancellation notice is calculated using dates and not datetime so is not as accurate as it could be
 10. If you change any data for the class category or instructor that an exercise class uses, then current class participants are not informed.
+11. You can schedule or update a class to be in the past
 
 ## **DEPLOYMENT**
 
