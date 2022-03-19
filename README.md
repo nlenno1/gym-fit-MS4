@@ -493,18 +493,19 @@ Error handling is being managed by the supplied functions and templates from Dja
 
 ### **Features for Future Releases**
 
-- Add customers to waiting lists if a class is full, with email notification on space opening up
-- Purchase multiple classes with a weekly interval with a specified number of weeks
-- Create, View, Edit and Delete Class Access Packages for specific class categories
-- Allow Instructors to Update their publicly visible profiles and manage their classes, see registers etc
-- Only show Instructors that are qualified to lead that Class Category when scheduling a class
-- Automated subscription payment service
-- Messaging system to allow admin to respond to customers with accounts
-- Add accessory products to the store like apparel, water bottles etc
-- Refactor Profile into separate pages to allow redirection to specific sections
-- Sign In and Out with other social media accounts
+- Add customers to waiting lists if a class is full, with email notification on space opening up.
+- Purchase multiple classes with a weekly interval with a specified number of weeks.
+- Create, View, Edit and Delete Class Access Packages for specific class categories.
+- Allow Instructors to Update their publicly visible profiles, manage their classes and access automatically generated registers.
+- Only show Instructors that are qualified to lead that Class Category when scheduling a class.
+- Automated subscription payment service.
+- Messaging system to allow admin to respond to customers with accounts.
+- Add accessory products to the store like apparel, water bottles etc.
+- Refactor Profile to allow redirection to specific sections.
+- Sign In and Out with other social media accounts.
 - When a Single Exercise Class is created or update, the Superuser would be taken to the day view for that class to make it easier to find.
 - Update Stripe integration to the latest release from Stripe to improve functionality.
+- Add Class Access Packages to the User Profile as a list of dictionaries to keep their individual expiry dates.
 
 ## **TESTING**
 
