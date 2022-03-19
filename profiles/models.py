@@ -73,7 +73,7 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     """
     Create or update the user profile
     """
-    if (len(str(user_profile.username)) < 11 or
+    if (len(str(instance.username)) < 11 or
             str(instance.username)[0:11] != "Guest_User_"):
         if created:
             UserProfile.objects.create(user=instance)
