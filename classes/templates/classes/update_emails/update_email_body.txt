@@ -11,7 +11,7 @@ Duration : {% if form.duration.value != class.duration|title  %}{{ form.duration
 
 We apologise for an inconvenience caused and look forward to seeing you for your {{ class.category.friendly_name }} class!
 
-If you wish to cancel your booking, due to these changes, then please do so through your profile page on our site
+If you wish to cancel your booking, due to these changes, then please do so through your profile page on our site or email us.
 
 If you have any questions, feel free to contact us at {{ contact_email }}.
 
