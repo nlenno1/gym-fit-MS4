@@ -92,14 +92,12 @@
 }
 
 .trainer-card {
-    height: 345px;
-    width: 280px;
-    margin-left: 15px;
+    height: 330px;
+    width: 265px;
 }
 
 .trainer-card img {
-    height: 345px;
-    width: 230px;
+    height: 330px;
     object-fit: cover;
     object-position: center;
 }
@@ -110,9 +108,24 @@
     color: #fafafa;
     float: right;
     font-size: 2em;
-    width: 345px;
+    width: 330px;
     padding-left: 12px;
     margin-bottom: 0;
+}
+
+@media(min-width:575px) {
+    .trainer-card {
+        width: 275px;
+        margin-left: 15px;
+    }
+    .trainer-card {
+        height: 345px;
+        width: 280px;
+    }
+    .trainer-card img {
+        height: 345px;
+        width: 230px;
+    }
 }
 
 
@@ -126,6 +139,7 @@
 
 #map img {
     width: 100%;
-    min-width: 438px;
-    min-height: 200px;
+    height: 600px;
+    object-fit: cover;
 }
+
