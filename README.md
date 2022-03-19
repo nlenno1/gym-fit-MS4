@@ -534,6 +534,9 @@ This is a table of the major bugs and issues that I experienced when building th
 | 15 | After being directed to sign in for add class category to favourites, when sign in completed, typeError from having no redirect url | Redirect url is stored on page | Added an if check on the existence of the redirect url |
 | 16 | Toast messages not showing | Multiple JavaScript on load functions in base.js | Combined both functions |
 | 17 | Password validation failing from AllAuth | I had broken the password validator strings up to comply with PEP8 | Removed the line break |
+| 18 | Webhooks failing and Order Confirmation emails not being sent when buying classes as a user | The intent metadata Username check was breaking as when using as a Guest, there is no username | Altered the check to use the has_account variable in the metadata which is always there after using request.user.is_authenticated |
+| 19 | Saving a Guest User object creating a unwanted UserProfile object | The signal reciever in the User model was creating the UserProfile object | Added a conditional to check the first 10 letters of the username as every guest account has the prefix "Guest_User_" |
+
 
 ### **Unresolved Bugs**
 
