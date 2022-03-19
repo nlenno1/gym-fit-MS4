@@ -63,6 +63,7 @@
         <!-- Instructor Display -->
         <section id="our-team" class="container-fluid">
             <div class="our-team-container py-big">
+                <!-- AOS Data Attributes (https://michalsnik.github.io/aos/) -->
                 <h2 class="text-center w-100 display-3 text-blue" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">Our Team</h2>
                 <div class="team-cards-container pt-big">
                     <!-- Instructor Cards -->
@@ -71,8 +72,10 @@
                             {% if instructor.display_on_site and instructor.image_url or instructor.image %}
                                 <div class="trainer-card">
                                     {% if instructor.image_url %}
+                                        <!-- AOS Data Attributes (https://michalsnik.github.io/aos/) -->
                                         <img data-aos="fade-up" data-aos-anchor-placement="center-bottom" src="{{ instructor.image_url }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
                                     {% elif instructor.image %}
+                                        <!-- AOS Data Attributes (https://michalsnik.github.io/aos/) -->
                                         <img data-aos="fade-up" data-aos-anchor-placement="center-bottom" src="{{ MEDIA_URL }}{{ instructor.image }}" alt="Picture of {{ instructor.friendly_name }}, one of our instructors">
                                     {% endif %}
                                     <p class="text-uppercase">{{ instructor.friendly_name }}</p>
