@@ -298,36 +298,40 @@ def checkout_success(request, order_number):
             profile.save()
     # Save Classes to Profile
     if len(current_bag["bag_items"]["single_classes"]) > 0:
-        for item in current_bag["bag_items"]["single_classes"]:
-            if request.user.is_authenticated:
+        if request.user.is_authenticated:
+            for item in current_bag["bag_items"]["single_classes"]:
+                # add profile to class
                 item.participants.add(user_profile_object)
                 # add class to profile
                 profile.classes.add(item)
                 profile.save()
-            else:
-                # fill guest user data and add to class list
-                list_name = order.full_name.split()
-                user_data = {
-                    "first_name": list_name[0],
-                    "last_name": list_name[-1],
-                    "email": order.email,
-                    "username": "Guest_" + str(uuid.uuid4()),
-                }
-                user_form = UserForm(user_data)
-
-                if user_form.is_valid():
+        else:
+            # fill guest user data and add to class list
+            list_name = order.full_name.split()
+            guest_user_data = {
+                "first_name": list_name[0],
+                "last_name": list_name[-1],
+                "email": order.email,
+                "username": "Guest_" + list_name[-1] + "_" + str(
+                        uuid.uuid4()),
+            }
+            user_form = UserForm(guest_user_data)
+            if user_form.is_valid():
+                guest_user = user_form.save()
+                for item in current_bag["bag_items"]["single_classes"]:
                     try:
-                        guest_user = user_form.save()
+                        # add guest to class
                         item.participants.add(guest_user)
-                        messages.success(request, f"Saved Guest info to Class {item}")
+                        messages.success(request, f"Saved Guest info \
+                            to Class {item}")
                     except Exception as err:
                         messages.error(
                             request,
                             f"Guest Info Not Saved. Error message: {err}",
                         )
-            # adjust remaining spaces
-            item.remaining_spaces -= 1
-            item.save()
+                    # adjust remaining spaces
+                    item.remaining_spaces -= 1
+                    item.save()
     # delete the bag in session
     if "bag" in request.session:
         del request.session["bag"]
