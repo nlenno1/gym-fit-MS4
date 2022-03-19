@@ -350,7 +350,7 @@ def cancel_class_booking(request, class_id):
     messages.success(request, f"You have cancelled your booking on the class \
         {exercise_class}")
     # check if user qualifies for a refund
-    if date.today() > exercise_class.class_date - timedelta(days=1):
+    if date.today() >= exercise_class.class_date - timedelta(days=1):
         messages.info(
             request,
             "You have cancelled this class booking \
