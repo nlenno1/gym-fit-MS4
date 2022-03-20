@@ -11,6 +11,8 @@ Location : {{ class.location }}
 
 {% if refunded %}You have been refunded {{ class.token_cost }} class token/s for this class cancellation. {% endif %}We apologise for an inconvenience caused and look forward to seeing you at another of our classes soon!
 
+If you have not cancelled this class, or would like a refund made to your bank account, then please get in touch to arrange the refund.
+
 If you have any questions, feel free to contact us at {{ contact_email }}.
 
 Kind Regards
