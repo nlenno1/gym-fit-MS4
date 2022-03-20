@@ -564,7 +564,7 @@ def delete_single_exercise_class(request, class_id):
                 refund_total += exercise_class.token_cost
                 refunded = True
             # if the user is on a token package
-            elif profile.class_package_type != PACKAGE_TYPES['UNLIMITED']:
+            elif profile.class_tokens and profile.class_package_type != PACKAGE_TYPES['UNLIMITED']:
                 profile.class_tokens += exercise_class.token_cost
                 profile.save()
                 refund_total += exercise_class.token_cost
