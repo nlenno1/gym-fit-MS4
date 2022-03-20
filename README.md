@@ -501,7 +501,7 @@ Error handling is being managed by the supplied functions and templates from Dja
 - Automated subscription payment service.
 - Messaging system to allow admin to respond to customers with accounts.
 - Add accessory products to the store like apparel, water bottles etc.
-- Refactor Profile to allow redirection to specific sections.
+- Refactor Profile to allow redirection to specific sections with auto scroll to content when a profile menu button is selected.
 - Sign In and Out with other social media accounts.
 - When a Single Exercise Class is created or update, the Superuser would be taken to the day view for that class to make it easier to find.
 - Update Stripe integration to the latest release from Stripe to improve functionality.
@@ -537,7 +537,6 @@ This is a table of the major bugs and issues that I experienced when building th
 | 18 | Webhooks failing and Order Confirmation emails not being sent when buying classes as a user | The intent metadata Username check was breaking as when using as a Guest, there is no username | Altered the check to use the has_account variable in the metadata which is always there after using request.user.is_authenticated |
 | 19 | Saving a Guest User object created an unwanted UserProfile object | The signal receiver in the User model was creating the UserProfile object | Added a conditional to check the first 10 letters of the username as every guest account has the prefix "Guest_User_" |
 
-
 ### **Known Limitations**
 
 1. Deleting a product like a Class Access Package removes it from the Users Previous Orders so a Product Inactive Field Needs to be Put In to Keep the Product Existing but not have it shown on the Products Page.
@@ -550,7 +549,8 @@ This is a table of the major bugs and issues that I experienced when building th
 8. If there is an error in the Edit a Single Exercise Class function, it will redirect to the Classes this Week.
 9. The refund cancellation notice is calculated using dates and not datetime so is not as accurate as it could be
 10. If you change any data for the class category or instructor that an exercise class uses, then current class participants are not informed.
-11. You can schedule or update a class to be in the past
+11. You can schedule or update a class to be in the past.
+12. Removing Packages and Single Exercise Classes removes them from the Previous Order Display on the Profile Page.
 
 ## **DEPLOYMENT**
 
