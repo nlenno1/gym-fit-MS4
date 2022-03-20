@@ -287,10 +287,16 @@ footer img {
 .toast-container {
     position: fixed;
     bottom: 30px;
-    right: 30px;
+    right: 10px;
     z-index: 999999;
     background-color: #fafafa;
 }
+
+.toast {
+    width: calc(100vw - 20px);
+    max-width: 400px;
+}
+
 
 .toast-container i {
     margin-right: 10px;
@@ -304,6 +310,12 @@ footer img {
     border: 3px solid rgba(42, 175, 211, .5);
     padding: 10px 5px 0;
     border-radius: 0.25rem;
+}
+
+@media(min-width:576px) {
+    .toast-container {
+        right: 30px;
+    }
 }
 
 /* Fade on load */

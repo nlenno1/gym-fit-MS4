@@ -17,7 +17,7 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 
 // Options for toasts
 var option = {
-  autohide: true,
+  autohide: false,
   delay: 5000,
 };
 
