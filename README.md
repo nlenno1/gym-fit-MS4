@@ -538,8 +538,6 @@ This is a table of the major bugs and issues that I experienced when building th
 | 19 | Saving a Guest User object created an unwanted UserProfile object | The signal receiver in the User model was creating the UserProfile object | Added a conditional to check the first 10 letters of the username as every guest account has the prefix "Guest_User_" |
 
 
-### **Unresolved Bugs**
-
 ### **Known Limitations**
 
 1. Deleting a product like a Class Access Package removes it from the Users Previous Orders so a Product Inactive Field Needs to be Put In to Keep the Product Existing but not have it shown on the Products Page.
